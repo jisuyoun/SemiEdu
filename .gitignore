@@ -96,3 +96,12 @@ replay_pid*
 # End of https://www.toptal.com/developers/gitignore/api/java,eclipse
 
 ##### commit 제외파일 #####
+.gitignore
+/SemiProject_3Zoe/src/main/webapp/WEB-INF/command.properties
+/SemiProject_3Zoe/src/main/java/common/controller/AbstractController.java
+/SemiProject_3Zoe/src/main/java/common/controller/FrontController.java
+/SemiProject_3Zoe/src/main/java/common/controller/InterCommand.java
+/SemiProject_3Zoe/src/main/webapp/WEB-INF/command.properties
+/SemiProject_3Zoe/src/main/java/common/controller/AbstractController.java
+/SemiProject_3Zoe/src/main/java/common/controller/FrontController.java
+/SemiProject_3Zoe/src/main/java/common/controller/InterCommand.java
