@@ -52,9 +52,9 @@
 <script type="text/javascript" src="<%= ctxPath%>/js/jquery-3.6.4.min.js"></script>
 <script type="text/javascript" src="<%= ctxPath%>/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js" ></script>
 
-<link rel="stylesheet" type="text/css" href="../css/common.css">
-<link rel="stylesheet" type="text/css" href="../css/custom.css">
-<link rel="stylesheet" type="text/css" href="../css/member.css">
+<link rel="stylesheet" type="text/css" href="../ssh.css/common.css">
+<link rel="stylesheet" type="text/css" href="../ssh.css/custom.css">
+<link rel="stylesheet" type="text/css" href="../ssh.css/member.css">
 	
 </head>
 <body>
