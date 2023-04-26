@@ -5,16 +5,16 @@
 <head>
 <meta charset="UTF-8">
 
-<link rel="stylesheet" type="text/css" href="../css2/common.css" />
-<link rel="stylesheet" type="text/css" href="../css2/font_notoSans.css" />
-<link rel="stylesheet" type="text/css" href="../css2/green_theme.css" />
+<link rel="stylesheet" type="text/css" href="../ssh.css2/common.css" />
+<link rel="stylesheet" type="text/css" href="../ssh.css2/font_notoSans.css" />
+<link rel="stylesheet" type="text/css" href="../ssh.css2/green_theme.css" />
 
 <title>회원가입 성공</title>
 </head>
 <body>
 
 
-<link rel="stylesheet" type="text/css" href="../css/member.css" />
+<link rel="stylesheet" type="text/css" href="../ssh.css/member.css" />
 
   <body>
 
@@ -25,19 +25,19 @@
 
 		<div class="process_cont">
 			<dl>
-				<dt><img src="../img/process_01.png" alt="방법선택" /></dt>
+				<dt><img src="../ssh.img/process_01.png" alt="방법선택" /></dt>
 				<dd>방법선택</dd>
 			</dl>
 			<dl>
-				<dt><img src="../img/process_02.png" alt="약관동의" /></dt>
+				<dt><img src="../ssh.img/process_02.png" alt="약관동의" /></dt>
 				<dd>약관동의</dd>
 			</dl>
 			<dl>
-				<dt><img src="../img/process_03.png" alt="정보입력" /></dt>
+				<dt><img src="../ssh.img/process_03.png" alt="정보입력" /></dt>
 				<dd>정보입력</dd>
 			</dl>
 			<dl class="up">
-				<dt><img src="../img/process_04_up.png" alt="가입완료" /></dt>
+				<dt><img src="../ssh.img/process_04_up.png" alt="가입완료" /></dt>
 				<dd>가입완료</dd>
 			</dl>
 		</div>

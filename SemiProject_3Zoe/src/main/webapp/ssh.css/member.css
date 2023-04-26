@@ -51,19 +51,11 @@ input[type="radio"]:checked {border:5px solid #222;}
 .sns_cont a {display:inline-block; width:calc((100% - 10px) / 3); margin-right:5px; font-size:15px; font-weight:400; border-radius:50px; line-height:45px; padding-left:25px; box-sizing:border-box; background-repeat:no-repeat; background-position:center left 20px; color:#fff; margin-bottom:4px;}
 .sns_cont a:nth-child(3n) {margin-right:0;}
 
-.sns_cont .join label {background-image:url('/theme/6/img/member/sns_icon01.png');}
-.sns_cont .naver label{background-image:url('/theme/6/img/member/sns_icon02.png'); background-color:#19ce60;}
-.sns_cont .kakao label {background-image:url('/theme/6/img/member/sns_icon03.png'); background-color:#f9e000; color:#381e1f !important;}
-.sns_cont .google label {background-image:url('/theme/6/img/member/sns_icon04.png'); background-color:#ffffff; border:1px solid #ddd; color:#222; color:#222 !important;}
-.sns_cont .facebook label {background-image:url('/theme/6/img/member/sns_icon05.png'); background-color:#1673e8;}
-.sns_cont .line label {background-image:url('/theme/6/img/member/sns_icon06.png'); background-color:#53d422;}
+.sns_cont .join label {background-image:url('../ssh.img/sns_icon01.png');}
 
-.sns_cont a.join {background-image:url('/theme/6/img/member/sns_icon01.png');}
-.sns_cont a.naver{background-image:url('/theme/6/img/member/sns_icon02.png'); background-color:#19ce60;}
-.sns_cont a.kakao {background-image:url('/theme/6/img/member/sns_icon03.png'); background-color:#f9e000; color:#381e1f !important;}
-.sns_cont a.google {background-image:url('/theme/6/img/member/sns_icon04.png'); background-color:#ffffff; border:1px solid #ddd; color:#222; color:#222 !important;}
-.sns_cont a.facebook {background-image:url('/theme/6/img/member/sns_icon05.png'); background-color:#1673e8;}
-.sns_cont a.line {background-image:url('/theme/6/img/member/sns_icon06.png'); background-color:#53d422;}
+
+.sns_cont a.join {background-image:url('../ssh.img/sns_icon01.png');}
+
 
 
 .sns_cont dd {display:inline-block; width:calc((100% - 10px) / 3); margin-right:5px; margin-bottom:4px; box-sizing:border-box; border-radius:50px;}
@@ -80,7 +72,7 @@ input[type="radio"]:checked {border:5px solid #222;}
 /**** íšŒì›ì„œë¹„ìŠ¤ - ë°©ë²•ì„ íƒ ****/
 .process_cont {font-size:0;}
 .process_cont dl {position:relative; display:inline-block; width:25%; text-align:center; vertical-align:top;}
-.process_cont dl:after {content:''; width:10px; height:18px; background:url('../img/pro_arrow.png')no-repeat center; position:absolute; right:-6px; top:45%; transform:translateY(-50%);}
+.process_cont dl:after {content:''; width:10px; height:18px; background:url('../ssh.img/pro_arrow.png')no-repeat center; position:absolute; right:-6px; top:45%; transform:translateY(-50%);}
 .process_cont dl:last-child:after {display:none;}
 .process_cont dl dd {font-size:15px; font-weight:400; letter-spacing:-0.6pt; line-height:1; margin:10px 0 0;}
 .process_cont dl.up dd {color:#222;}
@@ -198,15 +190,17 @@ p.notice i {width:20px; height:20px; text-align:center; line-height:17px; font-s
 /*******************************************************************************
 	@media ~1300px
 *******************************************************************************/
-@media all and (max-width:1300px) {
-
-
+@media all and (max-width:1400px) {
+	
+	
+	
 }
 /*******************************************************************************
 	@media ~1100px
 *******************************************************************************/
 @media all and (max-width:1100px) {
 
+	
 
 }
 /*******************************************************************************

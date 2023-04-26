@@ -1,0 +1,707 @@
+@charset "UTF-8";
+
+
+/* ********* 은서 - header ********* */
+
+.carousel-control-prev, .carousel-control-next {
+    font-size: 70px;
+    color: #1bceb8;
+	height: 10%;
+	width: 10%;
+}
+
+div#loginBar {
+	border: solid 1px #ddd;
+	width: 100%;
+	padding: 0 15%;
+	background-color: white;
+}
+
+
+
+form > input.search {
+	width: 130px;
+	height: 30px;
+	box-sizing: border-box;
+	border: 2px solid #ccc;
+	border-radius: 40px;
+	font-size: 10pt;
+	background-color: white;
+	background-position: 10px 10px; 
+	background-repeat: no-repeat;
+	padding: 8px 8px 10px 8px;
+	margin: 7px;
+	-webkit-transition: width 0.4s ease-in-out;
+	transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+	width: 280px;
+}
+
+nav.navbar {
+	margin: 1% 15%;
+	display: flex;
+	background-color: white;
+}
+
+.menu {
+	display: flex;
+	justify-content: flex-end; /* 메뉴들을 오른쪽으로 정렬 */
+	align-items: center;
+}
+
+.dropdown .dropbtn {
+	font-size: 20px;  
+	font-weight: bold;
+	border: none;
+	outline: none;
+	color: black;
+	padding: 14px 16px;
+	background-color: inherit;
+	margin-right: 60px;  
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+	color: #1BCEB8;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 1;
+}
+
+.dropdown-content a {
+	float: none;
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+	text-align: left;
+}
+
+.dropdown-content a:hover {
+	background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+	background-color: white;
+}	
+
+.mypage {
+	top: 28px;
+	right: 0;
+	display: block;
+	width: 150px;
+	height: 50px;
+	border-radius: 50px;
+	line-height: 45px;
+	color: #fff;
+	padding-left: 20px;
+	font-size: 17px;
+	font-weight: bold;
+	box-sizing: border-box;
+	background-image: url(/theme/6/img/main/mypage_w.png);
+	background-position: center left 10px;
+	background-color: #1bceb8;
+}
+
+.mypage:hover {
+	text-decoration: none;
+	color: white !important;
+	background-color: #C9C9C9;
+}
+
+
+/* ********* 은서 - index ********* */
+
+.carousel-inner img {
+    width: 100%;
+}
+
+.carousel-control-prev, .carousel-control-next {
+    font-size: 70px;
+    color: #1bceb8;
+	height: 100px;
+	width: 100px;
+    margin: auto 220px;
+}
+
+.banner_1 {
+	display: flex;
+}
+
+.video_cont {
+	margin: 20px 50px 20px 400px;
+	padding: 0;
+}
+
+.text_cont {
+	margin: 250px 0;	
+}
+
+.banner_2 {
+	 text-align:center;
+	 background-color: #D7D7FF;
+}
+
+
+
+.promotion_2 {
+	text-align:center;
+}
+
+
+
+.promotion_3 {
+	background-color: #F0FDFF;
+	text-align:center;
+}
+
+
+.rolling_panel { 
+	position: relative; 
+	height: 150px; 
+	margin: 50px auto; 
+	padding: 0; 
+	border: 1px solid #c7c7c7; 
+	overflow: hidden; 
+}
+
+.rolling_panel ul { 
+	position: absolute; 
+	margin-left: 500px; 
+	padding: 0; 
+	list-style: none; 
+}
+.rolling_panel ul li { 
+	float: left; 
+	width: 205px; 
+	height: 140px;
+}
+
+
+
+div#recommend {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 50px 0;
+}
+
+.cosContainer {
+	position: relative;
+	width: 350px;
+	margin: auto 50px;
+}
+
+.cosImage {
+	display: block;
+	width: 100%;
+	height: auto;
+	border-radius: 40px;
+	border: solid 6px #ddd;
+}
+
+.overlay {
+	position: absolute;
+	bottom: 100%;
+	left: 0;
+	right: 0;
+	background-color: #1bceb8;
+	overflow: hidden;
+	height:0;
+	transition: .5s ease;
+	border-radius: 40px;
+}
+
+.cosContainer:hover .overlay {
+	bottom: 0;
+	width: 350px; 
+	height: 250px;
+}
+
+.text {
+	color: white;
+	font-size: 19px;
+	position: absolute;
+	padding-top: 50px;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	text-align: center;
+	width: 350px; 
+  	height: 250px;
+}
+
+.banner_3 {
+	 text-align:center; 
+	 background-color: #2D2D2D;
+}
+
+
+
+/* ********* 용훈 - index ********* */
+
+.academy .video_cont img {
+    border-radius: 30px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+* {
+    outline: none;
+}
+
+* {
+    font-family: 'Noto Sans KR', Malgun Gothic,'Malgun Gothic', 'Outfit', sans-serif;
+}
+
+.academy .academy_bg {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: -1;
+    width: 60%;
+    height: 100%;
+}
+
+.grayBox {
+    background-color: #f3f7f8 !important;
+}
+
+div {
+    display: block;
+    margin : 0 auto;
+}
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    line-height: 155%;
+    letter-spacing: normal;
+}
+
+tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    line-height: 155%;
+    letter-spacing: normal;
+}
+
+
+body, html {
+    width: 100%;
+    height: 100%;
+    font-size: 17px;
+    font-weight: 300;
+    color: #777;
+    -webkit-text-size-adjust: none;
+    word-break: keep-all;
+}
+
+.academy {
+    position: relative;
+    /* margin-left: 350px; */
+}
+
+.w1230 {
+    position: relative;
+    width: 1230px;
+    margin: 0 auto;
+    min-width: 320px;
+}
+
+.academy .w1230 {
+    display: table;
+}
+
+.compad {
+    padding: 120px 0;
+    box-sizing: border-box;
+}
+
+h3 {
+    display: block;
+    font-size: 1.17em;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+h3.title {
+    font-size: 2.118rem;
+    text-align: center;
+    color: #222;
+    letter-spacing: -1.4pt;
+    font-weight: bold;
+    line-height: 1;
+    margin: 0 0 50px;
+    position: relative;
+    }
+    
+    h3.title a {
+    font-size: 15px;
+    letter-spacing: -0.6pt;
+    line-height: 1;
+    font-weight: 400;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+}
+
+h3.title a::after {
+    content: '';
+    width: 100%;
+    height: 1px;
+    background: #9f9f9f;
+    position: absolute;
+    bottom: -9px;
+    left: 0;
+}
+    
+    .academy .text_cont {
+    width: 50%;
+    display: table-cell;
+    vertical-align: middle;
+    padding-left: 75px;
+    box-sizing: border-box;
+	}
+	
+	.academy .text_cont h3 {
+    font-size: 2.118rem;
+    color: #222;
+    letter-spacing: -1pt;
+    line-height: 1;
+    font-weight: bold;
+    }
+    
+    .academy .text_cont a {
+    display: inline-block;
+    /* width: 180px; */
+    height: 54px;
+    padding: 0 30px 0 70px;
+    box-sizing: border-box;
+    line-height: 54px;
+    border-radius: 50px;
+    font-size: 15px;
+    color: #fff;
+    letter-spacing: -0.6pt;
+    font-weighT: 400;
+    background-image: url(/theme/6/img/main/dot_icon.png);
+    background-repeat: no-repeat;
+    background-position: center left 35px;
+    white-space: nowrap;
+}
+
+.bgColor {
+    background-color: #1bceb8 !important;
+}
+
+a {
+    cursor: pointer;
+    text-decoration: none;
+    color: #777;
+}
+
+i {
+    font-style: italic;
+}
+
+th {
+    display: table-cell;
+    vertical-align: inherit;
+    font-weight: bold;
+    text-align: -internal-center;
+}
+
+dl {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 15px;
+}
+
+thead {
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+.planWrap {
+    overflow: hidden;
+}
+
+.planWrap .calendar {
+    position: relative;
+    float: left;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+    width: 390px;
+    margin-right: 30px;
+    padding: 40px 45px;
+    text-align: center;
+    height: 469px;
+    background-color: #ffffff;
+}
+
+.planWrap .calendar table {
+    width: 100%;
+}
+
+.planWrap .calendar table .red {
+    color: #ee114f;
+}
+
+.planWrap .calendar table .blue {
+    color: #356ed5;
+}
+
+.planWrap .calendar td a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.planWrap .calendar h3 {
+    display: inline-block;
+    font-size: 1.176rem;
+    color: #222;
+    font-weight: bold;
+    margin: 0 0 10px;
+}
+
+.planWrap .calendar th {
+    width: 14%;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+    color: #222;
+    line-height: 1;
+    padding: 13px 0;
+}
+
+.planWrap .calendar table .gray {
+    color: #bbbbbb;
+}
+
+.planWrap .calendar td {
+    position: relative;
+    font-family: 'Outfit', sans-serif;
+    width: 14%;
+    font-size: 14px;
+    text-align: center;
+    line-height: 1;
+    padding: 14px 0;
+    font-weight: 400;
+    height: 23px;
+}
+
+.planWrap .calendar td i {
+    display: block;
+    width: 4px;
+    height: 4px;
+    border-radius: 100%;
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    margin-left: -2px;
+    
+}
+
+.planWrap .schedule {
+    float: right;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+    width: calc(100% - 420px);
+    height: 469px;
+    background-color: #ffffff;
+}
+
+.planWrap .schedule dl a {
+    position: relative;
+    padding: 25px 100px 25px 35px;
+    display: table;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.planWrap .schedule dl {
+    box-sizing: border-box;
+    border-bottom: 1px solid #ddd;
+}
+
+.planWrap .schedule dl dt {
+    width: 70px;
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 15px;
+    color: #222;
+    font-weight: 400;
+    text-align: center;
+}
+
+.planWrap .schedule dl dd {
+    display: table-cell;
+    vertical-align: middle;
+    width: calc(100% - 70px);
+    padding-left: 40px;
+    box-sizing: border-box;
+}
+
+.planWrap .schedule dl dd h4 {
+    color: #222;
+    letter-spacing: -0.7pt;
+    line-height: 1.6;
+    word-break: break-word;
+}
+
+.planWrap .schedule dl a::before {
+    content: '';
+    width: 40px;
+    height: 40px;
+    background-color: thistle;
+    border-radius: 100%;
+    background-image: url(/theme/6/img/main/moreBtn.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    right: 45px;
+    top: 50%;
+    transform: translateY(-20px);
+}
+
+.mCustomScrollbar {
+    -ms-touch-action: pinch-zoom;
+    touch-action: pinch-zoom;
+}
+
+.mCustomScrollBox {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    max-width: 100%;
+    outline: 0;
+    direction: ltr;
+}
+
+.mCSB_inside>.mCSB_container {
+    margin-right: 0 !important;
+}
+
+.mCSB_container {
+    overflow: hidden;
+    width: auto;
+    height: auto;
+}
+
+.schedule::-webkit-scrollbar {
+        width: 5px;
+}
+.schedule::-webkit-scrollbar-track {
+     	background-color: transparent;
+}
+.schedule::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        background-color: darkgrey;
+}
+
+
+
+/* ********* 용훈 - footer ********* */
+
+ #footer {
+    background: #3c3e40;
+    padding: 45px 0 90px;
+   }
+   
+   body, html {
+    width: 100%;
+    height: 100%;
+    font-size: 17px;
+    font-weight: 300;
+    color: #777;
+    -webkit-text-size-adjust: none;
+    word-break: keep-all;
+   }
+   
+   #footer .foot_top {
+    font-size: 0;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    margin: 0 0 40px;
+   }
+   
+   #footer .foot_top a {
+    font-size: 15px;
+    color: #939599;
+    letter-spacing: -0.6pt;
+    line-height: 1;
+    font-weight: 400;
+    margin-right: 35px;
+   }
+   
+   a {
+    cursor: pointer;
+    text-decoration: none;
+    color: #777;
+   }
+   
+   .txt_white {
+    color: #fff !important;
+   }
+   
+   div.foot_top , div.foot_bottom {
+    margin: 0;
+    border: 0;
+    line-height: 155%;
+    letter-spacing: normal;
+    padding: 0%;
+   }
+
+	.w1230 {
+
+    width: 1230px;
+    margin: 0 auto;
+    min-width: 320px;
+   }
+
+/* ********* top scroll Btn ********* */
+
+button#myBtn {
+	position: fixed;
+	top: 850px;
+	left: 93%;
+	background-color: inherit;
+	outline: none;
+	border: none;
+}  
+	
+
+
+
+
+
+
+

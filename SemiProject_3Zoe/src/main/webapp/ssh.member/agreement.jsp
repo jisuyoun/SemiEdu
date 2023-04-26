@@ -1,44 +1,85 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+    String ctxPath = request.getContextPath();
+    //    /MyMVC
+%>     
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 
-<link rel="stylesheet" type="text/css" href="../css2/common.css" />
-<link rel="stylesheet" type="text/css" href="../css2/font_notoSans.css" />
-<link rel="stylesheet" type="text/css" href="../css2/green_theme.css" />
+<link rel="stylesheet" type="text/css" href="../ssh.css2/common.css" />
+<link rel="stylesheet" type="text/css" href="../ssh.css/member.css" />
+<link rel="stylesheet" type="text/css" href="../ssh.css2/font_notoSans.css" />
+<link rel="stylesheet" type="text/css" href="../ssh.css2/green_theme.css" />
 
 
 
 <title>약관 동의</title>
+
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" type="text/css" href="<%= ctxPath%>/bootstrap-4.6.0-dist/css/bootstrap.min.css" >
+
+<!-- Font Awesome 6 Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+
+<!-- Optional JavaScript -->
+<script type="text/javascript" src="<%= ctxPath%>/js/jquery-3.6.4.min.js"></script>
+<script type="text/javascript" src="<%= ctxPath%>/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js" ></script>
+
+<script type="text/javascript"> 
+	$(document).ready(function(){		
+		$("#mem-join").hide();
+		popupcv(0);
+		
+	});
+	
+	function popupcv(no) {
+		if(no == "1") {
+			$("#pop_cv1").show();
+			initSlick($("#pop_cv1 ul"), 1, 1);
+		}else if(no == "2") {
+			$("#pop_cv2").show();
+			initSlick($("#pop_cv2 ul"), 2, 2);
+		}else if(no == "0") {
+			$("#pop_cv1").hide();
+			$("#pop_cv2").hide();
+		}
+	}
+</script>
+
 </head>
 <body>
 
-<link rel="stylesheet" type="text/css" href="../css/member.css" />
+<link rel="stylesheet" type="text/css" href="../ssh.css/member.css" />
 
 <div class="login_cont">
 	<div class="login_in">
-		<a href="/main/index.jsp">
+		<a href="/WEB-INF/index.jsp">
 		<h1><img src="https://cdn.malgnlms.com/cdndata/kense/file/e69e843b2e715ad0390d80e8e54d2a97.png" alt="워너에듀 로고" class="svg_logo"/></h1>
 		</a>
 		<h3>새로운 계정으로 회원가입 하세요!</h3>
 
 		<div class="process_cont">
 			<dl class="up">
-				<dt id="agree-1"><img src="../img/process_01_up.png" alt="방법선택" id="select-1" /></dt>
+				<dt id="agree-1"><img src="../ssh.img/process_01_up.png" alt="방법선택" id="select-1" /></dt>
 				<dd>방법선택</dd>
 			</dl>
 			<dl>
-				<dt id="agree-2"><img src="../img/process_02.png" alt="약관동의" id="agree" /></dt>
+				<dt id="agree-2"><img src="../ssh.img/process_02.png" alt="약관동의" id="agree" /></dt>
 				<dd>약관동의</dd>
 			</dl>
 			<dl>
-				<dt><img src="../img/process_03.png" alt="정보입력" /></dt>
+				<dt><img src="../ssh.img/process_03.png" alt="정보입력" /></dt>
 				<dd>정보입력</dd>
 			</dl>
 			<dl>
-				<dt><img src="../img/process_04.png" alt="가입완료" /></dt>
+				<dt><img src="../ssh.img/process_04.png" alt="가입완료" /></dt>
 				<dd>가입완료</dd>
 			</dl>
 		</div>
@@ -54,7 +95,7 @@
 	</div>
 
  	<div class="mem_cont" id="mem-join">
-		<form name="form1" method="POST" target="sysfrm" onsubmit="return goSubmit(this);">
+		<form name="agreement" id="agreement" method="POST" target="sysfrm" onsubmit="return goSubmit(this);">
 			<h4 class="mem_tit inline">가입 약관 동의<span class="tx">안내를 읽고 동의해 주세요.</span></h4>
 
 			<div class="agree_cont">
