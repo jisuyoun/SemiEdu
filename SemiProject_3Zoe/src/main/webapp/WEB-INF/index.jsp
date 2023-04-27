@@ -5,7 +5,7 @@
 %>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
 
-<jsp:include page="header .jsp" />
+<jsp:include page="header.jsp" />
 
 
 <style>

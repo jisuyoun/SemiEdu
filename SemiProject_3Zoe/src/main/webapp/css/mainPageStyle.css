@@ -17,8 +17,6 @@ div#loginBar {
 	background-color: white;
 }
 
-
-
 form > input.search {
 	width: 130px;
 	height: 30px;
@@ -102,7 +100,7 @@ nav.navbar {
 	line-height: 45px;
 	color: #fff;
 	padding-left: 20px;
-	font-size: 17px;
+	font-size: 18px;
 	font-weight: bold;
 	box-sizing: border-box;
 	background-image: url(/theme/6/img/main/mypage_w.png);
@@ -141,7 +139,7 @@ nav.navbar {
 }
 
 .text_cont {
-	margin: 250px 0;	
+	margin: 250px 0;		
 }
 
 .banner_2 {
@@ -161,30 +159,6 @@ nav.navbar {
 	background-color: #F0FDFF;
 	text-align:center;
 }
-
-
-.rolling_panel { 
-	position: relative; 
-	height: 150px; 
-	margin: 50px auto; 
-	padding: 0; 
-	border: 1px solid #c7c7c7; 
-	overflow: hidden; 
-}
-
-.rolling_panel ul { 
-	position: absolute; 
-	margin-left: 500px; 
-	padding: 0; 
-	list-style: none; 
-}
-.rolling_panel ul li { 
-	float: left; 
-	width: 205px; 
-	height: 140px;
-}
-
-
 
 div#recommend {
 	display: flex;
@@ -238,6 +212,7 @@ div#recommend {
 	text-align: center;
 	width: 350px; 
   	height: 250px;
+
 }
 
 .banner_3 {
@@ -256,13 +231,13 @@ div#recommend {
     background-size: cover;
 }
 
-* {
+/* * {
     outline: none;
-}
+}  적용되지 않아 삭제*/
 
-* {
+/* * {
     font-family: 'Noto Sans KR', Malgun Gothic,'Malgun Gothic', 'Outfit', sans-serif;
-}
+} 글씨체는 나중에 한번에 변경할 것으로 삭제*/
 
 .academy .academy_bg {
     position: absolute;
@@ -277,12 +252,12 @@ div#recommend {
     background-color: #f3f7f8 !important;
 }
 
-div {
+/* div {
     display: block;
     margin : 0 auto;
-}
+} 중복 삭제 */
 
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+/* html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
     margin: 0;
     padding: 0;
     border: 0;
@@ -305,7 +280,7 @@ body, html {
     color: #777;
     -webkit-text-size-adjust: none;
     word-break: keep-all;
-}
+} 중복 삭제*/
 
 .academy {
     position: relative;
@@ -328,7 +303,7 @@ body, html {
     box-sizing: border-box;
 }
 
-h3 {
+/* h3 {
     display: block;
     font-size: 1.17em;
     margin-block-start: 1em;
@@ -336,7 +311,7 @@ h3 {
     margin-inline-start: 0px;
     margin-inline-end: 0px;
     font-weight: bold;
-}
+} h3 자체가 위의 css 주는 부트스트랩으로 삭제*/
 
 h3.title {
     font-size: 2.118rem;
@@ -408,11 +383,11 @@ h3.title a::after {
     background-color: #1bceb8 !important;
 }
 
-a {
+/*  a {
     cursor: pointer;
     text-decoration: none;
     color: #777;
-}
+} footer 에 따로 css 주었으니 삭제 */
 
 i {
     font-style: italic;
@@ -636,7 +611,7 @@ thead {
     padding: 45px 0 90px;
    }
    
-   body, html {
+/*    body, html {
     width: 100%;
     height: 100%;
     font-size: 17px;
@@ -644,7 +619,7 @@ thead {
     color: #777;
     -webkit-text-size-adjust: none;
     word-break: keep-all;
-   }
+   } // 위와 겹쳐서 삭제 */
    
    #footer .foot_top {
     font-size: 0;
@@ -662,7 +637,8 @@ thead {
     margin-right: 35px;
    }
    
-   a {
+   footer > div#footer > div.w1230 > div.foot_top > a,
+   footer > div#footer > div.w1230 > div.foot_bottom > a {
     cursor: pointer;
     text-decoration: none;
     color: #777;
@@ -689,14 +665,14 @@ thead {
 
 /* ********* top scroll Btn ********* */
 
-button#myBtn {
-	position: fixed;
-	top: 850px;
-	left: 93%;
-	background-color: inherit;
-	outline: none;
-	border: none;
-}  
+ 	button#myBtn {
+		position: fixed;
+		top: 850px;
+		left: 1850px; 
+		background-color: inherit;
+		outline: none;
+		border: none;
+	}  
 	
 
 

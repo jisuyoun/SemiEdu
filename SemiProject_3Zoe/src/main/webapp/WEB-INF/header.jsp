@@ -104,7 +104,7 @@
 		
   	<div class="menu">
 		<div class="dropdown">
-		  <button class="dropbtn" onclick= "Location.href='<%= ctxPath%>/CosRegister.go'">수강신청</button>		  
+		  <button class="dropbtn" onclick= "location.href='<%= ctxPath%>/CosRegister.go'">수강신청</button>		  
 		    <div class="dropdown-content">
 		      <a href="#">정보처리</a>
 		      <a href="#">빅데이터분석</a>
