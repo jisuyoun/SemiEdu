@@ -125,7 +125,8 @@
 		    </div>
 		    
 		  </div>
-		  <a href="#" class="mypage bgColor"><i class="fa-solid fa-user" style="margin-right: 10px;"></i>마이페이지</a>
+		   <!-- 이 부분은 로그인이 된 상태가 아니기 때문에 로그인하는 창으로 가야함 -->
+		  <a href="<%= ctxPath%>/ljh.member.controller/myPage.go" class="mypage bgColor"><i class="fa-solid fa-user" style="margin-right: 10px;"></i>마이페이지</a>
 	  </div>
 	</nav>
 	<!-- 상단 네비게이션 끝 -->

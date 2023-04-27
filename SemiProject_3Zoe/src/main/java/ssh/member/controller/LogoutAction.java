@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import common.controller.AbstractController;
-import ssh.member.model.MemberVO;
+import member.model.MemberVO;
 
 public class LogoutAction extends AbstractController {
 

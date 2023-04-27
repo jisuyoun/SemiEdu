@@ -3,6 +3,8 @@ package ssh.member.model;
 import java.sql.SQLException;
 import java.util.Map;
 
+import member.model.MemberVO;
+
 public interface InterMemberDAO {
 
 	// 회원가입을 해주는 메소드(tbl_member 테이블에 insert)

@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import common.controller.AbstractController;
-import ssh.member.model.*;
+import member.model.*;
+import ssh.member.model.InterMemberDAO;
+import ssh.member.model.MemberDAO;
 
 
 public class LoginAction extends AbstractController {

@@ -1,4 +1,4 @@
-package ssh.member.model;
+package member.model;
 
 public class MemberVO {
 	
