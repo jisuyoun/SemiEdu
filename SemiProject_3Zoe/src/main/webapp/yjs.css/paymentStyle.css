@@ -1,0 +1,230 @@
+@charset "UTF-8";
+
+/* 상단 제목 시작 */
+h1.mainName  {
+	background-image: url("../images/barbackground.png");
+	font-size: 50pt; 
+	font-weight: bold; 
+	text-align: center;
+	color: white;
+	height: 206px;
+	padding: 61px 0;
+}
+/* 상단 제목 끝 */
+
+
+/* 모든 li 태그 리스트 스타일 제거 시작 */
+li {
+	list-style: none;
+}
+/* 모든 li 태그 리스트 스타일 제거 끝 */
+
+
+
+/* 왼쪽 항목 시작 */
+div#PMContainerBorder {
+	border: solid 1px #ddddd3;
+	border-radius: 20px;
+	float: left;
+	width: 548px;
+	padding: 46px 10px;
+	margin-bottom: 100px;
+}
+
+a#PMContainerBorderMoney {
+	float: right;
+	margin-right: 20px;
+	font-size: 15pt;
+	font-weight: bold;
+	color: #1bcebe;
+}
+
+/* payment.jsp 내 h4 모두 굵게 변경 */
+h4.PMh4Bold {
+	font-weight:bold;
+}
+
+/* 결제항목 시작 */
+div#PMContainerBorder > div#PMCosName > ul > li:first-child {
+	margin-bottom: 22px;
+}
+
+div#PMContainerBorder > div#PMCosName > ul > li > div {
+	font-size: 14pt;
+}
+
+div#PMContainerBorder > div#PMCosName > ul > li > div:last-child {
+	font-size: 15pt;
+	float: right;
+	font-weight: bold;
+	margin: 0 30px 20px 10px;
+}
+
+/* 결제항목 끝 */
+
+
+
+/* 포인트 사용 시작 */
+div#SPPayPoint > ul > li:first-child {
+	margin: 22px 0;
+}
+
+div#SPPayPoint li {
+	font-size: 14pt;
+	margin: 10px 0;
+}
+
+div#SPPayPoint > ul > li > a {
+	float: right;
+	font-size: 15pt;
+	/* margin-left: 10px; */
+	margin-right: 30px;
+	font-weight: bold;
+}
+
+div#SPPayPoint > ul > li:last-child {
+	margin-bottom: 20px;
+}
+
+div#SPPayPoint > ul > li > input {
+	float: right;
+	margin-right: 30px;
+	margin-bottom: 20px;
+	width: 192px;
+	font-size: 13pt;
+}
+/* 포인트 사용 끝 */
+
+
+/* 결제상세 시작 */
+div#PMDetail > ul > li:first-child {
+	margin: 22px 0;
+}
+
+div#PMDetail li {
+	font-size: 14pt;
+	margin: 10px 0;
+}
+
+li#PMDetailPayDetail > div {
+	margin-bottom: 10px;
+}
+
+li#PMDetailPayDetail > div > a {
+	float:right;
+	font-size: 15pt;
+	margin-right: 30px;
+	font-weight: bold;
+}
+
+li#PMDetailPayDetail > div:last-child > a {
+	color: #1bceb8;
+	font-size: 20pt;
+}
+
+/* 결제상세 끝 */
+
+/* 왼쪽 항목 끝 */
+
+
+
+/* 오른쪽 항목 시작  */
+
+/* 포인트현황 시작 */
+div#PMPointBorder {
+	padding: 46px 0;
+	width: 406px;
+	float: left;
+	border: none;
+	border-radius: 20px;
+	background-color: #f3f7f8;
+	margin: 0 78px 30px 55px;
+	height: 363px;
+}
+
+div#PMPointBorder > ul > li:first-child {
+	font-weight: bold;
+	margin-bottom: 22px;
+}
+
+li#PMPointBorderDetail {
+	background-color: white;
+	width: 319px;
+	padding: 22px;
+	border-radius: 20px;
+}
+
+li#PMPointBorderDetail > div {
+	margin-bottom: 10px;
+	font-size: 14pt;
+}
+
+li#PMPointBorderDetail > div > a {
+	float: right;
+	margin-right: 4px;
+	font-weight: bold;
+}
+
+/* 포인트현황 끝 */
+
+
+
+/* 오른쪽 항목 끝 */
+
+
+
+/* 결제약관 시작 */
+div#PMMethod {
+	width: 406px;
+	float: left;
+	margin-left: 26px;
+	height: 100px;
+}
+
+div#PMMethod > ul > li {
+	font-size: 15pt;
+	margin-bottom: 10px;
+}
+
+
+div#PMMethod > ul > li > input {
+	margin-right: 20px;
+	font-size: 20pt; 
+	width: 19px;
+	height: 17px;
+}
+
+a.PMUnderline {
+	text-decoration: underline;
+	color: black;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+/* 결제약관 끝 */
+
+
+/* 결제하기버튼 시작 */
+
+button#PMPaymentEnd {
+	background-color: #1bcebe;
+	color: white;
+	margin: 0 91px 10px 134px;
+	border: 0;
+	border-radius: 40px;
+	width: 235px;
+	height: 65px;
+	font-size: 15pt;
+}
+
+button#PMPaymentReset {
+	background-color: white;
+	color: #1bceb8;
+	margin: 0 91px 10px 134px;
+	border: solid 1px #1bceb8;
+	border-radius: 40px;
+	width: 235px;
+	height: 65px;
+	font-size: 15pt;
+}
+/* 결제하기버튼 끝 */
