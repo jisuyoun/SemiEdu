@@ -1,0 +1,189 @@
+@charset "UTF-8";
+
+/* 상단 제목 시작 */
+h1.mainName  {
+	background-image: url("../images/barbackground.png");
+	font-size: 50pt; 
+	font-weight: bold; 
+	text-align: center;
+	color: white;
+	height: 206px;
+	padding: 61px 0;
+}
+/* 상단 제목 끝 */
+
+/* 삭제버튼 시작 */
+button.SPDelectButton {
+	margin: 56px 0 0 10px;
+	background-color: white;
+	border-radius: 10px;
+	border: solid 1px gray;
+	color: gray;
+	width: 100px;
+	height: 43px;
+}
+/* 삭제버튼 끝 */
+
+/* 리스트 제목 시작 */
+div#SPListBody {
+	border: solic 1px blue;
+	width: 1107px;
+	border-radius: 10px;
+	background-color: #f3f7f8;
+	min-height: 200px;
+}
+
+div#SPListTitle {
+	margin: 19px 10px 0 10px;
+	padding: 19px 0;
+	background-color: #f8fafc;
+	position: relative;
+	top: 14px;
+	border-radius: 10px;
+	height: 65px;
+	
+}
+
+div#SPListBody > div#SPListTitle > ul > div {
+	display: inline-flex;
+	list-style-type: none;
+	font-size: 15pt;
+	font-weight: bold;
+}
+
+input#SPCheckbox {
+	margin-right: 10px; 
+	width: 20px; 
+	height: 15px;
+	position: relative;
+	top: 3px;
+}
+
+div#SPListBody > div#SPListTitle > ul > div:first-child {
+	width: 122px;
+}
+
+div#SPListBody > div#SPListTitle > ul > div:nth-child(2) {
+	width: 409px;
+}
+
+div#SPListBody > div#SPListTitle > ul > div:nth-child(3),
+div#SPListBody > div#SPListTitle > ul > div:nth-child(4),
+div#SPListBody > div#SPListTitle > ul > div:last-child {
+	width: 150px;
+}
+
+div#SPListBody > div#SPListTitle > ul > div > li {
+	display: block;
+	margin: 0 auto;
+}
+
+/* 리스트 제목 끝 */
+
+/* 리스트 항목 시작 */
+li#SPListCate {
+	position: relative;
+	top: 5px;
+	
+}
+
+div#SPListContent {
+	background-color: white;
+	margin: 0 10px;
+	padding: 18px 0;
+	border-radius: 10px;
+	position: relative;
+	top: 14px;
+	height: 65px;
+}
+
+div#SPListContent > ul > div {
+	display: inline-flex;
+	list-style-type: none;
+	font-size: 13pt;
+}
+
+ div#SPListBody > div#SPListContent > ul > div:first-child {
+	width: 122px;
+}
+
+div#SPListBody > div#SPListContent > ul > div:nth-child(2) {
+	width: 409px;
+}
+
+div#SPListBody > div#SPListContent > ul > div:nth-child(3),
+div#SPListBody > div#SPListContent > ul > div:nth-child(4),
+div#SPListBody > div#SPListContent > ul > div:last-child {
+	width: 150px;
+} 
+
+div#SPListBody > div#SPListContent > ul > div > li {
+	display: block;
+	margin: 0 auto;
+}
+/* 리스트 항목 시작 */
+
+
+/* 판매금액, 할인금액 넣어줄 곳 시작 */
+div#SPAllPrice {
+	position: relative;
+	top: 14px;
+	text-align: right;
+	margin-right: 17px;
+	margin: 0 10px;
+	border: solid 1px #ddddd3;
+	border-width: 0 0 1px 0;
+	
+}
+
+div#SPAllPrice > ul {
+	position: relative;
+	top: 12px;
+}
+
+div#SPAllPrice > ul > li {
+	display: inline-flex;
+	list-style-type: none;
+	font-size: 13pt;
+	font-weight: bold;
+	margin-right: 61px;
+	padding: 29px 0;
+}
+
+i#SPMinusIcon {
+	font-size: 17pt;
+}
+/* 판매금액, 할인금액 넣어줄 곳 끝 */
+
+/* 총 결제금액 시작 */
+div#SPListBody > div:last-child {
+	text-align: right;
+	font-size: 16pt;
+	font-weight: bold;
+	margin-right: 61px;
+	padding: 51px 0;
+	height: 120px;
+}
+
+div#SPListBody > div:last-child > ul > li {
+	list-style-type: none;
+}
+
+#SPListBody > div:last-child > ul > li > a {
+	color: #1bcebe;
+	margin-left: 30px;
+}
+
+button#SPEndButton {
+	background-color: #1bcebe;
+	color: white;
+	display: block;
+	margin: 0 auto;
+	margin-top: 62px;
+	border: 0;
+	border-radius: 40px;
+	width: 200px;
+	height: 65px;
+	font-size: 15pt;
+}
+/* 총 결제금액 끝 */
