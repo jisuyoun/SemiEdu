@@ -1,0 +1,246 @@
+@charset "UTF-8";
+
+/*표준 글꼴 서식 스타일*/
+
+	body{
+		 
+    	font-family: 'Noto Sans KR', Malgun Gothic,'Malgun Gothic', 'Outfit', sans-serif;
+
+	}
+
+
+	li.liM{
+		margin-left:20px;
+	}
+	
+	
+	/* Fixed sidenav, full height */
+	.sidenav {
+	  height: 100%;
+	  width: 250px;
+	  position: fixed;
+	  z-index: 1;
+	  top: 0;
+	  left: 0;
+	  background-color: white;
+	  overflow-x: hidden;
+	  padding-top: 20px;
+	  color:black;
+	  margin-top:80px;
+	}
+	
+	/*  */
+	.sidenav a , .dropdown-btn {
+	  padding: 6px 8px 6px 16px;
+	  text-decoration: none;
+	  font-size: 17px;
+	  color: black;
+	  display: block;
+	  border: none;
+	  background: none;
+	  width: 100%;
+	  text-align: left;
+	  cursor: pointer;
+	  outline: none;
+	}
+	
+	.dropdown-container a:hover{
+		color:#1bceb8;
+		text-decoration: none;
+	}
+	
+	
+	/* Main content */
+	div.main1 {
+	  margin-left: 250px; /* Same as the width of the sidenav */
+	  font-size: 20px; /* Increased text to enable scrolling */
+	  
+	  background-color:#eceff4; 
+	  height: 1500px; 
+	  margin-top:80px; 
+	  padding:30px 30px;
+	}
+	
+	
+
+	
+	
+	/* 눌렀을떄 */
+	.active {
+	  background-color: #1bceb8;
+	  color: white;
+	  border-top-left-radius:10px;
+	  border-top-right-radius:10px;
+	  height:57px;
+	  width: 230px;
+	  margin: 0 10px;
+	}
+	
+	/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+	.dropdown-container {
+	  display: none;
+	  background-color: #f3f7f8;
+	  padding: 10px 8px 0 8px ;
+	  color:gray;
+	  margin: 0 10px;
+	  border-bottom-left-radius:10px;
+	  border-bottom-right-radius:10px;
+	}
+	
+	.dropdown-container a {
+	  color:gray;
+	  height:50px;
+	}
+	
+	/* Optional: Style the caret down icon */
+	.fa-caret-down {
+	  float: right;
+
+	}
+	
+	/* Some media queries for responsiveness */
+	@media screen and (max-height: 450px) {
+	  .sidenav {padding-top: 15px;}
+	  .sidenav a {font-size: 18px;}
+	}
+	
+	hr{
+		margin:8px 0;
+	}
+	
+	.sidenav i{
+		margin-right:10px;
+	}
+	
+	p {
+		margin-bottom: 0;
+	}
+	
+	
+	nav#navId{
+		border-bottom:solid 1px #dddddd; 
+		background-color:white; 
+		height: 80px;
+		display: flex;
+		align-items: center;
+		padding: 0 25px;
+	}
+	
+	button#myPageB{
+		font-size : 10pt; 
+		border-radius:20px; 
+		margin-left:120px; 
+		background-color:#1bceb8;
+		padding: 5px 15px;
+		font-weight: bold;
+	}
+	
+	div#content1{
+		background-color:white; 
+		border-radius:20px; 
+		padding:0 50px; ;
+		width:100%; 
+		height:150px; 
+		display:flex; 
+		justify-content: space-between; 
+		align-items: center;
+	}
+	
+	div#content2{
+		margin-top:20px; 
+		width:100%; 
+		height:280px; 
+		display:flex; 
+		justify-content: space-between; 
+		align-items: center;
+	}
+	
+	div#content3{
+		margin-top:20px; 
+		width:100%; 
+		height:280px; 
+		display:flex; 
+		justify-content: space-between; 
+		align-items: center;
+	}
+	
+	div.content4{
+		background-color:white; 
+		border-radius:20px; 
+		padding:20px 30px; ;
+		width:100%; 
+		height:500px; 
+	}
+	
+	div.pic{
+		background-color:#f3f7f8; 
+		width:100px; height:100px; 
+		border-radius:50%;
+	}
+	
+	span.spanC{
+		color:#1bceb8; 
+		font-weight:bold; 
+		font-size:30pt;
+	}
+	
+	p.pC{
+		 margin-bottom:0; 
+		 font-size:10pt; 
+		 color:gray; 
+		 width:85px;
+	}
+	
+	p.pC2{
+		margin-bottom:0; 
+		width:85px;
+	}
+	
+	p.pCenter{
+		text-align:center;
+	}
+	
+	div.item{
+		display:flex; 
+		width:200px; 
+		justify-content: space-between; 
+		align-items: center; 
+	}
+	
+	div.content2Div{
+		background-color:white; 
+		height:100%; 
+		width:49%;  
+		border-radius:20px; 
+		padding:30px 20px;
+	}
+	
+	div.item2{
+		border-top:solid 1px gray; 
+		border-bottom:solid 1px gray;
+		 height:70%; 
+		 margin-top:10px; 
+		 display: flex; 
+		 justify-content: center; 
+		 align-items: center;
+	}
+	
+	p.pC3{
+		text-align:center; 
+		color:gray; 
+		font-size:13pt;
+	}
+	
+	div.content3Div{
+		background-color:white; 
+		height:100%; 
+		width:100%;  
+		border-radius:20px; 
+		padding:30px 20px;
+	}
+	
+	
+	input, select{
+		border:solid 1px lightgray;
+		border-radius:5px;
+	}
