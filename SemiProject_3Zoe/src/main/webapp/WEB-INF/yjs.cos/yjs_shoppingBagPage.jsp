@@ -10,7 +10,7 @@
 
 
 	
-<jsp:include page="header.jsp" />
+<jsp:include page="../header.jsp" />
 
 <%-- 직접만든 css --%>
 <link rel="stylesheet" type="text/css" href="<%= ctxPath%>/css/shoppingBagStyle.css" />
