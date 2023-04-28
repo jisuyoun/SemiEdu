@@ -10,7 +10,7 @@
          <a href="/main/page.jsp?code=refund" title="환불규정 페이지로 이동">환불규정</a>
       </div>
       
-
+ 
       <div class="foot_bottom">
          <a>(주)한국라이센스개발원 | 대표 : 이봉규</a><br>
          <a>사업자등록번호 : 665-88-00071 | 통신판매업신고번호 : 제2015-서울구로-1013호</a><br>

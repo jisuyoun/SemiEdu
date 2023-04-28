@@ -11,7 +11,7 @@ public class IndexController extends AbstractController {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 
-		
+		 
 		    super.setRedirect(false); // 디폴트가 false이기 때문에 생략가능
 		//	또는 this.setRedirect(false);
 		//	또는 setRedirect(false);
