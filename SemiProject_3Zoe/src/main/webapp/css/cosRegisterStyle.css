@@ -1,0 +1,430 @@
+@charset "UTF-8";
+
+
+/* 최상단메뉴바 시작 */
+h1#CRMainName {
+	background-image: url("../images/barbackground.png");
+	font-size: 50pt; 
+	font-weight: bold; 
+	text-align: center;
+	color: white;
+	height: 206px;
+	padding: 61px 0;
+}
+
+div#CRMainMenu {
+	position: relative;
+	float: right;
+	top: -64px;
+}
+
+a#CRLine {
+	margin: 0 30px 0 10px;
+	color: white;
+}
+
+button#dropdownMenuButton {
+	background: none;
+	border: none;
+	margin-right: 300px;
+	font-size: 16pt;
+}
+
+button#dropdownbtn {
+	clear: both;
+	float: left;
+   	margin-left: 151px;
+   	background-color: white;
+   	color: black;
+   	border: solid 1px lightgray;
+   	width: 140px;
+	padding-left: 76px;
+	text-align: left;
+}
+/* 최상단메뉴바 끝 */
+
+
+
+
+/* 글쓰기 버튼 시작 */
+div#CRButtonPosition {
+	margin-left: 341px;
+	margin-top: 65px;	
+}
+
+.CRButtonPosition {
+	/* margin-left: 1232px;	 */
+	clear: both;
+	position: relative;
+	top: 649px;
+}
+
+div#CRButtonShowPosition {
+	clear: both;
+	position: relative;
+	top: 33px;
+	left: 352px;
+}
+
+button#CRWritingButton,
+button#CRHideButton {
+	border-radius: 30px;
+	height: 50px;
+	width: 177px;
+	background-color: white;
+	border: solid 1px #1bceb8;
+	color: #1bceb8;
+	font-size: 15pt;
+}
+
+button#CRWritingButton:hover {
+	background-color: #1bceb8;
+	border: solid 1px #1bceb8;
+	color: white;
+}
+
+button#CRHideButton:hover {
+	background-color: #1bceb8;
+	border: solid 1px #1bceb8;
+	color: white;
+}
+
+button#CRDeleteButton {
+	margin-left: 10px;
+	border-radius: 30px;
+	height: 50px;
+	width: 177px;
+	background-color: #1bceb8;
+	border: solid 1px white;
+	color: white;
+	font-size: 15pt;
+}
+
+button#CRDeleteButton:hover {
+	background-color: white;
+	border: solid 1px #1bceb8;
+	color: #1bceb8;
+}
+/* 글쓰기 버튼 끝 */
+
+
+
+
+/* 강의선택 아이콘 시작 */
+h1.CRMainTitle {
+	margin-top: 38px;
+	padding: 0 634px;
+}
+
+div#CRAllImg {
+	margin: 100px 0;
+	padding: 0 280px;
+	cursor: pointer;
+} 
+
+.flip-box {
+	background-color: transparent;
+	width: 321px;
+	height: 200px;
+	border: 0px solid #f1f1f1;
+	perspective: 1000px; /* Remove this if you don't want the 3D effect */
+	float:left;
+	margin: 0 13px;
+}
+
+/* This container is needed to position the front and back side */
+.flip-box-inner {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	transition: transform 0.8s;
+	transform-style: preserve-3d;
+}
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flip-box:hover .flip-box-inner {
+	transform: rotateY(180deg);
+}
+
+/* Position the front and back side */
+.flip-box-front, .flip-box-back {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+
+/* Style the front side */
+.flip-box-front {
+	background-color: white;
+	color: black;
+}
+
+/* Style the back side */
+.flip-box-back {
+	background-color: white;
+	color: white;
+	transform: rotateY(180deg);
+}
+
+.CRButton-div { 
+	width: 185px;
+	height: 192px;
+}  
+	
+div#CRContentContainerMar {
+	display: block;
+	margin: 0 auto;
+	max-width: 100%;
+	width: 1410px;
+	margin-top: 419px;
+}
+
+
+/* 강의선택 아이콘 끝 */
+
+
+
+/* 나타나는 강의 아이콘 및 강의 소개 시작 */
+div#CRAllContent {
+	position: relative;
+	top: 190px;
+	left: 147px;
+}
+
+img.CRChangeImg {
+	display: none;
+	position: relative;
+	top: 50px;
+	left: 41px;
+	width: 375px;
+	height: 400px;
+}
+
+img#CRChangeImgFour {
+	position: relative;
+	top: -7px;
+	left: 41px;
+	width: 312px;
+	height: 291px;
+}
+
+span.CRCosIntroduce {
+	display: block;
+	position: relative;
+	top: -69px;
+	left: 602px;
+	font-size: 13pt;
+	margin-bottom: 10px;
+}
+
+span#CRCosIntroduceOne,
+span#CRCosIntroduceTwo,
+span#CRCosIndroduceThree,
+span#CRCosIntroduceFour,
+span#CRCosIntroduceFive,
+span#CRCosIntroduceSix{
+	display: block;
+	position: relative;
+	top: -283px;
+	left: 478px;
+	font-size: 13pt;
+	margin-bottom: 10px;
+	 
+} 
+/* 나타나는 강의 아이콘 및 강의 소개 끝 */
+
+
+
+/* 검색창 시작 */
+.CRSearchBox {
+	position: relative;
+	top: 16px;
+	float: right;
+	display: none;
+	width: 250px;
+	transform: translate(-50%, -50%);
+	height: 50px;
+	padding: 10px;
+}
+
+.CRSearchTxt {
+	float: left;
+	padding: 2px;
+	border-width: 1px 0 1px 1px;
+	outline: none;
+	font-size: 15px;
+	line-height: 40px;
+	border-radius: 0;
+	height:40px;
+	position: relative;
+	top: 0px;
+	left: 13px;
+	width: 176px;
+	margin: 0;
+}
+
+.CRSearchBtn {
+	float: right;
+	width: 40px;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-width: 1px 1px 1px 0;
+	border-color: #f1f1f1;
+}
+/* 검색창 끝 */
+
+/* 전체선택 시작 */
+div#CRDeleteAll {
+	position: absolute!important;
+	z-index: 99!important;
+	margin: 4px 313px!important;
+	font-size: 15pt;
+}
+
+label.CRDeleteCheckBox {
+	display: none;
+	margin-right: 20px;
+}
+
+input#CRDeleteAll {
+	position: relative;
+	left: 0!important;
+	top: 0!important;
+}
+/* 전체선택 끝 */			
+			
+/* 상품 리스트 나오는 곳 시작 시작 */
+input.CRDeleteCheckBox {
+	display: none;
+	position: absolute;
+	left: 10px;
+	top: 134px;
+	width: 20px;
+	height: 20px;
+}
+
+.fa-solid fa-heart {
+	color: #ff0000;
+}
+
+
+i#heart {
+	font-size: 20pt;
+	position: absolute;
+	bottom: 219px;
+	left: 345px;
+	z-index: 99;
+}
+
+.CRSildeMenu {
+	margin: 107px 100px;
+	display: none;
+	margin-top: 80px;
+}
+
+.CRCosList {
+	border-style: solid;
+	border-width: 1px 0 1px 0;
+	display: inline-block;
+	height: 291px;
+}
+	
+.CRCosList_1 {
+	border-style: solid;
+	border-width: 0 0 1px 0;
+	display: inline-block;
+	height: 291px;
+}
+
+img.CRSellImg {
+	float: left;
+	width: 335px;
+	height: 247px;
+	margin-top: 21px;
+	border-radius: 20px;
+	border: solid 1px #cccccc; 
+}
+
+.CRListMainPosition {
+	display: inline-block;
+	position: relative;
+	top: 26px;
+}
+
+h4.CRCosTitleName {
+	margin-bottom: 78px;
+	font-weight: bold;
+}
+
+div.CRDate {
+	font-size: 15pt;
+}
+
+div.CRLastListPostion {
+	display: inline-block;
+	width: 147px;
+	padding: 0;
+	position: relative;
+	top: -23px;
+	
+}
+
+div.CRCosPrice {
+	font-size: 18pt;
+	color: gray;
+	text-decoration: line-through;
+}
+
+div.CRCosSalePrice {
+	font-size: 18pt;
+	font-weight: bold;
+	color: #1bceb8;
+}
+
+div.CRButton {
+	float: right;
+	position: relative;
+	top: -97px;
+	left: 214px;
+}
+
+button.CRButtonGoBag {
+	font-size: 13pt;
+	margin-bottom: 20px;
+	border-radius: 30px;
+	height: 50px;
+	width: 177px;
+	background-color: #1bceb8;
+	border: solid 1px #1bceb8;
+	color: white;
+}
+
+button.CRButtonGoApplication {
+	font-size: 13pt;
+	border-radius: 30px;
+	height: 50px;
+	width: 177px;
+	background-color: white;
+	border: solid 1px #1bceb8;
+	color: #1bceb8;
+}
+/* 상품 리스트 나오는 곳 시작 끝 */
+
+
+/* 기타 공통 시작 */
+li {
+	list-style-type: none;
+	font-size: 10pt;
+}
+	
+h3.CRh3 {
+	color: black;
+	padding-top: 73px;
+	font-weight: bold;
+}
+/* 기타 공통 끝 */
