@@ -38,45 +38,63 @@
   
 <script type="text/javascript">
 
-	//로그인 유무를 건사해서 로그인을 했으면 true를 리턴해주고 
-	// 로그인 안했으면 false를 리턴해주도록 한다.
-	public boolean checkLogin(HttpServletRequest request) {
-	   
-	   HttpSession session = request.getSession();
-	   MemberVO loginuser = (MemberVO)session.getAttribute("loginuser");
-	   
-	   if(loginuser != null) {
-	      //로그인 한 경우
-	      return true;
-	   }
-	   else {
-	      //로그인 안한 경우
-	      return false;
-		}
-	   
-	}// end of public boolean checkLogin(HttpServletRequest request)----------------
-
+	$(document).ready(function(){
+	    
+	    
+	    
+	});
+	
+	function goLogOut() {
+   
+    // 로그아웃을 처리해주는 페이지로 이동
+    location.href="<%=request.getContextPath()%>/login/logout.go";
+      
+   }// end of function goLogOut(){}---------------------------------
+   
 </script>
 
-
-
-
-	<!-- 상단 네비게이션 시작 -->
-	<div id="loginBar" style="text-align: right;">
 	
-		<button type="button" class="btn btn-light" id="loginBtn" href="#">
-			<i class="fa-solid fa-arrow-right-to-bracket" style="margin-right: 10px;"></i>로그인
-		</button>
-		<button type="button" class="btn btn-light" id="registerBtn" href="#">
-			<i class="fa-solid fa-user-plus" style="margin-right: 10px;"></i>회원가입
-		</button>
-	
-		<form style="display: inline-block;">
-			<img src="<%= ctxPath %>/images/searching.png" class="img-search" width="30px;" />
-			<input type="text" class="search" name="search" placeholder="Search.." autocomplete="off">
-		</form>
-	
-	</div>
+	<%-- *** 로그인 전 상단바 화면 *** --%>
+	<c:if test="${empty sessionScope.loginuser}">   
+	   <div id="loginBar" style="text-align: right;">
+	   
+	      <a type="button" class="btn btn-light" id="loginBtn" href ="<%= ctxPath%>/login/login.go">
+	         <i class="fa-solid fa-arrow-right-to-bracket" style="margin-right: 10px;"></i>로그인
+	      </a>
+	      <button type="button" class="btn btn-light" id="registerBtn" href="#">
+	         <i class="fa-solid fa-user-plus" style="margin-right: 10px;"></i>회원가입
+	      </button>
+	   
+	      <form style="display: inline-block;">
+	         <img src="images/searching.png" class="img-search" width="30px;">
+	         <input type="text" class="search" name="search" placeholder="Search.." autocomplete="off">
+	      </form>
+	   
+	   </div>
+   </c:if>
+  
+   <%-- *** 로그인 후 상단바 화면 *** --%>
+   <c:if test="${not empty sessionScope.loginuser}">
+      <div id="loginBar" style="text-align: right;">
+   
+      <button type="button" class="btn btn-light" id="loginBtn" href="#">
+         <i class="fa-regular fa-circle-user" style="margin-right: 10px;"></i>${(sessionScope.loginuser).name}
+      </button>
+      <button type="button" class="btn btn-light" id="registerBtn" onclick="goLogOut();" >
+         <i class="fa-solid fa-arrow-right-from-bracket" style="margin-right: 10px;"></i>로그아웃
+      </button>
+      <button type="button" class="btn btn-light" id="registerBtn" href="#">
+         <i class="fa-solid fa-cart-shopping" style="margin-right: 10px;"></i>장바구니
+      </button>
+   
+      <form style="display: inline-block;">
+         <img src="images/searching.png" class="img-search" width="30px;">
+         <input type="text" class="search" name="search" placeholder="Search.." autocomplete="off">
+      </form>
+   
+    </div>
+
+   </c:if>
 
 
 
@@ -142,14 +160,8 @@
 	<!-- to Top btn 끝 -->
 	
 	</nav>
+	
+	
+	
 </head>
 
-
-	
-
- 
-	
-
-
-
-    
