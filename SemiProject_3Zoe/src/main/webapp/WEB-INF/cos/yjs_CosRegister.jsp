@@ -179,7 +179,7 @@ String ctxPath = request.getContextPath();
 							}
 							html += "	<ul>"
 								  +	"		<li><input type='checkbox' class='CRDeleteCheckBox' name='CRDeleteCheckBox' value='" + item.courseCode + "' />"
-								  + "		  	<img src='<%= request.getContextPath()%>/yjs.img/'"+ item.img +" class='CRSellImg' />" 
+								  + "		  	<img src='<%= request.getContextPath()%>/yjs.images/'"+ item.img +" class='CRSellImg' />" 
 						 	  	  + "			<a data-toggle='tooltip' title='찜!'><label for='CRheartCheck" + index + "'><i id='heart' class='fa-regular fa-heart' style='color: #cccccc;'></i>"
 						  	 	  + "			<input type='checkbox' id='CRheartCheck" + index + "' name='CRHeartCheckName' value='" + item.courseCode + "' style='display:none;' /></label></a>"
 								  + "       </li>"
@@ -342,7 +342,7 @@ String ctxPath = request.getContextPath();
 				var checkedHeartJoin = checkedHeartArr.join();
 				
 				$.ajax({
-					url:"<%= request.getContextPath()%>/ysj.cos/CosLikeJSON.go",
+					url:"<%= request.getContextPath()%>/yjs.cos/CosLikeJSON.go",
 					type:"POST",
 					data:{"checkedHeart":checkedHeartJoin,
 						  "userid":"${sessionScope.loginuser.userid}"},
@@ -604,7 +604,7 @@ String ctxPath = request.getContextPath();
 	<div class="flip-box" style="margin: 0 0;">
 		<div class="flip-box-inner">
 			<div class="flip-box-front">
-				<img class="CRButton-div" src="<%= request.getContextPath()%>/yjs.img/Program icon.png" />
+				<img class="CRButton-div" src="<%= request.getContextPath()%>/yjs.images/Program icon.png" />
 			</div>
 			<div class="flip-box-back" id="CRButton_one" value="1">
 				<h3 class="CRh3">정보처리기사</h3>
@@ -616,7 +616,7 @@ String ctxPath = request.getContextPath();
 	<div class="flip-box">
 		<div class="flip-box-inner">
 			<div class="flip-box-front">
-				<img class="CRButton-div" src="<%= request.getContextPath()%>/yjs.img/monitor.png" />
+				<img class="CRButton-div" src="<%= request.getContextPath()%>/yjs.images/monitor.png" />
 			</div>
 			<div class="flip-box-back" id="CRButton_two">
 				<h3 class="CRh3">데이터관련</h3>
@@ -627,7 +627,7 @@ String ctxPath = request.getContextPath();
 	<div class="flip-box">
 		<div class="flip-box-inner">
 			<div class="flip-box-front">
-				<img class="CRButton-div" src="<%= request.getContextPath()%>/yjs.img/circuit.png" />
+				<img class="CRButton-div" src="<%= request.getContextPath()%>/yjs.images/circuit.png" />
 			</div>
 			<div class="flip-box-back" id="CRButton_three">
 				<h3 class="CRh3">전자계산기</h3>
@@ -638,7 +638,7 @@ String ctxPath = request.getContextPath();
 	<div class="flip-box" style="margin: 0 0;">
 		<div class="flip-box-inner">
 			<div class="flip-box-front">
-				<img class="CRButton-div" src="<%= request.getContextPath()%>/yjs.img/Exam study icon.png" />
+				<img class="CRButton-div" src="<%= request.getContextPath()%>/yjs.images/Exam study icon.png" />
 			</div>
 			<div class="flip-box-back" id="CRButton_four">
 				<h3 class="CRh3">패키지</h3>
@@ -655,10 +655,10 @@ String ctxPath = request.getContextPath();
 	<%-- 나타나는 강의 아이콘 및 강의 소개 시작 --%>
 	<div id=CRAllContent class="col-lg-12">
 		<div class="col-lg-6" style="float: left; clear: both;">
-			<img class="CRChangeImg" id="CRChangeImgOne" src="<%= request.getContextPath()%>/yjs.img/Program icon.png" /> 
-			<img class="CRChangeImg" id="CRChangeImgTwo" src="<%= request.getContextPath()%>/yjs.img/monitor.png" /> 
-			<img class="CRChangeImg" id="CRChangeImgThree" src="<%= request.getContextPath()%>/yjs.img/circuit.png" /> 
-			<img class="CRChangeImg" id="CRChangeImgFour" src="<%= request.getContextPath()%>/yjs.img/Exam study icon.png" />
+			<img class="CRChangeImg" id="CRChangeImgOne" src="<%= request.getContextPath()%>/yjs.images/Program icon.png" /> 
+			<img class="CRChangeImg" id="CRChangeImgTwo" src="<%= request.getContextPath()%>/yjs.images/monitor.png" /> 
+			<img class="CRChangeImg" id="CRChangeImgThree" src="<%= request.getContextPath()%>/yjs.images/circuit.png" /> 
+			<img class="CRChangeImg" id="CRChangeImgFour" src="<%= request.getContextPath()%>/yjs.images/Exam study icon.png" />
 		</div>
 		<div class="col-lg-6" style="float: left; clear: both;">
 			<span class="CRCosIntroduce" id="CRCosIntroduceOne" style="font-weight: bold; font-size: 20pt;"></span> 
