@@ -124,12 +124,12 @@ public class MemberDAO implements InterMemberDAO {
 		try {
 			 conn = ds.getConnection();
 			 
-			 String sql = " SELECT  userid, name, email, mobile, postcode, address, detailaddress, extraaddress, gender, "
-			 		    + " birthday, point, registerday, pwdchangegap, issue, checkEmail, checkMobile, "
+			 String sql = " SELECT  userid, name, email, mobile, postcode, address, detailaddress, "
+			 		    + " point, registerday, pwdchangegap, issue, checkEmail, checkMobile, "
 			 		    + " NVL(lastlogingap, trunc( months_between(sysdate, registerday)) ) AS lastlogingap "
 			 		    + " FROM "
 			 		    + " ( "
-			 		    + " select userid, name, email, mobile, postcode, address, detailaddress, extraaddress, gender , birthday "
+			 		    + " select userid, name, email, mobile, postcode, address, detailaddress "
 			 		    + " , point, to_char(registerday, 'yyyy-mm-dd') AS registerday "
 				 		+ " , trunc( months_between(sysdate, lastpwdchangedate) ) AS pwdchangegap "
 			 		    + " , issue, checkEmail, checkMobile "
@@ -161,24 +161,21 @@ public class MemberDAO implements InterMemberDAO {
 				 member.setPostcode(rs.getString(5));
 				 member.setAddress(rs.getString(6));
 				 member.setDetailaddress(rs.getString(7));
-				 member.setExtraaddress(rs.getString(8));
-				 member.setGender(rs.getString(9));
-				 member.setBirthday(rs.getString(10));
-				 member.setPoint(rs.getInt(11));
-				 member.setRegisterday(rs.getString(12));
+				 member.setPoint(rs.getInt(8));
+				 member.setRegisterday(rs.getString(9));
 				 
-				 if( rs.getInt(13) >= 3 ) { // 또는 rs.getInt("PWDCHANGEGAP")
+				 if( rs.getInt(10) >= 3 ) { // 또는 rs.getInt("PWDCHANGEGAP")
 					// 마지막으로 암호를 변경한 날짜가 현재시각으로 부터 3개월이 넘었으면 true
 				    // 마지막으로 암호를 변경한 날짜가 현재시각으로 부터 3개월이 넘지 않았으면 false
 					 
 					member.setRequirePwdChange(true); // 로그인시 암호를 변경해라는 alert 를 띄우도록 할때 사용한다.  
 				 }
 				 
-				 member.setIssue(rs.getString(14));
-				 member.setCheckEmail(rs.getString(15));
-				 member.setCheckMobile(rs.getString(16));
+				 member.setIssue(rs.getString(11));
+				 member.setCheckEmail(rs.getString(12));
+				 member.setCheckMobile(rs.getString(13));
 				 
-				 if ( rs.getInt(17) >= 12 ) { // 또는 rs.getInt("LASTLOGINGAP")
+				 if ( rs.getInt(14) >= 12 ) { // 또는 rs.getInt("LASTLOGINGAP")
 					 // 마지막으로 로그인 한 날짜시간이 현재시각으로 부터 1년이 지났으면 휴면으로 지정  
 					 
 					 member.setIdle(1); 

@@ -10,9 +10,6 @@ public class MemberVO {
 	private String postcode;			// 우편번호 
 	private String address;				// 주소
 	private String detailaddress;		// 상세주소
-	private String extraaddress;		// 참고항목
-	private String gender;          	// 성별  남:1 여:2  
-	private String birthday; 			// 생년월일
 	private int point; 				   	// 포인트 
 	private String registerday;        	// 가입일자 
 	private String lastpwdchangedate;  	// 마지막으로 암호를 변경한 날짜  
@@ -51,9 +48,6 @@ public class MemberVO {
 		this.postcode = postcode;
 		this.address = address;
 		this.detailaddress = detailaddress;
-		this.extraaddress = extraaddress;
-		this.gender = gender;
-		this.birthday = birthday;
 		this.point = point;
 		
 	}
@@ -124,29 +118,6 @@ public class MemberVO {
 		this.detailaddress = detailaddress;
 	}
 
-	public String getExtraaddress() {
-		return extraaddress;
-	}
-
-	public void setExtraaddress(String extraaddress) {
-		this.extraaddress = extraaddress;
-	}
-
-	public String getGender() {
-		return gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
-
-	public String getBirthday() {
-		return birthday;
-	}
-
-	public void setBirthday(String birthday) {
-		this.birthday = birthday;
-	}
 
 	public int getPoint() {
 		return point;
