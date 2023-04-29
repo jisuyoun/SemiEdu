@@ -155,7 +155,7 @@ String ctxPath = request.getContextPath();
 		$("div#CRAllImg").click(function(){
 			// alert("확인용 값들어옴!!");
 			$.ajax({
-				url:"<%= request.getContextPath()%>/yjs_cos/CosDisplayJSON.go",
+				url:"<%= request.getContextPath()%>/cos/yjs_CosDisplayJSON.go",
 				data:{"ClickData":$("input#CRInput_Text").val()},   
 				dataType:"json", /* dataType 을 생략하면 string 타입으로 들어온다. */
 				/* async:false, */
@@ -179,7 +179,7 @@ String ctxPath = request.getContextPath();
 							}
 							html += "	<ul>"
 								  +	"		<li><input type='checkbox' class='CRDeleteCheckBox' name='CRDeleteCheckBox' value='" + item.courseCode + "' />"
-								  + "		  	<img src='<%= request.getContextPath()%>/yjs.images/'"+ item.img +" class='CRSellImg' />" 
+								  + "			<img src='<%= ctxPath%>/yjs.images/"+item.img1+"' class='CRSellImg' />" 
 						 	  	  + "			<a data-toggle='tooltip' title='찜!'><label for='CRheartCheck" + index + "'><i id='heart' class='fa-regular fa-heart' style='color: #cccccc;'></i>"
 						  	 	  + "			<input type='checkbox' id='CRheartCheck" + index + "' name='CRHeartCheckName' value='" + item.courseCode + "' style='display:none;' /></label></a>"
 								  + "       </li>"
@@ -342,7 +342,7 @@ String ctxPath = request.getContextPath();
 				var checkedHeartJoin = checkedHeartArr.join();
 				
 				$.ajax({
-					url:"<%= request.getContextPath()%>/yjs.cos/CosLikeJSON.go",
+					url:"<%= request.getContextPath()%>/cos/yjs_CosLikeJSON.go",
 					type:"POST",
 					data:{"checkedHeart":checkedHeartJoin,
 						  "userid":"${sessionScope.loginuser.userid}"},
@@ -377,7 +377,7 @@ String ctxPath = request.getContextPath();
 				
 				
 				$.ajax({
-					url:"<%= request.getContextPath()%>/yjs.cos/CosDislikeJSON.go",
+					url:"<%= request.getContextPath()%>/cos/yjs_CosDislikeJSON.go",
 					type:"POST",
 					data:{"discheckedHeart":discheckedHeartJoin,
 						  "userid":"${sessionScope.loginuser.userid}"},
@@ -466,7 +466,7 @@ String ctxPath = request.getContextPath();
 				// 체크한 체크박스들의 value 를 배열 Checked_Arr 에 넣어주고, join 을 이용하여 합쳐준다.
 				if(confirm("정말로 삭제하시겠습니까?")){
 					$.ajax({
-						url:"<%= request.getContextPath()%>/cos.yjs/CosDeleteJSON.go",
+						url:"<%= request.getContextPath()%>/cos/yjs_CosDeleteJSON.go",
 						type:"POST",
 						data:{"checkedJoin":checkedJoin},
 						dataType:"json",
