@@ -12,4 +12,9 @@ public interface InterMemberDAO {
 	//입력받은 비밀번호와 로그인된 유저의 아이디와 같은지 체크
 	boolean checkPasswd(Map<String, String> paraMap) throws SQLException;
 
+	
+	// userid의 status 값 변경해주기
+	int deleteMember(String userid) throws SQLException;
+
+
 }
