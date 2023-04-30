@@ -128,7 +128,7 @@
 	 
 	 	<%-- 로그인 전 메인페이지 --%>
 	 	<c:if test="${sessionScope.loginuser == null}"> 
-	       <a href="<%= ctxPath%>/ljh.member.controller/myPage.go" class="mypage bgColor"><i class="fa-solid fa-user" style="margin-right: 10px;"></i>마이페이지</a>
+	       <a href="<%= ctxPath%>/login/login.go" class="mypage bgColor"><i class="fa-solid fa-user" style="margin-right: 10px;"></i>마이페이지</a>
 	    </c:if>
 	 	
 	 
