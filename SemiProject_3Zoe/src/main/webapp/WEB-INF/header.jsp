@@ -104,7 +104,7 @@
 	
   	<div class="menu">
 		<div class="dropdown">
-		  <button type="button" class="dropbtn" onclick= "location.href='#'">수강신청</button>		  
+		  <button type="button" class="dropbtn" onclick= "location.href='<%= ctxPath%>/cos/yjs_CosRegister.go'">수강신청</button> 		  
 		    <div class="dropdown-content">
 		      <a href="#">정보처리</a>
 		      <a href="#">빅데이터분석</a>
@@ -133,13 +133,13 @@
 	 	
 	 
 	    <%-- 관리자계정 로그인 할 경우 메인페이지 --%>
-	 	<c:if test="${sessionScope.loginuser != null and sessionScope.loginuser.userid == 'admintest'}"> 
+	 	<c:if test="${sessionScope.loginuser != null and sessionScope.loginuser.userid == 'testadmin'}"> 
 	       <a href="<%= ctxPath%>/pes.admin/adminPage.go" class="mypage bgColor" style="width: 160px;"><i class="fa-solid fa-user" style="margin-right: 10px;"></i>관리자페이지</a>
 	    </c:if>
 		     
 		     
 		<%-- 회원 로그인 할 경우 메인페이지 --%>     
-	    <c:if test="${sessionScope.loginuser != null and sessionScope.loginuser.userid ne 'admintest'}"> 
+	    <c:if test="${sessionScope.loginuser != null and sessionScope.loginuser.userid ne 'testadmin'}"> 
 	    	
 			<a href="<%= ctxPath%>/ljh.member.controller/myPage.go" class="mypage bgColor"><i class="fa-solid fa-user" style="margin-right: 10px;"></i>마이페이지</a>
 	    </c:if>
