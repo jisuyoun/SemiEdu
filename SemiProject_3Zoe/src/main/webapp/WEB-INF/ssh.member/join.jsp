@@ -3,7 +3,7 @@
     
 <%
    String ctxPath = request.getContextPath();
-   //      /MyMVC
+   
 %>
     
 <!DOCTYPE html>
@@ -11,9 +11,10 @@
 <head>
 <meta charset="UTF-8">
 
-<link rel="stylesheet" type="text/css" href="../ssh.css2/common.css" />
-<link rel="stylesheet" type="text/css" href="../ssh.css2/font_notoSans.css" />
-<link rel="stylesheet" type="text/css" href="../ssh.css2/green_theme.css" />
+<link rel="stylesheet" type="text/css" href="<%= ctxPath%>/ssh.css2/common.css" />
+<link rel="stylesheet" type="text/css" href="<%= ctxPath%>/ssh.css2/font_notoSans.css" />
+<link rel="stylesheet" type="text/css" href="<%= ctxPath%>/ssh.css2/green_theme.css" />
+<link rel="stylesheet" type="text/css" href="<%= ctxPath%>/ssh.css/member.css" />
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" type="text/css" href="<%= ctxPath%>/bootstrap-4.6.0-dist/css/bootstrap.min.css" > 
@@ -29,7 +30,6 @@
 <link rel="stylesheet" type="text/css" href="<%= ctxPath%>/jquery-ui-1.13.1.custom/jquery-ui.min.css" />
 <script type="text/javascript" src="<%= ctxPath%>/jquery-ui-1.13.1.custom/jquery-ui.min.js"></script>
 
-<link rel="stylesheet" type="text/css" href="../ssh.css/member.css" />
 
 <style type="text/css">
 	
@@ -40,23 +40,18 @@
 </style>
 
 <title>회원가입</title>
-</head>
-<body>
-
-
-
 
 <script type="text/javascript">
 	
 	let b_flag_idDuplicate_click = false;
 	// "아이디 중복확인" 을 클릭했는지 클릭을 안 했는지 여부를 알아오기 위한 용도.
 	
-	
+	 let b_flag_emailDuplicate_click = false;
+   // "이메일중복확인" 을 클릭했는지 클릭을 안 했는지 여부를 알아오기 위한 용도.
 
 	$(document).ready(function(){
 		
 		 $("span.error").hide();
-		 $("input#userid").focus();
 		 
 		 
 		 $("input#userid").blur( (e) => {
@@ -142,6 +137,50 @@
 	            }
 	            
 	         });// 아이디가 name 인 것은 포커스를 잃어버렸을 경우 (blur) 이벤트를 처리해주는 것이다.
+	         
+	         
+	         
+			 $("input#email1").blur( (e) => {
+	        	 
+	        	 const regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])$/i;
+	        	 
+	        	 const bool = regExp.test($(e.target).val());
+	        	 
+	        	 if(!bool) {
+	        		 // 이메일 앞부분이 정규표현식에 위배 된 경우
+	        		 $("div.mem_cont :input").prop("disabled", true);
+	        		 $(e.target).prop("disabled", false);
+	        		 $(e.target).parent().find("span.error").show();
+	    	         $(e.target).focus();
+	        	 }
+	        	 else {
+	        		 $("div.mem_cont :input").prop("disabled", false);
+		         $(e.target).parent().find("span.error").hide();
+	        	 }
+	        	 
+	         }); // end of $("input#email1").blur( (e) -----------------------
+	        		 
+	        	
+	        		 
+			 $("input#email2").blur( (e) => {
+	        	 
+	        	 const regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+	        	 
+	        	 const bool = regExp.test($(e.target).val());
+	        	 
+	        	 if(!bool) {
+	        		 // 이메일 앞부분이 정규표현식에 위배 된 경우
+	        		 $("div.mem_cont :input").prop("disabled", true);
+	        		 $(e.target).prop("disabled", false);
+	        		 $(e.target).parent().find("span.error").show();
+	    	         $(e.target).focus();
+	        	 }
+	        	 else {
+	        		 $("div.mem_cont :input").prop("disabled", false);
+		         $(e.target).parent().find("span.error").hide();
+	        	 }
+	        	 
+	         }); // end of $("input#email2").blur( (e) -----------------------	
 	         
 	         
 	         
@@ -254,6 +293,53 @@
 		
 	}); // end of $(document).ready(function()--------------------------------------
 			
+	// "이메일중복확인" 을 클릭했을 때 이벤트 처리하기	
+   	function isExistEmailCheck() {
+   		
+	   	b_flag_emailDuplicate_click = true;
+ 	    // "이메일중복확인" 을 클릭했는지 클릭을 안 했는지 여부를 알아오기 위한 용도.
+ 	    	 
+ 	    // 입력하고자 하는 이메일이 데이터베이스 테이블에 존재하는지, 존재하지 않는지 알아와야 한다.
+   	     /*
+           Ajax (Asynchronous JavaScript and XML)란?
+           ==> 이름만 보면 알 수 있듯이 '비동기 방식의 자바스크립트와 XML' 로서
+               Asynchronous JavaScript + XML 인 것이다.
+               한마디로 말하면, Ajax 란? Client 와 Server 간에 XML 데이터를 JavaScript 를 사용하여 비동기 통신으로 주고 받는 기술이다.
+               하지만 요즘에는 데이터 전송을 위한 데이터 포맷방법으로 XML 을 사용하기 보다는 JSON(Javascript Standard Object Notation) 을 더 많이 사용한다. 
+               참고로 HTML은 데이터 표현을 위한 포맷방법이다.
+               그리고, 비동기식이란 어떤 하나의 웹페이지에서 여러가지 서로 다른 다양한 일처리가 개별적으로 발생한다는 뜻으로서, 
+               어떤 하나의 웹페이지에서 서버와 통신하는 그 일처리가 발생하는 동안 일처리가 마무리 되기전에 또 다른 작업을 할 수 있다는 의미이다.
+       	 */ 
+	         $.ajax({
+           		 url:"<%= ctxPath%>/member/emailDuplicateCheck.go",
+           		 data:{"email":$("input#email1").val()+"@"+$("input#email2").val()},    // data는 /MyMVC/member/emailDuplicateCheck.up 로 전송해야할 데이터를 말한다.
+           		 type: "post", // 조심 !!! ajax는 method: get 이나 post를 사용하지 않고 type으로 사용한다.type 을 생략하면 type="get"이다.
+           		 dataType:"json", // Javascript Standard Object Notation.  dataType은 /MyMVC/member/emailDuplicateCheck.up 로 부터 실행되어진 결과물을 받아오는 데이터타입을 말한다. T 대문자!!!!!!
+                 				  // 만약에 dataType:"xml" 으로 해주면 /MyMVC/member/emailDuplicateCheck.up 로 부터 받아오는 결과물은 xml 형식이어야 한다. 
+                 				  // 만약에 dataType:"json" 으로 해주면 /MyMVC/member/emailDuplicateCheck.up 로 부터 받아오는 결과물은 json 형식이어야 한다.
+          //     async: true,  // async: true 는 비동기 방식을 말한다. async 을 생략하면 기본값이 비동기 방식인 async: true 이다.
+                 			   // async: false 는 동기 방식을 말한다. 지도를 할때는 반드시 동기방식인 async: false 를 사용해야만 지도가 올바르게 나온다.
+           		 success: function(json){ // 파라미터 json 에 {"isExists":true} 또는 {"isExists":false} 이 들어오게 된다.
+           			 if(json.isExists) {
+           			 	// 입력한 email이 이미 사용중이라면
+           			 	$("span#emailCheckResult").html($("input#email1").val()+"@"+$("input#email2").val()+" 은 중복된 email 이므로 사용불가합니다.").css("color","red");
+           			 	$("input#email").val("");
+           			 }
+           			 else if(!json.isExists && $("input#email").val().trim() != ""){ 
+           				// 입력한 email 가 존재하지 않는 경우라면
+           				$("span#emailCheckResult").html($("input#email1").val()+"@"+$("input#email2").val()+" 은 사용가능합니다.").css("color","navy"); 
+           			 }
+           		 },
+           		 
+           		 error: function(request, status, error){
+                    alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+                  }
+           	 });              
+          		 
+           	 
+           	 
+ 	      } // end of function isExistEmailCheck()----------------		
+			
 	// 가입하기 버튼 클릭시 호출되는 함수 
 	function goRegister(){
 	   
@@ -292,28 +378,32 @@
 
 </script>
 
+</head>
+<body>
+
+
 <div class="login_cont member_cont">
 	<div class="login_in">
 		<a href="/SemiProject_3Zoe/">
-		<h1><img src="../ssh.img/logo.png" alt="워너에듀 로고" class="svg_logo"/></h1>
+		<h1><img src="<%= ctxPath%>/ssh.img/logo.png" alt="워너에듀 로고" class="svg_logo"/></h1>
 		</a>
 		<h3>새로운 계정으로 회원가입 하세요!</h3>
 
 		<div class="process_cont">
 			<dl>
-				<dt><img src="../ssh.img/process_01.png" alt="방법선택" /></dt>
+				<dt><img src="<%= ctxPath%>/ssh.img/process_01.png" alt="방법선택" /></dt>
 				<dd>방법선택</dd>
 			</dl>
 			<dl>
-				<dt><img src="../ssh.img/process_02.png" alt="약관동의" /></dt>
+				<dt><img src="<%= ctxPath%>/ssh.img/process_02.png" alt="약관동의" /></dt>
 				<dd>약관동의</dd>
 			</dl>
 			<dl class="up">
-				<dt><img src="../ssh.img/process_03_up.png" alt="정보입력" /></dt>
+				<dt><img src="<%= ctxPath%>/ssh.img/process_03_up.png" alt="정보입력" /></dt>
 				<dd>정보입력</dd>
 			</dl>
 			<dl>
-				<dt><img src="../ssh.img/process_04.png" alt="가입완료" /></dt>
+				<dt><img src="<%= ctxPath%>/ssh.img/process_04.png" alt="가입완료" /></dt>
 				<dd>가입완료</dd>
 			</dl>
 		</div>
@@ -335,7 +425,7 @@
 				<dd>
 					<input name="userid" class="input requiredInfo" id="userid" maxlength="20" type="text"  placeholder="영문 또는 숫자 2~20자리" />
 					<!-- 아이디중복체크 -->
-             		<img id="idcheck" src="../ssh.img/idcheck2.png" style="vertical-align: middle; width:100px; cursor: pointer;" />
+             		<img id="idcheck" src="<%= ctxPath%>/ssh.img/idcheck2.png" style="vertical-align: middle; width:100px; cursor: pointer;" />
              		<span id="idcheckResult"></span>
 					<span class="error" style= "color:red; font-size: 14px;">&nbsp;&nbsp;영문으로 시작하는 2-20자 영문, 숫자 조합을 입력하세요.</span>
 				</dd>
@@ -433,10 +523,12 @@
 		</div>
 	</div>
   </form>
-</div>
-	<div class="btn_list">
-		<input type="button" class="moreBtn pointColor pointBorder" onclick="location.href= 'agreement.jsp'" value="이전으로" />
+  <div class="btn_list">
+		<input type="button" class="moreBtn pointColor pointBorder" onclick="location.href='javascript:history.go(-1)'" value="이전으로" />
 		<input type="submit" class="moreBtn bgColor pointBorder" id="btn_submit" onclick="goRegister()" value="회원가입하기" />
 	</div>
+</div>
+
+	
 </body>
 </html>

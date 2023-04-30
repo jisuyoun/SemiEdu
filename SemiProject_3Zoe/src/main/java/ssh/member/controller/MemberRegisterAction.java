@@ -17,7 +17,7 @@ public class MemberRegisterAction extends AbstractController {
 		
 		String method = request.getMethod();
 		
-		if("POST".equalsIgnoreCase(method)) {
+		if("GET".equalsIgnoreCase(method)) {
 			super.setRedirect(false);   // isRedirect ==> false 
 			// 여기서는 회원가입 후 다시 회원가입을 눌렀을때의 404 오류를 방지하기 위해 super.setRedirect(false);를 생략하면 안된다. 
 			super.setViewPage("/WEB-INF/ssh.member/join.jsp");
@@ -27,10 +27,15 @@ public class MemberRegisterAction extends AbstractController {
 			String name = request.getParameter("name");
 			String userid = request.getParameter("userid");
 			String pwd = request.getParameter("pwd");
-			String email = request.getParameter("email");
+			String email1 = request.getParameter("email1");
+			String email2 = request.getParameter("email2");
+			
+			String email = email1+"@"+email2;
+			
 			String mobile1 = request.getParameter("mobile1");
 			String mobile2 = request.getParameter("mobile2");
 			String mobile3 = request.getParameter("mobile3");
+			
 			
 			String mobile = mobile1+mobile2+mobile3;
 			

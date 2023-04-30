@@ -126,7 +126,7 @@
 		<ul>
 			<li>
 				아직 회원이 아니라면?
-				<a href="<%=request.getContextPath()%>/member/agreementCheck.go" >회원가입</a>
+				<a href="<%= ctxPath%>/member/agreementCheck.go" >회원가입</a>
 			</li>
 			<li>
 				아이디/비밀번호가 생각나지 않는다면?
