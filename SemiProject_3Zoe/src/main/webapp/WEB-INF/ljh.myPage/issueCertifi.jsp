@@ -25,6 +25,10 @@
 		 align-items: center;
 	}
 	
+		label.labelTag{
+		font-size:11pt; position:relative; top:3px;
+	}
+	
 
 	
 </style>
@@ -44,7 +48,7 @@
 			      	<span><b>증명서 발급</b></span>
 			      	
 			 
-			      	<input type="checkbox" class="chkboxCos"  style=" margin-left:30px; "></input> <label style="font-size:11pt;">수료 과정만 보기</label>
+			      	<input type="checkbox" class="chkboxCos"  style=" margin-left:30px; "></input> <label style="font-size:11pt;" class="labelTag">수료 과정만 보기</label>
 		
 
 			      	<select style=" height:50px; color:gray; text-align:center; margin-left:1060px; width:150px; height: 45px; font-size:13pt;">

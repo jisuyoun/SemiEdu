@@ -61,17 +61,24 @@ label.spanS{
 		
 		const inputPasswd = $("input#passwd").val().trim();
 		
-		if(inputPasswd == ""){
+		
+		if(inputPasswd== ""){
 			alert("암호를 입력하세요!");
 			return;
 		}
+		
+		//정보삭제동의에 체크하지 않은 경우라면
+		if ( ! $("input#chkboxInfo").prop("checked") ){
+			alert("[정보삭제동의]항목은 필수항목입니다.");
+			return;
+		}
+
+		
 	
 		//입력된 비밀번호가 로그인된 계정의 비밀번호와 같은지 검사해야함. 이건 class로 가서 dao로 가서 함
-		
-		
-		
-		const frm = document.passwdInput;
-		frm.action = "<%=ctxPath%>/ljh.member.controller/passwdInput.go";
+
+		const frm = document.deleteMember;
+		frm.action = "<%=ctxPath%>/ljh.member.controller/deleteMember.go";
 		
 		frm.method = "post";
 		frm.submit();
@@ -84,7 +91,7 @@ label.spanS{
  
 </head>
   
-
+<form name="deleteMember">
 <div class="main1" >
   	
   	<div class="content1" style="background-color:white; border-radius:20px; padding:20px 30px; ;width:100%; height:300px; ">
@@ -94,7 +101,7 @@ label.spanS{
   			<tr>
   				<td class="tdS">비밀번호<span style="color:#1bceb8; margin-left:5px;">*</span></td>
   				<td>
-  					<input type="password"></input>
+  					<input type="password" id="passwd" name="passwd"></input>
   				</td>
   			</tr>
   			
@@ -118,7 +125,7 @@ label.spanS{
 	  	<button type="button" id="btnSubmit" style="background-color:#1bceb8; color:white; border-radius:30px; width:155px; border:none; padding:10px;">탈퇴하기</button>
   	</p>
 </div>
-	
+</form>	
 	
 	
 	<script type="text/javascript">
