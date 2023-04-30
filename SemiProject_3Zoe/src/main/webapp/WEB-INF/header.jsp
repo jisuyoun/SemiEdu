@@ -118,8 +118,8 @@
 		    <div class="dropdown-content">
 		      <a href="<%= ctxPath%>/pes.customerService/notice.go">공지사항</a>
 		      <a href="<%= ctxPath%>/pes.customerService/question.go">자주하는질문</a>
-		      <a href="#">수강후기</a>
-		      <a href="#">이벤트</a>
+		      <a href="<%= ctxPath%>/hyh.customerService/reviewCourse.go">수강후기</a>
+		      <a href="<%= ctxPath%>/hyh.customerService/event.go">이벤트</a>
 		    </div>
 		    
 		  </div>
