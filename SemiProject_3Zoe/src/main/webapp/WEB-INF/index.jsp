@@ -101,7 +101,7 @@
 <div class="promotion_2" style="height:800px !important;">
 
 	<h3 class="es_title" style="padding: 100px 0 50px 0; font-weight: bold; font-size: 30pt; color: black;">BEST 인기강의</h3>
-	<div class="rolling_panel" style="height: 400px; ">
+	<div class="rolling_panel" style="height: 400px;">
             <ul>
                  <li class="slick-slide" style="width: 450px; height: 400px;"><a><img src="<%=request.getContextPath()%>/images/best1.png" style="width: 350px; height: 400px;" alt="배너이미지2" /></a></li>
                    
@@ -510,5 +510,6 @@
     });
 </script>
 </body>
+
 
 <jsp:include page="footer.jsp" />
