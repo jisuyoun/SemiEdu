@@ -125,7 +125,7 @@ public class MemberDAO implements InterMemberDAO {
 			 conn = ds.getConnection();
 			 
 			 String sql = " SELECT  userid, name, email, mobile, postcode, address, detailaddress, "
-			 		    + " point, registerday, pwdchangegap, issue, checkEmail, checkMobile "
+			 		    + " point, registerday, pwdchangegap, issue, checkEmail, checkMobile, "
 			 		    + " pwd, NVL(lastlogingap, trunc( months_between(sysdate, registerday)) ) AS lastlogingap "
 			 		    + " FROM "
 			 		    + " ( "
