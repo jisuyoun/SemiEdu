@@ -126,13 +126,13 @@ public class MemberDAO implements InterMemberDAO {
 			 
 			 String sql = " SELECT  userid, name, email, mobile, postcode, address, detailaddress, "
 			 		    + " point, registerday, pwdchangegap, issue, checkEmail, checkMobile "
-			 		    + " NVL(lastlogingap, trunc( months_between(sysdate, registerday)) ) AS lastlogingap "
+			 		    + " pwd, NVL(lastlogingap, trunc( months_between(sysdate, registerday)) ) AS lastlogingap "
 			 		    + " FROM "
 			 		    + " ( "
 			 		    + " select userid, name, email, mobile, postcode, address, detailaddress "
 			 		    + " , point, to_char(registerday, 'yyyy-mm-dd') AS registerday "
 				 		+ " , trunc( months_between(sysdate, lastpwdchangedate) ) AS pwdchangegap "
-			 		    + " , issue, checkEmail, checkMobile "
+			 		    + " , issue, checkEmail, checkMobile, pwd "
 				 		+ " from tbl_member "
 				 		+ " where status = 1 and userid = ? and pwd = ? "
 				 		+ " ) M "
@@ -174,9 +174,10 @@ public class MemberDAO implements InterMemberDAO {
 				 member.setIssue(rs.getString(11));
 				 member.setCheckEmail(rs.getString(12));
 				 member.setCheckMobile(rs.getString(13));
+				 member.setPwd(rs.getString(14));
 
 				 
-				 if ( rs.getInt(14) >= 12 ) { // 또는 rs.getInt("LASTLOGINGAP")
+				 if ( rs.getInt(15) >= 12 ) { // 또는 rs.getInt("LASTLOGINGAP")
 					 // 마지막으로 로그인 한 날짜시간이 현재시각으로 부터 1년이 지났으면 휴면으로 지정  
 					 
 					 member.setIdle(1); 
