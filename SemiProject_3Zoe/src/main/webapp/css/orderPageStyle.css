@@ -131,6 +131,20 @@ span.badge-secondary {
 	margin: 0 2px 0 16px;
 }
 
+span#OPPrice {
+	float: right;
+	font-size: 13pt;
+	color: gray;
+	text-decoration: line-through;
+}
+
+span#OPSalePrice {
+	float: right;
+	font-size: 13pt;
+	font-weight: bold;
+	color: #1bceb8;
+}
+
 div#OPPriceTitle {
 	background-color: white;
 	border-radius: 10px;
