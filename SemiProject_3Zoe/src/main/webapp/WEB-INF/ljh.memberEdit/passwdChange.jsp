@@ -41,6 +41,22 @@ color:#1bceb8;
 	
 </style>  
 
+<!-- 
+
+1. 첫 페이지는 초록색
+영문, 숫자, 특수문자 조합 8자 이상 입력하세요.
+
+
+2. 그냥 아무것도 안 누르고 변경 누르면
+alert로 비밀번호를 입력하라고 뜨게
+
+3. 신규비밀번호랑 비밀번호 확인탭이랑
+다르면
+두 비밀번호가 일치하지 않습니다. 빨강으로 즉시 변함
+
+4. 두 비밀번호가 같으면
+두 비밀번호가 일치합니다. 파랑 
+-->
 
 			
 <script type="text/javascript">
@@ -79,7 +95,7 @@ color:#1bceb8;
 
 </script>			
 
-
+<form name="passwdChange">
 <div class="main1" >
   	
   	<div class="content1" style="background-color:white; border-radius:20px; padding:20px 30px; ;width:100%; height:400px; ">
@@ -118,7 +134,7 @@ color:#1bceb8;
 	  	<button type="button" style="background-color:#1bceb8; color:white; border-radius:30px; width:155px; border:none; padding:10px;">변경하기</button>
   	</p>
 </div>
-	
+</form>	
 	
 	
 	<script type="text/javascript">
