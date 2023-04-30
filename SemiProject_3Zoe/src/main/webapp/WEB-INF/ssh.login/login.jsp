@@ -109,7 +109,7 @@
 	<div class="login_cont">
 	<div class="login_in">
 		<a href="/SemiProject_3Zoe/">
-		<h1><img src="https://cdn.malgnlms.com/cdndata/kense/file/e69e843b2e715ad0390d80e8e54d2a97.png" alt="워너에듀 로고" class="svg_logo"></h1>
+		<h1><img src="../ssh.img/logo.png" alt="워너에듀 로고" class="svg_logo"></h1>
 		</a>
 		<h3>가입한 계정으로 로그인 하세요.</h3>
 
@@ -126,11 +126,11 @@
 		<ul>
 			<li>
 				아직 회원이 아니라면?
-				<a href="http://localhost:9090/SemiProject_3Zoe/ssh.member/agreement.jsp" >회원가입</a>
+				<a href="<%=request.getContextPath()%>/member/agreementCheck.go" >회원가입</a>
 			</li>
 			<li>
 				아이디/비밀번호가 생각나지 않는다면?
-				<a href="<%= ctxPath%>/login/idpwdfind.go">아이디 /비밀번호 찾기</a>
+				<a href="<%= ctxPath%>/login/idFind.go">아이디 /비밀번호 찾기</a>
 			</li>
 		</ul>
 

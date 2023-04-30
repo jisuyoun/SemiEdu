@@ -294,7 +294,7 @@
 
 <div class="login_cont member_cont">
 	<div class="login_in">
-		<a href="/main/index.jsp">
+		<a href="/SemiProject_3Zoe/">
 		<h1><img src="../ssh.img/logo.png" alt="워너에듀 로고" class="svg_logo"/></h1>
 		</a>
 		<h3>새로운 계정으로 회원가입 하세요!</h3>

@@ -85,15 +85,26 @@
 		$(".check").prop("checked", bool);
 	}
 	
+	
 	function checkAgree() {
 		
-		if($("#agree_yn1").is("checked") == false || $("#agree_yn2").is("checked") == false || $("#agree_yn3").is("checked") == false) {
+		var bool_1 = $("#agree_yn1").is(":checked");
+		
+		var bool_2 = $("#agree_yn2").is(":checked");
+		
+		var bool_3 = $("#agree_yn3").is(":checked");
+		
+		if(bool_1 == false || bool_2 == false || bool_3 == false) {
 			
 			alert("필수 동의 항목에는 모두 동의하셔야 합니다!");
+			return;
 			
 		}
 		else {
-			
+		const frm = document.agreement
+		frm.action = "<%= ctxPath%>/memberRegister.go";
+		frm.method = "post";
+		frm.submit();
 		}
 	}
 	
@@ -107,7 +118,7 @@
 
 <div class="login_cont">
 	<div class="login_in">
-		<a href="/WEB-INF/index.jsp">
+		<a href="/SemiProject_3Zoe/">
 		<h1><img src="../ssh.img/logo.png" alt="워너에듀 로고" class="svg_logo"/></h1>
 		</a>
 		<h3>새로운 계정으로 회원가입 하세요!</h3>
@@ -144,7 +155,7 @@
 	</div>
 
  	<div class="mem_cont" id="mem-join">
-		<form name="agreement" id="agreement" method="POST" target="sysfrm" onsubmit="return goSubmit(this);">
+		<form name="agreement" id="agreement" method="POST" target="sysfrm" >
 			<h4 class="mem_tit inline">가입 약관 동의<span class="tx">안내를 읽고 동의해 주세요.</span></h4>
 
 			<div class="agree_cont">
@@ -152,26 +163,26 @@
 
 				<div class="agree_in">
 					<dl>
-						<dt><input name="agree_yn1" id="agree_yn1" value="Y" type="checkbox" class="check" required="required" onclick="checkOne();"></dt>
+						<dt><input name="agree_yn1" id="agree_yn1" type="checkbox" value="false" class="check" required="required" onclick="checkOne();"></dt>
 						<dd>
 							<label for="agree_yn1"><a href="javascript:openPageLayer('clause');">이용약관 동의 <b class="txt_red">(필수)</b></a></label>
 						</dd>
 					</dl>
 					<dl>
-						<dt><input name="agree_yn2" id="agree_yn2" value="Y" type="checkbox" class="check" required="required" onclick="checkOne();"></dt>
+						<dt><input name="agree_yn2" id="agree_yn2" type="checkbox" value="false" class="check" required="required" onclick="checkOne();"></dt>
 						<dd>
 							<label for="agree_yn2"><a href="javascript:openPageLayer('policy');">개인정보취급 동의 <b class="txt_red">(필수)</b></a></label>
 						</dd>
 					</dl>
 					<dl>
-						<dt><input name="agree_yn3" id="agree_yn3" value="Y" type="checkbox" class="check" required="required" onclick="checkOne();" ></dt>
+						<dt><input name="agree_yn3" id="agree_yn3" type="checkbox" value="false" class="check" required="required" onclick="checkOne();" ></dt>
 						<dd>
 							<label for="agree_yn3"><a href="javascript:openPageLayer('consignment');">개인정보 처리위탁 동의 <b class="txt_red">(필수)</b></a></label>
 						</dd>
 					</dl>
 					<dl>
 						<dt>
-							<input name="email_yn" id="email_yn" value="Y" type="checkbox" class="check" onclick="checkSms(this.checked); checkOne();" />
+							<input name="email_yn" id="email_yn" value="false" type="checkbox" class="check" onclick="checkSms(this.checked); checkOne();" />
 							<input name="sms_yn" value="Y" type="checkbox" style="display:none;" />
 						</dt>
 						<dd>
