@@ -89,6 +89,32 @@ public class MemberDAO implements InterMemberDAO {
 		}
 		
 		return isSame;
+	}
+
+	
+	// userid의 status 값 변경해주기
+	@Override
+	public int deleteMember(String userid) throws SQLException {
+		int n = 0;
+		
+		try {
+			conn = ds.getConnection();
+			
+			String sql = " update tbl_member set status = 0 "
+					+ " where userid = ? ";
+			
+			pstmt = conn.prepareStatement(sql); 
+			pstmt.setString(1, userid);
+		
+			
+			n = pstmt.executeUpdate();
+		
+
+
+		} finally {
+			close();
+		}
+		return n;
 	}	
 	
 	
