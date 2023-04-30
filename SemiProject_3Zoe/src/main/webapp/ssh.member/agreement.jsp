@@ -85,6 +85,17 @@
 		$(".check").prop("checked", bool);
 	}
 	
+	function checkAgree() {
+		
+		if($("#agree_yn1").is("checked") == false || $("#agree_yn2").is("checked") == false || $("#agree_yn3").is("checked") == false) {
+			
+			alert("필수 동의 항목에는 모두 동의하셔야 합니다!");
+			
+		}
+		else {
+			
+		}
+	}
 	
 	
 </script>
@@ -177,7 +188,6 @@
 				<input type="submit" class="moreBtn bgColor pointBorder" onclick="checkAgree()" value="다음으로" />
 			</div>
 		</form>
-
 	</div>
 </div>
 </body>
