@@ -20,7 +20,7 @@ public class MemberRegisterAction extends AbstractController {
 		if("GET".equalsIgnoreCase(method)) {
 			super.setRedirect(false);   // isRedirect ==> false 
 			// 여기서는 회원가입 후 다시 회원가입을 눌렀을때의 404 오류를 방지하기 위해 super.setRedirect(false);를 생략하면 안된다. 
-			super.setViewPage("/ssh.member/join.jsp");
+			super.setViewPage("/WEB-INF/ssh.member/join.jsp");
 			// super를 써도 되고 this를 써도 됨 똑같음
 		}
 		else {

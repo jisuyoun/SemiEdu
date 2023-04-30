@@ -130,7 +130,7 @@
 			</li>
 			<li>
 				아이디/비밀번호가 생각나지 않는다면?
-				<a href="/SemiProject_3Zoe/ssh.login/id_pwd_find.jsp">아이디 /비밀번호 찾기</a>
+				<a href="<%= ctxPath%>/login/idpwdfind.go">아이디 /비밀번호 찾기</a>
 			</li>
 		</ul>
 
