@@ -38,7 +38,7 @@ public class MemberVO {
 	}
 	
 	public MemberVO(String userid, String pwd, String name, String email, String mobile, String postcode, String address,
-				    String detailaddress, String extraaddress, String gender, String birthday, int point) {
+				    String detailaddress, int point) {
 		super();
 		this.userid = userid;
 		this.pwd = pwd;
