@@ -18,7 +18,12 @@
 <script type="text/javascript">
 
 	$(document).ready(function(){
-
+		
+		var all = ${requestScope.cvo.price}-${requestScope.cvo.salePrice};
+		//alert(all);
+		
+		$("span#salePriceText").text(all);
+		 
 	      $(window).on("scroll",function(){
 	    	  
 	    	  
@@ -29,9 +34,7 @@
 	            $(".OPMenuSemi").addClass("navbar-expand-sm fixed-top");
 	        	$(".OPMenuSemi").removeClass("OPMenuSemi");
 	        	
-	        	
-	        	
-	        	
+	
 	          }else {
 	        	  
 	        	$(".nav-menu").addClass("OPMenuSemi")
@@ -41,8 +44,7 @@
 	        	$("span#menuIntro").removeClass("OPFont_change");
 	        	$("span#menuList").removeClass("OPFont_change");
 		    	$("span#menuReview").removeClass("OPFont_change");
-		    	
-		    	
+ 	
 		    	
 	          }
 	          
@@ -162,15 +164,27 @@
 		 $('[data-toggle="tooltip"]').tooltip(); 
 		 /* 찜 토글 끝 */
 	      
+		 
 	}); // end of document.ready
 	
 
+	function shoppingGo(){
+		
+		if("${sessionScope.loginuser.userid}" != ""){
+			
+		}
+		else {
+			alert("로그인이 필요한 서비스 입니다!");
+		}
+		
+		
+	};
 	
 </script>
 
 	<%-- 최상단 메뉴바 시작 --%>
 	<i class="fa-solid fa-share-nodes" style="color: #ffffff;"></i>
-	<h1 id="OPMainName" class="container-fluid">선택된카테고리명</h1>
+	<h1 id="OPMainName" class="container-fluid">${requestScope.cvo.courseName}</h1>
 	
 	<div id="OPMenu">
 		<i class="fa-solid fa-house" style="color: #ffffff; font-size:15pt;"></i>
@@ -190,22 +204,22 @@
 	<%-- 메인 메뉴 시작 --%>	
 	<div id="OPAllMain">		
 		<div id="OPContainer">
-			<img src="./images/jeong_1.png" class="OPSellImg col-xl-6" />
+			<img src="<%= request.getContextPath()%>/yjs.images/${requestScope.cvo.img1}" class="OPSellImg col-xl-6" />
 			
 			<div class="OPContent col-xl-6" style="background-color:white">
 				<div>
 					<a id="OPClassUpdate">2023년 최신강의 업데이트 완료</a>
-					<h1 id="OPClassName">정보처리기사 필기
+					<h1 id="OPClassName">${requestScope.cvo.courseName}
 					<a data-toggle="tooltip" title="찜!"><i id="heart" class="fa-regular fa-heart" style="color: #cccccc;"></i></a>
 					</h1>
 				</div>
 				<div id="OPClassDate">
 					<a>기간</a>
-					<a style="color: gray;">00일</a>
+					<a style="color: gray;">${requestScope.cvo.courseTerm}일</a>
 				</div>
 				<div id="OPClassStatus">
-					<a>강의구성</a>
-					<a style="color: gray;">000차시</a>
+					<a>강사명</a>
+					<a style="color: gray;">${requestScope.cvo.teacher}</a>
 				</div>
 				<button type="button" id="OPPreButton"><i class="fa-brands fa-youtube" style="color: #ffffff; margin-right:10px;"></i>맛보기</button>
 			</div>
@@ -220,21 +234,22 @@
 			<div id="OPPriceTitle" class="col-xl-12">
 				<label><input type="checkbox" id="OPCheckbox" name="checkbox"/></label>
 				<span class="badge badge-secondary">과정</span>
-				<a>정보처리기사 필기</a>
+				<a>${requestScope.cvo.courseName}</a>
+				<span id="OPSalePrice">${requestScope.cvo.salePrice}원</span><span id="OPPrice">${requestScope.cvo.price}원</span>
 			</div>
 			<div id="OPPrice" class="col-xl-12">
 				<span>판매금액</span>
-				<span style="margin:0 18px 0 40px;">0000000원</span>
+				<span style="margin:0 18px 0 40px;">${requestScope.cvo.price}원</span>
 				<span>-</span>
 				<span style="margin:0 40px 0 18px;">할인금액</span>
-				<span>00000원</span>
+				<span id="salePriceText"></span><a>원</a>
 			</div>
 			
 			<hr/>
 			
 			<div id="OPAllPrice">
 				<span style="margin-right: 40px;">총 결제금액</span>
-				<span>00000원</span>
+				<span>${requestScope.cvo.salePrice}원</span>
 			</div>
 		</div>
 		<%-- 강의 가격 끝 --%>
@@ -243,7 +258,7 @@
 		<nav id="showHide" class="navbar navbar-expand-sm bg-dark navbar-dark fixed-bottom" style="background-color: #f2f2f2!important; margin:0% 15%; display:none;">
 		  <ul class="navbar-nav">
 		    <li class="nav-item">
-		      <button type="button" id="OPShoppingbag"><i class="fa-solid fa-cart-shopping" style="color: #1bceb8; margin-right:10px;"></i>장바구니</button>
+		      <button type="button" id="OPShoppingbag" onclick="shoppingGo();" ><i class="fa-solid fa-cart-shopping" style="color: #1bceb8; margin-right:10px;"></i>장바구니</button>
 		    </li>
 		    <li class="nav-item">
 		      <button type="button" id="OPCosRegister"><i class="fa-solid fa-pen" style="color: #ffffff; margin-right:10px;"></i>수강신청</button>
@@ -266,23 +281,23 @@
 		
 		
 		<%-- 메인 이미지 시작 --%>
-		<img class="OPCosContentImg" src="./images/eventimg.png" />
-		<img class="OPCosContentImg" src="./images/eventimg_2.png" />
-		<img class="OPCosContentImg" src="./images/eventimg_3.png" style="width:1125px; margin: 0 auto;"/>
+		<img class="OPCosContentImg" src="<%= request.getContextPath()%>/yjs.images/cos_jeong_1_introduce1.png" />
+	<%-- <img class="OPCosContentImg" src="./images/eventimg_2.png" />
+		<img class="OPCosContentImg" src="./images/eventimg_3.png" style="width:1125px; margin: 0 auto;"/> --%>
 		<%-- 메인 이미지 끝 --%>
 		
 		
 		
 		<%-- 패키지 추천 시작 --%>
-		<div class="container" style="margin:0 300px;">
-			<h4 style="margin:32px 0 25px 11px; font-weight: bold;">이 과정이 포함된 패키지</h4>
-			<div class="card" style="width:290px">
-    			<img class="card-img-top" src="./images/jeong_4.png" alt="Card image" style="width:100%">
-    			<div class="card-body"  style="height: 110px;">
-					<h5 class="card-title">정보처리기사 필기+실기</h5>
-    			</div>
+			<div class="container" style="margin:0 300px;">
+				<h4 style="margin:32px 0 25px 11px; font-weight: bold;">이 과정이 포함된 패키지</h4>
+				<div class="card" style="width:290px">
+	    			<img class="card-img-top" src="<%= request.getContextPath()%>/yjs.images/${requestScope.cosList.img1}" alt="Card image" style="width:100%">
+	    			<div class="card-body"  style="height: 110px;">
+						<h5 class="card-title">${requestScope.cosList.fk_categoryCode}</h5>
+	    			</div>
+				</div>
 			</div>
-		</div>
 		<%-- 패키지 추천 끝 --%>
     
     
@@ -298,18 +313,8 @@
 			  <p>1</p>
 			</div>
 			
-			<button type="button" class="collapsible_before">Open Section 1</button>
-			<div class="collapsibleContent">
-			  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
-			<button type="button" class="collapsible_before">Open Section 2</button>
-			<div class="collapsibleContent">
-			  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
-			<button type="button" class="collapsible_before">Open Section 3</button>
-			<div class="collapsibleContent">
-			  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
+			<button type="button" class="collapsible_before">${requestScope.cvo.courseList}</button>
+			
 		</div>
 		<!-- 아코디언 끝  -->
 		

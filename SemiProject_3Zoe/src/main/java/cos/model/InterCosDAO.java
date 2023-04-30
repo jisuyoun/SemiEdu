@@ -19,5 +19,14 @@ public interface InterCosDAO {
 
 	// 찜 풀은 강의 찜 테이블에서 삭제해주는 메소드 생성하기
 	int dislike(String discheckedHeart, String userid) throws SQLException;
+	
+	// 제품상세목록 보여주는 메소드 생성하기
+	CosVO selectOneProductByCourseCode(String courseCode)  throws SQLException;
+
+	// 비슷한 강의 찾아주기 메소드 생성하기
+	List<CosVO> CategoryListByCourseCode(Map<String, String> paraMap) throws SQLException;
+	
+	// 용훈님용 제품목록 불러오기 메소드 생성하기
+	List<Map<String, String>> getCategoryList() throws SQLException;
 
 }

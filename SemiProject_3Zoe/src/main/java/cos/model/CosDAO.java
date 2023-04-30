@@ -144,30 +144,36 @@ public class CosDAO implements InterCosDAO {
 		
 		try {
 			
+			System.out.println("dao"+checkedHeart);
+			System.out.println("dao"+userid);
+			
 			conn = ds.getConnection();
 			
-			conn.setAutoCommit(false);
+			/* conn.setAutoCommit(false); */
 			
-			String sql = " insert into tbl_like(fk_courseCode, fk_userid)"
-					   + " values(?, ?) ";
+			String sql = " insert into tbl_like(fk_courseCode, fk_userid) values(?, ?) ";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, checkedHeart);
 			pstmt.setString(2, userid);
 			
+			System.out.println(pstmt);
+			
 			n = pstmt.executeUpdate();
-					
-			if(n==1) {
-				conn.commit();
-			}
+			System.out.println("dao n값 : " + n);
+			/*
+			 * if(n==1) { conn.commit(); }
+			 */
 			
-		} catch(SQLIntegrityConstraintViolationException e) {
+		} /*
+			 * catch(SQLIntegrityConstraintViolationException e) {
+			 * 
+			 * conn.rollback(); System.out.println("sql 문제");
+			 * 
+			 * }
+			 */ finally {
 			
-			conn.rollback();
-			
-		} finally {
-			
-			conn.setAutoCommit(true);
+			/* conn.setAutoCommit(true); */
 			close();
 		}
 			
@@ -211,6 +217,96 @@ public class CosDAO implements InterCosDAO {
 		}
 			
 		return n;
+	}
+
+	
+	// 물품 상세보기에서 물품 보여주는 메소드 생성하기
+	@Override
+	public CosVO selectOneProductByCourseCode(String courseCode)  throws SQLException {
+		
+		CosVO cvo = null;
+		
+		try {
+			
+			conn = ds.getConnection();
+			
+			String sql = " select courseName, price, salePrice, courseTerm, courseList, img1, img2, teacher"
+					   + " from tbl_course "
+					   + " where courseCode = ? ";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, courseCode);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				String courseName = rs.getString(1);
+				int price = rs.getInt(2);
+				int salePrice = rs.getInt(3);
+				int courseTerm = rs.getInt(4);
+				String courseList = rs.getString(5);
+				String img1 = rs.getString(6);
+				String img2 = rs.getString(7);
+				String teacher = rs.getString(8);
+				
+				cvo = new CosVO();
+				
+				cvo.setCourseCode(courseCode);
+				cvo.setCourseName(courseName);
+				cvo.setPrice(price);
+				cvo.setSalePrice(salePrice);
+				cvo.setCourseTerm(courseTerm);
+				cvo.setCourseList(courseList);
+				cvo.setTeacher(teacher);
+				
+				cvo.setImg1(img1);
+				cvo.setImg2(img2);
+				
+			}
+		
+		} finally {
+			close();
+		}
+		
+		return cvo;
+	}
+
+	// 비슷한 강의 보여주는 메소드 생성하기
+	@Override
+	public List<CosVO> CategoryListByCourseCode(Map<String, String> paraMap) throws SQLException {
+		
+		List<CosVO> cosList = null;
+		
+		try {
+			
+			conn = ds.getConnection();
+			
+			String sql = " select C.courseName, C.img1 "
+					   + " from tbl_course C join tbl_category G "
+					   + " on C.fk_categoryCode = G.categoryCode "
+					   + " where G.categoryCode = ? ";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, paraMap.get("courseCode"));
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				String courseName = rs.getString(1);
+				String img1 = rs.getString(2);
+				
+				CosVO cvo = new CosVO();
+				
+				cvo.setCourseName(rs.getString("courseName"));
+				cvo.setImg1(rs.getString("img1"));
+			}
+			
+			
+		} finally {
+			close();
+		}
+		
+		return cosList;
 	}
 
 }
