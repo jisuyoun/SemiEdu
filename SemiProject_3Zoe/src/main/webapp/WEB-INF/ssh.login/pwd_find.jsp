@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <%
     String ctxPath = request.getContextPath();
     //    /MyMVC
@@ -65,9 +67,43 @@
 
 	$(document).ready (function(){
 		
+		$("button#btnFind").click(function(){
+			// 아이디에 대한 유효성 검사
+			const useridVal = $("input#userid").val().trim();
+			
+			if(useridVal == "") {
+				alert("아이디를 입력하세요!!");
+				return;
+			}
+			
+			// 이름에 대한 유효성 검사
+			const usernameVal = $("input#name").val().trim();
+			
+			if(useridVal == "") {
+				alert("이름을 입력하세요!!");
+				return;
+			}
+			
+			// e메일에 대한 정규표현식을 사용한 유효성 검사 
+			const regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+	 	  
+	 	  	const bool = regExp.test($("input#email").val());
+	 	  	
+			if(!bool) {
+				alert("올바른 이메일을 입력하세요!!");
+				return;
+			}
+			
+			const frm = document.pwdFindFrm;
+			frm.action = "<%=ctxPath%>/login/pwdFind.go";
+			frm.method = "POST";
+			frm.submit();
+		 
+		}); // end of $("button#btnFind").click(function()----------------
+		 
+		 
 
-
-	});
+	}); // end of $(document).ready (function()-----------------------------------
 	
 	
 	
@@ -103,48 +139,37 @@
 
 		<div class="passwd_cont">
 			<div class="myinfo_cont refund_info email_cont">
-				<form name="form2" method="POST" target="sysfrm">
+				<form name="pwdFindFrm" method="POST" target="sysfrm">
 				<input type="hidden" name="mode" value="email_authno">
 				<input type="hidden" name="domain" value="www.wannaedu.com">
 				<h4 class="mem_tit marb20 inline">회원정보 입력 <span class="tx"> 회원가입 시 입력한 아이디, 이름과 이메일을 입력해 주세요.</span></h4>
 				<dl>
 					<dt>아이디 <span class="pointColor">*</span></dt>
-					<dd><input name="login_id" class="input" type="text" HNAME="아이디" /></dd>
+					<dd><input name="userid" id="userid" class="input" type="text" HNAME="아이디" /></dd>
 				</dl>
 
 				<dl>
 					<dt>이름 <span class="pointColor">*</span></dt>
-					<dd><input name="user_nm" class="input" type="text" HNAME="이름" /></dd>
+					<dd><input name="name" id="name" class="input" type="text" HNAME="이름" /></dd>
 				</dl>
 
 				<dl>
 					<dt>이메일 <span class="pointColor">*</span></dt>
 					<dd>
-						<input name="email1" id="email1" type="text" class="input input_m2" HNAME="이메일" /><span class='hipen2'>@</span>
-						<input name="email2" id="email2" type="text" class="input input_m2" HNAME="이메일" />
-						<div class="selectBox select_email input_m2" style="vertical-align:2px;">
-							<select name="email3" id="email3" onchange="document.forms['form2']['email2'].value = this.value;if(!this.value) document.forms['form2']['email2'].focus();">
-								<option value="">직접입력</option>
-								<option value="naver.com">naver.com</option>
-								<option value="daum.net">daum.net</option>
-								<option value="hanmail.net">hanmail.net</option>
-								<option value="dreamwiz.com">dreamwiz.com</option>
-								<option value="yahoo.co.kr">yahoo.co.kr</option>
-								<option value="empal.com">empal.com</option>
-								<option value="unitel.co.kr">unitel.co.kr</option>
-								<option value="gmail.com">gmail.com</option>
-								<option value="korea.com">korea.com</option>
-								<option value="chol.com">chol.com</option>
-								<option value="paran.net">paran.net</option>
-								<option value="freechal.com">freechal.com</option>
-								<option value="hotmail.com">hotmail.com</option>
-							</select>
-						</div>
-						<input type="button" class="add_btn" value="인증번호 받기" onclick="sendEmailAuthNo()" />
+						<input name="email" id="email" type="text" class="input" HNAME="이메일" />
+
+						<button type="submit" id="btnFind" class="add_btn" >인증번호 받기</button>
 <!--						<p class="notice pointColor"><i class="pointBorder pointColor">!</i>입력하신 정보와 일치하는 회원이 없습니다. 입력한 정보를 다시 확인하세요.</p>-->
 					</dd>
 				</dl>
-
+			 </form>
+			 <c:if test="${requestScope.isUserExist == false}">
+			<span style="color:red; margin-left: 150px;">사용자 정보가 없습니다.</span>
+			</c:if>
+			<c:if test="${requestScope.isUserExist == true && requestScope.sendMailSuccess == false}">
+			<span style="color:red; margin-left: 150px;">메일발송이 실패했습니다.</span><br>
+			</c:if>
+			 
 				<dl>
 					<dt></dt>
 					<dd>
@@ -155,7 +180,7 @@
 				<div class="btn_list">
 					<a href="#" class="moreBtn bgColor" onclick="sendEmailNewPasswd()">인증번호 확인</a>
 				</div>
-				</form>
+				
 			</div>
 
 

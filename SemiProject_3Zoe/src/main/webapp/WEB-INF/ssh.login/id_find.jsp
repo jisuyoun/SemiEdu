@@ -64,13 +64,50 @@
 <script type="text/javascript">
 
 	$(document).ready (function(){
+		 $("span.error").hide();
+		 
+		const method = "${requestScope.method}";  // ""를 붙여줘야 "GET" 또는 "POST"
 		
+		if(method == "GET") {
+			$("div#div_findResult").hide();
+		}
+		else if(method == "POST"){
+			$("input#name").val("${requestScope.name}");
+			$("input#email").val("${requestScope.email}");
+		}
+		// GET 방식이라면 hide, POST 방식라면 넘어온 값을 그대로 꽂아줌(?) 아이디 찾기에서 잘못된 정보를 입력하여도 이름, 이메일이 안 사라짐
 		
+		  
 
-	});
+	});// end of $(document).ready (function()---------------------------------------------------
 	
-
-	
+	function goFindId() {
+		
+		// 이름에 대한 유효성 검사
+		const useridVal = $("input#name").val().trim();
+		
+		if(useridVal == "") {
+			alert("이름을 입력하세요!!");
+			return;
+		}
+		
+		// e메일에 대한 정규표현식을 사용한 유효성 검사 
+		const regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+ 	  
+ 	  	const bool = regExp.test($("input#email").val());
+ 	  	
+		if(!bool) {
+			alert("올바른 이메일을 입력하세요!!");
+			return;
+		}
+		
+		////////////////////////////////////////////////
+		const frm = document.idFindFrm;
+		frm.action = "<%= ctxPath%>/login/idFind.go";
+		frm.method = "post";
+		frm.submit();
+		
+	}
 	
 	
 	
@@ -103,46 +140,36 @@
 
 		<div class="id_cont">
 			<div class="myinfo_cont refund_info email_cont">
-				<form name="form1" method="POST" target="sysfrm">
+				<form name="idFindFrm" method="POST" target="sysfrm">
 				<input type="hidden" name="mode" value="find_id">
 				<input type="hidden" name="domain" value="www.wannaedu.com">
 				<h4 class="mem_tit marb20 inline">회원정보 입력 <span class="tx"> 회원가입 시 입력한 이름과 이메일을 입력해 주세요.</span></h4>
 				<dl>
 					<dt>이름 <span class="pointColor">*</span></dt>
-					<dd><input name="user_nm" class="input" type="text" HNAME="이름" REQUIRED="Y" ></dd>
+					<dd><input name="name" id="name" class="input requiredInfo" type="text" autocomplete="off" required HNAME="이름" >
+						<span class="error" style= "color:red; font-size: 14px;">&nbsp;이름은 필수입력사항입니다.</span>
+					</dd>
 				</dl>
 
 				<dl>
 					<dt>이메일 <span class="pointColor">*</span></dt>
 					<dd>
-						<input type="text" name="email1"  class="input input_m2" HNAME="이메일" REQUIRED="Y"><span class='hipen2'>@</span>
-						<input type="text" name="email2"  class="input input_m2" HNAME="이메일" REQUIRED="Y">
-						<div class="selectBox select_email input_m2"  style="vertical-align:2px;">
-							<select name="email3" id="email3" onchange="document.forms['form1']['email2'].value = this.value;if(!this.value) document.forms['form1']['email2'].focus();">
-								<option value="">직접입력</option>
-								<option value="naver.com">naver.com</option>
-								<option value="daum.net">daum.net</option>
-								<option value="hanmail.net">hanmail.net</option>
-								<option value="dreamwiz.com">dreamwiz.com</option>
-								<option value="yahoo.co.kr">yahoo.co.kr</option>
-								<option value="empal.com">empal.com</option>
-								<option value="unitel.co.kr">unitel.co.kr</option>
-								<option value="gmail.com">gmail.com</option>
-								<option value="korea.com">korea.com</option>
-								<option value="chol.com">chol.com</option>
-								<option value="paran.net">paran.net</option>
-								<option value="freechal.com">freechal.com</option>
-								<option value="hotmail.com">hotmail.com</option>
-							</select>
-						</div>
+						<input type="text" name="email" id="email " class="input requiredInfo" autocomplete="off" required HNAME="이메일" >
+						<span class="error" style= "color:red; font-size: 14px;">&nbsp;이메일 형식에 맞지 않습니다.</span>
+						
 <!--						<p class="notice pointColor"><i class="pointBorder pointColor">!</i>입력하신 정보와 일치하는 회원이 없습니다. 입력한 정보를 다시 확인하세요.</p>-->
 <!--						<input type="button" class="add_btn" value="아이디찾기" onclick="goFindId()" />-->
 					</dd>
 				</dl>
 				<div class="btn_list">
-					<a href="#" class="moreBtn bgColor" onclick="goFindId()">아이디 찾기</a>
+					<button type="button" class="moreBtn bgColor" onclick="goFindId()">아이디 찾기</button>
 				</div>
 				</form>
+			<div id="div_findResult">
+			      <p class="text-center">
+			         회원님의 ID: <span style="color: red; font-size: 16pt; font-weight: bold;">${requestScope.userid}</span> 
+			      </p>
+		    </div>	
 
 			</div>
 		</div>

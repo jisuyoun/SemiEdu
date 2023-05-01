@@ -16,8 +16,8 @@ public class MemberVO {
 	private int status;                	// 회원탈퇴유무   1: 사용가능(가입중) / 0:사용불능(탈퇴) 
 	private int idle;                  	// 휴면유무      0 : 활동중  /  1 : 휴면중   마지막으로 로그인 한 날짜 시간인 현재시간으로부터 1년이 지났으면 휴면 처리
 	private String issue;
-	private String checkEmail;
-	private String checkMobile;
+	private int checkEmail;
+	private int checkMobile;
 	///////////////////////////////////////////////////////////////////////
 	
 	private boolean requirePwdChange = false;
@@ -29,7 +29,7 @@ public class MemberVO {
 	public MemberVO() {}
 	
 	
-	public MemberVO(String name, String userid, String pwd, String email, String mobile, String checkEmail, String checkMobile) {
+	public MemberVO(String name, String userid, String pwd, String email, String mobile, int checkEmail, int checkMobile) {
 		this.userid = userid;
 		this.pwd = pwd;
 		this.name = name;
@@ -169,19 +169,19 @@ public class MemberVO {
 		this.issue = issue;
 	}
 
-	public String getCheckEmail() {
+	public int getCheckEmail() {
 		return checkEmail;
 	}
 
-	public void setCheckEmail(String checkEmail) {
+	public void setCheckEmail(int checkEmail) {
 		this.checkEmail = checkEmail;
 	}
 
-	public String getCheckMobile() {
+	public int getCheckMobile() {
 		return checkMobile;
 	}
 
-	public void setCheckMobile(String checkMobile) {
+	public void setCheckMobile(int checkMobile) {
 		this.checkMobile = checkMobile;
 	}
 

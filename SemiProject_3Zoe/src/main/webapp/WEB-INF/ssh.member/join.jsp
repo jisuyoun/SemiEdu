@@ -158,7 +158,7 @@
 		         $(e.target).parent().find("span.error").hide();
 	        	 }
 	        	 
-	         }); // end of $("input#email1").blur( (e) -----------------------
+	         }); // end of $("input#email").blur( (e) -----------------------
 
 	         
 	         
@@ -217,50 +217,8 @@
 	           
 	           
 	           
-	        // "아이디중복확인" 을 클릭했을 때 이벤트 처리하기
-	  	    $("img#idcheck").click(function(){
-	  	    	 b_flag_idDuplicate_click = true;
-	  	    	 // "아이디 중복확인" 을 클릭했는지 클릭을 안 했는지 여부를 알아오기 위한 용도.
-
-	            	 $.ajax({
-	           		 url:"<%= ctxPath%>/member/idDuplicateCheck.go",
-	           		 data:{"userid":$("input#userid").val()},    // data는 /MyMVC/member/idDuplicateCheck.up 로 전송해야할 데이터를 말한다.
-	           		 type: "post", // 조심 !!! ajax는 method: get 이나 post를 사용하지 않고 type으로 사용한다.type 을 생략하면 type="get"이다.
-	           	//	 dataType:"json", // Javascript Standard Object Notation.  dataType은 /MyMVC/member/idDuplicateCheck.up 로 부터 실행되어진 결과물을 받아오는 데이터타입을 말한다. T 대문자!!!!!!
-	                 				  // 만약에 dataType:"xml" 으로 해주면 /MyMVC/member/idDuplicateCheck.up 로 부터 받아오는 결과물은 xml 형식이어야 한다. 
-	                 				  // 만약에 dataType:"json" 으로 해주면 /MyMVC/member/idDuplicateCheck.up 로 부터 받아오는 결과물은 json 형식이어야 한다.
-	             //   async: true,  // async: true 는 비동기 방식을 말한다. async 을 생략하면 기본값이 비동기 방식인 async: true 이다.
-	                 			   // async: false 는 동기 방식을 말한다. 지도를 할때는 반드시 동기방식인 async: false 를 사용해야만 지도가 올바르게 나온다.
-	           		 success: function(text){ 
-	           			 // dataType:"json" 을 생략하면
-	           			 // 파라미터 json 에 "{"isExists":true}" 또는 "{"isExists":false}" 의 string(문자열)타입의 결과물이 들어오게 된다.
-	           			 
-	           			 // dataType:"json" 을 생략하지 않고 넣어주면 
-	           			 // 파라미터 json 에 {"isExists":true} 또는 {"isExists":false} 인 object(객체)타입의 결과물이 들어오게 된다.
-	           			 
-	           			 const json = JSON.parse(text);
-	           			 // JSON.parse(text); 은 JSON.parse("{"isExists":true}"); 또는 JSON.parse("{"isExists":false}"); 와 같은 것인데
-	                      // 그 결과물은 {"isExists":true} 또는 {"isExists":false} 와 같은 문자열을 자바스크립트 객체로 변환해주는 것이다. 
-	                      // 조심할 것은 text 는 반드시 JSON 형식으로 되어진 문자열이어야 한다. 
-	           			 
-	           			 if(json.isExists ) {
-	           			 	// 입력한 useris 가 이미 사용중이라면
-	           			 	$("span#idcheckResult").html($("input#userid").val()+" 은 중복된 ID 이므로 사용불가합니다.").css("color","red");
-	           			 	$("input#userid").val("");
-	           			 }
-	           			 else { 
-	           				// 입력한 userid 가 존재하지 않는 경우라면
-	           				$("span#idcheckResult").html($("input#userid").val()+" 은 사용가능합니다.").css("color","navy"); 
-	           			 }
-	           		 },
-	           		 
-	           		 error: function(request, status, error){
-	                    alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
-	                  }
-	           	 });
-	            	 
-	            	 
-	  	      }); // end of $("img#idcheck").click(function()----------------
+	     
+	        
 	  	    		  
 	  		// 아이디값이 변경되면 가입하기 버튼을 클릭 시 "아이디중복확인" 을 클릭했는지 클릭안했는지 알아보기 위한 용도를 초기화 시키기
 	 	    $("input#userid").bind("change", function(){
@@ -275,6 +233,52 @@
 	 		
 		
 	}); // end of $(document).ready(function()--------------------------------------
+			
+	// "아이디중복확인" 을 클릭했을 때 이벤트 처리하기
+    function isExistIdCheck() {
+	   
+    	 b_flag_idDuplicate_click = true;
+    	 // "아이디 중복확인" 을 클릭했는지 클릭을 안 했는지 여부를 알아오기 위한 용도.
+
+    	 $.ajax({
+   		 url:"<%= ctxPath%>/member/idDuplicateCheck.go",
+   		 data:{"userid":$("input#userid").val()},    // data는 /MyMVC/member/idDuplicateCheck.up 로 전송해야할 데이터를 말한다.
+   		 type: "post", // 조심 !!! ajax는 method: get 이나 post를 사용하지 않고 type으로 사용한다.type 을 생략하면 type="get"이다.
+   	//	 dataType:"json", // Javascript Standard Object Notation.  dataType은 /MyMVC/member/idDuplicateCheck.up 로 부터 실행되어진 결과물을 받아오는 데이터타입을 말한다. T 대문자!!!!!!
+         				  // 만약에 dataType:"xml" 으로 해주면 /MyMVC/member/idDuplicateCheck.up 로 부터 받아오는 결과물은 xml 형식이어야 한다. 
+         				  // 만약에 dataType:"json" 으로 해주면 /MyMVC/member/idDuplicateCheck.up 로 부터 받아오는 결과물은 json 형식이어야 한다.
+     //   async: true,  // async: true 는 비동기 방식을 말한다. async 을 생략하면 기본값이 비동기 방식인 async: true 이다.
+         			   // async: false 는 동기 방식을 말한다. 지도를 할때는 반드시 동기방식인 async: false 를 사용해야만 지도가 올바르게 나온다.
+   		 success: function(text){ 
+   			 // dataType:"json" 을 생략하면
+   			 // 파라미터 json 에 "{"isExists":true}" 또는 "{"isExists":false}" 의 string(문자열)타입의 결과물이 들어오게 된다.
+   			 
+   			 // dataType:"json" 을 생략하지 않고 넣어주면 
+   			 // 파라미터 json 에 {"isExists":true} 또는 {"isExists":false} 인 object(객체)타입의 결과물이 들어오게 된다.
+   			 
+   			 const json = JSON.parse(text);
+   			 // JSON.parse(text); 은 JSON.parse("{"isExists":true}"); 또는 JSON.parse("{"isExists":false}"); 와 같은 것인데
+              // 그 결과물은 {"isExists":true} 또는 {"isExists":false} 와 같은 문자열을 자바스크립트 객체로 변환해주는 것이다. 
+              // 조심할 것은 text 는 반드시 JSON 형식으로 되어진 문자열이어야 한다. 
+   			 
+   			 if(json.isExists) {
+   			 	// 입력한 useris 가 이미 사용중이라면
+   			 	$("span#idcheckResult").html($("input#userid").val()+" 은 중복된 ID 이므로 사용불가합니다.").css("color","red");
+   			 	$("input#userid").val("");
+   			 }
+   			 else if(!json.isExists && $("input#userid").val().trim() != "") { 
+   				// 입력한 userid 가 존재하지 않는 경우라면
+   				$("span#idcheckResult").html($("input#userid").val()+" 은 사용가능합니다.").css("color","navy"); 
+   			 }
+   		 },
+   		 
+   		 error: function(request, status, error){
+            alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+          }
+   	 });
+    	 
+    	 
+      } // end of function isExistIdCheck() ----------------   		
 			
 	// "이메일중복확인" 을 클릭했을 때 이벤트 처리하기	
    	function isExistEmailCheck() {
@@ -413,7 +417,7 @@
 				<dd>
 					<input name="userid" class="input requiredInfo" id="userid" maxlength="20" type="text"  placeholder="영문 또는 숫자 2~20자리" />
 					<!-- 아이디중복체크 -->
-             		<img id="idcheck" src="<%= ctxPath%>/ssh.img/idcheck2.png" style="vertical-align: middle; width:100px; cursor: pointer;" />
+             		<span style="display: inline-block; font-family: 'Noto Sans KR', Malgun Gothic,'Malgun Gothic', 'Outfit', sans-serif; width: 100px; height: 22px; border: solid 1px #1bceb8; border-radius: 10px; font-size: 10pt; text-align: center; margin-left: 5px; margin-top: 5px; background-color: #1bceb8; color: white; font:bold; cursor: pointer;" onclick="isExistIdCheck();" >아이디 중복확인</span>
              		<span id="idcheckResult"></span>
 					<span class="error" style= "color:red; font-size: 14px;">&nbsp;&nbsp;영문으로 시작하는 2-20자 영문, 숫자 조합을 입력하세요.</span>
 				</dd>
@@ -456,7 +460,7 @@
 				<dd>
 					<input name="email" id="email" type="text" class="input input_m2 requiredInfo" >
 					<span class="error" style= "color:red; font-size: 14px;">&nbsp;이메일 형식에 맞지 않습니다.</span>
-					<span style="display: inline-block; width: 80px; height: 30px; border: solid 1px gray; border-radius: 5px; font-size: 8pt; text-align: center; margin-left: 10px; cursor: pointer;" onclick="isExistEmailCheck();">이메일중복확인</span> 
+					<span style="display: inline-block; font-family: 'Noto Sans KR', Malgun Gothic,'Malgun Gothic', 'Outfit', sans-serif; width: 100px; height: 22px; border: solid 0px #1bceb8; border-radius: 10px; font-size: 10pt; text-align: center; margin-left: 10px; background-color: #1bceb8; color: white; font:bold; cursor: pointer;" onclick="isExistEmailCheck();">이메일 중복확인</span> 
              		<span id="emailCheckResult"></span>	
 					<div class="check_box">
 						<label><input name="checkEmail" value="1" type="radio" class="radio" >수신동의</label>

@@ -28,16 +28,16 @@ public class MemberRegisterAction extends AbstractController {
 			String userid = request.getParameter("userid");
 			String pwd = request.getParameter("pwd");		
 			String email = request.getParameter("email");
-			String checkEmail = request.getParameter("checkEmail");
+			int checkEmail = Integer.parseInt(request.getParameter("checkEmail"));
 			String mobile1 = request.getParameter("mobile1");
 			String mobile2 = request.getParameter("mobile2");
 			String mobile3 = request.getParameter("mobile3");
-			String checkMobile = request.getParameter("checkMobile");
+			int checkMobile = Integer.parseInt(request.getParameter("checkMobile"));
 			
 			
 			String mobile = mobile1+mobile2+mobile3;
 			
-			MemberVO member = new MemberVO(name, userid, pwd, email, checkEmail, mobile, checkMobile);
+			MemberVO member = new MemberVO(name, userid, pwd, email, mobile, checkEmail, checkMobile);
 		
 			String message = "";
 			String loc = "";
