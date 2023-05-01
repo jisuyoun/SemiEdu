@@ -83,7 +83,7 @@
       <button type="button" class="btn btn-light" id="registerBtn" onclick="goLogOut();" >
          <i class="fa-solid fa-arrow-right-from-bracket" style="margin-right: 10px;"></i>로그아웃
       </button>
-      <button type="button" class="btn btn-light" id="registerBtn" href="#">
+      <button type="button" class="btn btn-light" id="registerBtn" onclick= "location.href='<%=request.getContextPath()%>/yjs.cos/yjs_ShoppingBagPage.go'">
          <i class="fa-solid fa-cart-shopping" style="margin-right: 10px;"></i>장바구니
       </button>
    
