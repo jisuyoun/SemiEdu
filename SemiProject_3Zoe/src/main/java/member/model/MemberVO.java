@@ -29,12 +29,14 @@ public class MemberVO {
 	public MemberVO() {}
 	
 	
-	public MemberVO(String name, String userid, String pwd, String email, String mobile) {
+	public MemberVO(String name, String userid, String pwd, String email, String mobile, String checkEmail, String checkMobile) {
 		this.userid = userid;
 		this.pwd = pwd;
 		this.name = name;
 		this.email = email;
 		this.mobile = mobile;
+		this.checkEmail = checkEmail;
+		this.checkMobile = checkMobile;
 	}
 	
 	public MemberVO(String userid, String pwd, String name, String email, String mobile, String postcode, String address,

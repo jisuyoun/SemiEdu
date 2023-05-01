@@ -20,11 +20,12 @@ public class LoginAction extends AbstractController {
 		
 		String method = request.getMethod();
 		
+		if("GET".equalsIgnoreCase(method)) {
+			super.setRedirect(false);
+			super.setViewPage("/WEB-INF/ssh.login/login.jsp");
+		}
 		
-		
-		super.setRedirect(false);
-		super.setViewPage("/WEB-INF/ssh.login/login.jsp");
-		
+		else {
 		String userid = request.getParameter("userid");
 		String pwd = request.getParameter("pwd");
 		
@@ -88,7 +89,7 @@ public class LoginAction extends AbstractController {
 			
 		}
 		
-		
+	  }	
 	  
 	}
 }

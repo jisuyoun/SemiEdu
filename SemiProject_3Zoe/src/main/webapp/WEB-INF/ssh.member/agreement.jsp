@@ -101,10 +101,7 @@
 			
 		}
 		else {
-		const frm = document.agreement
-		frm.action = "<%= ctxPath%>/memberRegister.go";
-		frm.method = "post";
-		frm.submit();
+			location.href="<%=request.getContextPath()%>/memberRegister.go";
 		}
 	}
 	
@@ -191,12 +188,14 @@
 					</dl>
 				</div>
 				<p class="notice pointColor marb40"><i class="pointBorder pointColor">!</i> 가입 약관을 확인한 후 동의해 주세요</p>
-			</div>
+			
+			
+		 </div>
 
 			
 			<div class="btn_list" id="mem-button">
 				<input type="button" class="moreBtn pointColor pointBorder" onclick="goUndo()" value="이전으로" />
-				<input type="submit" class="moreBtn bgColor pointBorder" onclick="checkAgree()" value="다음으로" />
+				<input type="button" class="moreBtn bgColor pointBorder" onclick="checkAgree()" value="다음으로" />
 			</div>
 		</form>
 	</div>

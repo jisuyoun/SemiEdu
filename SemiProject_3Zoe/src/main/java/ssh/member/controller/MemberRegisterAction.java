@@ -26,20 +26,18 @@ public class MemberRegisterAction extends AbstractController {
 		else {
 			String name = request.getParameter("name");
 			String userid = request.getParameter("userid");
-			String pwd = request.getParameter("pwd");
-			String email1 = request.getParameter("email1");
-			String email2 = request.getParameter("email2");
-			
-			String email = email1+"@"+email2;
-			
+			String pwd = request.getParameter("pwd");		
+			String email = request.getParameter("email");
+			String checkEmail = request.getParameter("checkEmail");
 			String mobile1 = request.getParameter("mobile1");
 			String mobile2 = request.getParameter("mobile2");
 			String mobile3 = request.getParameter("mobile3");
+			String checkMobile = request.getParameter("checkMobile");
 			
 			
 			String mobile = mobile1+mobile2+mobile3;
 			
-			MemberVO member = new MemberVO(name, userid, pwd, email, mobile);
+			MemberVO member = new MemberVO(name, userid, pwd, email, checkEmail, mobile, checkMobile);
 		
 			String message = "";
 			String loc = "";
@@ -49,20 +47,26 @@ public class MemberRegisterAction extends AbstractController {
 				int n = mdao.registerMember(member);
 				
 				if(n==1) {
-					message = "회원가입 성공";
-					loc = request.getContextPath()+"/index.up"; // 시작페이지로 이동한가.
+					request.setAttribute("userid", userid);
+					request.setAttribute("pwd", pwd);
+					
+					super.setRedirect(false);
+					super.setViewPage("/WEB-INF/ssh.member/join_success.jsp");
 				}
 			} catch(SQLException e) {
 				message = "SQL구문 오류발생";
-				loc = "javascript:history.back()";  //자바스크립트를 이용한 이전 페이지로
-				e.printStackTrace();		
+				loc = "javascript:history.back()";  //자바스크립트를 이용한 이전 페이지로	
+				
+				request.setAttribute("message", message);
+				request.setAttribute("loc", loc);
+				
+				super.setRedirect(false);
+				super.setViewPage("/WEB-INF/msg.jsp");
+				
+				e.printStackTrace();	
 			}
 			
-			request.setAttribute("message", message);
-			request.setAttribute("loc", loc);
 			
-			super.setRedirect(false);
-			super.setViewPage("/WEB-INF/msg.jsp");
 	   	
 		}
 		

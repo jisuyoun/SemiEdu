@@ -3,7 +3,13 @@ package ssh.member.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
+
 import common.controller.AbstractController;
+import ssh.member.model.InterMemberDAO;
+import ssh.member.model.MemberDAO;
+
+
 
 public class EmailDuplicateCheckAction extends AbstractController {
 
@@ -14,7 +20,11 @@ public class EmailDuplicateCheckAction extends AbstractController {
 		
 		if("POST".equalsIgnoreCase(method)) {
 			String email = request.getParameter("email");
-			System.out.println("~~~ 확인용 email : " + email);
+		//  System.out.println("~~~ 확인용 email : " + email);
+			
+			InterMemberDAO mdao = new MemberDAO();
+			
+			
 		}
 		
 	}

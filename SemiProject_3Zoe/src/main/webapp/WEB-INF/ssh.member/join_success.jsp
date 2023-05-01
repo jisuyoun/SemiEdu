@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%
+    String ctxPath = request.getContextPath();
+%>    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,7 +54,7 @@
 			홈으로 이동합니다.
 		</h4>
 		<div class="btn_list">
-			<a href="../index.jsp" class="moreBtn bgColor">확인</a>
+			<a href="<%= ctxPath%>/index.go" class="moreBtn bgColor">확인</a>
 		</div>
 	</div>
 </div>

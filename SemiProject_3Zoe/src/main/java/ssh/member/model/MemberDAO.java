@@ -63,8 +63,8 @@ public class MemberDAO implements InterMemberDAO {
 		try {
 			conn = ds.getConnection();
 			
-			String sql = " insert into tbl_member(userid, pwd, name, email, mobile) " 
-					   + " values(?, ?, ?, ?, ?) ";
+			String sql = " insert into tbl_member(userid, pwd, name, email, mobile, checkEmail, checkMobile) " 
+					   + " values(?, ?, ?, ?, ?, ?, ?) ";
 			
 			pstmt = conn.prepareStatement(sql); 
 			
@@ -73,7 +73,8 @@ public class MemberDAO implements InterMemberDAO {
 			pstmt.setString(3, member.getName());
 			pstmt.setString(4, aes.encrypt(member.getEmail()) );  // 이메일을 AES256 알고리즘으로 양방향 암호화 시킨다. 
 			pstmt.setString(5, aes.encrypt(member.getMobile()) ); // 휴대폰번호를 AES256 알고리즘으로 양방향 암호화 시킨다. 
-
+			pstmt.setString(6, member.getCheckEmail());
+			pstmt.setString(7, member.getCheckMobile());
 			
 			result = pstmt.executeUpdate();
 			

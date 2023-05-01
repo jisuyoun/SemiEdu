@@ -140,9 +140,9 @@
 	         
 	         
 	         
-			 $("input#email1").blur( (e) => {
+			 $("input#email").blur( (e) => {
 	        	 
-	        	 const regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])$/i;
+	        	 const regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 	        	 
 	        	 const bool = regExp.test($(e.target).val());
 	        	 
@@ -159,28 +159,7 @@
 	        	 }
 	        	 
 	         }); // end of $("input#email1").blur( (e) -----------------------
-	        		 
-	        	
-	        		 
-			 $("input#email2").blur( (e) => {
-	        	 
-	        	 const regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-	        	 
-	        	 const bool = regExp.test($(e.target).val());
-	        	 
-	        	 if(!bool) {
-	        		 // 이메일 앞부분이 정규표현식에 위배 된 경우
-	        		 $("div.mem_cont :input").prop("disabled", true);
-	        		 $(e.target).prop("disabled", false);
-	        		 $(e.target).parent().find("span.error").show();
-	    	         $(e.target).focus();
-	        	 }
-	        	 else {
-	        		 $("div.mem_cont :input").prop("disabled", false);
-		         $(e.target).parent().find("span.error").hide();
-	        	 }
-	        	 
-	         }); // end of $("input#email2").blur( (e) -----------------------	
+
 	         
 	         
 	         
@@ -288,8 +267,12 @@
 	 	    		b_flag_idDuplicate_click = false;
 	 	    });	 
 	  	      
-	         
-		 
+	 		// 이메일값이 변경되면 가입하기 버튼을 클릭 시 "이메일중복확인" 을 클릭했는지 클릭안했는지 알아보기 위한 용도를 초기화 시키기
+	 	    $("input#email").bind("change", function(){
+	 	    	b_flag_emailDuplicate_click = false;
+	 	    }); 
+		 	
+	 		
 		
 	}); // end of $(document).ready(function()--------------------------------------
 			
@@ -312,22 +295,20 @@
        	 */ 
 	         $.ajax({
            		 url:"<%= ctxPath%>/member/emailDuplicateCheck.go",
-           		 data:{"email":$("input#email1").val()+"@"+$("input#email2").val()},    // data는 /MyMVC/member/emailDuplicateCheck.up 로 전송해야할 데이터를 말한다.
+           		 data:{"email":$("input#email").val()},    
            		 type: "post", // 조심 !!! ajax는 method: get 이나 post를 사용하지 않고 type으로 사용한다.type 을 생략하면 type="get"이다.
-           		 dataType:"json", // Javascript Standard Object Notation.  dataType은 /MyMVC/member/emailDuplicateCheck.up 로 부터 실행되어진 결과물을 받아오는 데이터타입을 말한다. T 대문자!!!!!!
-                 				  // 만약에 dataType:"xml" 으로 해주면 /MyMVC/member/emailDuplicateCheck.up 로 부터 받아오는 결과물은 xml 형식이어야 한다. 
-                 				  // 만약에 dataType:"json" 으로 해주면 /MyMVC/member/emailDuplicateCheck.up 로 부터 받아오는 결과물은 json 형식이어야 한다.
+           		 dataType:"json", 
           //     async: true,  // async: true 는 비동기 방식을 말한다. async 을 생략하면 기본값이 비동기 방식인 async: true 이다.
                  			   // async: false 는 동기 방식을 말한다. 지도를 할때는 반드시 동기방식인 async: false 를 사용해야만 지도가 올바르게 나온다.
            		 success: function(json){ // 파라미터 json 에 {"isExists":true} 또는 {"isExists":false} 이 들어오게 된다.
            			 if(json.isExists) {
            			 	// 입력한 email이 이미 사용중이라면
-           			 	$("span#emailCheckResult").html($("input#email1").val()+"@"+$("input#email2").val()+" 은 중복된 email 이므로 사용불가합니다.").css("color","red");
+           			 	$("span#emailCheckResult").html($("input#email").val()+" 은 중복된 email 이므로 사용불가합니다.").css("color","red");
            			 	$("input#email").val("");
            			 }
            			 else if(!json.isExists && $("input#email").val().trim() != ""){ 
            				// 입력한 email 가 존재하지 않는 경우라면
-           				$("span#emailCheckResult").html($("input#email1").val()+"@"+$("input#email2").val()+" 은 사용가능합니다.").css("color","navy"); 
+           				$("span#emailCheckResult").html($("input#email").val()+" 은 사용가능합니다.").css("color","navy"); 
            			 }
            		 },
            		 
@@ -364,6 +345,13 @@
 	   if(!b_flag_idDuplicate_click) {
 			// "아이디중복확인" 버튼을 클릭 안 했을 경우
 			alert("아이디중복확인을 클릭하셔야 합니다.");
+			return; // 함수종료
+	   } 
+	   
+	   // "이메일중복확인" 을 클릭했는지 여부 알아오기
+	   if(!b_flag_emailDuplicate_click) {
+			// "이메일중복확인" 버튼을 클릭 안 했을 경우
+			alert("이메일중복확인을 클릭하셔야 합니다.");
 			return; // 함수종료
 	   } 
 
@@ -462,27 +450,17 @@
 			
 			<dl>
 				<dt>
-					이메일 <span class="pointColor">*</span></dt>
+					이메일 <span class="pointColor">*</span>
+				</dt>
+				
 				<dd>
-					<input name="email1" id="email1" type="text" class="input input_m2 requiredInfo" ><span class='hipen2'>@</span>
-					<input name="email2" id="email2" type="text" class="input input_m2 requiredInfo" >
+					<input name="email" id="email" type="text" class="input input_m2 requiredInfo" >
 					<span class="error" style= "color:red; font-size: 14px;">&nbsp;이메일 형식에 맞지 않습니다.</span>
-					<div class="selectBox select_email input_m2" style="margin-right: 15px;">
-						<select name="email3" id="email3" onchange="document.forms['form1']['email2'].value = this.value;if(!this.value) document.forms['form1']['email2'].focus();">
-							<option value="">직접입력</option>
-							<option value="naver.com">naver.com</option>
-							<option value="daum.net">daum.net</option>
-							<option value="hanmail.net">hanmail.net</option>
-							<option value="gmail.com">gmail.com</option>	
-						</select>
 					<span style="display: inline-block; width: 80px; height: 30px; border: solid 1px gray; border-radius: 5px; font-size: 8pt; text-align: center; margin-left: 10px; cursor: pointer;" onclick="isExistEmailCheck();">이메일중복확인</span> 
              		<span id="emailCheckResult"></span>	
-					</div>
-					
-
 					<div class="check_box">
-						<label><input name="email_yn" value="Y" type="radio" class="radio" >수신동의</label>
-						<label><input name="email_yn" value="N" type="radio" class="radio" >수신거부</label>
+						<label><input name="checkEmail" value="1" type="radio" class="radio" >수신동의</label>
+						<label><input name="checkEmail" value="0" type="radio" class="radio" >수신거부</label>
 					</div>
 				</dd>
 			</dl>
@@ -511,23 +489,25 @@
 					<input name="mobile3" class="input input_num requiredInfo" type="text" id="mobile3" maxlength="4" onchange=''>
 					<span class="error" style= "color:red; font-size: 14px;">&nbsp;휴대폰형식이 아닙니다</span>
 					<div class="check_box">
-						<label><input name="sms_yn" value="Y" type="radio" class="radio" />수신동의</label>
-						<label><input name="sms_yn" value="N" type="radio" class="radio" />수신거부</label>
+						<label><input name="checkMobile" value="1" type="radio" class="radio" />수신동의</label>
+						<label><input name="checkMobile" value="0" type="radio" class="radio" />수신거부</label>
 					</div>
 				</dd>
 			</dl>
 			
-			
+			<div class="btn_list">
+				<input type="button" class="moreBtn pointColor pointBorder" onclick="location.href='javascript:history.go(-1)'" value="이전으로" />
+				<input type="submit" class="moreBtn bgColor pointBorder" id="btn_submit" onclick="goRegister()" value="회원가입하기" />
+			</div>
 
 			
 		</div>
-	</div>
-  </form>
-  <div class="btn_list">
-		<input type="button" class="moreBtn pointColor pointBorder" onclick="location.href='javascript:history.go(-1)'" value="이전으로" />
-		<input type="submit" class="moreBtn bgColor pointBorder" id="btn_submit" onclick="goRegister()" value="회원가입하기" />
-	</div>
+	   </div>	
+	</form>
 </div>
+	
+ 
+
 
 	
 </body>
