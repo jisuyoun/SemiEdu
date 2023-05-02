@@ -101,13 +101,41 @@
 		 
 		}); // end of $("button#btnFind").click(function()----------------
 		 
-		 
+		const method = "${requestScope.method}";  // "" 를 꼭 붙여야 변수로 인식
+		
+		if(method == "POST") {
+			$("input#userid").val("${requestScope.userid}");
+			$("input#name").val("${requestScope.name}");
+			$("input#email").val("${requestScope.email}");
+		}
+		
+		
+		const method = "${requestScope.method}";  // "" 를 꼭 붙여야 변수로 인식
+		
+		if(method == "POST") {
+			$("input#userid").val("${requestScope.userid}");
+			$("input#email").val("${requestScope.email}");
+			$("div#div_findResult").show();
+			
+		}
+		else {
+			$("div#div_findResult").hide();	
+		}
+		
+		// 인증하기
+		$("button#btnConfirmCode").click(function(){
+			const frm = document.verifyCertificationFrm;
+			
+			frm.userCertificationCode.value = $("input#input_confirmCode").val();
+			frm.userid.value = $("input#userid").val();
+			
+			frm.action = "<%= ctxPath%>/login/verifyCertification.go";
+			frm.method = "post";
+			frm.submit();
+		
+		});
 
 	}); // end of $(document).ready (function()-----------------------------------
-	
-	
-	
-	
 	
 	
 	
@@ -139,7 +167,7 @@
 
 		<div class="passwd_cont">
 			<div class="myinfo_cont refund_info email_cont">
-				<form name="pwdFindFrm" method="POST" target="sysfrm">
+				<form name="pwdFindFrm">
 				<input type="hidden" name="mode" value="email_authno">
 				<input type="hidden" name="domain" value="www.wannaedu.com">
 				<h4 class="mem_tit marb20 inline">회원정보 입력 <span class="tx"> 회원가입 시 입력한 아이디, 이름과 이메일을 입력해 주세요.</span></h4>
@@ -163,29 +191,40 @@
 					</dd>
 				</dl>
 			 </form>
-			 <c:if test="${requestScope.isUserExist == false}">
-			<span style="color:red; margin-left: 150px;">사용자 정보가 없습니다.</span>
-			</c:if>
-			<c:if test="${requestScope.isUserExist == true && requestScope.sendMailSuccess == false}">
-			<span style="color:red; margin-left: 150px;">메일발송이 실패했습니다.</span><br>
-			</c:if>
-			 
-				<dl>
-					<dt></dt>
-					<dd>
-						<input name="auth_no" class="input" type="text" placeholder="발송된 인증번호 입력 "  HNAME="인증번호">
-<!--						<input type="button" class="certi_btn" value="인증번호 확인" onclick="sendEmailNewPasswd()">-->
-					</dd>
-				</dl>
-				<div class="btn_list">
-					<a href="#" class="moreBtn bgColor" onclick="sendEmailNewPasswd()">인증번호 확인</a>
-				</div>
-				
+
 			</div>
 
-
 		</div>
+		<div id="div_findResult" class="myinfo_cont refund_info email_cont">	
+			<c:if test="${requestScope.isUserExist == false}">
+				<span style="color:red; margin-left: 150px;">사용자 정보가 없습니다.</span>
+				</c:if>
+				<c:if test="${requestScope.isUserExist == true && requestScope.sendMailSuccess == false}">
+				<span style="color:red; margin-left: 150px;">메일발송이 실패했습니다.</span><br>
+				</c:if>
+				 <c:if test="${requestScope.isUserExist == true && requestScope.sendMailSuccess == true}">
+						<span style="font-size: 10pt;">인증코드가 ${requestScope.email}로 발송되었습니다.</span><br>
+						<span style="font-size: 10pt;">인증코드를 입력해주세요.</span><br>
+			             <br><br>
+					<dl>
+						<dt></dt>
+						<dd>
+							<input name="input_confirmCode" id="input_confirmCode" class="input" type="text" placeholder="발송된 인증번호 입력 "  HNAME="인증번호">
+						</dd>
+					</dl>
+			             <div class="btn_list">
+							<button type="button" class="moreBtn bgColor" id="btnConfirmCode">인증번호 확인</button>
+						</div>
+				</c:if>
+			</div>		
 	</div>
 </div>
+
+<%-- 인증하기 form --%>
+<form name="verifyCertificationFrm">
+	<input type="hidden" name="userCertificationCode" />
+	<input type="hidden" name="userid" />
+</form>  
+
 </body>
 </html>
