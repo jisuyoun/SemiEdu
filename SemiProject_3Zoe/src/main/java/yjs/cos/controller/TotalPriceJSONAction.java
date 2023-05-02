@@ -20,10 +20,10 @@ public class TotalPriceJSONAction extends AbstractController {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		String courseCode = request.getParameter("courseCode");
+		String checkPriceJoin = request.getParameter("checkPriceJoin");
 		
 		Map<String, Object> paraMap = new HashMap<>();
-		paraMap.put("courseCodeArr", courseCode.split("\\,"));
+		paraMap.put("courseCodeArr", checkPriceJoin.split("\\,"));
 		
 		InterCosDAO cdao = new CosDAO();
 		

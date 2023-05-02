@@ -20,7 +20,7 @@ public class CosOrderPageAction extends AbstractController {
 		String courseCode = request.getParameter("courseCode");
 		// System.out.println(courseCode);
 		
-		String fk_categoryCode = request.getParameter("fk_categoryCode");
+		// String fk_categoryCode = request.getParameter("fk_categoryCode");
 		
 		InterCosDAO cdao = new CosDAO();
 		
@@ -28,7 +28,7 @@ public class CosOrderPageAction extends AbstractController {
 		
 		Map<String, String> paraMap = new HashMap<>();
 		paraMap.put("courseCode", courseCode);
-		paraMap.put("fk_categoryCode", fk_categoryCode);
+		// paraMap.put("fk_categoryCode", fk_categoryCode);
 		
 		List<CosVO> cvoList = cdao.CategoryListByCourseCode(paraMap);
 		

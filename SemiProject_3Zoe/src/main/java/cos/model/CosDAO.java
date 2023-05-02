@@ -125,7 +125,7 @@ public class CosDAO implements InterCosDAO {
 			for(int i=0; i<checkedArr.length; i++) {
 				
 				sql = " delete from tbl_course "
-					+ "where courseCode in(?) ";
+					+ " where courseCode = ? ";
 				
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, checkedArr[i]);
@@ -317,10 +317,10 @@ public class CosDAO implements InterCosDAO {
 			
 			conn = ds.getConnection();
 			
-			String sql = " select C.courseName, C.img1 "
-					   + " from tbl_course C join tbl_category G "
-					   + " on C.fk_categoryCode = G.categoryCode "
-					   + " where G.categoryCode = ? ";
+			String sql = " select C.courseName, C.img1, C.img2, E.img3 "
+					   + " from tbl_course C join tbl_extraImg E "
+					   + " on C.fk_categoryCode = E.fk_courseCode "
+					   + " where C.fk_categoryCode = ? ";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, paraMap.get("courseCode"));
@@ -330,11 +330,21 @@ public class CosDAO implements InterCosDAO {
 			while(rs.next()) {
 				String courseName = rs.getString(1);
 				String img1 = rs.getString(2);
+				String img2 = rs.getString(3);
+				String img3 = rs.getString(4);
 				
 				CosVO cvo = new CosVO();
 				
 				cvo.setCourseName(rs.getString("courseName"));
 				cvo.setImg1(rs.getString("img1"));
+				cvo.setImg2(rs.getString("img2"));
+				
+				ImgVO ivo = new ImgVO();
+				ivo.setImg3(rs.getString("img3"));
+				cvo.setImgvo(ivo);
+				
+				cosList.add(cvo);
+				
 			}
 			
 			
@@ -469,65 +479,49 @@ public class CosDAO implements InterCosDAO {
 		
 		List<CosVO> cvoList = new ArrayList<>();
 		
+		String[] courseCodeArr = (String[]) paraMap.get("courseCodeArr");
+		
 		CosVO cvo = null;
+		
+		String sql = "";
 		
 		String courseCode = "";
 		
 		try {
 			
-			courseCode = String.join("','", (String []) paraMap.get("courseCodeArr"));
+			courseCode = String.join(",", (String []) paraMap.get("courseCodeArr"));
 			
-			System.out.println(courseCode);
-			
-			if (courseCode != "") {
+			if (courseCodeArr.length > 0) {
 	
 				conn=ds.getConnection();
 				
-				String sql = " select courseCode, price, salePrice "
-						   + " from tbl_course "
-						   + " where courseCode in(" + courseCode + ") ";
-				
-				pstmt = conn.prepareStatement(sql);
-				
-				rs = pstmt.executeQuery();
-				
-				while(rs.next()) {
+				for(int i=0; i<courseCodeArr.length; i++) {
 					
-					cvo = new CosVO();
+					sql = " select courseCode, price, salePrice "
+						+ " from tbl_course "
+						+ " where courseCode = ? ";
+				
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1, courseCodeArr[i]);
 					
-					cvo.setCourseCode(rs.getString(1));
-					cvo.setPrice(rs.getInt(2));
-					cvo.setSalePrice(rs.getInt(3));
+					rs = pstmt.executeQuery();
 					
-					cvoList.add(cvo);
-	
-				}
-	
+					while(rs.next()) {
+						
+						cvo = new CosVO();
+						
+						cvo.setCourseCode(rs.getString(1));
+						cvo.setPrice(rs.getInt(2));
+						cvo.setSalePrice(rs.getInt(3));
+						
+						cvoList.add(cvo);
+		
+					}
+					
+				} // end of for
+
 			} // end of if
 			
-			else {
-				
-				conn=ds.getConnection();
-				
-				String sql = " select courseCode, price, salePrice "
-						   + " from tbl_course ";
-				
-				pstmt = conn.prepareStatement(sql);
-				
-				rs = pstmt.executeQuery();
-				
-				while(rs.next()) {
-					
-					cvo = new CosVO();
-					
-					cvo.setCourseCode(rs.getString(1));
-					cvo.setPrice(rs.getInt(2));
-					cvo.setSalePrice(rs.getInt(3));
-					
-					cvoList.add(cvo);
-				
-				}
-			}
 		
 		} finally {
 			close();
@@ -539,22 +533,30 @@ public class CosDAO implements InterCosDAO {
 	
 	// 장바구니에 체크된 강의 선택삭제하기 메소드 생성하기
 	@Override
-	public int BagSelectDelete(Map<String, String> paraMap) throws SQLException {
+	public int BagSelectDelete(Map<String, Object> paraMap) throws SQLException {
 		
 		int n = 0;
+		
+		String[] courseCodeArr = (String[]) paraMap.get("courseCodeArr");
+		
+		String sql = "";
 		
 		try {
 			
 			conn = ds.getConnection();
 			
-			String sql = " delete from tbl_shoppingbag"
-					   + " where fk_courseCode in(?) and fk_userid = ? ";
-			
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, paraMap.get("courseCode"));
-			pstmt.setString(2, paraMap.get("userid"));
-			
-			n = pstmt.executeUpdate();
+			for(int i=0; i<courseCodeArr.length; i++) {
+				
+				sql = " delete from tbl_shoppingbag "
+				    + " where fk_courseCode = ? and fk_userid = ? ";
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, courseCodeArr[i]);
+				pstmt.setString(2, (String) paraMap.get("userid"));
+				
+				n = pstmt.executeUpdate();
+				
+			} // end of for
 			
 		} finally {
 			close();

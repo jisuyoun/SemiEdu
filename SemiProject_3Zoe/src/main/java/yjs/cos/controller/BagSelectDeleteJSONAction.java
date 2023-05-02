@@ -17,12 +17,12 @@ public class BagSelectDeleteJSONAction extends AbstractController {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		String courseCode = request.getParameter("courseCode");
+		String delCheckboxJoin = request.getParameter("delCheckboxJoin");
 		
 		String userid = request.getParameter("userid");
 		
-		Map<String, String> paraMap = new HashMap<>();
-		paraMap.put("courseCode", courseCode);
+		Map<String, Object> paraMap = new HashMap<>();
+		paraMap.put("courseCodeArr", delCheckboxJoin.split("\\,"));
 		paraMap.put("userid", userid);
 		
 		InterCosDAO cdao = new CosDAO();

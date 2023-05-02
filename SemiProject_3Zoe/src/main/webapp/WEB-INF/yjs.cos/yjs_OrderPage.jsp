@@ -19,6 +19,26 @@
 
 	$(document).ready(function(){
 		
+		/* 연관있는 강의들 불러오기 시작 */
+		$.ajax({
+			url:"<%= request.getContextPath()%>/yjs.cos/yjs_CosRecommend.go",
+			type:"GET",
+			data:{
+				"courseCode":"${requestScope.courseCode}"
+			},
+			dataType:"json",
+			success:function(json){
+				
+			},
+			error: function(request, status, error){
+				alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+			}
+		});
+		/* 연관있는 강의들 불러오기 끝 */
+		
+		
+		
+		
 		var all = ${requestScope.cvo.price}-${requestScope.cvo.salePrice};
 		//alert(all);
 		
@@ -290,9 +310,8 @@
 		
 		
 		<%-- 메인 이미지 시작 --%>
-		<img class="OPCosContentImg" src="<%= request.getContextPath()%>/yjs.images/cos_jeong_1_introduce1.png" />
-	<%-- <img class="OPCosContentImg" src="./images/eventimg_2.png" />
-		<img class="OPCosContentImg" src="./images/eventimg_3.png" style="width:1125px; margin: 0 auto;"/> --%>
+		<img class="OPCosContentImg" src="<%= request.getContextPath()%>/yjs.images/${requestScope.cvo.img2}" />
+	
 		<%-- 메인 이미지 끝 --%>
 		
 		

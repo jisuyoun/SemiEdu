@@ -14,7 +14,16 @@ public class CosVO {
 	private String img1;			  // 강의썸네일
 	private String img2;			  // 강의소개이미지
 	
+	private ImgVO imgvo;			  // 이미지vo
 	
+	public ImgVO getImgvo() {
+		return imgvo;
+	}
+
+	public void setImgvo(ImgVO imgvo) {
+		this.imgvo = imgvo;
+	}
+
 	public String getCourseCode() {
 		return courseCode;
 	}
