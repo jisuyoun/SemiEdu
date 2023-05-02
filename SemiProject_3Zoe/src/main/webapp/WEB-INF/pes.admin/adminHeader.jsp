@@ -32,10 +32,28 @@
   
 <link rel="stylesheet" href="<%= ctxPath%>/css/ljh_myPage.css">
 
-<style type="text/css">
-</style>
-
 <meta charset="UTF-8">
+
+<script type="text/javascript" src="<%= ctxPath%>/jquery-ui-1.13.1.custom/jquery-ui.min.js"></script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  
+<script type="text/javascript">
+
+	$(document).ready(function(){
+	    
+	    
+	    
+	});
+	
+	function goLogOut() {
+   
+    // 로그아웃을 처리해주는 페이지로 이동
+    location.href="<%=request.getContextPath()%>/login/logout.go";
+      
+   }// end of function goLogOut(){}---------------------------------
+   
+</script>
 
 </head>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous"> 
@@ -56,7 +74,9 @@
 	      	<span style="margin: 0 20px 0 15px;"><b>|</b></span>
 	      
 	      	<a href="<%= ctxPath %>/index.go" style="margin-right: 20px;"><i class="fa fa-fw fa-home text-body"></i><b class="text-body">홈으로</b></a>
-	      	<a href="#"><i class="fa-solid fa-arrow-right-from-bracket text-body"></i><b class="text-body">로그아웃</b></a>
+	      	<button type="button" class="btn btn-light" id="registerBtn" onclick="goLogOut();" >
+         <i class="fa-solid fa-arrow-right-from-bracket" style="margin-right: 10px;"></i>로그아웃
+      </button>
 	      </p>
 	    </li>
 	  </ul>

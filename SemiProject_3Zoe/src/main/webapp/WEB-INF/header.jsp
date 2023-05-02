@@ -61,7 +61,7 @@
 	      <a type="button" class="btn btn-light" id="loginBtn" href ="<%= ctxPath%>/login/login.go">
 	         <i class="fa-solid fa-arrow-right-to-bracket" style="margin-right: 10px;"></i>로그인
 	      </a>
-	      <button type="button" class="btn btn-light" id="registerBtn" href="#">
+	      <button type="button" class="btn btn-light" id="registerBtn" onclick= "location.href='<%= ctxPath%>/member/agreementCheck.go'">
 	         <i class="fa-solid fa-user-plus" style="margin-right: 10px;"></i>회원가입
 	      </button>
 	   
