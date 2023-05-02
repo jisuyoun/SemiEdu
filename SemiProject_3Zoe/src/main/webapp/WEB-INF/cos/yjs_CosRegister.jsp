@@ -573,6 +573,56 @@ String ctxPath = request.getContextPath();
 		});
 		/* 장바구니 끝 */
 		
+		
+		/* 결제하기 시작 */
+		$(document).on("click", ".CRButtonGoApplication", function(){
+			
+			if("${sessionScope.loginuser.userid}" != ""){
+			
+				var form = document.createElement("formPay"); //태그 만들기 createElement
+	
+		        form.setAttribute("method", "post");  //태그 method속성 주기 => Post 방식
+	
+		        form.setAttribute("action", "<%= ctxPath%>/hyh.order/payment.go"); //태그 action속성 주기 => 요청 보낼 주소
+	
+		       
+		        var hidden1 = document.createElement("input"); //인풋태그 생성
+	
+		        hidden1.setAttribute("type", "hidden"); //태그 type속성 주기
+	
+		        hidden1.setAttribute("name", "courseCode"); //태그 name속성 주기
+	
+		        hidden1.setAttribute("value", $(this).val()); //태그 value속성 주기
+	
+		        form.appendChild(hidden1); //form 변수(그러니까 form태그)의 자식(child)으로 hidden1을 붙여준다
+				 
+		         
+		        var hidden2 = document.createElement("input"); 
+	
+		        hidden2.setAttribute("type", "hidden");
+	
+		        hidden2.setAttribute("name", "userid");
+	
+		        hidden2.setAttribute("value", "${sessionScope.loginuser.userid}");
+	
+		        form.appendChild(hidden2);
+		       
+		         
+				document.body.appendChild(formPay); //body태그의 자식으로 form 태그 붙여주기
+	
+		        form.submit(); //submit함수로 form전송
+				
+		        
+		        
+			}
+			else {
+				alert("로그인이 필요한 서비스 입니다!");
+			} 
+			
+		});
+		/* 결제하기 끝 */
+		
+		
 		/* 강의 등록하기 시작 */
 		$("button#CRWritingButton").click(function(){
 			location.href="<%= ctxPath%>/pes.admin/productRegister.go"
