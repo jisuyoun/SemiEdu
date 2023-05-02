@@ -20,13 +20,17 @@ public class CosDeleteJSONAction extends AbstractController {
 
 		String checkedJoin = request.getParameter("checkedJoin");
 		
+		System.out.println(checkedJoin);
+		
 		InterCosDAO cdao = new CosDAO();
 		
 		CosVO cvo = new CosVO();
 		
-		Map<String, String> paraMap = new HashMap<>();
+		Map<String, Object> paraMap = new HashMap<>();
 		
-		paraMap.put("checkedJoin", checkedJoin);
+		// paraMap.put("checkedJoin", checkedJoin);
+		
+		paraMap.put("checkedArr", checkedJoin.split("\\,"));
 		
 		int n = cdao.delectCos(paraMap);
 		

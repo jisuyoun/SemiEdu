@@ -110,23 +110,31 @@ public class CosDAO implements InterCosDAO {
 	
 	// 강의삭제하기에서 체크된 강의들 삭제하는 메소드 구현하기
 	@Override
-	public int delectCos(Map<String, String> paraMap) throws SQLException {
+	public int delectCos(Map<String, Object> paraMap) throws SQLException {
 		
 		int n = 0;
+		
+		String[] checkedArr = (String[]) paraMap.get("checkedArr"); 
+		
+		String sql = "";
 		
 		try {
 			
 			conn = ds.getConnection();
 			
-			String sql = " delete from tbl_course "
-						+ "where courseCode in(?) ";
-			
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, paraMap.get("checkedJoin"));
-			
-			n = pstmt.executeUpdate();
-			
+			for(int i=0; i<checkedArr.length; i++) {
+				
+				sql = " delete from tbl_course "
+					+ "where courseCode in(?) ";
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, checkedArr[i]);
+				
+				n = pstmt.executeUpdate();
+				
+				
+			} // end of for(int i=0; i<pnum_arr.length; i++) {} -----------------------------
+		
 		} finally {
 			close();
 		}
@@ -498,7 +506,27 @@ public class CosDAO implements InterCosDAO {
 			} // end of if
 			
 			else {
-				cvoList = null;
+				
+				conn=ds.getConnection();
+				
+				String sql = " select courseCode, price, salePrice "
+						   + " from tbl_course ";
+				
+				pstmt = conn.prepareStatement(sql);
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					
+					cvo = new CosVO();
+					
+					cvo.setCourseCode(rs.getString(1));
+					cvo.setPrice(rs.getInt(2));
+					cvo.setSalePrice(rs.getInt(3));
+					
+					cvoList.add(cvo);
+				
+				}
 			}
 		
 		} finally {
