@@ -53,7 +53,7 @@
 <div class="login_cont member_cont">
 	<div class="login_in">
 		<h1><img src="<%= ctxPath%>/ssh.img/logo.png" alt="워너에듀 로고" class="svg_logo"/></h1>
-		<h3>서상현님 환영합니다!</h3>
+		<h3>${requestScope.name}님 환영합니다!</h3>
 
 		<div class="process_cont">
 			<dl>

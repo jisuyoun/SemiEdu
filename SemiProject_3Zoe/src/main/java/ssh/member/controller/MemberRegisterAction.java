@@ -49,6 +49,7 @@ public class MemberRegisterAction extends AbstractController {
 				if(n==1) {
 					request.setAttribute("userid", userid);
 					request.setAttribute("pwd", pwd);
+					request.setAttribute("name", name);
 					
 					super.setRedirect(false);
 					super.setViewPage("/WEB-INF/ssh.member/join_success.jsp");
