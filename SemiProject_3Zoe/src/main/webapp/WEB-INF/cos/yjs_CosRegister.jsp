@@ -206,7 +206,7 @@ String ctxPath = request.getContextPath();
 							  	 + "		<button type='button' class='CRButtonGoBag'  value='" + item.courseCode + "' >"
 							  	 + "			<i class='fa-solid fa-pen' style='color: #ffffff; margin-right=10px;'></i>장바구니"
 							  	 + "		</button>"
-							  	 + "		<button type='button' class='CRButtonGoApplication' value='" + item.courseName + "'>"
+							  	 + "		<button type='button' class='CRButtonGoApplication' value='" + item.courseCode + "'>"
 							  	 + "			<i class='fa-solid fa-cart-shopping' style='color: #1bceb8; margin-right=10px;'></i>수강신청"
 							  	 + "		</button>"
 							  	 + "	</div>"
@@ -573,6 +573,11 @@ String ctxPath = request.getContextPath();
 		});
 		/* 장바구니 끝 */
 		
+		/* 강의 등록하기 시작 */
+		$("button#CRWritingButton").click(function(){
+			location.href="<%= ctxPath%>/pes.admin/productRegister.go"
+		});
+		/* 강의 등록하기 끝 */
 		
 	}); // end of $(document).ready(function(){}) -------------------------
 
