@@ -30,7 +30,7 @@
 	<script type="text/javascript" src="<%= ctxPath%>/jquery-ui-1.13.1.custom/jquery-ui.min.js"></script>
 
   
-<link rel="stylesheet" href="<%= ctxPath%>/css/ljhcss.css">
+<link rel="stylesheet" href="<%= ctxPath%>/css/ljh_myPage.css">
 
 <style type="text/css">
 </style>
@@ -74,10 +74,10 @@
     <a href="<%= ctxPath%>/pes.admin/loginHistory.go">- 회원 로그인기록</a>
 
   </div>
-  
+ 
   <hr>
   
-  <a href="<%= ctxPath%>/pes.admin/courseRegister.go" style="text-decoration: none;"><i class="fa-solid fa-video"></i>강좌등록</a>
+  <a href="<%= ctxPath%>/pes.admin/productRegister.go" style="text-decoration: none;"><i class="fa-solid fa-video"></i>강좌등록</a>
   
   <hr>
 

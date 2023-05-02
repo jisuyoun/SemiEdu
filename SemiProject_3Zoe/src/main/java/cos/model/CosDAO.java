@@ -110,23 +110,31 @@ public class CosDAO implements InterCosDAO {
 	
 	// 강의삭제하기에서 체크된 강의들 삭제하는 메소드 구현하기
 	@Override
-	public int delectCos(Map<String, String> paraMap) throws SQLException {
+	public int delectCos(Map<String, Object> paraMap) throws SQLException {
 		
 		int n = 0;
+		
+		String[] checkedArr = (String[]) paraMap.get("checkedArr"); 
+		
+		String sql = "";
 		
 		try {
 			
 			conn = ds.getConnection();
 			
-			String sql = " delete from tbl_course "
-						+ "where courseCode in(?) ";
-			
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, paraMap.get("checkedJoin"));
-			
-			n = pstmt.executeUpdate();
-			
+			for(int i=0; i<checkedArr.length; i++) {
+				
+				sql = " delete from tbl_course "
+					+ "where courseCode in(?) ";
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, checkedArr[i]);
+				
+				n = pstmt.executeUpdate();
+				
+				
+			} // end of for(int i=0; i<pnum_arr.length; i++) {} -----------------------------
+		
 		} finally {
 			close();
 		}
@@ -136,16 +144,55 @@ public class CosDAO implements InterCosDAO {
 	
 	
 	
+	
+	// 찜한 강의 알아오기 메소드 생성하기
+	@Override
+	public List<CosVO> SelectLike(Map<String, String> paraMap) throws SQLException {
+
+		List<CosVO> cosList = new ArrayList<>();
+		
+		try {
+			conn = ds.getConnection();
+			
+			String sql = " select fk_courseCode "
+					   + " from tbl_like "
+					   + " where fk_userid = ? ";
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, paraMap.get("userid"));
+
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				CosVO cvo = new CosVO();
+				
+				cvo.setCourseCode(rs.getString(1));		// 강의코드
+				
+				cosList.add(cvo);
+	            
+			} // end of while --------------------------------------------------------------------------------
+			
+			// System.out.println("확인용" + cosList.size());
+			
+		} finally {
+			close();
+		}
+		
+		return cosList;
+	}
+	
+	
+	
 	// 찜한 강의 찜 테이블에 올려주는 메소드 생성하기
 	@Override
-	public int LikeTblAdd(String checkedHeart, String userid) throws SQLException {
-	
+	public int LikeTblAdd(Map<String, String> paraMap) throws SQLException {
+		
 		int n = 0;
 		
 		try {
-			
-			System.out.println("dao"+checkedHeart);
-			System.out.println("dao"+userid);
+			System.out.println(paraMap.get("checkedHeart"));
 			
 			conn = ds.getConnection();
 			
@@ -154,26 +201,15 @@ public class CosDAO implements InterCosDAO {
 			String sql = " insert into tbl_like(fk_courseCode, fk_userid) values(?, ?) ";
 			
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, checkedHeart);
-			pstmt.setString(2, userid);
-			
-			System.out.println(pstmt);
+			pstmt.setString(1, paraMap.get("checkedHeart"));
+			pstmt.setString(2, paraMap.get("userid"));
 			
 			n = pstmt.executeUpdate();
+			
 			System.out.println("dao n값 : " + n);
-			/*
-			 * if(n==1) { conn.commit(); }
-			 */
 			
-		} /*
-			 * catch(SQLIntegrityConstraintViolationException e) {
-			 * 
-			 * conn.rollback(); System.out.println("sql 문제");
-			 * 
-			 * }
-			 */ finally {
 			
-			/* conn.setAutoCommit(true); */
+		} finally {
 			close();
 		}
 			
@@ -308,6 +344,254 @@ public class CosDAO implements InterCosDAO {
 		
 		return cosList;
 	}
+
+	
+	// tbl_category 테이블에서 categoryCode, categoryName 조회해오기 
+	@Override
+	   public List<Map<String, String>> getCategoryList() throws SQLException {
+	      
+	      List<Map<String, String>> categoryList = new ArrayList<>();
+	      
+	      try {
+	         conn = ds.getConnection();
+	         
+	         String sql =  " select categoryCode, categoryName "
+	                  + " from tbl_category "
+	                  + " order by categoryCode asc ";
+	            
+	         pstmt = conn.prepareStatement(sql);
+	         
+	         rs = pstmt.executeQuery();
+	         
+	         while(rs.next()) {
+	            
+	            Map<String, String> map = new HashMap<>();
+	            map.put("categoryCode", rs.getString(1));
+	            map.put("categoryName", rs.getString(2));
+	            
+	            categoryList.add(map);
+	            
+	         }// end of while-----
+	               
+	      } finally {
+	         close();
+	      }
+	      
+	      return categoryList;
+	   }// end of public List<Map<String, String>> getCategoryList()
+
+	
+	// 장바구니 페이지에 정보 보내기 메소드 생성하기
+	@Override
+	public int ShoppingBagAdd(Map<String, String> paraMap) throws SQLException {
+		
+		int n = 0;
+		
+		try {
+			
+			conn = ds.getConnection();
+			
+			String sql = " select * "
+					   + " from tbl_shoppingbag "
+					   + " where fk_courseCode = ? ";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, paraMap.get("courseCode"));
+			
+			rs = pstmt.executeQuery();
+			
+			if(!rs.next()) {
+				sql = " insert into tbl_shoppingbag(shoppingbagNum, fk_userid, fk_courseCode) "
+					 + " values(seq_shoppingbag_shoppingbagNum.nextval, ?, ?) ";
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, paraMap.get("userid"));
+				pstmt.setString(2, paraMap.get("courseCode"));
+				
+				n = pstmt.executeUpdate();
+				
+			}
+			else {
+				n = 0;
+			}
+			
+		} finally {
+			close();
+		}
+		
+		return n;
+	}
+
+	
+	// 장바구니 리스트 보기 메소드 생성하기
+	@Override
+	public List<CosVO> ShoppingBagList(Map<String, String> paraMap) throws SQLException {
+		
+		List<CosVO> cvoList = new ArrayList<>();
+		
+		try {
+			
+			conn = ds.getConnection();
+			
+			String sql = " select C.courseCode, C.courseName, C.price, C.salePrice "
+					   + " from tbl_course C join tbl_shoppingbag S "
+					   + " on C.courseCode = S.fk_courseCode "
+					   + " where S.fk_userid = ? ";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, paraMap.get("userid"));
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				CosVO cvo = new CosVO();
+				
+				cvo.setCourseCode(rs.getString(1));
+				cvo.setCourseName(rs.getString(2));
+				cvo.setPrice(rs.getInt(3));
+				cvo.setSalePrice(rs.getInt(4));
+				
+				cvoList.add(cvo);
+
+			}
+			
+		} finally {
+			close();
+		}
+		
+		return cvoList;
+	}
+
+	// 장바구니에 체크된 강의들 가격 알아오는 메소드 생성하기
+	@Override
+	public List<CosVO> SelectPrice(Map<String, Object> paraMap) throws SQLException {
+		
+		List<CosVO> cvoList = new ArrayList<>();
+		
+		CosVO cvo = null;
+		
+		String courseCode = "";
+		
+		try {
+			
+			courseCode = String.join("','", (String []) paraMap.get("courseCodeArr"));
+			
+			System.out.println(courseCode);
+			
+			if (courseCode != "") {
+	
+				conn=ds.getConnection();
+				
+				String sql = " select courseCode, price, salePrice "
+						   + " from tbl_course "
+						   + " where courseCode in(" + courseCode + ") ";
+				
+				pstmt = conn.prepareStatement(sql);
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					
+					cvo = new CosVO();
+					
+					cvo.setCourseCode(rs.getString(1));
+					cvo.setPrice(rs.getInt(2));
+					cvo.setSalePrice(rs.getInt(3));
+					
+					cvoList.add(cvo);
+	
+				}
+	
+			} // end of if
+			
+			else {
+				
+				conn=ds.getConnection();
+				
+				String sql = " select courseCode, price, salePrice "
+						   + " from tbl_course ";
+				
+				pstmt = conn.prepareStatement(sql);
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					
+					cvo = new CosVO();
+					
+					cvo.setCourseCode(rs.getString(1));
+					cvo.setPrice(rs.getInt(2));
+					cvo.setSalePrice(rs.getInt(3));
+					
+					cvoList.add(cvo);
+				
+				}
+			}
+		
+		} finally {
+			close();
+		}
+		
+		return cvoList;
+	}
+
+	
+	// 장바구니에 체크된 강의 선택삭제하기 메소드 생성하기
+	@Override
+	public int BagSelectDelete(Map<String, String> paraMap) throws SQLException {
+		
+		int n = 0;
+		
+		try {
+			
+			conn = ds.getConnection();
+			
+			String sql = " delete from tbl_shoppingbag"
+					   + " where fk_courseCode in(?) and fk_userid = ? ";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, paraMap.get("courseCode"));
+			pstmt.setString(2, paraMap.get("userid"));
+			
+			n = pstmt.executeUpdate();
+			
+		} finally {
+			close();
+		}
+		
+		return n;
+	}
+
+	
+	// 장바구니에 있는 모든 강의 삭제하기 메소드 생성하기
+	@Override
+	public int BagAllDelete(String userid) throws SQLException {
+
+		int n = 0;
+				
+		try {
+			
+			conn = ds.getConnection();
+			
+			String sql = " delete from tbl_shoppingbag "
+					   + " where fk_userid = ? "; 
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userid);
+			
+			n = pstmt.executeUpdate();
+			
+		} finally {
+			close();
+		}
+		
+		return n;
+	}
+
+
+	
+	
 
 }
 

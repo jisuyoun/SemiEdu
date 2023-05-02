@@ -12,10 +12,13 @@ public interface InterCosDAO {
 	List<CosVO> selectBySpecName(Map<String, String> paraMap) throws SQLException;
 
 	// 강의삭제하기에서 체크된 강의들 삭제하는 메소드 생성하기
-	int delectCos(Map<String, String> paraMap) throws SQLException;
+	int delectCos(Map<String, Object> paraMap) throws SQLException;
 
+	// 찜한 강의 알아오기 메소드 생성하기
+	List<CosVO> SelectLike(Map<String, String> paraMap) throws SQLException;
+	
 	// 찜한 강의 찜 테이블에 올려주는 메소드 생성하기
-	int LikeTblAdd(String checkedHeart, String userid) throws SQLException;
+	int LikeTblAdd(Map<String, String> paraMap) throws SQLException;
 
 	// 찜 풀은 강의 찜 테이블에서 삭제해주는 메소드 생성하기
 	int dislike(String discheckedHeart, String userid) throws SQLException;
@@ -26,7 +29,25 @@ public interface InterCosDAO {
 	// 비슷한 강의 찾아주기 메소드 생성하기
 	List<CosVO> CategoryListByCourseCode(Map<String, String> paraMap) throws SQLException;
 	
-	// 용훈님용 제품목록 불러오기 메소드 생성하기
+	// tbl_category 테이블에서 categoryCode, categoryName 조회해오기 
 	List<Map<String, String>> getCategoryList() throws SQLException;
+
+	// 장바구니 추가 메소드 생성하기
+	int ShoppingBagAdd(Map<String, String> paraMap) throws SQLException;
+
+	// 장바구니 페이지에 정보 보내기 메소드 생성하기
+	List<CosVO> ShoppingBagList(Map<String, String> paraMap) throws SQLException;
+
+	// 장바구니에 체크된 강의들 가격 알아오는 메소드 생성하기
+	List<CosVO> SelectPrice(Map<String, Object> paraMap) throws SQLException;
+
+	// 장바구니에 체크된 강의 선택삭제하기 메소드 생성하기
+	int BagSelectDelete(Map<String, String> paraMap) throws SQLException;
+
+	// 장바구니에 있는 모든 강의 삭제하기 메소드 생성하기
+	int BagAllDelete(String userid) throws SQLException;
+
+	
+
 
 }

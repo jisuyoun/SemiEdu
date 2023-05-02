@@ -171,6 +171,11 @@
 	function shoppingGo(){
 		
 		if("${sessionScope.loginuser.userid}" != ""){
+			var frm = document.cartOrderFrm;
+			
+			frm.method = "POST";
+			frm.action = "<%= ctxPath%>/yjs.cos/yjs_ShoppingBagPage.go";
+			frm.submit();
 			
 		}
 		else {
@@ -258,7 +263,11 @@
 		<nav id="showHide" class="navbar navbar-expand-sm bg-dark navbar-dark fixed-bottom" style="background-color: #f2f2f2!important; margin:0% 15%; display:none;">
 		  <ul class="navbar-nav">
 		    <li class="nav-item">
+		    <form name="cartOrderFrm">
+		    	<input type="hidden" name="courseCode" value="${requestScope.cvo.courseCode}" />
+		    	<input type="hidden" name="userid" value="${sessionScope.loginuser.userid}" />
 		      <button type="button" id="OPShoppingbag" onclick="shoppingGo();" ><i class="fa-solid fa-cart-shopping" style="color: #1bceb8; margin-right:10px;"></i>장바구니</button>
+		    </form>
 		    </li>
 		    <li class="nav-item">
 		      <button type="button" id="OPCosRegister"><i class="fa-solid fa-pen" style="color: #ffffff; margin-right:10px;"></i>수강신청</button>

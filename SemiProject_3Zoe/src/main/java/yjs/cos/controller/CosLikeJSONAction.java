@@ -1,5 +1,8 @@
 package yjs.cos.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,9 +22,13 @@ public class CosLikeJSONAction extends AbstractController {
 				
 				String userid = request.getParameter("userid");
 				
+				Map<String, String> paraMap = new HashMap<>();
+				paraMap.put("checkedHeart", checkedHeart);
+				paraMap.put("userid", userid);
+				
 				InterCosDAO cdao = new CosDAO();
 				
-				int n = cdao.LikeTblAdd(checkedHeart, userid);
+				int n = cdao.LikeTblAdd(paraMap);
 				
 				JSONObject jsonobj = new JSONObject();
 				
