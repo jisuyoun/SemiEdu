@@ -20,8 +20,6 @@ public class CosDeleteJSONAction extends AbstractController {
 
 		String checkedJoin = request.getParameter("checkedJoin");
 		
-		System.out.println(checkedJoin);
-		
 		InterCosDAO cdao = new CosDAO();
 		
 		CosVO cvo = new CosVO();
