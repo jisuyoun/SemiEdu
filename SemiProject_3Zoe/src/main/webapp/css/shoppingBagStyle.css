@@ -51,7 +51,7 @@ div#SPListBody > div#SPListTitle > ul > div {
 	font-weight: bold;
 }
 
-input#SPCheckbox {
+input.SPCheckbox {
 	margin-right: 10px; 
 	width: 20px; 
 	height: 15px;
@@ -90,11 +90,11 @@ li#SPListCate {
 div#SPListContent {
 	background-color: white;
 	margin: 0 10px;
-	padding: 18px 0;
+	padding: 7px 0;
+	padding-top: 13px;
 	border-radius: 10px;
 	position: relative;
 	top: 14px;
-	height: 65px;
 }
 
 div#SPListContent > ul > div {
@@ -119,7 +119,7 @@ div#SPListBody > div#SPListContent > ul > div:last-child {
 
 div#SPListBody > div#SPListContent > ul > div > li {
 	display: block;
-	margin: 0 auto;
+	margin: 15px auto;
 }
 /* 리스트 항목 시작 */
 
@@ -178,8 +178,7 @@ button#SPEndButton {
 	background-color: #1bcebe;
 	color: white;
 	display: block;
-	margin: 0 auto;
-	margin-top: 62px;
+	margin: 62px auto;
 	border: 0;
 	border-radius: 40px;
 	width: 200px;

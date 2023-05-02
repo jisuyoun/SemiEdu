@@ -156,30 +156,27 @@ String ctxPath = request.getContextPath();
 			// alert("확인용 값들어옴!!");
 			$.ajax({
 				url:"<%= request.getContextPath()%>/cos/yjs_CosDisplayJSON.go",
-				data:{"ClickData":$("input#CRInput_Text").val()},   
+				data:{
+					"ClickData":$("input#CRInput_Text").val()
+				},   
 				dataType:"json", /* dataType 을 생략하면 string 타입으로 들어온다. */
 				/* async:false, */
 				success:function(json){
-					
-				/*
-					console.log("확인용 json => " + json);
-					console.log("json 의 타입 => " + typeof json);
-				*/	
+				
 					let html = "";
 					
 					if (json.length > 0) {
-						//alert("데이터 있음"); 
 						
 						$.each(json, function(index, item){
 							if(index == 0) {
-								html = "<div class='CRCosList  col-lg-12' value='" + item.courseCode + "'>"
+								html = "<div class='CRCosList  col-lg-12'>"
 							}
 							else {
-								html = "<div class='CRCosList_1  col-lg-12' value='" + item.courseCode + "'>"
+								html = "<div class='CRCosList_1  col-lg-12'>"
 							}
 							html += "	<ul>"
 								  +	"		<li><input type='checkbox' class='CRDeleteCheckBox' name='CRDeleteCheckBox' value='" + item.courseCode + "' />"
-								  + "			<img src='<%= ctxPath%>/yjs.images/"+item.img1+"' class='CRSellImg' />" 
+								  + "			<a href ='<%= ctxPath%>/yjs.cos/yjs_OrderPage.go?courseCode="+ item.courseCode +"'><img src='<%= ctxPath%>/yjs.images/"+item.img1+"' class='CRSellImg' /></a>" 
 						 	  	  + "			<a data-toggle='tooltip' title='찜!'><label for='CRheartCheck" + index + "'><i id='heart' class='fa-regular fa-heart' style='color: #cccccc;'></i>"
 						  	 	  + "			<input type='checkbox' id='CRheartCheck" + index + "' name='CRHeartCheckName' value='" + item.courseCode + "' style='display:none;' /></label></a>"
 								  + "       </li>"
@@ -187,7 +184,7 @@ String ctxPath = request.getContextPath();
 								  + "	<div class='CRListMainPosition col-lg-4'>"
 								  + "		<ul>"
 								  + "			<li>"
-								  + "				<h4 class='CRCosTitleName'>"+item.courseName+"</h4>"
+								  + "				<a href ='<%= ctxPath%>/yjs.cos/yjs_OrderPage.go?courseCode="+ item.courseCode +"'><h4 class='CRCosTitleName' style='color:black'>"+item.courseName+"</h4></a>"
 								  + "				<h5 class='CRCosTeacher'>강사명 <a style='margin-left: 10px;'>" + item.teacher + "</a></h5>"
 								  + "				<div class='CRDate'>"
 								  + "				기간 <a style='margin-left: 28px;'>"+item.courseterm+"일</a>"
@@ -205,7 +202,8 @@ String ctxPath = request.getContextPath();
 								  + "	</div>";
 								  
 							html += "	<div class='CRButton'>"
-							  	 + "		<button type='button' class='CRButtonGoBag' value='" + item.courseName + "'>"
+							  	 + " 		<input type='hidden' id='courseCode' /> "
+							  	 + "		<button type='button' class='CRButtonGoBag'  value='" + item.courseCode + "' >"
 							  	 + "			<i class='fa-solid fa-pen' style='color: #ffffff; margin-right=10px;'></i>장바구니"
 							  	 + "		</button>"
 							  	 + "		<button type='button' class='CRButtonGoApplication' value='" + item.courseName + "'>"
@@ -310,17 +308,26 @@ String ctxPath = request.getContextPath();
 		
 		
 		
-		/* 리스트 누르면 상세페이지로 이동 시작 */
-		$(document).on("click", 'div.CRCosList', function(){
-			alert($(this).val());
-		});
 		
-		$(document).on("click", 'div.CRCosList_1', function(){
-			alert($(this).val());
-		});
-		
-		/* 리스트 누르면 상세페이지로 이동 끝 */
-		
+		/* 찜 했나 알아오기 시작 */
+			<%-- $.ajax({
+				url:"<%= request.getContextPath()%>/cos/yjs_CosSelectLikeJSON.go",
+				type:"POST",
+				data:{
+					"userid":"${sessionScope.loginuser.userid}"
+				},
+				dataType:"json",
+				success:function(json){
+					alert(json.courseCode);
+				},
+				error: function(request, status, error){
+					alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+				}
+			});   --%>
+			/* 찜 했나 알아오기 끝 */
+			
+			
+			
 		
 		
 		
@@ -331,32 +338,28 @@ String ctxPath = request.getContextPath();
 				
 				//alert("찜목록 추가");
 				
-				let checkedHeartArr = [];
+				var checkedHeart = "";
 				
 				$("input[type=checkbox][name=CRHeartCheckName]:checked").each(function(){
-					var checkedHeart = $(this).val();
-					checkedHeartArr.push(checkedHeart);
-					
+					checkedHeart = $(this).val();
 				});
-				
-				var checkedHeartJoin = checkedHeartArr.join();
 				
 				$.ajax({
 					url:"<%= request.getContextPath()%>/cos/yjs_CosLikeJSON.go",
 					type:"POST",
-					data:{"checkedHeart":checkedHeartJoin,
+					data:{"checkedHeart":checkedHeart,
 						  "userid":"${sessionScope.loginuser.userid}"},
 					dataType:"json",
 					success:function(json){
 						if(json.n == 1) {
 							alert("찜 완료");
-							checkboxFlag = true;
-							flag = false;
+							$("i#heart").removeClass("fa-regular fa-heart");
+							$("i#heart").addClass("fa-solid fa-heart").css("color", "#ff0000");
+							checkboxFlag=true;
 						}
 						else {
 							alert("로그인을 해주세요");
-							flag = true;
-							return
+							return;
 						}
 					},
 					error: function(request, status, error){
@@ -368,7 +371,7 @@ String ctxPath = request.getContextPath();
 				
 				let discheckedHeartArr = [];
 				
-				$("input[type=checkbox][name=CRHeartCheckName]:checked").each(function(){
+				$("input[type=checkbox][name=CRHeartCheckName]:change").each(function(){
 					var discheckedHeart = $(this).val();
 					discheckedHeartArr.push(discheckedHeart);
 				});
@@ -384,6 +387,9 @@ String ctxPath = request.getContextPath();
 					dataType:"json",
 					success:function(json){
 						alert("찜 취소");
+						$("i#heart").removeClass("fa-solid fa-heart");
+						$("i#heart").addClass("fa-regular fa-heart").css("color", "#cccccc"); 
+						checkboxFlag=false;
 					},
 					error: function(request, status, error){
 						alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
@@ -396,7 +402,7 @@ String ctxPath = request.getContextPath();
 		/* 찜 끝 */
 		
 		/* 찜 토글 시작 */
-		$(document).on("click", "#heart", function(){
+		/* $(document).on("click", "#heart", function(){
 			if(!flag) {
 				$(this).removeClass("fa-regular fa-heart");
 				$(this).addClass("fa-solid fa-heart").css("color", "#ff0000");
@@ -418,7 +424,7 @@ String ctxPath = request.getContextPath();
 			}
 			
 			
-		});
+		}); */
 		
 		
 		
@@ -519,6 +525,55 @@ String ctxPath = request.getContextPath();
 		});
 		/* 되돌아가기 버튼 시작 */
 		
+		/* 장바구니 시작 */
+		$(document).on("click", ".CRButtonGoBag", function(){
+			
+			if("${sessionScope.loginuser.userid}" != ""){
+			
+				var form = document.createElement("form"); //태그 만들기 createElement
+	
+		        form.setAttribute("method", "post");  //태그 method속성 주기 => Post 방식
+	
+		        form.setAttribute("action", "<%= ctxPath%>/yjs.cos/yjs_ShoppingBagPage.go"); //태그 action속성 주기 => 요청 보낼 주소
+	
+		       
+		        var hidden1 = document.createElement("input"); //인풋태그 생성
+	
+		        hidden1.setAttribute("type", "hidden"); //태그 type속성 주기
+	
+		        hidden1.setAttribute("name", "courseCode"); //태그 name속성 주기
+	
+		        hidden1.setAttribute("value", $(this).val()); //태그 value속성 주기
+	
+		        form.appendChild(hidden1); //form 변수(그러니까 form태그)의 자식(child)으로 hidden1을 붙여준다
+				 
+		         
+		        var hidden2 = document.createElement("input"); 
+	
+		        hidden2.setAttribute("type", "hidden");
+	
+		        hidden2.setAttribute("name", "userid");
+	
+		        hidden2.setAttribute("value", "${sessionScope.loginuser.userid}");
+	
+		        form.appendChild(hidden2);
+		       
+		         
+				document.body.appendChild(form); //body태그의 자식으로 form 태그 붙여주기
+	
+		        form.submit(); //submit함수로 form전송
+				
+		        
+		        
+			}
+			else {
+				alert("로그인이 필요한 서비스 입니다!");
+			} 
+			
+		});
+		/* 장바구니 끝 */
+		
+		
 	}); // end of $(document).ready(function(){}) -------------------------
 
 	// function declaration
@@ -534,21 +589,10 @@ String ctxPath = request.getContextPath();
 			
 		} // end of for ------------------------------------------
 		
-	} // end of function fun_allCheck(bool) ----------------------
+	}
 	/* 체크박스 전체선택 또는 전체 해제 끝 */ 
+
 	
-	 function test() {
-		 $("input[name=CRHeartCheckName]:checked").each(function(){
-				/* var cccchecked = $(this).val();
-				alert(cccchecked); */
-
-				if(!flag) {
-
-					test();
-				}
-		}) 
-	};
-		
 	
 </script>
 
