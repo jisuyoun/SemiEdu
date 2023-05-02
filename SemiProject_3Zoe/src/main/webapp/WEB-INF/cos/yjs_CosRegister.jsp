@@ -579,7 +579,7 @@ String ctxPath = request.getContextPath();
 			
 			if("${sessionScope.loginuser.userid}" != ""){
 			
-				var form = document.createElement("formPay"); //태그 만들기 createElement
+				var form = document.createElement("form"); //태그 만들기 createElement
 	
 		        form.setAttribute("method", "post");  //태그 method속성 주기 => Post 방식
 	
@@ -608,7 +608,7 @@ String ctxPath = request.getContextPath();
 		        form.appendChild(hidden2);
 		       
 		         
-				document.body.appendChild(formPay); //body태그의 자식으로 form 태그 붙여주기
+				document.body.appendChild(form); //body태그의 자식으로 form 태그 붙여주기
 	
 		        form.submit(); //submit함수로 form전송
 				
