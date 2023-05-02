@@ -104,7 +104,7 @@
 				url:"<%= ctxPath%>/yjs.cos/yjs_TotalPriceJSON.go",
 				type:"POST",
 				data:{
-					"courseCode":checkPriceJoin
+					"checkPriceJoin":checkPriceJoin
 				},  
 				dataType:"JSON",
 				success:function(json){
@@ -148,12 +148,13 @@
 			});
 
 			var delCheckboxJoin = delCheckboxArr.join();
+			
 			if(confirm("정말로 삭제하시겠습니까?")){
 				$.ajax({
 					url:"<%= ctxPath%>/yjs.cos/yjs_BagSelectDeleteJSON.go",
 					type:"POST",
 					data: {
-						"courseCode":delCheckboxJoin,
+						"delCheckboxJoin":delCheckboxJoin,
 						"userid":"${sessionScope.loginuser.userid}"
 					},
 					dataType:"json",

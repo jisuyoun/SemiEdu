@@ -42,7 +42,7 @@ public interface InterCosDAO {
 	List<CosVO> SelectPrice(Map<String, Object> paraMap) throws SQLException;
 
 	// 장바구니에 체크된 강의 선택삭제하기 메소드 생성하기
-	int BagSelectDelete(Map<String, String> paraMap) throws SQLException;
+	int BagSelectDelete(Map<String, Object> paraMap) throws SQLException;
 
 	// 장바구니에 있는 모든 강의 삭제하기 메소드 생성하기
 	int BagAllDelete(String userid) throws SQLException;
