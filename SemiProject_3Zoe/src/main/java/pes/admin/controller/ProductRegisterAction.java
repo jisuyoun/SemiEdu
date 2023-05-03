@@ -47,7 +47,7 @@ public class ProductRegisterAction extends AbstractController {
 				
 				// 1. 첨부되어진 파일이 디스크에 업로드 될 경로
 				ServletContext svlCtx = session.getServletContext();
-				String uploadFileDir = svlCtx.getRealPath("/yjs.images"); 
+				String uploadFileDir = svlCtx.getRealPath("/images"); 
 				
 				System.out.println("=== 첨부되어지는 이미지 파일이 올라가는 절대경로 uploadFileDir ==> " + uploadFileDir);
 				// === 첨부되어지는 이미지 파일이 올라가는 절대경로 uploadFileDir ==> C:\NCS\workspace(jsp)\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\MyMVC\images

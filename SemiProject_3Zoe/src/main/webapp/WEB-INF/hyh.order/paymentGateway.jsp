@@ -64,8 +64,8 @@ $(document).ready(function() {
            url:"<%= request.getContextPath()%>/order/orderAdd.up",
            type:"post",
            data:{"sum_totalPrice":$"{requestScope.salePrice}",
-                "sum_totalPoint":Number("${requestScope.pvo.point}") * Number($("input#spinner").val()),
-                "pnum_join":"${requestScope.pvo.pnum}",
+                //"sum_totalPoint":Number("${requestScope.pvo.point}") * Number($("input#spinner").val()),
+                "courseCode_join":"${requestScope.cvo.courseCode}",
                 "oqty_join":$("input#spinner").val(),
                 "totalPrice_join":sum_totalPrice
                 },

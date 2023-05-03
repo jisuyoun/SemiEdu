@@ -31,6 +31,7 @@ public class PurchaseEndAction extends AbstractController {
 		System.out.println(mobile);
 		
 		request.setAttribute("courseName", courseName);
+		request.setAttribute("courseCode", courseCode);
 		request.setAttribute("salePrice", salePrice);
 		request.setAttribute("email", email);
 		request.setAttribute("name", name);
