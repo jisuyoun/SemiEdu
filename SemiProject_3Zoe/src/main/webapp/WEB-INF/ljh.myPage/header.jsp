@@ -4,7 +4,7 @@
     
 <%
     String ctxPath = request.getContextPath();
-    //    /MyMVC
+
 %>   
 
 
