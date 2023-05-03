@@ -15,25 +15,25 @@ import cos.model.CosDAO;
 import cos.model.CosVO;
 import cos.model.InterCosDAO;
 
-public class CosDisplayJSONAction extends AbstractController {
+public class CosSortDisplayJSONAction extends AbstractController {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-		String ClickData = request.getParameter("ClickData");
 		
-		// System.out.println("확인용"+ClickData);
+		String sort = request.getParameter("sort");
+		String courseCode = request.getParameter("courseCode");
+		// System.out.println(sort);
 		
 		InterCosDAO cdao = new CosDAO();
 		
 		Map<String, String> paraMap = new HashMap<>();
-		paraMap.put("ClickData", ClickData); 
-
+		paraMap.put("sort", sort);
+		paraMap.put("courseCode", courseCode);
 		
-		List<CosVO> cosList = cdao.selectBySpecName(paraMap);
+		List<CosVO> cosList = cdao.SortDisplay(paraMap);
 		
 		JSONArray jsonArr = new JSONArray(); // 위와 같이 표현하기 위해서는 JSONArray 를 사용해주어야 한다.
-			
+		
 		if(cosList.size() > 0){
 			// DB에서 조회해온 결과물이 있을 경우를 뜻한다.
 			
@@ -71,7 +71,7 @@ public class CosDisplayJSONAction extends AbstractController {
 		
         super.setRedirect(false);
         super.setViewPage("/WEB-INF/jsonview.jsp");
-	
+		
 	}
 
 }

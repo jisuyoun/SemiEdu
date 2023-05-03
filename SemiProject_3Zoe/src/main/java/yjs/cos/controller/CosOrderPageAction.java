@@ -26,8 +26,8 @@ public class CosOrderPageAction extends AbstractController {
 		
 		CosVO cvo = cdao.selectOneProductByCourseCode(courseCode);
 		
-		Map<String, String> paraMap = new HashMap<>();
-		paraMap.put("fk_categoryCode", fk_categoryCode);
+		// Map<String, String> paraMap = new HashMap<>();
+		// paraMap.put("fk_categoryCode", fk_categoryCode);
 		// paraMap.put("fk_categoryCode", fk_categoryCode);
 		
 		// List<CosVO> cvoList = cdao.RecommendCos(paraMap);

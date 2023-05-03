@@ -2,45 +2,65 @@
 
 
 /* 최상단메뉴바 시작 */
-h1#CRMainName {
-	background-image: url("../images/barbackground.png");
-	font-size: 50pt; 
-	font-weight: bold; 
-	text-align: center;
-	color: white;
-	height: 206px;
-	padding: 61px 0;
-}
+div.es_bar {
+	    width: 100%;
+	    height: 200px;
+	    background-size: contain;
+	    top: 0;
+	    left: 0;
+	}
+	
+	#page_title {
+	    position: relative;
+	    font-size: 40pt;
+	    top: -140px;
+	    color: #fff;
+	    text-align: center;
+	    font-weight: bold;
+	}
 
-div#CRMainMenu {
-	position: relative;
-	float: right;
-	top: -64px;
-}
+	.es_dropbtn {
+		position: relative;
+	    color: white;
+	    font-size: 14px;
+	    border: none;
+	    cursor: pointer; 
+	    top: -130px;
+	    left: 1300px;
+	    background-color: inherit;
+	}
+	
+	.es_dropdown {
+	    position: relative;
+	    display: inline-block;
+	   
+	}
+	
+	.es_dropdown-content {
+	    display: none;
+	    position: absolute;
+	    background-color: white;
+	    border-radius: 10px;
+	    margin-top: 10px; 
+	    min-width: 120px;
+	    overflow: auto;
+	    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	    border: solid 1px #ddd;
+	    font-size: 12pt;
+	}
+	
+	.es_dropdown-content a {
+	    color: gray;
+	    padding: 5px 2px;
+	    text-decoration: none;
+	    display: block;
+	}
 
-a#CRLine {
-	margin: 0 30px 0 10px;
-	color: white;
-}
+	.es_dropdown-content a:hover {
+		color: #1BCEB8;
+	} 
 
-button#dropdownMenuButton {
-	background: none;
-	border: none;
-	margin-right: 300px;
-	font-size: 16pt;
-}
-
-button#dropdownbtn {
-	clear: both;
-	float: left;
-   	margin-left: 151px;
-   	background-color: white;
-   	color: black;
-   	border: solid 1px lightgray;
-   	width: 140px;
-	padding-left: 76px;
-	text-align: left;
-}
+	.show {display: block;}
 /* 최상단메뉴바 끝 */
 
 
@@ -238,64 +258,30 @@ span#CRCosIntroduceSix{
 
 
 
-/* 검색창 시작 */
-.CRSearchBox {
+/* 정렬 시작 */
+select#dropdown {
+	width: 175px;
+	height: 46px;
+	background-size:20px;
+	padding: 5px 30px 5px 10px;
+	border-radius: 4px;
+	outline: 0 none;
 	position: relative;
-	top: 16px;
-	float: right;
+	top: 637px;
+	right: 544px;
 	display: none;
-	width: 250px;
-	transform: translate(-50%, -50%);
-	height: 50px;
-	padding: 10px;
 }
-
-.CRSearchTxt {
-	float: left;
-	padding: 2px;
-	border-width: 1px 0 1px 1px;
-	outline: none;
-	font-size: 15px;
-	line-height: 40px;
-	border-radius: 0;
-	height:40px;
-	position: relative;
-	top: -36px;
-	left: 13px;
-	width: 176px;
-	margin: 0;
-}
-
-.CRSearchBtn {
-	float: right;
-	width: 40px;
-	height: 42px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	border-width: 1px 1px 1px 0;
-	border-color: #f1f1f1;
-	position: relative;
-	top: -37px;
-	right: 3px;
-}
-
-select#CRSearchSelect {
-	position: relative;
-	right: 110px;
-	top: 3px;
-	height: 40px;
-	width: 100px;
-	border-color: #f1f1f1;	
-}
-/* 검색창 끝 */
+/* 정렬 끝 */
 
 /* 전체선택 시작 */
 div#CRDeleteAll {
-	position: absolute!important;
+	/* position: absolute!important;
+	margin: 4px 313px!important; */
 	z-index: 99!important;
-	margin: 4px 313px!important;
 	font-size: 15pt;
+	position: relative;
+	top: 666px;
+	right: 542px;
 }
 
 label.CRDeleteCheckBox {
@@ -309,6 +295,7 @@ input#CRDeleteAll {
 	top: 0!important;
 }
 /* 전체선택 끝 */			
+			
 			
 /* 상품 리스트 나오는 곳 시작 시작 */
 input.CRDeleteCheckBox {
@@ -336,7 +323,7 @@ i.heartGroup {
 .CRSildeMenu {
 	margin: 107px 100px;
 	display: none;
-	margin-top: 80px;
+	margin-top: 686px;
 }
 
 .CRCosList {
@@ -380,10 +367,9 @@ div.CRDate {
 
 div.CRLastListPosition {
 	display: inline-block;
-	width: 147px;
-	padding: 0;
+	width: 192px;
 	position: relative;
-	top: -21px;
+	top: -34px;
 	
 }
 
@@ -399,11 +385,17 @@ div.CRCosSalePrice {
 	color: #1bceb8;
 }
 
+div.CRCosPoint {
+	font-size: 15pt;
+	
+}
+
 div.CRButton {
 	float: right;
 	position: relative;
-	top: -97px;
-	left: 214px;
+	top: 73px;
+	left: -15px;
+	width: 194px;
 }
 
 button.CRButtonGoBag {

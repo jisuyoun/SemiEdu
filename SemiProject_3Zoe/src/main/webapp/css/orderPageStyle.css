@@ -5,36 +5,68 @@
 	z-index: 99;
 } */
 
-/* 최상단 메뉴바 시작 */
-h1#OPMainName  {
-	background-image: url("../images/barbackground.png");
-	font-size: 50pt; 
-	font-weight: bold; 
-	text-align: center;
-	color: white;
-	height: 206px;
-	padding: 61px 0;
+/* 최상단메뉴바 시작 */
+div.es_bar {
+    width: 100%;
+    height: 200px;
+    background-size: contain;
+    top: 0;
+    left: 0;
 }
 
-div#OPMenu {
-    float: right;
+#page_title {
     position: relative;
-    top: -57px;
+    font-size: 40pt;
+    top: -140px;
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
 }
 
-a#OPLine {
-	font-size:15pt; 
-	color:#ffffff; 
-	margin-left: 18px;
+.es_dropbtn {
+	position: relative;
+    color: white;
+    font-size: 14px;
+    border: none;
+    cursor: pointer; 
+    top: -130px;
+    left: 1300px;
+    background-color: inherit;
 }
 
-button#dropdownMenuButton {
-	background: none;
-	border: none;
-	margin-right: 300px;
-	font-size: 16pt;
+.es_dropdown {
+    position: relative;
+    display: inline-block;
+   
 }
-/* 최상단 메뉴바 끝 */
+
+.es_dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border-radius: 10px;
+    margin-top: 10px; 
+    min-width: 120px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border: solid 1px #ddd;
+    font-size: 12pt;
+}
+
+.es_dropdown-content a {
+    color: gray;
+    padding: 5px 2px;
+    text-decoration: none;
+    display: block;
+}
+
+.es_dropdown-content a:hover {
+	color: #1BCEB8;
+} 
+
+.show {display: block;}
+/* 최상단메뉴바 끝 */
+
 
 
 
@@ -244,10 +276,21 @@ div#OPCardPos {
     flex-wrap: wrap;
 }
 
-div.OPCardContainer {
-	width: 276px;
+div.OPFirstCardContainer {
+	width: 266px;
 	position: relative;
-    margin-right: 30px;
+	margin: 0 11px;
+}
+
+div.OPCardContainer {
+	width: 266px;
+	position: relative;
+    margin-right: 11px;
+}
+
+div.OPLastCardContainer {
+	width: 266px;
+	position: relative;
 }
 
 div.OPTitelBox {
@@ -255,6 +298,11 @@ div.OPTitelBox {
     padding: 30px 30px 35px;
     box-sizing: border-box;
     border: 1px solid #dddddd;
+}
+
+img.OPImgClass {
+	width: 268px;
+	height: 205px;
 }
 /* 연관된 강의 끝 */
 
@@ -343,7 +391,7 @@ div#OPCosReview {
 
 h4#OPCosReviewTitle {
 	font-weight: bold; 
-	margin: 32px 0 25px 11px;
+	margin: 113px 0 25px 11px;
 }
 
 i.OPUserIcon {
@@ -358,6 +406,10 @@ a.OPReviewWritingDay {
 }
 
 div.OPCosReviewStar {
+	margin-bottom: 20px;
+}
+
+div.OPCosReviewContent {
 	margin-bottom: 20px;
 }
 

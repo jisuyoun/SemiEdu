@@ -24,6 +24,47 @@
 		let sumTotalSalePrice = 0; // 총할인가
 		let sumTotalAllPrice = 0;  // 총계산금액
 		
+		
+		<%-- 상단 title dropdown content 시작 --%>
+		function myFunction() {
+		  document.getElementById("myDropdown").classList.toggle("show");
+		}
+		
+		// Close the dropdown if the user clicks outside of it
+		window.onclick = function(event) {
+		  if (!event.target.matches('.es_dropbtn')) {
+		    var dropdowns = document.getElementsByClassName("es_dropdown-content");
+		    var i;
+		    for (i = 0; i < dropdowns.length; i++) {
+		      var openDropdown = dropdowns[i];
+		      if (openDropdown.classList.contains('show')) {
+		        openDropdown.classList.remove('show');
+		      }
+		    }
+		  }
+		}
+		
+		
+		function myFunction2() {
+			  document.getElementById("myDropdown2").classList.toggle("show");
+			}
+			
+			// Close the dropdown if the user clicks outside of it
+			window.onclick = function(event) {
+			  if (!event.target.matches('.es_dropbtn')) {
+			    var dropdowns = document.getElementsByClassName("es_dropdown-content");
+			    var i;
+			    for (i = 0; i < dropdowns.length; i++) {
+			      var openDropdown = dropdowns[i];
+			      if (openDropdown.classList.contains('show')) {
+			        openDropdown.classList.remove('show');
+			      }
+			    }
+			  }
+			}
+		<%-- 상단 title dropdown content 끝 --%>	
+			
+		
 		/* 리스트 불러오기 시작 */
 		
 		$.ajax({
@@ -159,6 +200,7 @@
 					},
 					dataType:"json",
 					success:function(json){
+						alert("삭제가 완료되었습니다.");
 						javascript:history.go(0);
 					},
 					error: function(request, status, error){
@@ -185,6 +227,7 @@
 					},
 					dataType:"json",
 					success:function(json){
+						alert("삭제가 완료되었습니다.");
 						javascript:history.go(0);
 					},
 					error: function(request, status, error){
@@ -201,7 +244,31 @@
 	
 </script>
 
-	<h1 class="mainName container-fluid">장바구니</h1>
+	<%-- 최상단메뉴바 시작 --%>
+	<div class="es_bar">
+		<img class="bar" src="<%= ctxPath %>/images/bar배경.png" style="width: 100%; height: 200px;"/>
+		<h2 id="page_title">장바구니</h2>
+
+		<button onclick= "location.href='<%= ctxPath%>/index.go'" class="es_dropbtn"><i class="fa-solid fa-house" style="color: #ffffff; font-size: 16pt; margin: 0 10px;"></i>|</button>
+
+	    <button onclick="myFunction()" class="es_dropbtn" style="color:#ffffff; font-size: 14pt;"> 고객센터 <i class="fa-solid fa-circle-chevron-down" style="color: #ffffff; margin: 0 10px;"></i>|
+		    <div id="myDropdown" class="es_dropdown-content">
+		       <a href="#">수강신청</a>
+		       <a href="<%= ctxPath%>/pes.customerService/noticeList.go">고객센터</a>
+		    </div>
+	    </button>
+	    
+	    <button onclick="myFunction2()" class="es_dropbtn" style="color:#ffffff; font-size: 14pt;"> 공지사항 <i class="fa-solid fa-circle-chevron-down" style="color: #ffffff; margin: 0 10px;"></i>|
+		    <div id="myDropdown2" class="es_dropdown-content">
+		       <a href="<%= ctxPath%>/pes.customerService/noticeList.go">공지사항</a>
+		       <a href="<%= ctxPath%>/pes.customerService/question.go">자주하는질문</a>
+		       <a href="#">수강후기</a>
+		       <a href="#">이벤트</a>
+		    </div>
+	    </button>
+
+	</div>	
+<%-- 최상단메뉴바 끝 --%>
 
 	<%-- 장바구니 리스트 시작 --%>
 	<div class="container">
