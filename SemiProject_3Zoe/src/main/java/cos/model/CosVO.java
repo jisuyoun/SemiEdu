@@ -13,6 +13,14 @@ public class CosVO {
 	private String courseList;		  // 강의목차
 	private String img1;			  // 강의썸네일
 	private String img2;			  // 강의소개이미지
+	public int getPoint() {
+		return point;
+	}
+
+	public void setPoint(int point) {
+		this.point = point;
+	}
+
 	private int point;			// 강의 포인트
 	
 	private ImgVO ivo;			  // 이미지vo
