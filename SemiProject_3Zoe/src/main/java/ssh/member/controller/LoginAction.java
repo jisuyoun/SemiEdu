@@ -59,6 +59,7 @@ public class LoginAction extends AbstractController {
 				return; // 메소드종료 
 				
 			}
+
 			
 			// 로그인 성공 시 
 			// System.out.println(">>> 확인용 로그인한 사용자명 : " + loginuser.getName());
@@ -87,6 +88,16 @@ public class LoginAction extends AbstractController {
 				}
 			
 			
+		}
+		else {
+			String message = "로그인 실패!! 아이디, 비밀번호를 확인하세요!!";
+			String loc = "javascript:history.back()";
+			
+			request.setAttribute("message", message);
+			request.setAttribute("loc", loc);
+			
+			super.setRedirect(false);
+			super.setViewPage("/WEB-INF/msg.jsp");
 		}
 		
 	  }	
