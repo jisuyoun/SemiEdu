@@ -7,13 +7,13 @@ import java.util.Map;
 import member.model.MemberVO;
 
 public interface InterCosDAO {
-	/*
-	 * // 강의 리스트 페이지에서 필요한 정보 불러오는 메소드 생성하기 List<CosVO> searchCosList() throws
-	 * SQLException;
-	 */
+	
 	// 강의 리스트 불러오기 메소드 생성하기
 	List<CosVO> selectBySpecName(Map<String, String> paraMap) throws SQLException;
 
+	// 선택된 정렬로 만드는 메소드 생성하기
+	List<CosVO> SortDisplay(Map<String, String> paraMap) throws SQLException;
+	
 	// 강의삭제하기에서 체크된 강의들 삭제하는 메소드 생성하기
 	int delectCos(Map<String, Object> paraMap) throws SQLException;
 
@@ -55,6 +55,11 @@ public interface InterCosDAO {
 
 	// 강의 검색하기 메소드 생성하기
 	List<CosVO> searchCos(Map<String, String> paraMap) throws SQLException;
+
+	// 리뷰 불러오기 메소드 생성하기
+	List<YJS_ReviewVO> ReviewShow(Map<String, String> paraMap) throws SQLException;
+
+	
 
 	
 

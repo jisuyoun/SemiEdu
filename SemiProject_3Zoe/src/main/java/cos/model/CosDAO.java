@@ -1,18 +1,21 @@
 package cos.model;
 
+import java.io.UnsupportedEncodingException;
+import java.security.GeneralSecurityException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-
-import member.model.MemberVO;
 
 
 
@@ -57,37 +60,6 @@ public class CosDAO implements InterCosDAO {
 				e.printStackTrace();
 			}
 		}
-	
-		/*
-		 * // 강의 리스트 페이지에서 필요한 정보 불러오는 메소드 생성하기
-		 * 
-		 * @Override public List<CosVO> searchCosList() throws SQLException {
-		 * 
-		 * List<CosVO> cvoList = new ArrayList<>();
-		 * 
-		 * try {
-		 * 
-		 * conn = ds.getConnection();
-		 * 
-		 * String sql = " select courseCode " + " from tbl_course ";
-		 * 
-		 * pstmt = conn.prepareStatement(sql);
-		 * 
-		 * rs = pstmt.executeQuery();
-		 * 
-		 * while(rs.next()) {
-		 * 
-		 * CosVO cvo = new CosVO();
-		 * 
-		 * cvo.setCourseCode(rs.getString(1));
-		 * 
-		 * cvoList.add(cvo); }
-		 * 
-		 * } finally { close(); }
-		 * 
-		 * return cvoList; }
-		 */
-		
 		
 		
 	// 강의 리스트 불러오기 메소드 생성하기
@@ -105,7 +77,7 @@ public class CosDAO implements InterCosDAO {
 			
 			// System.out.println("확인용 " + paraMap.get("ClickData"));
 			
-			String sql = " select courseCode, fk_categoryCode, coursename, price, saleprice, courseterm, teacher, img1, img2 "
+			String sql = " select courseCode, fk_categoryCode, coursename, price, saleprice, courseterm, teacher, img1, img2, point "
 					   + " from tbl_course "
 					   + " where fk_categorycode = ? ";
 			
@@ -128,6 +100,7 @@ public class CosDAO implements InterCosDAO {
 				cvo.setTeacher(rs.getString(7)); 		 // 강사명
 				cvo.setImg1(rs.getString(8));		    // 강의썸네일
 				cvo.setImg2(rs.getString(9));		    // 강의소개메인이미지 
+				cvo.setPoint(rs.getInt(10));         // 포인트
 				
 				cosList.add(cvo);
 	            
@@ -142,6 +115,76 @@ public class CosDAO implements InterCosDAO {
 		return cosList;
 	}
 
+	
+	
+	// 선택된 정렬로 만드는 메소드 생성하기
+	@Override
+	public List<CosVO> SortDisplay(Map<String, String> paraMap) throws SQLException {
+		
+		List<CosVO> cosList = new ArrayList<>();
+		
+		CosVO cvo = null;
+		
+		String sort = paraMap.get("sort");
+		
+		// System.out.println("dao에 위치한 : "+sort);
+		
+		try {
+			conn = ds.getConnection();
+			
+			String sql = " select courseCode, fk_categoryCode, coursename, price, saleprice, courseterm, teacher, img1, img2, point "
+					   + " from tbl_course "
+					   + " where fk_categorycode = ? ";
+			
+			if("1".equals(sort)) {
+				sql += " order by price asc ";
+			}
+			else if("2".equals(sort)) {
+				sql += " order by price desc ";
+			}
+			else if("3".equals(sort)) {
+				sql += " order by courseterm desc ";
+			}
+			else if("4".equals(sort)) {
+				sql += " order by point desc ";
+			}
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, paraMap.get("courseCode"));
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				cvo = new CosVO();
+				
+				cvo.setCourseCode(rs.getString(1));		// 강의코드
+				cvo.setFk_categoryCode(rs.getString(2)); // 카테고리코드
+				cvo.setCourseName(rs.getString(3));      // 강의명
+				cvo.setPrice(rs.getInt(4)); 		 	 // 가격
+				cvo.setSalePrice(rs.getInt(5));  		 // 할인가
+				cvo.setCourseTerm(rs.getInt(6)); 		 // 강의기간
+				cvo.setTeacher(rs.getString(7)); 		 // 강사명
+				cvo.setImg1(rs.getString(8));		    // 강의썸네일
+				cvo.setImg2(rs.getString(9));		    // 강의소개메인이미지 
+				cvo.setPoint(rs.getInt(10));         // 포인트
+				
+				cosList.add(cvo);
+	            
+			} // end of while --------------------------------------------------------------------------------
+			
+			// System.out.println("확인용" + cosList.size());
+			
+		} finally {
+			close();
+		}
+		
+		return cosList;
+		
+	} // end of public CosVO SortDisplay(String sort) throws SQLException {} -------------------------------
+		
+	
 	
 	// 강의삭제하기에서 체크된 강의들 삭제하는 메소드 구현하기
 	@Override
@@ -449,16 +492,17 @@ public class CosDAO implements InterCosDAO {
 			
 			String sql = " select * "
 					   + " from tbl_shoppingbag "
-					   + " where fk_courseCode = ? ";
+					   + " where fk_courseCode = ? and fk_userid = ? ";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, paraMap.get("courseCode"));
+			pstmt.setString(2, paraMap.get("userid"));
 			
 			rs = pstmt.executeQuery();
 			
 			if(!rs.next()) {
 				sql = " insert into tbl_shoppingbag(shoppingbagNum, fk_userid, fk_courseCode) "
-					 + " values(seq_shoppingbag_shoppingbagNum.nextval, ?, ?) ";
+					+ " values(seq_shoppingbag_shoppingbagNum.nextval, ?, ?) ";
 				
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, paraMap.get("userid"));
@@ -673,11 +717,107 @@ public class CosDAO implements InterCosDAO {
 		return imgList;
 	}
 
+	
+	// 검색하기 기능
 	@Override
 	public List<CosVO> searchCos(Map<String, String> paraMap) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		List<CosVO> cosList = new ArrayList<>();
+		
+		String search = paraMap.get("search");
+		String keyWord = paraMap.get("keyWord");
+		
+		try {
+			
+			conn = ds.getConnection();
+			
+			String sql = " select courseCode, fk_categoryCode, coursename, price, saleprice, courseterm, teacher, img1 "
+					   + " from tbl_course ";
+			
+			if(search != null && !search.trim().isEmpty()) {
+				sql += " where " + keyWord + " like '%'|| ? || '%' ";
+				// colname 이 ?가 되지 않는 이유는 컬럼명과 테이블명은 위치홀더로 사용이 불가하기 때문이다.
+				// 위치홀더로 들어오는 것은 오로지 컬럼명과 테이블명이 아닌 데이터값이다.
+				
+			}
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			if(search != null && !search.trim().isEmpty()) {
+				pstmt.setString(1, search);
+			}
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				CosVO cvo = new CosVO();
+				
+				cvo.setCourseCode(rs.getString(1));
+				cvo.setFk_categoryCode(rs.getString(2));
+				cvo.setCourseName(rs.getString(3));
+				cvo.setPrice(rs.getInt(4));
+				cvo.setSalePrice(rs.getInt(5));
+				cvo.setCourseTerm(rs.getInt(6));
+				cvo.setTeacher(rs.getString(7));
+				cvo.setImg1(rs.getString(8));
+							
+				cosList.add(cvo);
+				
+			} // end of while(rs.next()) {}  -----------------------------------------------------------------------
+		
+		} finally {
+			close();
+		}
+		
+		return cosList;
 	}
+
+	
+	// 리뷰 불러오기 메소드 생성하기
+	@Override
+	public List<YJS_ReviewVO> ReviewShow(Map<String, String> paraMap) throws SQLException {
+		
+		List<YJS_ReviewVO> revoList = new ArrayList<>();
+		
+		YJS_ReviewVO rvo = null;
+		
+		try {
+			conn = ds.getConnection();
+			
+			String sql = " select fk_userid, reviewTitle, review, reviewPoint, writeDay "
+					   + " from tbl_reviewBoard "
+					   + " where fk_courseCode = ? ";
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, paraMap.get("courseCode"));
+
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				rvo = new YJS_ReviewVO();
+				
+				rvo.setFk_userid(rs.getString(1));
+				rvo.setReviewTitle(rs.getString(2));
+				rvo.setReview(rs.getString(3));
+				rvo.setReviewPoint(rs.getInt(4));
+				rvo.setWriteDay(rs.getString(5));
+				
+				revoList.add(rvo);
+	            
+			} // end of while --------------------------------------------------------------------------------
+			
+			// System.out.println("확인용" + cosList.size());
+			
+		} finally {
+			close();
+		}
+		
+		return revoList;
+	}
+	
 	
 
 	

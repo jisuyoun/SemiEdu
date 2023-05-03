@@ -19,7 +19,46 @@
 
 	$(document).ready(function(){
 		
-		alert(sessionStorage.getItem("checked"));
+		<%-- 상단 title dropdown content 시작 --%>
+		function myFunction() {
+		  document.getElementById("myDropdown").classList.toggle("show");
+		}
+		
+		// Close the dropdown if the user clicks outside of it
+		window.onclick = function(event) {
+		  if (!event.target.matches('.es_dropbtn')) {
+		    var dropdowns = document.getElementsByClassName("es_dropdown-content");
+		    var i;
+		    for (i = 0; i < dropdowns.length; i++) {
+		      var openDropdown = dropdowns[i];
+		      if (openDropdown.classList.contains('show')) {
+		        openDropdown.classList.remove('show');
+		      }
+		    }
+		  }
+		}
+		
+		
+		function myFunction2() {
+			  document.getElementById("myDropdown2").classList.toggle("show");
+			}
+			
+			// Close the dropdown if the user clicks outside of it
+			window.onclick = function(event) {
+			  if (!event.target.matches('.es_dropbtn')) {
+			    var dropdowns = document.getElementsByClassName("es_dropdown-content");
+			    var i;
+			    for (i = 0; i < dropdowns.length; i++) {
+			      var openDropdown = dropdowns[i];
+			      if (openDropdown.classList.contains('show')) {
+			        openDropdown.classList.remove('show');
+			      }
+			    }
+			  }
+			}
+		<%-- 상단 title dropdown content 끝 --%>	
+			
+		
 		<%-- 추가이미지 불러오기 시작 --%>
 		$.ajax({
 			url:"<%= request.getContextPath()%>/yjs.cos/yjs_PlusImgJSON.go",
@@ -50,7 +89,7 @@
 		
 		
 	
-		<%-- 연관있는 강의들 불러오기 시작 --%>
+		<%-- 비슷한 강의 추천 불러오기 시작 --%>
 		$.ajax({
 			url:"<%= request.getContextPath()%>/yjs.cos/yjs_CosRecommendJSON.go",
 			type:"POST",
@@ -62,23 +101,65 @@
 				
 				let html = "";
 				
+				let cnt = 1;
+				
 				if (json.length > 0) {
+					
 					$.each(json, function(index, item){
 						
 						if("${requestScope.cvo.courseCode}" != item.courseCode) {
 							
-							html += "<div class='OPCardContainer'>"
-								 + "	<a href='<%=request.getContextPath()%>/yjs.cos/yjs_OrderPage.go?courseCode="+item.courseCode+"&fk_categoryCode="+item.fk_categoryCode+"' style='color:black;'>"
-								 + "		<div class='OPImgBox' value='" + item.courseCode + "'>"
-								 + "			<img src='<%= request.getContextPath()%>/yjs.images/" + item.img1 + "' alt='Card image' style='width:100%'>"
-								 + " 		</div>"
-								 + "		<div class='OPTitelBox' style='height: 110px;'>"
-								 + "			<h5 class='card-title'>" + item.courseName + "</h5>"
-								 + "		</div>"
-								 + "	</a>"
-								 + "</div>";
-						
-		                
+							if(cnt == 1) {
+								
+								html += "<div class='OPFirstCardContainer'>"
+									 + "	<a href='<%=request.getContextPath()%>/yjs.cos/yjs_OrderPage.go?courseCode="+item.courseCode+"&fk_categoryCode="+item.fk_categoryCode+"' style='color:black;'>"
+									 + "		<div class='OPImgBox' value='" + item.courseCode + "'>"
+									 + "			<img src='<%= request.getContextPath()%>/yjs.images/" + item.img1 + "' alt='이미지 로딩중' class='OPImgClass'>"
+									 + " 		</div>"
+									 + "		<div class='OPTitelBox' style='height: 110px;'>"
+									 + "			<h5 class='card-title'>" + item.courseName + "</h5>"
+									 + "		</div>"
+									 + "	</a>"
+									 + "</div>";
+									 
+								cnt++;
+							}
+							
+							else if(cnt < 4) {
+								
+								html += "<div class='OPCardContainer'>"
+									 + "	<a href='<%=request.getContextPath()%>/yjs.cos/yjs_OrderPage.go?courseCode="+item.courseCode+"&fk_categoryCode="+item.fk_categoryCode+"' style='color:black;'>"
+									 + "		<div class='OPImgBox' value='" + item.courseCode + "'>"
+									 + "			<img src='<%= request.getContextPath()%>/yjs.images/" + item.img1 + "' alt='이미지 로딩중' class='OPImgClass'>"
+									 + " 		</div>"
+									 + "		<div class='OPTitelBox' style='height: 110px;'>"
+									 + "			<h5 class='card-title'>" + item.courseName + "</h5>"
+									 + "		</div>"
+									 + "	</a>"
+									 + "</div>";
+								
+								cnt++;
+							}
+							
+							else if(cnt == 4) {
+								
+								html += "<div class='OPLastCardContainer'>"
+									 + "	<a href='<%=request.getContextPath()%>/yjs.cos/yjs_OrderPage.go?courseCode="+item.courseCode+"&fk_categoryCode="+item.fk_categoryCode+"' style='color:black;'>"
+									 + "		<div class='OPImgBox' value='" + item.courseCode + "'>"
+									 + "			<img src='<%= request.getContextPath()%>/yjs.images/" + item.img1 + "' alt='이미지 로딩중' class='OPImgClass'>"
+									 + " 		</div>"
+									 + "		<div class='OPTitelBox' style='height: 110px;'>"
+									 + "			<h5 class='card-title'>" + item.courseName + "</h5>"
+									 + "		</div>"
+									 + "	</a>"
+									 + "</div>";
+								
+								cnt++;
+							}
+							
+							else {
+								return;
+							}
 						} // end of if("${requestScope.cvo.courseCode}" != item.courseName) {}
 						
 							$("div#OPCardPos").html(html);	
@@ -96,8 +177,9 @@
 				
 			}
 		});
-		<%-- 연관있는 강의들 불러오기 끝 --%>
+		<%-- 비슷한 강의 추천 불러오기 끝 --%>
 		
+
 		
 		/* 찜한 과목인지 알아오기 시작 */
 		if("${sessionScope.loginuser.userid}" != "") {
@@ -125,11 +207,63 @@
 					
 				},
 				error: function(request, status, error){
-					alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+					alert("찜을 불러오는데 오류가 발생했습니다. 관리자에게 문의해주세요.");
 				}
 			});
 		} // end of if
 		/* 찜한 과목인지 알아오기 끝 */
+		
+		
+		/* 수강후기 시작 */
+		
+		$.ajax({
+			url:"<%= request.getContextPath()%>/yjs.cos/yjs_ReviewShowJSON.go",
+			type:"POST",
+			data:{
+				"courseCode":"${requestScope.cvo.courseCode}"
+			},
+			dataType:"json",
+			success:function(json){
+				
+				let html = "";
+				let starCnt = 0;
+				
+				$.each(json, function(index, item){
+				
+					html="";
+					starCnt = 0;
+					
+					for(var i=0; i<item.reviewPoint; i++) {
+						
+						html += "<i class='fa-solid fa-star' style='color: #1bcdb9;'></i>";
+						starCnt++;
+						
+					}
+					
+					for(var i=0; i<5-starCnt; i++) {
+						html += "<i class='fa-regular fa-star' style='color: #1bcdb9;'></i>";
+					}
+					
+					html += "	<i class='fa-regular fa-user OPUserIcon' style='color: #000000;'></i><a>"+item.fk_userid+"</a>"
+						  + "	<a class='OPReviewWritingDay'>"+item.writeDay+"</a>"
+						  + "	<div class='OPCosReviewSmallTitle'>"+item.reviewTitle+"</div>"
+						  + "	<div class='OPCosReviewHideMethod'>"
+						  + "	<div class='OPCosReviewContent'>"+item.review+"</div>"
+						  + "</div>"
+						  + "<hr style='max-width: 1196px;'/>";
+					
+					$("div#OPCosReview").append(html);
+					
+				});
+						  
+				
+			},
+			error: function(request, status, error){
+				alert("수강후기를 불러오는데 오류가 발생했습니다. 관리자에게 문의해주세요.");
+			}
+		});
+		/* 수강후기 끝 */
+		
 		
 		
 		
@@ -176,7 +310,7 @@
 	        	  $("span#menuIntro").addClass("OPFont_change");
 	        	  $("span#menuList").removeClass("OPFont_change");
 	          }
-	    	  else if ( $(window).scrollTop() >= 9368 ){
+	    	  else if ( $(window).scrollTop() >= 10000 ){
 	    		  <%-- 수강후기와 수강목차가 추가된 것을 보고 스크롤 위치 수정하기 --%>
 	    		  $("span#menuIntro").removeClass("OPFont_change");
 	    		  $("span#menuList").addClass("OPFont_change");
@@ -196,7 +330,7 @@
 	      });
 	      
 	      $("span#menuList").click(function(){
-	    	  window.scrollTo({top:9368, behavior:'smooth'});
+	    	  window.scrollTo({top:10000, behavior:'smooth'});
 	    	  
 	    	  $("span#menuIntro").removeClass("OPFont_change");
 	    	  $("span#menuList").addClass("OPFont_change");
@@ -211,7 +345,10 @@
 	    	  $("span#menuReview").addClass("OPFont_change");
 	      });
 
-	      <%-- 수강목차 --%>
+	      
+	      
+	      
+	      <%-- 수강목차 시작 --%>
 	      var coll = document.getElementsByClassName("collapsible_before");
 	      var i;
 
@@ -243,7 +380,7 @@
 	    	  }
 	    	  
 	      });
-	      
+	      <%-- 수강목차 끝 --%>
 	      
 	      
 	      $("div.OPCosReviewHideMethod").hide();
@@ -257,24 +394,6 @@
 	    	  $("div.OPCosReviewPlus").show();
 	      });
 	      
-	      
-	      /* 찜 토글 */
-	     /*  $("i#heart").click(function(){
-				if(!flag) {
-					$(this).removeClass("fa-regular fa-heart");
-					$(this).addClass("fa-solid fa-heart").css("color", "#ff0000");
-					
-					flag = true;
-				}
-				else {
-					$(this).removeClass("fa-solid fa-heart");
-					$(this).addClass("fa-regular fa-heart").css("color", "#cccccc"); 
-					flag = false;
-				}
-				
-			}); */
- 
-		 $('[data-toggle="tooltip"]').tooltip(); 
 		 /* 찜 토글 끝 */
 	     
 		 
@@ -307,7 +426,7 @@
 							
 						},
 						error: function(request, status, error){
-							alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+							alert("찜 추가에 실패했습니다. 관리자에게 문의해주세요.");
 						}
 					});
 					
@@ -338,26 +457,45 @@
 	}; // end of function shoppingGo()
 	/* 장바구니 가기 끝 */
 	
-	 
+	/* 목차 나오기 시작 */
+	function showCourseList() {
+		
+		$("button#collapsible_before").toggle();
+		
+	}
+	/* 목차 나오기 끝 */
+	
+	
 </script>
 
-	<%-- 최상단 메뉴바 시작 --%>
-	<i class="fa-solid fa-share-nodes" style="color: #ffffff;"></i>
-	<h1 id="OPMainName" class="container-fluid">${requestScope.cvo.courseName}</h1>
 	
-	<div id="OPMenu">
-		<i class="fa-solid fa-house" style="color: #ffffff; font-size:15pt;"></i>
-		<a id="OPLine">|</a>
-		
-		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		    수강신청
-		</button>
-		<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-		    <a class="dropdown-item" href="#" style="color:#00b377;">수강신청</a>
-		    <a class="dropdown-item" href="#">고객센터</a>
-		</div>			
-	</div>
-	<%-- 최상단 메뉴바 끝 --%>
+	<%-- 최상단메뉴바 시작 --%>
+	<div class="es_bar">
+		<img class="bar" src="<%= ctxPath %>/images/bar배경.png" style="width: 100%; height: 200px;"/>
+		<h2 id="page_title">수강신청</h2>
+
+		<button onclick= "location.href='<%= ctxPath%>/index.go'" class="es_dropbtn"><i class="fa-solid fa-house" style="color: #ffffff; font-size: 16pt; margin: 0 10px;"></i>|</button>
+
+	    <button onclick="myFunction()" class="es_dropbtn" style="color:#ffffff; font-size: 14pt;"> 고객센터 <i class="fa-solid fa-circle-chevron-down" style="color: #ffffff; margin: 0 10px;"></i>|
+		    <div id="myDropdown" class="es_dropdown-content">
+		       <a href="#">수강신청</a>
+		       <a href="<%= ctxPath%>/pes.customerService/noticeList.go">고객센터</a>
+		    </div>
+	    </button>
+	    
+	    <button onclick="myFunction2()" class="es_dropbtn" style="color:#ffffff; font-size: 14pt;"> 공지사항 <i class="fa-solid fa-circle-chevron-down" style="color: #ffffff; margin: 0 10px;"></i>|
+		    <div id="myDropdown2" class="es_dropdown-content">
+		       <a href="<%= ctxPath%>/pes.customerService/noticeList.go">공지사항</a>
+		       <a href="<%= ctxPath%>/pes.customerService/question.go">자주하는질문</a>
+		       <a href="#">수강후기</a>
+		       <a href="#">이벤트</a>
+		    </div>
+	    </button>
+
+	</div>	
+	<%-- 최상단메뉴바 끝 --%>
+
+
 		
 		
 	<%-- 메인 메뉴 시작 --%>	
@@ -452,7 +590,7 @@
 		
 		
 		<%-- 비슷한 강의 추천 시작 --%>
-		<div class="container">
+		<div class="container" style="max-width:1184px;">
 			<h4 style="margin:32px 0 25px 11px; font-weight: bold;">추천 강의</h4>
 		</div>
 		<div class="container" style="margin:0 300px;">
@@ -464,17 +602,17 @@
     
     	<!-- 아코디언 시작 -->
 		<div id="OPCosList" class="container">
-			<h4 id="OPCosListSubTitle">강의목차<a style="color:#00b377; font-size:13pt; margin-left: 15px;">(총 113강)</a></h4> 
+			<h4 id="OPCosListSubTitle">강의목차</h4> 
 		
 			<div id="OPOT">
-			  <p>강의 OT</p>
+				<p>강의 OT</p>
 			</div>
-			<button type="button" class="collapsible">목차</button>
+			<button type="button" id="collapsible" class="collapsible" onclick="showCourseList();">목차</button>
 			<div class="collapsibleContent">
-			  <p>1</p>
+				<p></p>
 			</div>
 			
-			<button type="button" class="collapsible_before">${requestScope.cvo.courseList}</button>
+			<button type="button" id="collapsible_before" class="collapsible_before" style="display:none;">${requestScope.cvo.courseList}</button>
 			
 		</div>
 		<!-- 아코디언 끝  -->
@@ -484,23 +622,7 @@
 			<h4 id="OPCosReviewTitle">수강후기</h4>
 			<hr style="max-width: 1196px;"/>
 			
-			<div class="OPCosReviewStar">
-				<i class="fa-solid fa-star" style="color: #1bcdb9;"></i>
-				<i class="fa-regular fa-star" style="color: #1bcdb9;"></i>
-				<i class="fa-regular fa-star" style="color: #1bcdb9;"></i>
-				<i class="fa-regular fa-star" style="color: #1bcdb9;"></i>
-				<i class="fa-regular fa-star" style="color: #1bcdb9;"></i>
-				<i class="fa-regular fa-user OPUserIcon" style="color: #000000;"></i><a>사용자이름</a>
-				<a class="OPReviewWritingDay">글쓴날짜</a>
-			</div>	
 			
-			<div class="OPCosReviewSmallTitle">수강후기제목</div>
-			<div>수강후기내용</div>
-			<div class="OPCosReviewPlus">더보기</div>
-			<div class="OPCosReviewHideMethod">
-				<div>수강후기내용자세히</div>
-				<div class="OPCosReviewHide">접기</div>
-			</div>
 		
 		</div>	
 		<%-- 수강 후기 끝 --%>

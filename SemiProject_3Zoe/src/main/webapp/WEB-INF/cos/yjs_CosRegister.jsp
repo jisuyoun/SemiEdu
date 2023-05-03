@@ -26,6 +26,46 @@ String ctxPath = request.getContextPath();
 		
 		
 		
+		<%-- 상단 title dropdown content 시작 --%>
+		function myFunction() {
+		  document.getElementById("myDropdown").classList.toggle("show");
+		}
+		
+		// Close the dropdown if the user clicks outside of it
+		window.onclick = function(event) {
+		  if (!event.target.matches('.es_dropbtn')) {
+		    var dropdowns = document.getElementsByClassName("es_dropdown-content");
+		    var i;
+		    for (i = 0; i < dropdowns.length; i++) {
+		      var openDropdown = dropdowns[i];
+		      if (openDropdown.classList.contains('show')) {
+		        openDropdown.classList.remove('show');
+		      }
+		    }
+		  }
+		}
+		
+		
+		function myFunction2() {
+			  document.getElementById("myDropdown2").classList.toggle("show");
+			}
+			
+			// Close the dropdown if the user clicks outside of it
+			window.onclick = function(event) {
+			  if (!event.target.matches('.es_dropbtn')) {
+			    var dropdowns = document.getElementsByClassName("es_dropdown-content");
+			    var i;
+			    for (i = 0; i < dropdowns.length; i++) {
+			      var openDropdown = dropdowns[i];
+			      if (openDropdown.classList.contains('show')) {
+			        openDropdown.classList.remove('show');
+			      }
+			    }
+			  }
+			}
+		<%-- 상단 title dropdown content 끝 --%>	
+			
+		
 		/* 이미지 누르면 리스트 뜨기 시작 */
 		$("div#CRButton_one").click(function(){
 			
@@ -41,8 +81,7 @@ String ctxPath = request.getContextPath();
 			$("span#CRCosIntroduceFive").html("비전공자도 IT 취업이 가능한 필수 자격증!");
 			$("span#CRCosIntroduceSix").html("고용노동부에서 공개한 구인 공고 기사 분야 1순위 자격증!");
 			
-			$("div.dropdown").css("display", "").css("both","clear");
-			$("div.CRSearchBox").show();
+			$("select#dropdown").show();
 			
 			$("img#CRChangeImgOne").show();
 			$("img#CRChangeImgTwo").hide();
@@ -53,7 +92,7 @@ String ctxPath = request.getContextPath();
 			
 			$("button#CRDeleteButton").show();
 			
-			window.scrollTo({top:1000, behavior:'smooth'});	
+			window.scrollTo({top:1500, behavior:'smooth'});	
 			
 		});
 		
@@ -75,8 +114,7 @@ String ctxPath = request.getContextPath();
 			$("span#CRCosIntroduceFive").html("데이터 분석전문가 분야 수요 증가!");
 			$("span#CRCosIntroduceSix").html("전공 상관 없이, 대학 졸업자면 모두 응시 가능!");
 			
-			$("div.dropdown").show();
-			$("div.CRSearchBox").show(); 
+			$("select#dropdown").show();
 			
 			$("img#CRChangeImgOne").hide();
 			$("img#CRChangeImgTwo").show();
@@ -85,7 +123,7 @@ String ctxPath = request.getContextPath();
 			
 			$("button#CRDeleteButton").show();
 			
-			window.scrollTo({top:800, behavior:'smooth'});
+			window.scrollTo({top:1500, behavior:'smooth'});
 
 		});
 		
@@ -107,8 +145,7 @@ String ctxPath = request.getContextPath();
 			$("span#CRCosIntroduceFive").html("산업화, 정보화, 국제화 사회에서 처리해야 하는 정보의 양 급증으로 인한 대규모 전산망 증가!");
 			$("span#CRCosIntroduceSix").html("그에 따른 인력 수요 증가!");
 			 
-			$("div.dropdown").show();
-			$("div.CRSearchBox").show();
+			$("select#dropdown").show();
 			
 			$("img#CRChangeImgOne").hide();
 			$("img#CRChangeImgTwo").hide();
@@ -117,7 +154,7 @@ String ctxPath = request.getContextPath();
 
 			$("button#CRDeleteButton").show();
 			
-			window.scrollTo({top:800, behavior:'smooth'});
+			window.scrollTo({top:1500, behavior:'smooth'});
 			
 		});
 		
@@ -139,8 +176,7 @@ String ctxPath = request.getContextPath();
 			$("span#CRCosIntroduceFive").html("패키지 강의 중 하나라도 불합격 인증 시 6개월 연장 혜택!");
 			$("span#CRCosIntroduceSix").html("    ");
 			
-			$("div.dropdown").show();
-			$("div.CRSearchBox").show(); 
+			$("select#dropdown").show();
 			
 			$("img#CRChangeImgOne").hide();
 			$("img#CRChangeImgTwo").hide();
@@ -149,7 +185,7 @@ String ctxPath = request.getContextPath();
 
 			$("button#CRDeleteButton").show();
 			
-			window.scrollTo({top:800, behavior:'smooth'});
+			window.scrollTo({top:1500, behavior:'smooth'});
 		});
 		/* 이미지 누르면 리스트 뜨기 끝 */
 			
@@ -207,16 +243,16 @@ String ctxPath = request.getContextPath();
 								let jjim_flag = false;	  
 								for(let i=0; i<jjim_arr.length; i++) {
 									if(item.courseCode == jjim_arr[i].courseCode) {
-									    html += "<label for='CRheartCheck" + index + "'><i id='heart" + index + "' class='heartGroup fa-solid fa-heart' style='color: #ff0000;' onclick='likeAdd();'></i>"
+									    html += "<label for='CRheartCheck" + index + "'><i id='heart" + index + "' class='heartGroup fa-solid fa-heart' style='color: #ff0000;'></i>"
 									          + "<input type='checkbox' id='CRheartCheck" + index + "' name='CRHeartCheckName' value='" + item.courseCode + "' style='display:none;' /></label>";
 									    jjim_flag = true;
-									    return;
+									    break;
 									}
 									
 								}// end of for---------------------
 							
 								if(!jjim_flag) {
-									html +=	"<label for='CRheartCheck" + index + "'><i id='heart" + index + "' class='heartGroup fa-regular fa-heart' style='color: #cccccc;' onclick='likeAdd();'></i>"
+									html +=	"<label for='CRheartCheck" + index + "'><i id='heart" + index + "' class='heartGroup fa-regular fa-heart' style='color: #cccccc;' ></i>"
 							             + "<input type='checkbox' id='CRheartCheck" + index + "' name='CRHeartCheckName' value='" + item.courseCode + "' style='display:none;' /></label>";
 								}
 							} 
@@ -230,18 +266,22 @@ String ctxPath = request.getContextPath();
 							  	  + "		<ul>"
 							  	  + "			<li>"
 							  	  + "				<a href ='<%= ctxPath%>/yjs.cos/yjs_OrderPage.go?courseCode="+ item.courseCode +"&fk_categoryCode="+ item.fk_categoryCode +"'><h4 class='CRCosTitleName' style='color:black'>"+item.courseName+"</h4></a>"
-							  	  + "				<h5 class='CRCosTeacher'>강사명 <a style='margin-left: 10px;'>" + item.teacher + "</a></h5>"
-							  	  + "				<div class='CRDate'>"
-							  	  + "				기간 <a style='margin-left: 28px;'>"+item.courseterm+"일</a>"
+							  	  + "				<div style='width: 197px;'>"
+							  	  + "					<h5 class='CRCosTeacher'>강사명 <a style='float: right;'>" + item.teacher + "</a></h5>"
+							  	  + "					<div class='CRDate'>"
+							  	  + "						기간 <a style='float: right;'>"+item.courseterm+"일</a>"
+							  	  + "					</div>"
+							  	  + "					<div class='CRCosPoint'>적립포인트 <a style='float: right;'>"+item.point+"</a></div>"
 							  	  + "				</div>"
 							  	  + "			</li>"
 							  	  + "		</ul>"
 							  	  + "	</div>"
-							  	  + "	<div class='CRLastListPostion col-lg-2'>"
+							  	  + "	<div class='CRLastListPosition col-lg-2'>"
 							  	  + "		<ul>"
 							  	  + "			<li>"
-							  	  + "				<div class='CRCosPrice'>"+item.price+"</div>"
-							  	  + "				<div class='CRCosSalePrice'>"+item.salePrice+"</div>";
+							  	  + "				<div class='CRCosPrice'>"+item.price+"<a> 원</a></div>"
+							  	  + "				<div class='CRCosSalePrice'>"+item.salePrice+"<a> 원</a></div>"
+							  	  
 							  	  + "			</li>"
 							  	  + "		</ul>"
 							  	  + "	</div>";
@@ -268,9 +308,7 @@ String ctxPath = request.getContextPath();
 						
 						$("div.CRCosList").hide();
 						$("div.CRCosList_1").hide();
-						$("button#CRDeleteButton").hide();
 						$("div.dropdown").hide();
-						$("div.CRSearchBox").hide(); 
 						
 						return; 
 					} // end of else if --------------------------------------------------------------------
@@ -291,8 +329,7 @@ String ctxPath = request.getContextPath();
 			$("div.CRCosList").hide();
 			$("div.CRCosList_1").hide();
 			
-			$("div.dropdown").hide();
-			$("div.CRSearchBox").hide(); 
+			$("select#dropdown").hide();
 	
 			$(this).hide();
 			
@@ -314,8 +351,7 @@ String ctxPath = request.getContextPath();
 			$("div.CRCosList").hide();
 			$("div.CRCosList_1").hide();
 			
-			$("div.dropdown").hide();
-			$("div.CRSearchBox").hide(); 
+			$("select#dropdown").hide(); 
 
 			$(this).hide();
 			
@@ -338,8 +374,7 @@ String ctxPath = request.getContextPath();
 			$("div.CRCosList").hide();
 			$("div.CRCosList_1").hide();
 			
-			$("div.dropdown").hide();
-			$("div.CRSearchBox").hide(); 
+			$("select#dropdown").hide();
 
 			$(this).hide();
 
@@ -363,8 +398,7 @@ String ctxPath = request.getContextPath();
 			$("div.CRCosList").hide();
 			$("div.CRCosList_1").hide();
 			
-			$("div.dropdown").hide();
-			$("div.CRSearchBox").hide(); 
+			$("select#dropdown").hide();
 			
 			$(this).hide();
 			
@@ -440,12 +474,12 @@ String ctxPath = request.getContextPath();
 						$.each(json, function(index, item){
 
 							if(json.result == 1) {
-								
 								alert("찜 성공");
-								
+								likeAdd();
 							}
 							else if(json.result == 0) {
 								alert("찜 삭제완료");
+								likeAdd();
 							}
 		                
 						}) // end of $.each(json, function(index, item)
@@ -461,9 +495,11 @@ String ctxPath = request.getContextPath();
 				alert("로그인이 필요한 서비스 입니다!");
 			}  
 		});
+		/* 찜 추가 및 삭제 끝 */
 		
 		
-		
+				
+				
 		/* 찜 토글 시작 */
 		$(document.body).tooltip({
 			selector: "[data-toggle='tooltip']"
@@ -533,11 +569,18 @@ String ctxPath = request.getContextPath();
 		/* 되돌아가기 버튼 시작 */
 		$("button#CRHideButton").click(function(){
 			
+			$("div.CRCosList").hide();
+			$("div.CRCosList_1").hide();
+			
 			$("#CRDeleteButton").hide();
 			$(this).hide();
 			
 			$("div.dropdown").hide();
-			$("div.CRSearchBox").hide(); 
+			
+			$("img#CRChangeImgOne").hide();
+			$("img#CRChangeImgTwo").hide();
+			$("img#CRChangeImgThree").hide();
+			$("img#CRChangeImgFour").hide();
 			
 			$("span#CRCosIntroduceOne").html("");
 			$("span#CRCosIntroduceTwo").html("");
@@ -665,20 +708,7 @@ String ctxPath = request.getContextPath();
 			location.href="<%= ctxPath%>/pes.admin/productRegister.go"
 		});
 		/* 강의 등록하기 끝 */
-		
-		/* 검색창 엔터 누르기 시작 */
-		$("input[name=search]").keyup(function(e){
-			// input 태그를 하나만 넣어서 엔터가 그냥 가능하게 만들 경우 alert 와 같은 메소드들을 적용하지 못한다.
-			if(e.keyCode == 13) {
-				
-				goSearch();
-				
-			}
-			
-		});
-		/* 검색창 엔터 누르기 끝 */
-		
-		
+		   
 		
 	}); // end of $(document).ready(function(){}) -------------------------
 
@@ -695,45 +725,169 @@ String ctxPath = request.getContextPath();
 			
 		} // end of for ------------------------------------------
 		
-	}
+	};
+	
+	
 	/* 체크박스 전체선택 또는 전체 해제 끝 */ 
 
-	function goSearch() {
-		
-		const frm = document.CRSearchFrm;
-		
-		if( $("input#CRSearchTxt").val().trim() == "" ) {
-			alert("검색어를 입력해주세요!!");
-		}
-		
-		frm.action = "<%= ctxPath%>/cos/yjs_CRSearch.go";
-		frm.method = "get";
-		frm.submit();
-	}
 	
+	
+	/* 찜 누른 후 새로고침 시작 */
 	function likeAdd() {
 		
 		javascript:history.go(0);
 		
-	}
+	};
+	/* 찜 누른 후 새로고침 끝 */
 	
+	/* 정렬 시작 */
+	function goSort() {
+		
+		var dropdown  = document.getElementById("dropdown");
+		var sort = (dropdown.options[dropdown.selectedIndex].value);
+		// alert("sort = "+sort);
+		
+		$.ajax({
+			url:"<%= request.getContextPath()%>/cos/yjs_CosSortDisplayJSON.go",
+			data:{
+				"sort":sort,
+				"courseCode":$("input#CRInput_Text").val()
+			},   
+			dataType:"json", /* dataType 을 생략하면 string 타입으로 들어온다. */
+			/* async:false, */
+			success:function(json){
+				 
+				$("div.CRCosList").hide();
+				$("div.CRCosList_1").hide();
+				
+				const jjim_arr = JSON.parse(sessionStorage.getItem("jjim"));
+				
+				if (json.length > 0) {
+					
+					let html = "";
+				
+					$.each(json, function(index, item){
+						
+						if(index == 0) {
+							html = "<div class='CRCosList  col-lg-12'>"
+						}
+						else {
+							html = "<div class='CRCosList_1  col-lg-12'>"
+						}
+						
+						html += "	<ul>"
+							  +	"		<li><input type='checkbox' class='CRDeleteCheckBox' name='CRDeleteCheckBox' value='" + item.courseCode + "' />"
+							  + "			<a href ='<%= ctxPath%>/yjs.cos/yjs_OrderPage.go?courseCode="+ item.courseCode +"&fk_categoryCode="+ item.fk_categoryCode +"'><img src='<%= ctxPath%>/yjs.images/"+item.img1+"' class='CRSellImg' /></a>";  
+					 	
+						if("${sessionScope.loginuser.userid}" != "") {
+							let jjim_flag = false;	  
+							for(let i=0; i<jjim_arr.length; i++) {
+								if(item.courseCode == jjim_arr[i].courseCode) {
+								    html += "<label for='CRheartCheck" + index + "'><i id='heart" + index + "' class='heartGroup fa-solid fa-heart' style='color: #ff0000;'></i>"
+								          + "<input type='checkbox' id='CRheartCheck" + index + "' name='CRHeartCheckName' value='" + item.courseCode + "' style='display:none;' /></label>";
+								    jjim_flag = true;
+								    break;
+								}
+								
+							}// end of for---------------------
+						
+							if(!jjim_flag) {
+								html +=	"<label for='CRheartCheck" + index + "'><i id='heart" + index + "' class='heartGroup fa-regular fa-heart' style='color: #cccccc;' ></i>"
+						             + "<input type='checkbox' id='CRheartCheck" + index + "' name='CRHeartCheckName' value='" + item.courseCode + "' style='display:none;' /></label>";
+							}
+						} 
+						else {
+							html += "<input type='hidden' name='heartSelect" + index + "' value='" + item.courseCode + "' /><i id='heart" + index + "' class='heartGroup fa-regular fa-heart' style='color: #cccccc;'></i>"; 
+						} 
+						
+				 	  	html += "       </li>"
+						  	  + "	</ul>"	
+						  	  + "	<div class='CRListMainPosition col-lg-4'>"
+						  	  + "		<ul>"
+						  	  + "			<li>"
+						  	  + "				<a href ='<%= ctxPath%>/yjs.cos/yjs_OrderPage.go?courseCode="+ item.courseCode +"&fk_categoryCode="+ item.fk_categoryCode +"'><h4 class='CRCosTitleName' style='color:black'>"+item.courseName+"</h4></a>"
+						  	  + "				<div style='width: 197px;'>"
+						  	  + "					<h5 class='CRCosTeacher'>강사명 <a style='float: right;'>" + item.teacher + "</a></h5>"
+						  	  + "					<div class='CRDate'>"
+						  	  + "						기간 <a style='float: right;'>"+item.courseterm+"일</a>"
+						  	  + "					</div>"
+						  	  + "					<div class='CRCosPoint'>적립포인트 <a style='float: right;'>"+item.point+"</a></div>"
+						  	  + "				</div>"
+						  	  + "			</li>"
+						  	  + "		</ul>"
+						  	  + "	</div>"
+						  	  + "	<div class='CRLastListPosition col-lg-2'>"
+						  	  + "		<ul>"
+						  	  + "			<li>"
+						  	  + "				<div class='CRCosPrice'>"+item.price+"<a> 원</a></div>"
+						  	  + "				<div class='CRCosSalePrice'>"+item.salePrice+"<a> 원</a></div>"
+						  	  
+						  	  + "			</li>"
+						  	  + "		</ul>"
+						  	  + "	</div>";
+						  
+						html += "	<div class='CRButton'>"
+						  	 + " 		<input type='hidden' id='courseCode' /> "
+						  	 + "		<button type='button' class='CRButtonGoBag'  value='" + item.courseCode + "' >"
+						  	 + "			<i class='fa-solid fa-pen' style='color: #ffffff; margin-right=10px;'></i>장바구니"
+						  	 + "		</button>"
+						  	 + "		<button type='button' class='CRButtonGoApplication' value='" + item.courseCode + "'>"
+						  	 + "			<i class='fa-solid fa-cart-shopping' style='color: #1bceb8; margin-right=10px;'></i>수강신청"
+						  	 + "		</button>"
+						  	 + "	</div>"
+						  	 + "</div>";
+					
+						$("div.CRSildeMenu").append(html);
+				 
+					}); // end of $.each(json, functioin(index, item){} -------------------------------
+							  
+
+				} // end of if ------------------------------------------------------------------------
+				else if(json.length == 0) {
+					alert("강의 준비중입니다.");
+					
+					$("div.CRCosList").hide();
+					$("div.CRCosList_1").hide();
+					$("div.dropdown").hide();
+					
+					return; 
+				} // end of else if --------------------------------------------------------------------
+				 
+			},
+			error: function(request, status, error){
+	 			alert("강의를 불러올 수 없습니다. 관리자에게 문의해주세요.");
+	        }
+		}) // end of ajax
+		
+	};
+	/* 정렬 끝 */
 	
 </script>
 
-<%-- 최상단메뉴바 시작 --%>
-<h1 id="CRMainName">수강신청</h1>
-<div id="CRMainMenu">
-	<i class="fa-solid fa-house" style="color: #ffffff; font-size: 15pt;"></i>
-	<a id="CRLine" style="font-size: 15pt;">|</a>
+	<%-- 최상단메뉴바 시작 --%>
+	<div class="es_bar">
+		<img class="bar" src="<%= ctxPath %>/images/bar배경.png" style="width: 100%; height: 200px;"/>
+		<h2 id="page_title">수강신청</h2>
 
-	<button class="btn btn-secondary dropdown-toggle" type="button"
-		id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-		aria-expanded="false">수강신청</button>
-	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-		<a class="dropdown-item" href="#" style="color: #00b377;">수강신청</a> <a
-			class="dropdown-item" href="#">고객센터</a>
-	</div>
-</div>
+		<button onclick= "location.href='<%= ctxPath%>/index.go'" class="es_dropbtn"><i class="fa-solid fa-house" style="color: #ffffff; font-size: 16pt; margin: 0 10px;"></i>|</button>
+
+	    <button onclick="myFunction()" class="es_dropbtn" style="color:#ffffff; font-size: 14pt;"> 고객센터 <i class="fa-solid fa-circle-chevron-down" style="color: #ffffff; margin: 0 10px;"></i>|
+		    <div id="myDropdown" class="es_dropdown-content">
+		       <a href="#">수강신청</a>
+		       <a href="<%= ctxPath%>/pes.customerService/noticeList.go">고객센터</a>
+		    </div>
+	    </button>
+	    
+	    <button onclick="myFunction2()" class="es_dropbtn" style="color:#ffffff; font-size: 14pt;"> 공지사항 <i class="fa-solid fa-circle-chevron-down" style="color: #ffffff; margin: 0 10px;"></i>|
+		    <div id="myDropdown2" class="es_dropdown-content">
+		       <a href="<%= ctxPath%>/pes.customerService/noticeList.go">공지사항</a>
+		       <a href="<%= ctxPath%>/pes.customerService/question.go">자주하는질문</a>
+		       <a href="#">수강후기</a>
+		       <a href="#">이벤트</a>
+		    </div>
+	    </button>
+
+	</div>	
 <%-- 최상단메뉴바 끝 --%>
 
 
@@ -843,30 +997,16 @@ String ctxPath = request.getContextPath();
 
 
 	<%-- 정렬 시작 --%>
-	<div id="dropdown" class="dropdown" style="display: none; clear: both;">
-		<button type="button" id="dropdownbtn"
-			class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-			정렬</button>
-		<div class="dropdown-menu">
-			<a class="dropdown-item" href="#">정렬</a> <a class="dropdown-item"
-				href="#">가격 낮은 순</a> <a class="dropdown-item" href="#">가격 높은 순</a>
-		</div>
-	</div>
+	<select id="dropdown" onchange="goSort()">
+		<option value="">정렬</option>
+		<option value="1">가격 낮은 순</option>
+		<option value="2">가격 높은 순</option>
+		<option value="3">기간순</option>
+		<option value="4">포인트적립순</option>
+	</select>
 	<%-- 정렬 끝 --%>
 
 
-
-
-	<%-- 검색창 시작 --%>
-	<div class="CRSearchBox">
-		<form name="CRSearchFrm">
-			<input class="CRSearchTxt" id="CRSearchTxt" type="text" placeholder="검색어를 입력해주세요" name="search">
-			<button class="CRSearchBtn" type="submit" onclick="goSearch();">
-				<i class="fa fa-search"></i>
-			</button>
-		</form>
-	</div>
-	<%-- 검색창 끝 --%>
 
 	<div id="CRDeleteAll">
 		<label for="CRDeleteAll" class='CRDeleteCheckBox'>전체선택</label><input type="checkbox" id="CRDeleteAll" class='CRDeleteCheckBox' onclick='AllCheck(this.checked)' />
