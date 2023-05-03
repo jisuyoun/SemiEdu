@@ -8,169 +8,19 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<style>
+<link rel="stylesheet" type="text/css" href="<%= ctxPath%>/css/questionStyle.css" />
 
-	<%-- 상단 title 시작 --%>
-	div.es_bar {
-	    width: 100%;
-	    height: 200px;
-	    background-size: contain;
-	    top: 0;
-	    left: 0;
-	}
-	
-	#page_title {
-	    position: relative;
-	    font-size: 40pt;
-	    top: -140px;
-	    color: #fff;
-	    text-align: center;
-	    font-weight: bold;
-	}
 
-	.es_dropbtn {
-		position: relative;
-	    color: white;
-	    font-size: 14px;
-	    border: none;
-	    cursor: pointer;
-	    top: -130px;
-	    left: 1300px;
-	    background-color: inherit;
-	}
-	
-	.es_dropdown {
-	    position: relative;
-	    display: inline-block;
-	   
-	}
-	
-	.es_dropdown-content {
-	    display: none;
-	    position: absolute;
-	    background-color: white;
-	    border-radius: 10px;
-	    margin-top: 10px; 
-	    min-width: 120px;
-	    overflow: auto;
-	    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-	    border: solid 1px #ddd;
-	    font-size: 12pt;
-	}
-	
-	.es_dropdown-content a {
-	  color: gray;
-	  padding: 5px 2px;
-	  text-decoration: none;
-	  display: block;
-	  text-decoration: none; 
-	} 
-
-	.es_dropdown a:hover {color: #1BCEB8;}
-
-	.show {display: block;} 
-	<%-- 상단 title 끝 --%>	
-	
-	
-	<%-- 카테고리 div 시작 --%>
-	ul {
-		list-style: none;
-	}
-	
-	li {
-		float: left;
-	}
-	
-	div.menu_cont {
-		margin: 0 auto;
-	}
-	
-	.question_menu {
-		border: solid 1px #ddd;
-		height: 80px;
-		width: 60%; 
-		display: flex;
-		margin: 50px auto;
-		padding: 0 auto;
-		align-items: center;
-		border-radius: 20px;
-	}
-	
-	.tab_title a {
-		margin: 0 20px;
-		font-size: 14pt;
-	}
-	
-	.tab_title a:hover {
-		color: #1BCEB8; 		
-		font-weight: bold;
-	}
-	<%-- 카테고리 div 끝 --%>
-	
-	<%-- 검색창 --%>
-	.es_input_search {
-		border: solid 1px #ddd;
-		height: 50px;
-		width: 280px;
-		border-radius: 5px;
-	}
-	.questionSearch {
-		width: 60%;
-		margin: 20px auto;
-		text-align: right;
-		margin-top: 50px;
-	}
-
-	<%-- 자주하는질문List 효과 시작 --%>
-	div#openSection {
-		width: 60%;
-		margin: 0 auto;
-		border-top: 1px solid #444444; 
-		border-bottom: 1px solid #ddd;
-	} 
-	
-	.collapsible {
-	  background-color: white;
-	  color: #222;
-	  border-top: 1px solid #444444;
-	  border-bottom: 1px solid #ddd;
-	  cursor: pointer;
-	  padding: 18px;
-	  width: 100%;
-	  border: none;
-	  text-align: left;
-	  outline: none;
-	  font-size: 15px; 
-	}
-	
-	.active, .collapsible:hover {
-	  background-color: #ddd; 
-	}
-	
-	.es_content {
-	  padding: 0 18px;
-	  background-color: white;
-	  max-height: 0;
-	  overflow: hidden;
-	  transition: max-height 0.2s ease-out;
-	}
-	<%-- 자주하는질문List 효과 끝 --%>
-	
-
-</style>
 </head>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
 <script type="text/javascript">
 	
-	<%-- 상단 title 시작 --%>
-	/* When the user clicks on the button, 
-	toggle between hiding and showing the dropdown content */
+	<%-- 상단 title dropdown 시작 --%>
 	function myFunction() {
 	  document.getElementById("myDropdown").classList.toggle("show");
 	}
 	
-	// Close the dropdown if the user clicks outside of it
 	window.onclick = function(event) {
 	  if (!event.target.matches('.es_dropbtn')) {
 	    var dropdowns = document.getElementsByClassName("es_dropdown-content");
@@ -202,31 +52,13 @@
 		    }
 		  }
 		}
-		<%-- 상단 title 끝 --%>	
+		<%-- 상단 title dropdown 끝 --%>	
 		
 		
 		<%-- 카테고리 이동 --%>
 		addEvent("onload", function() { $('#category-').addClass("active"); });
 		
-		
-		<%-- 자주하는질문List 효과 시작 --%>	
-		var coll = document.getElementsByClassName("collapsible");
-		var i;
 
-		for (i = 0; i < coll.length; i++) {
-		  coll[i].addEventListener("click", function() {
-		    this.classList.toggle("active");
-		    var es_content = this.nextElementSibling;
-		    if (es_content.style.display === "block") {
-		    	es_content.style.display = "none";
-		    } else {
-		    	es_content.style.display = "block";
-		    }
-		  });
-		}
-		<%-- 자주하는질문List 효과 끝 --%>
-		
-		
 
 </script>
 <jsp:include page="../header.jsp" /> 
@@ -246,14 +78,14 @@
 	    <button onclick="myFunction()" class="es_dropbtn" style="color:#ffffff; font-size: 14pt;"> 고객센터 <i class="fa-solid fa-circle-chevron-down" style="color: #ffffff; margin: 0 10px;"></i>|
 		    <div id="myDropdown" class="es_dropdown-content">
 		       <a href="#">수강신청</a>
-		       <a href="<%= ctxPath%>/customerService/announcement.go">고객센터</a>
+		       <a href="<%= ctxPath%>/pes.customerService/noticeList.go">고객센터</a>
 		    </div>
 	    </button>
 	    
 	    <button onclick="myFunction2()" class="es_dropbtn" style="color:#ffffff; font-size: 14pt;"> 자주하는질문 <i class="fa-solid fa-circle-chevron-down" style="color: #ffffff; margin: 0 10px;"></i>|
 		    <div id="myDropdown2" class="es_dropdown-content">
-		       <a href="<%= ctxPath%>/customerService/announcement.go">공지사항</a>
-		       <a href="<%= ctxPath%>/customerService/question.go">자주하는질문</a>
+		       <a href="<%= ctxPath%>/pes.customerService/noticeList.go">공지사항</a>
+		       <a href="<%= ctxPath%>/pes.customerService/question.go">자주하는질문</a>
 		       <a href="#">수강후기</a>
 		       <a href="#">이벤트</a>
 		    </div>
@@ -269,7 +101,7 @@
 		<div class="question_menu">
 		    <div class="menu_cont">
 		        <ul>
-		            <li class="tab_title" id="category-"><a class="es_question_menu" href="<%= ctxPath%>/customerService/question.go">전체</a></li>
+		            <li class="tab_title" id="category-"><a class="es_question_menu" href="<%= ctxPath%>/pes.customerService/question.go">전체</a></li>
 		            
 		            <li class="tab_title" id="category-2390"><a href="#">회원정보관리</a></li>
 		            
@@ -283,30 +115,58 @@
 		</div>
 		
 		
-		<form class="questionSearch">
-
+		<form class="noticeSearch">
 			<input type="text" name="s_keyword" class="es_input_search" title="검색어" placeholder="검색어를 입력해주세요" />
 			<input type="image" src="../es_noticeImages/search.png" class="btn_search" style="height: 25px;" onclick="goSearch();" />
 		</form>
-	
-		<%-- 자주하는질문List 효과 시작 --%>
-		<div id="openSection">
-			<button type="button" class="collapsible">Open Section 1</button>
-			<div class="es_content">
-			  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
-			<button type="button" class="collapsible">Open Section 2</button>
-			<div class="es_content">
-			  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
-			<button type="button" class="collapsible">Open Section 3</button>
-			<div class="es_content">
-			  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
-		</div>
-		<%-- 자주하는질문List 효과 끝--%>
 		
+		
+<div id="es_collapsible" >
+	<button type="button" class="collapsible">강의교안 파일에 보안이 걸려있어요</button>
+	<div class="content">
+	  <p>강의교안의 경우 pdf로 제공됩니다. 하지만 저작권문제로 비밀번호가 설정이 되어 편집이 불가합니다. <br><br> 태블릿의 경우 플렉슬과 같은 어플을 이용하시면 필기가 가능합니다.</p>
 	</div>
+	<button type="button" class="collapsible">모바일 수강시 다운로드 버튼(민트색 화살표)이 보이지 않아요</button>
+	<div class="content">
+	  <p>아이폰이나 아이패드의 경우 다운로드 버튼이 보이지 않는 경우가 있습니다. <br><br> 설정 - 사파리 들어가셔서 데스크탑웹사이트요청 해제 부탁드립니다.</p>
+	</div>
+	<button type="button" class="collapsible">Code:1002 캡쳐프로그램 Chrome Remote Desktop 나타나는 경우</button>
+	<div class="content">
+	  <p>크롬 원격 프로그램이 설치되어 있는 경우 나타나는 메시지입니다. <br><br> 해결방법<br>- 크롬 확장프로그램에서 Chrome Remote Desktop 프로그램 삭제 부탁드립니다.<br>
+	  또한 엣지 브라우져에도 설치되어 있는 경우가 있으니 엣지 확장프로그램도 확인 후 삭제 부탁드립니다.<br><br>만약 크롬원격 프로그램을 꼭 사용하셔야 하는경우 해결방법<br>
+	  - 크롬 브라우져에서 로그아웃 후 컴퓨터 재부팅합니다. 재부팅 후 엣지나 웨일 등의 브라우져로 강의 수강 부탁드립니다.</p>
+	</div>
+	<button type="button" class="collapsible">회원가입해도 개인정보유출 위험은 없나요?</button>
+	<div class="content">
+	  <p>본 사이트는 개인정보보호법의 정보통신망 이용 촉진 및 정보보호에 관한 법률을 준수하고 있습니다. <br>회원가입 시 기재된 사항은 법률에 의거하여 보호되고 있습니다.</p>
+	</div>
+	<button type="button" class="collapsible">회원 아이디를 변경하고 싶어요. 아이디 변경 가능하나요?</button>
+	<div class="content">
+	  <p>관리자에게 별도 문의 부탁드립니다. </p>
+	</div>
+</div>
+
+<script>
+
+	<%-- 자주하는질문List 효과 시작 --%>
+	var coll = document.getElementsByClassName("collapsible");
+	var i;
+	
+	for (i = 0; i < coll.length; i++) {
+	  coll[i].addEventListener("click", function() {
+	    this.classList.toggle("active");
+	    var content = this.nextElementSibling;
+	    if (content.style.display === "block") {
+	      content.style.display = "none";
+	    } else {
+	      content.style.display = "block";
+	    }
+	  });
+	}
+	<%-- 자주하는질문List 효과 끝 --%>
+	
+</script>
+	
 	
 	
 
