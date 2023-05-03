@@ -42,7 +42,6 @@ String ctxPath = request.getContextPath();
 			$("span#CRCosIntroduceSix").html("고용노동부에서 공개한 구인 공고 기사 분야 1순위 자격증!");
 			
 			$("div.dropdown").css("display", "").css("both","clear");
-			$("div.CRSearchBox").show();
 			
 			$("img#CRChangeImgOne").show();
 			$("img#CRChangeImgTwo").hide();
@@ -76,7 +75,6 @@ String ctxPath = request.getContextPath();
 			$("span#CRCosIntroduceSix").html("전공 상관 없이, 대학 졸업자면 모두 응시 가능!");
 			
 			$("div.dropdown").show();
-			$("div.CRSearchBox").show(); 
 			
 			$("img#CRChangeImgOne").hide();
 			$("img#CRChangeImgTwo").show();
@@ -108,7 +106,6 @@ String ctxPath = request.getContextPath();
 			$("span#CRCosIntroduceSix").html("그에 따른 인력 수요 증가!");
 			 
 			$("div.dropdown").show();
-			$("div.CRSearchBox").show();
 			
 			$("img#CRChangeImgOne").hide();
 			$("img#CRChangeImgTwo").hide();
@@ -140,7 +137,6 @@ String ctxPath = request.getContextPath();
 			$("span#CRCosIntroduceSix").html("    ");
 			
 			$("div.dropdown").show();
-			$("div.CRSearchBox").show(); 
 			
 			$("img#CRChangeImgOne").hide();
 			$("img#CRChangeImgTwo").hide();
@@ -207,16 +203,16 @@ String ctxPath = request.getContextPath();
 								let jjim_flag = false;	  
 								for(let i=0; i<jjim_arr.length; i++) {
 									if(item.courseCode == jjim_arr[i].courseCode) {
-									    html += "<label for='CRheartCheck" + index + "'><i id='heart" + index + "' class='heartGroup fa-solid fa-heart' style='color: #ff0000;' onclick='likeAdd();'></i>"
+									    html += "<label for='CRheartCheck" + index + "'><i id='heart" + index + "' class='heartGroup fa-solid fa-heart' style='color: #ff0000;'></i>"
 									          + "<input type='checkbox' id='CRheartCheck" + index + "' name='CRHeartCheckName' value='" + item.courseCode + "' style='display:none;' /></label>";
 									    jjim_flag = true;
-									    return;
+									    break;
 									}
 									
 								}// end of for---------------------
 							
 								if(!jjim_flag) {
-									html +=	"<label for='CRheartCheck" + index + "'><i id='heart" + index + "' class='heartGroup fa-regular fa-heart' style='color: #cccccc;' onclick='likeAdd();'></i>"
+									html +=	"<label for='CRheartCheck" + index + "'><i id='heart" + index + "' class='heartGroup fa-regular fa-heart' style='color: #cccccc;' ></i>"
 							             + "<input type='checkbox' id='CRheartCheck" + index + "' name='CRHeartCheckName' value='" + item.courseCode + "' style='display:none;' /></label>";
 								}
 							} 
@@ -237,7 +233,7 @@ String ctxPath = request.getContextPath();
 							  	  + "			</li>"
 							  	  + "		</ul>"
 							  	  + "	</div>"
-							  	  + "	<div class='CRLastListPostion col-lg-2'>"
+							  	  + "	<div class='CRLastListPosition col-lg-2'>"
 							  	  + "		<ul>"
 							  	  + "			<li>"
 							  	  + "				<div class='CRCosPrice'>"+item.price+"</div>"
@@ -269,7 +265,6 @@ String ctxPath = request.getContextPath();
 						$("div.CRCosList").hide();
 						$("div.CRCosList_1").hide();
 						$("div.dropdown").hide();
-						$("div.CRSearchBox").hide(); 
 						
 						return; 
 					} // end of else if --------------------------------------------------------------------
@@ -291,7 +286,6 @@ String ctxPath = request.getContextPath();
 			$("div.CRCosList_1").hide();
 			
 			$("div.dropdown").hide();
-			$("div.CRSearchBox").hide(); 
 	
 			$(this).hide();
 			
@@ -313,8 +307,7 @@ String ctxPath = request.getContextPath();
 			$("div.CRCosList").hide();
 			$("div.CRCosList_1").hide();
 			
-			$("div.dropdown").hide();
-			$("div.CRSearchBox").hide(); 
+			$("div.dropdown").hide(); 
 
 			$(this).hide();
 			
@@ -338,7 +331,6 @@ String ctxPath = request.getContextPath();
 			$("div.CRCosList_1").hide();
 			
 			$("div.dropdown").hide();
-			$("div.CRSearchBox").hide(); 
 
 			$(this).hide();
 
@@ -363,7 +355,6 @@ String ctxPath = request.getContextPath();
 			$("div.CRCosList_1").hide();
 			
 			$("div.dropdown").hide();
-			$("div.CRSearchBox").hide(); 
 			
 			$(this).hide();
 			
@@ -415,8 +406,56 @@ String ctxPath = request.getContextPath();
 		/* 찜한 과목인지 알아오기 끝 */
 			
 			
+		/* 찜 추가 및 삭제 시작 */
+		$(document).on("change", "input:checkbox[name='CRHeartCheckName']", function(){
+			
+			 if("${sessionScope.loginuser.userid}" != ""){
+				 	
+				 if(!CheckFlag){
+					 sessionStorage.setItem("checked",$("input:checkbox[name='CRHeartCheckName']:checked").val());
+					 CheckFlag = true;
+				 }
+				 
+				$.ajax({
+					url:"<%= request.getContextPath()%>/yjs.cos/yjs_CosAddLikeJSON.go",
+					type:"POST",
+					data:{
+						"userid":"${sessionScope.loginuser.userid}",
+						"courseCode": sessionStorage.getItem("checked")	
+					},
+					dataType:"json",
+					success:function(json){
+						
+						
+						$.each(json, function(index, item){
+
+							if(json.result == 1) {
+								alert("찜 성공");
+								likeAdd();
+							}
+							else if(json.result == 0) {
+								alert("찜 삭제완료");
+								likeAdd();
+							}
+		                
+						}) // end of $.each(json, function(index, item)
+						
+					},
+					error: function(request, status, error){
+						alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+					}
+				});
+				
+			}
+			else {
+				alert("로그인이 필요한 서비스 입니다!");
+			}  
+		});
+		/* 찜 추가 및 삭제 끝 */
 		
 		
+				
+				
 		/* 찜 토글 시작 */
 		$(document.body).tooltip({
 			selector: "[data-toggle='tooltip']"
@@ -490,7 +529,6 @@ String ctxPath = request.getContextPath();
 			$(this).hide();
 			
 			$("div.dropdown").hide();
-			$("div.CRSearchBox").hide(); 
 			
 			$("span#CRCosIntroduceOne").html("");
 			$("span#CRCosIntroduceTwo").html("");

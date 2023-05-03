@@ -112,7 +112,7 @@ button#CRDeleteButton:hover {
 
 /* 강의선택 아이콘 시작 */
 h1.CRMainTitle {
-	margin-top: 38px;
+	margin-top: 87px;
 	padding: 0 634px;
 }
 
@@ -365,23 +365,25 @@ img.CRSellImg {
 .CRListMainPosition {
 	display: inline-block;
 	position: relative;
-	top: 45px;
+	top: 30px;
 }
 
 h4.CRCosTitleName {
 	margin-bottom: 78px;
 	font-weight: bold;
+	width: 350px;
 }
 
 div.CRDate {
 	font-size: 15pt;
 }
 
-div.CRLastListPostion {
+div.CRLastListPosition {
 	display: inline-block;
 	width: 147px;
 	padding: 0;
 	position: relative;
+	top: -21px;
 	
 }
 
