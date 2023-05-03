@@ -107,14 +107,6 @@
 			$("input#userid").val("${requestScope.userid}");
 			$("input#name").val("${requestScope.name}");
 			$("input#email").val("${requestScope.email}");
-		}
-		
-		
-		const method = "${requestScope.method}";  // "" 를 꼭 붙여야 변수로 인식
-		
-		if(method == "POST") {
-			$("input#userid").val("${requestScope.userid}");
-			$("input#email").val("${requestScope.email}");
 			$("div#div_findResult").show();
 			
 		}
@@ -203,8 +195,8 @@
 				<span style="color:red; margin-left: 150px;">메일발송이 실패했습니다.</span><br>
 				</c:if>
 				 <c:if test="${requestScope.isUserExist == true && requestScope.sendMailSuccess == true}">
-						<span style="font-size: 10pt;">인증코드가 ${requestScope.email}로 발송되었습니다.</span><br>
-						<span style="font-size: 10pt;">인증코드를 입력해주세요.</span><br>
+						<span style="font-size: 10pt; margin-left: 150px; font-weight: bold; color: black;">인증코드가 ${requestScope.email}로 발송되었습니다.</span><br>
+						<span style="font-size: 10pt; margin-left: 150px; font-weight: bold; color: black;">인증코드를 입력해주세요.</span><br>
 			             <br><br>
 					<dl>
 						<dt></dt>
