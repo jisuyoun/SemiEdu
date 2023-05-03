@@ -20,11 +20,11 @@ String ctxPath = request.getContextPath();
 		
 		let CheckFlag = false;   // 찜 풀어주는 깃발
 		
-		let ChangeFlag = false;  // 하트 변화시켜주는 깃발
-		
 		let flag = false;
 		
 		let checkboxFlag = false;
+		
+		
 		
 		/* 이미지 누르면 리스트 뜨기 시작 */
 		$("div#CRButton_one").click(function(){
@@ -68,11 +68,11 @@ String ctxPath = request.getContextPath();
 			
 			$("div.CRSildeMenu").show();
 			
-			$("span#CRCosIntroduceOne").html("빅데이터분석기사란?");
-			$("span#CRCosIntroduceTwo").html("빅데이터 이해를 기반으로 빅데이터 분석 기획, 빅데이터 수집, 저장, 처리, 빅데이터 분석 및 시각화를 수행한다.");
+			$("span#CRCosIntroduceOne").html("데이터관련이란?");
+			$("span#CRCosIntroduceTwo").html("데이터 이해를 기반으로 데이터 분석 기획, 데이터 수집, 저장, 처리, 데이터 분석 및 시각화를 수행한다.");
 			$("span#CRCosIndroduceThree").html("당장 시작해야하는 이유!!");
-			$("span#CRCosIntroduceFour").html("국내 빅데이터산업 시장 지속적 성장!");
-			$("span#CRCosIntroduceFive").html("빅데이터 분석전문가 분야 수요 증가!");
+			$("span#CRCosIntroduceFour").html("국내 데이터산업 시장 지속적 성장!");
+			$("span#CRCosIntroduceFive").html("데이터 분석전문가 분야 수요 증가!");
 			$("span#CRCosIntroduceSix").html("전공 상관 없이, 대학 졸업자면 모두 응시 가능!");
 			
 			$("div.dropdown").show();
@@ -207,22 +207,22 @@ String ctxPath = request.getContextPath();
 								let jjim_flag = false;	  
 								for(let i=0; i<jjim_arr.length; i++) {
 									if(item.courseCode == jjim_arr[i].courseCode) {
-									    html += "<label for='CRheartCheck" + index + "'><i id='heart" + index + "' class='heartGroup fa-solid fa-heart'  style='color: #ff0000;'></i>"
-									          + "<input type='checkbox' id='CRheartCheck" + index + "' name='CRHeartCheckName' style='display:none;' /></label>";
+									    html += "<label for='CRheartCheck" + index + "'><i id='heart" + index + "' class='heartGroup fa-solid fa-heart' style='color: #ff0000;' onclick='likeAdd();'></i>"
+									          + "<input type='checkbox' id='CRheartCheck" + index + "' name='CRHeartCheckName' value='" + item.courseCode + "' style='display:none;' /></label>";
 									    jjim_flag = true;
-									    break;
+									    return;
 									}
 									
 								}// end of for---------------------
 							
 								if(!jjim_flag) {
-									html +=	"<label for='CRheartCheck" + index + "'><i id='heart" + index + "' class='heartGroup fa-regular fa-heart' style='color: #cccccc;'></i>"
-							             + "<input type='checkbox' id='CRheartCheck" + index + "' name='CRHeartCheckName' value='" + item.courseCode + "' value='" + item.courseCode + "' style='display:none;' /></label>";
+									html +=	"<label for='CRheartCheck" + index + "'><i id='heart" + index + "' class='heartGroup fa-regular fa-heart' style='color: #cccccc;' onclick='likeAdd();'></i>"
+							             + "<input type='checkbox' id='CRheartCheck" + index + "' name='CRHeartCheckName' value='" + item.courseCode + "' style='display:none;' /></label>";
 								}
-							}/*  
+							} 
 							else {
 								html += "<input type='hidden' name='heartSelect" + index + "' value='" + item.courseCode + "' /><i id='heart" + index + "' class='heartGroup fa-regular fa-heart' style='color: #cccccc;'></i>"; 
-							} */
+							} 
 							
 					 	  	html += "       </li>"
 							  	  + "	</ul>"	
@@ -410,7 +410,7 @@ String ctxPath = request.getContextPath();
 		else {
 			sessionStorage.removeItem("jjim");
 			sessionStorage.removeItem("checked");
-			CheckFlag = false;
+			
 		}
 		
 		/* 찜한 과목인지 알아오기 끝 */
@@ -441,17 +441,11 @@ String ctxPath = request.getContextPath();
 
 							if(json.result == 1) {
 								
-								ChangeFlag = true;
+								alert("찜 성공");
 								
-								/* $("i#heart").removeClass("fa-regular fa-heart");
-								$("i#heart").addClass("fa-solid fa-heart").css("color", "#ff0000");
-								 */
 							}
 							else if(json.result == 0) {
-								
-								/* $("i#heart").removeClass("fa-solid fa-heart");
-								$("i#heart").addClass("fa-regular fa-heart").css("color", "#cccccc"); 
-								 */
+								alert("찜 삭제완료");
 							}
 		                
 						}) // end of $.each(json, function(index, item)
@@ -467,19 +461,6 @@ String ctxPath = request.getContextPath();
 				alert("로그인이 필요한 서비스 입니다!");
 			}  
 		});
-		
-		// console.log(sessionStorage.getItem("checked"));
-		
-		/* $(document).on("click", "i[name='heartGroup']", function(){
-			alert("아아앙");
-				$(this).removeClass("fa-regular fa-heart");
-				$(this).addClass("fa-solid fa-heart").css("color", "#ff0000");
-				
-				$(this).removeClass("fa-solid fa-heart");
-				$(this).addClass("fa-regular fa-heart").css("color", "#cccccc"); 
-			
-		}); */
-		 /* 찜 추가 및 삭제 끝 */
 		
 		
 		
@@ -572,7 +553,7 @@ String ctxPath = request.getContextPath();
 		
 		
 		$("button#CRHideButton").click(function(){
-			$(".CRChangeImg").hide();
+			$(".CRImg").hide();
 			$(".CRDeleteCheckBox").hide();
 			$(this).hide();
 			deleteFlag = true;
@@ -730,27 +711,9 @@ String ctxPath = request.getContextPath();
 		frm.submit();
 	}
 	
-	function ggo() {
+	function likeAdd() {
 		
-		// alert("ㅇㅇㅇㅇㅇ");
-		
-		if ($(this).hasClass("fa-regular fa-heart")) {
-			
-			i.classList.toggle('fa-solid fa-heart');
-			
-			/* $(this).removeClass("fa-regular fa-heart");
-			$(this).addClass("fa-solid fa-heart").css("color", "#ff0000"); */
-        } 
-		else {
-        	/* $(this).removeClass("fa-solid fa-heart");
-    		$(this).addClass("fa-regular fa-heart").css("color", "#cccccc"); */
-        }
-		
-		/* $(this).removeClass("fa-regular fa-heart");
-		$(this).addClass("fa-solid fa-heart").css("color", "#ff0000");
-		
-		$(this).removeClass("fa-solid fa-heart");
-		$(this).addClass("fa-regular fa-heart").css("color", "#cccccc");  */
+		javascript:history.go(0);
 		
 	}
 	
