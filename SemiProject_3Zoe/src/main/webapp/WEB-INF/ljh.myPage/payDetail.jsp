@@ -103,7 +103,7 @@
   	  </div>
 
   	  
-  	  <table  class="table" style="margin-top:50px;">
+  	  <table  class="table" style="margin-top:50px; text-align:center;">
   	  	<thead class="thead-light" style="height:20px; ">
   	  		<tr>
 		  	  	<th>No</th>
@@ -143,6 +143,10 @@
 		  </tbody>
   	  </table>
   	</div>
+  	
+  	
+  	<!-- 삭제예정 -->
+  	<button type="button" onclick = "location.href = '<%= ctxPath %>/ljh.member.controller/payDetail2.go'">상세페이지로 가는 버튼</button>
   
 </div>
 	

@@ -137,9 +137,6 @@ button.btnInfoChange{
 			
 	// "이메일중복확인" 을 클릭했을 때 이벤트 처리하기   
     function isExistEmailCheck() {
-       
-
-          
 
           $.ajax({
                 url:"<%= ctxPath%>/ljh.member.controller/emailDuplicateCheck.go",
@@ -151,7 +148,7 @@ button.btnInfoChange{
                       // 입력한 email이 이미 사용중이라면
                       
                       $("span#emailCheckResult").show();
-                      
+                      $("span.error").hide();
                       $("span#emailCheckResult").html($("input#email").val()+" 은 중복된 email 이므로 사용불가합니다.").css("color","red");
                       $("input#email").val("");
                       b_flag_emailDuplicate_click = false;
@@ -190,9 +187,13 @@ button.btnInfoChange{
         
     	function goEdit(b_flag_email_change,b_flag_emailDuplicate_click,b_flag_emailExpOk){
     		
+        	alert("b_flag_email_change "+b_flag_email_change);
+        	alert("b_flag_emailDuplicate_click "+b_flag_emailDuplicate_click);
+        	alert("b_flag_emailExpOk "+b_flag_emailExpOk);
+        	
     		//이메일 변경을 하지 않았거나 했다면 이메일 중복체크를 했고, 정규표현식에 맞는지 체크.
     		if(!b_flag_email_change ||$ || $("input#email").val().trim() != null || (b_flag_emailDuplicate_click && b_flag_emailExpOk)){
-    			
+    			alert("첫번째 if 들오왔음");
     			const frm = document.infoChange;
                 frm.action = "<%= ctxPath%>/ljh.member.controller/infoChange.go";
                 frm.method = "post";
@@ -202,7 +203,7 @@ button.btnInfoChange{
     		else if(b_flag_email_change|| $("input#email").val().trim() == null || (!b_flag_emailDuplicate_click || !b_flag_emailExpOk )){
     			
     			alert("이메일 형식에 맞게 쓰시고 중복체크를 하세요");
-    			return;
+    			return false;
     		}
         	
     		

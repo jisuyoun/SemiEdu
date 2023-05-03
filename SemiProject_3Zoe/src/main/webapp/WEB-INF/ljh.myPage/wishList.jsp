@@ -64,7 +64,7 @@
 
 <div class="main1">
   	
-  	<div class="content4" >
+  	<div class="content4" style="height:auto; padding-bottom:10px;" >
   		
   		<div>
   		
