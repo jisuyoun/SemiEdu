@@ -44,7 +44,7 @@ public class GoogleMail {
         MimeMessage msg = new MimeMessage(ses);
 
         // 제목 설정
-        String subject = "localhost:9090/MyMVC/index.up 회원님의 비밀번호를 찾기위한 인증코드 발송";
+        String subject = "위너에듀 회원님의 비밀번호를 찾기위한 인증코드 발송";
         msg.setSubject(subject);
               
         // 보내는 사람의 메일주소
@@ -57,8 +57,39 @@ public class GoogleMail {
         msg.addRecipient(Message.RecipientType.TO, toAddr);
               
         // 메시지 본문의 내용과 형식, 캐릭터 셋 설정
-        msg.setContent("발송된 인증코드 : <span style='font-size:14pt; color:red;'>"+certificationCode+"</span>", "text/html;charset=UTF-8");
-              
+        
+        msg.setContent("<div class=\"mail_view_contents\"><div class=\"mail_view_contents_inner\" data-translate-body-38263=\"\"><div><table align=\"center\" width=\"825\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-collapse:collapse;table-layout:fixed;\">\r\n"
+        		+ "    <tbody><tr><td style=\"color:#333333; font-size:16px; text-align:left; padding:0; border-bottom:3px solid #507bd7;\">\r\n"
+        		+ "            <div style=\"float:left\"><img src=\"http://www.wannaedu.com/data/file/e69e843b2e715ad0390d80e8e54d2a97.png\" alt=\"워너에듀\" style=\"margin:25px 0 10px 0;max-height:50px;\" loading=\"lazy\"></div>\r\n"
+        		+ "            <div style=\"float:right;\"><a href=\"http://localhost:9090/SemiProject_3Zoe/\" target=\"_blank\" style=\"text-decoration:none; font-size:12px;:22px;line-:22px;border:1px solid #c1c1c1;text-align:center;padding:0 5px;margin-top:25px;display:block\" rel=\"noreferrer noopener\">+ 사이트 바로가기</a></div>\r\n"
+        		+ "        </td></tr>\r\n"
+        		+ "    <tr><td style=\"color:#333333; font-size:13px; padding:0;line-height:150%;\">\r\n"
+        		+ "            <div style=\"position:relative;\">\r\n"
+        		+ "                <h2 style=\"background-color:#ffffff;line-height:40px;color:000000;font-size:24px;padding:20px 0;margin:0\"><strong>인증번호가 발급되었습니다.</strong></h2>\r\n"
+        		+ "                <div style=\"padding:20px 0;border-top:1px solid #e7e7e7;min-height:200px;margin-bottom:12px\">\r\n"
+        		+ "                    안녕하세요. 워너에듀입니다. <br><br>\r\n"
+        		+ " 발송된 인증코드 : <span style='font-size:14pt; color:red;'>"+certificationCode+"</span> <br><br>\r\n"
+        		+ "감사합니다.\r\n"
+        		+ "                </div>\r\n"
+        		+ "            </div>\r\n"
+        		+ "        </td></tr>\r\n"
+        		+ "    <tr><td align=\"center\" style=\"color:#333333; font-size:12px; padding:10px 0; letter-spacing:-1px;border-top:1px solid #e7e7e7;line-height:22px; background: #fff;\">\r\n"
+        		+ "            \r\n"
+        		+ "            본 메일은 발신전용이므로 회신이 되지 않습니다.<br>\r\n"
+        		+ "        </td></tr>\r\n"
+        		+ "\r\n"
+        		+ "    <tr><td align=\"center\" style=\"color:#333333; font-size:12px; padding:10px 0; letter-spacing:-1px;border-top:1px solid #e7e7e7;line-height:22px; background: #fff;\">\r\n"
+        		+ "            (주)한국라이센스개발원\r\n"
+        		+ "            / wannaedu@naver.com\r\n"
+        		+ "            /\r\n"
+        		+ "            (08592)\r\n"
+        		+ "            서울 금천구 가산디지털1로 75-15 201호 (가산동, 가산 하우스디 와이즈타워)\r\n"
+        		+ "            \r\n"
+        		+ "        </td></tr>\r\n"
+        		+ "</tbody></table>\r\n"
+        		+ "\r\n"
+        		+ "\r\n"
+        		+ "</div></div></div>" ,"text/html;charset=UTF-8");      
         // 메일 발송하기
         Transport.send(msg);
 		

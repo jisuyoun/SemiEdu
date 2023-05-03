@@ -147,7 +147,7 @@
 	        	 const bool = regExp.test($(e.target).val());
 	        	 
 	        	 if(!bool) {
-	        		 // 이메일 앞부분이 정규표현식에 위배 된 경우
+	        		 // 이메일이 정규표현식에 위배 된 경우
 	        		 $("div.mem_cont :input").prop("disabled", true);
 	        		 $(e.target).prop("disabled", false);
 	        		 $(e.target).parent().find("span.error").show();
@@ -217,7 +217,7 @@
 	           
 	           
 	           
-	     
+	       
 	        
 	  	    		  
 	  		// 아이디값이 변경되면 가입하기 버튼을 클릭 시 "아이디중복확인" 을 클릭했는지 클릭안했는지 알아보기 위한 용도를 초기화 시키기
@@ -401,7 +401,7 @@
 		</div>
 	</div>
 
-	<form name="registerFrm" method="POST" target="sysfrm" onsubmit="return goSubmit(this);">
+	<form name="registerFrm">
 	<input type="hidden" name="ek" value="e93651e5dd3aafd46d1704c698d762b8">
 	<input type="hidden" name="k" value="nnDicIFtKv">
 	<input type="hidden" name="verify_email_yn" value="N">

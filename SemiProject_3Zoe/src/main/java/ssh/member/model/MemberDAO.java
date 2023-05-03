@@ -127,13 +127,13 @@ public class MemberDAO implements InterMemberDAO {
 			 
 			 String sql = " SELECT  userid, name, email, mobile, postcode, address, detailaddress, "
 			 		    + " point, registerday, pwdchangegap, issue, checkEmail, checkMobile, "
-			 		    + " pwd, NVL(lastlogingap, trunc( months_between(sysdate, registerday)) ) AS lastlogingap "
+			 		    + " NVL(lastlogingap, trunc( months_between(sysdate, registerday)) ) AS lastlogingap "
 			 		    + " FROM "
 			 		    + " ( "
 			 		    + " select userid, name, email, mobile, postcode, address, detailaddress "
 			 		    + " , point, to_char(registerday, 'yyyy-mm-dd') AS registerday "
 				 		+ " , trunc( months_between(sysdate, lastpwdchangedate) ) AS pwdchangegap "
-			 		    + " , issue, checkEmail, checkMobile, pwd "
+			 		    + " , issue, checkEmail, checkMobile "
 				 		+ " from tbl_member "
 				 		+ " where status = 1 and userid = ? and pwd = ? "
 				 		+ " ) M "
@@ -175,10 +175,9 @@ public class MemberDAO implements InterMemberDAO {
 				 member.setIssue(rs.getString(11));
 				 member.setCheckEmail(rs.getInt(12));
 				 member.setCheckMobile(rs.getInt(13));
-				 member.setPwd(rs.getString(14));
 
 				 
-				 if ( rs.getInt(15) >= 12 ) { // 또는 rs.getInt("LASTLOGINGAP")
+				 if ( rs.getInt(14) >= 12 ) { // 또는 rs.getInt("LASTLOGINGAP")
 					 // 마지막으로 로그인 한 날짜시간이 현재시각으로 부터 1년이 지났으면 휴면으로 지정  
 					 
 					 member.setIdle(1); 
@@ -313,6 +312,35 @@ public class MemberDAO implements InterMemberDAO {
 		
 		return isUserExist;
 	}// end of public boolean isUserExist(Map<String, String> paraMap)----------------------
+
+	
+	// 암호변경하기
+	@Override
+	public int pwdUpdate(Map<String, String> paraMap) throws SQLException {
+		
+		int result = 0;
+		
+		try {
+			conn = ds.getConnection();
+			
+			String sql = " update tbl_member set pwd = ? "
+					   + " 					   , lastpwdchangedate = sysdate "
+					   + " where userid = ? ";
+			
+			pstmt = conn.prepareStatement(sql); 
+			
+			pstmt.setString(1, Sha256.encrypt(paraMap.get("pwd")) ); // 암호를 SHA256 알고리즘으로 단방향 암호화 시킨다.
+			pstmt.setString(2, paraMap.get("userid") );  
+			
+			result = pstmt.executeUpdate();
+			
+			
+		}finally {
+			close();
+		}
+		
+		return result;
+	}
 
 
 

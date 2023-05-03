@@ -93,16 +93,17 @@ public class PwdFindAction extends AbstractController {
 			
 			request.setAttribute("isUserExist", isUserExist);
 			request.setAttribute("userid", userid);
+			request.setAttribute("name", name);
 			request.setAttribute("email", email);
 			request.setAttribute("sendMailSuccess", sendMailSuccess);
 			
 		}// end of if("POST".equalsIgnoreCase(method))-------------------------------
-		else {
+		
 		request.setAttribute("method", method);
 		
 		super.setRedirect(false);
 		super.setViewPage("/WEB-INF/ssh.login/pwd_find.jsp");
-		}
+		
 		
 	}
 

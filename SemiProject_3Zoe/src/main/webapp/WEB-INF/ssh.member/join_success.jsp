@@ -49,11 +49,11 @@
 <link rel="stylesheet" type="text/css" href="../ssh.css/member.css" />
 
   <body>
-
+<form name="loginFrm">
 <div class="login_cont member_cont">
 	<div class="login_in">
 		<h1><img src="<%= ctxPath%>/ssh.img/logo.png" alt="워너에듀 로고" class="svg_logo"/></h1>
-		<h3>${requestScope.name}님 환영합니다!</h3>
+		<h3> ${requestScope.name}님 환영합니다!</h3>
 
 		<div class="process_cont">
 			<dl>
@@ -76,7 +76,7 @@
 	</div>
 
 	<div class="mem_cont">
-	 <form name="loginFrm">
+	 
 		<h4 class="mem_tit center">
 			회원가입이 완료되어 <br />
 			홈으로 이동합니다.
@@ -87,12 +87,10 @@
 	
 		<input type="hidden" name="userid" value="${requestScope.userid}" />
 		<input type="hidden" name="pwd" value="${requestScope.pwd}" />
-	 </form>
+	 
 	</div>
 </div>
+</form>
 </body>
 </html>
-    <iframe src="" name="sysfrm" id="sysfrm" width="100%" height="0" scrolling="no" frameborder="0"></iframe>
     
-</body>
-</html>
