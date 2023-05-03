@@ -1,17 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+
+  
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
     
 <%
    String ctxPath = request.getContextPath();
    
 %>
+
+
     
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+
 
 <link rel="stylesheet" type="text/css" href="<%= ctxPath%>/ssh.css2/common.css" />
 <link rel="stylesheet" type="text/css" href="<%= ctxPath%>/ssh.css2/font_notoSans.css" />
@@ -47,7 +52,6 @@
 	div#logoimg {
 		text-align: center;
 	}
-	
 </style>
 
 <title>비밀번호 변경</title>
@@ -56,6 +60,9 @@
 	
 
 	$(document).ready(function(){
+		const method = "${requestScope.method}";  // ""를 붙여줘야 "GET" 또는 "POST"
+		
+		
 		
 		$("button#btnUpdate").click(function(){
 			
@@ -64,7 +71,7 @@
 			
 			const regExp = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).*$/g;  // 암호 정규표현식
 	    	  
-    	    const bool = regExp.test(pwd);
+    	    		const bool = regExp.test(pwd);
 			
 			if(!bool) {
 				alert("암호는 8글자 이상 15글자 이하에 영문자,숫자,특수기호가 혼합되어야만 합니다.");
@@ -79,11 +86,12 @@
 				return;  // 종료
 			}
 			else {
-
+				
 				const frm = document.pwdUpdateEndFrm;
-				frm.action = "<%= ctxPath%>/login/pwdUpdateEnd.go";
+				frm.action = "<%= ctxPath%>/login/pwdChange.go";
 				frm.method = "POST";
 				frm.submit();
+				
 			}
 			
 		});
@@ -104,9 +112,12 @@
 	
 
 	<form name="pwdUpdateEndFrm">
+
 	<div id="logoimg"><img src="<%= ctxPath%>/ssh.img/logo.png" alt="워너에듀 로고" class="svg_logo"/></div>
 	<div class="mem_cont">
 		<h4 class="mem_tit marb40 inline" style="text-align: center; font-size: 20pt;">비밀번호 변경 <span class="tx"><span class="pointColor">*</span> 필수 입력 정보입니다.</span></h4>
+		
+		<h6 class="mem_tit marb40 inline" style="text-align: center; font-size: 14pt;">비밀번호를 변경하신지 3개월이 지나 비밀번호 변경이 필요합니다.</h6>
 
 		<div class="myinfo_cont refund_info">
 			
@@ -126,11 +137,11 @@
 			</dl>
 			<input type="hidden" name="userid" value="${requestScope.userid}" />
 			
-		 <c:if test="${requestScope.method == 'GET'}">		
+		  
 			<p style="text-align:center; margin-top:20px;">
 	  			<button type="button" id="btnUpdate" style="background-color:#1bceb8; color:white; border-radius:30px; width:155px; border:none; padding:10px;">변경하기</button>
   			</p>
-		 </c:if>
+		  
 		
 		</div>
 	   </div>	
@@ -139,7 +150,7 @@
 	<c:if test="${requestScope.method == 'POST' && requestScope.n == 1}">
 		<div id="div_updateResult" align="center">
 		        사용자 ID ${requestScope.userid}님의 암호가 새로이 변경되었습니다.<br><br>
-		<input type="button" align="center" style="background-color:#1bceb8; color:white; border-radius:30px; width:155px; border:none; padding:10px;" class="bgColor pointBorder" id="btn_submit" onclick="location.href='<%=request.getContextPath()%>/login/login.go'" value="로그인 이동" />        
+		<input type="button" align="center" style="background-color:#1bceb8; color:white; border-radius:30px; width:155px; border:none; padding:10px;" id="btn_submit" onclick="location.href='<%=request.getContextPath()%>/login/login.go'" value="로그인 이동" />        
 		</div>
 	  </c:if>    
 	    

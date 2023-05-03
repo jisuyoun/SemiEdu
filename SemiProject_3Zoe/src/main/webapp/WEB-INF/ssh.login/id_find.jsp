@@ -74,6 +74,7 @@
 		else if(method == "POST"){
 			$("input#name").val("${requestScope.name}");
 			$("input#email").val("${requestScope.email}");
+			$("div.btn_list").hide();
 		}
 		// GET 방식이라면 hide, POST 방식라면 넘어온 값을 그대로 꽂아줌(?) 아이디 찾기에서 잘못된 정보를 입력하여도 이름, 이메일이 안 사라짐
 		
@@ -161,7 +162,8 @@
 				</form>
 			<div id="div_findResult">
 			      <p class="text-center">
-			         <br>회원님의 ID는  <span style="color: red; font-size: 16pt; font-weight: bold;">${requestScope.userid}</span> 
+			         <br>회원님의 ID는  <span style="color: red; font-size: 16pt; font-weight: bold;">${requestScope.userid}</span> &nbsp;입니다.
+			         <br><br><input type="button" align="center" style="background-color:#1bceb8; color:white; border-radius:30px; width:155px; border:none; padding:10px;" class="bgColor pointBorder" id="btn_submit" onclick="location.href='<%=request.getContextPath()%>/login/login.go'" value="로그인 이동" />
 			      </p>
 		    </div>	
 

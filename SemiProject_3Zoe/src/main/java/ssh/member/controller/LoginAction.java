@@ -67,16 +67,17 @@ public class LoginAction extends AbstractController {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginuser", loginuser);
 			
+			
+			// 비밀번호를 변경한지 3개월이 지났을 경우 
 			if(loginuser.isRequirePwdChange() == true) {
-				String message = "비밀번호를 변경하신지 3개월이 지났습니다. 암호를 변경하세요!!";
-				String loc = request.getContextPath()+"/index.go";
-				// 원래는 위와 같이 index.up 이 아니라 사용자의 암호를 변경해주는 페이지로 잡아주어야 한다. 플젝에서 그렇게 하세요!!
 				
-				request.setAttribute("message", message);
-				request.setAttribute("loc", loc);
+				request.setAttribute("userid", loginuser.getUserid());
 				
+				// 비밀번호 변경 페이지로 이동
 				super.setRedirect(false);
-				super.setViewPage("/WEB-INF/msg.jsp");
+				super.setViewPage("/WEB-INF/ssh.login/pwdChange.jsp");
+				
+				return;
 			}
 			else {
 				// 비밀번호를 변경한지 3개월 이내인 경우

@@ -193,7 +193,7 @@ public class MemberDAO implements InterMemberDAO {
 				 }
 				 
 				 // === tbl_loginhistory(로그인기록) 테이블에 insert 하기 === // 
-				 if(member.getIdle() != 1) {
+				 if(member.getIdle() != 1 && rs.getInt(10) < 3) {
 				
 					 sql = " insert into tbl_loginhistory(fk_userid, logip) "
 					 	 + " values(?, ?) "; 
