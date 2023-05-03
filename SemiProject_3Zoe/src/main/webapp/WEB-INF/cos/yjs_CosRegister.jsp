@@ -169,9 +169,6 @@ String ctxPath = request.getContextPath();
 					
 					$("div.CRCosList").hide();
 					$("div.CRCosList_1").hide();
-					$("button#CRDeleteButton").hide();
-					$("div.dropdown").hide();
-					$("div.CRSearchBox").hide(); 
 					
 				//	console.log(JSON.stringify(json));
 					/*
@@ -210,8 +207,8 @@ String ctxPath = request.getContextPath();
 								let jjim_flag = false;	  
 								for(let i=0; i<jjim_arr.length; i++) {
 									if(item.courseCode == jjim_arr[i].courseCode) {
-									    html += "<label for='CRheartCheck" + index + "'><i id='heart" + index + "' class='heartGroup fa-solid fa-heart' style='color: #ff0000;'></i>"
-									          + "<input type='checkbox' id='CRheartCheck" + index + "' name='CRHeartCheckName' value='" + item.courseCode + "' style='display:none;' /></label>";
+									    html += "<label for='CRheartCheck" + index + "'><i id='heart" + index + "' class='heartGroup fa-solid fa-heart'  style='color: #ff0000;'></i>"
+									          + "<input type='checkbox' id='CRheartCheck" + index + "' name='CRHeartCheckName' style='display:none;' /></label>";
 									    jjim_flag = true;
 									    break;
 									}
@@ -220,12 +217,12 @@ String ctxPath = request.getContextPath();
 							
 								if(!jjim_flag) {
 									html +=	"<label for='CRheartCheck" + index + "'><i id='heart" + index + "' class='heartGroup fa-regular fa-heart' style='color: #cccccc;'></i>"
-							             + "<input type='checkbox' id='CRheartCheck" + index + "' name='CRHeartCheckName' value='" + item.courseCode + "' style='display:none;' /></label>";
+							             + "<input type='checkbox' id='CRheartCheck" + index + "' name='CRHeartCheckName' value='" + item.courseCode + "' value='" + item.courseCode + "' style='display:none;' /></label>";
 								}
-							} 
+							}/*  
 							else {
 								html += "<input type='hidden' name='heartSelect" + index + "' value='" + item.courseCode + "' /><i id='heart" + index + "' class='heartGroup fa-regular fa-heart' style='color: #cccccc;'></i>"; 
-							}
+							} */
 							
 					 	  	html += "       </li>"
 							  	  + "	</ul>"	
@@ -301,6 +298,14 @@ String ctxPath = request.getContextPath();
 			
 			$("button#CRDeleteButton").hide();
 			
+			$("span#CRCosIntroduceOne").html("");
+			$("span#CRCosIntroduceTwo").html("");
+			$("span#CRCosIndroduceThree").html("");
+			$("span#CRCosIntroduceFour").html("");
+			$("span#CRCosIntroduceFive").html("");
+			$("span#CRCosIntroduceSix").html("");
+
+			
 			window.scrollTo({top:0, behavior:'smooth'});
 		});
 		
@@ -315,6 +320,14 @@ String ctxPath = request.getContextPath();
 			$(this).hide();
 			
 			$("button#CRDeleteButton").hide();
+			
+			$("span#CRCosIntroduceOne").html("");
+			$("span#CRCosIntroduceTwo").html("");
+			$("span#CRCosIndroduceThree").html("");
+			$("span#CRCosIntroduceFour").html("");
+			$("span#CRCosIntroduceFive").html("");
+			$("span#CRCosIntroduceSix").html("");
+
 			
 			window.scrollTo({top:0, behavior:'smooth'});
 
@@ -332,6 +345,14 @@ String ctxPath = request.getContextPath();
 
 			$("button#CRDeleteButton").hide();
 			
+			$("span#CRCosIntroduceOne").html("");
+			$("span#CRCosIntroduceTwo").html("");
+			$("span#CRCosIndroduceThree").html("");
+			$("span#CRCosIntroduceFour").html("");
+			$("span#CRCosIntroduceFive").html("");
+			$("span#CRCosIntroduceSix").html("");
+
+			
 			window.scrollTo({top:0, behavior:'smooth'});
 			
 		});
@@ -348,6 +369,14 @@ String ctxPath = request.getContextPath();
 			$(this).hide();
 			
 			$("button#CRDeleteButton").hide();
+			
+			$("span#CRCosIntroduceOne").html("");
+			$("span#CRCosIntroduceTwo").html("");
+			$("span#CRCosIndroduceThree").html("");
+			$("span#CRCosIntroduceFour").html("");
+			$("span#CRCosIntroduceFive").html("");
+			$("span#CRCosIntroduceSix").html("");
+
 			
 			window.scrollTo({top:0, behavior:'smooth'});
 
@@ -439,11 +468,17 @@ String ctxPath = request.getContextPath();
 			}  
 		});
 		
-		console.log(sessionStorage.getItem("checked"));
+		// console.log(sessionStorage.getItem("checked"));
 		
-		$(document).on("click", "input:checkbox[name='CRHeartCheckName']", function(){
-			alert("아아아아");
-		});
+		/* $(document).on("click", "i[name='heartGroup']", function(){
+			alert("아아앙");
+				$(this).removeClass("fa-regular fa-heart");
+				$(this).addClass("fa-solid fa-heart").css("color", "#ff0000");
+				
+				$(this).removeClass("fa-solid fa-heart");
+				$(this).addClass("fa-regular fa-heart").css("color", "#cccccc"); 
+			
+		}); */
 		 /* 찜 추가 및 삭제 끝 */
 		
 		
@@ -516,6 +551,7 @@ String ctxPath = request.getContextPath();
 		
 		/* 되돌아가기 버튼 시작 */
 		$("button#CRHideButton").click(function(){
+			
 			$("#CRDeleteButton").hide();
 			$(this).hide();
 			
@@ -533,11 +569,8 @@ String ctxPath = request.getContextPath();
 			
 			deleteFlag = true;
 		});
-		/* 되돌아가기 버튼 끝 */
 		
 		
-		
-		/* 되돌아가기 버튼 시작 */
 		$("button#CRHideButton").click(function(){
 			$(".CRChangeImg").hide();
 			$(".CRDeleteCheckBox").hide();
@@ -545,6 +578,8 @@ String ctxPath = request.getContextPath();
 			deleteFlag = true;
 		});
 		/* 되돌아가기 버튼 시작 */
+		
+		
 		
 		/* 장바구니 시작 */
 		$(document).on("click", ".CRButtonGoBag", function(){
@@ -664,8 +699,6 @@ String ctxPath = request.getContextPath();
 		
 		
 		
-		
-		
 	}); // end of $(document).ready(function(){}) -------------------------
 
 	// function declaration
@@ -695,6 +728,30 @@ String ctxPath = request.getContextPath();
 		frm.action = "<%= ctxPath%>/cos/yjs_CRSearch.go";
 		frm.method = "get";
 		frm.submit();
+	}
+	
+	function ggo() {
+		
+		// alert("ㅇㅇㅇㅇㅇ");
+		
+		if ($(this).hasClass("fa-regular fa-heart")) {
+			
+			i.classList.toggle('fa-solid fa-heart');
+			
+			/* $(this).removeClass("fa-regular fa-heart");
+			$(this).addClass("fa-solid fa-heart").css("color", "#ff0000"); */
+        } 
+		else {
+        	/* $(this).removeClass("fa-solid fa-heart");
+    		$(this).addClass("fa-regular fa-heart").css("color", "#cccccc"); */
+        }
+		
+		/* $(this).removeClass("fa-regular fa-heart");
+		$(this).addClass("fa-solid fa-heart").css("color", "#ff0000");
+		
+		$(this).removeClass("fa-solid fa-heart");
+		$(this).addClass("fa-regular fa-heart").css("color", "#cccccc");  */
+		
 	}
 	
 	
