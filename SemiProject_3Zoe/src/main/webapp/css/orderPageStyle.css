@@ -61,6 +61,10 @@ div.OPContent {
 	margin: 108px auto;
 }
 
+form#heartFrm {
+	display: inline-block;
+}
+
 a#OPClassUpdate {
 	color: red;
 }
@@ -234,14 +238,41 @@ img.OPCosContentImg {
 
 
 
+/* 연관된 강의 시작 */
+div#OPCardPos {
+	display: flex;
+    flex-wrap: wrap;
+}
+
+div.OPCardContainer {
+	width: 276px;
+	position: relative;
+    margin-right: 30px;
+}
+
+div.OPTitelBox {
+	position: relative;
+    padding: 30px 30px 35px;
+    box-sizing: border-box;
+    border: 1px solid #dddddd;
+}
+/* 연관된 강의 끝 */
+
+
+
 /* 아코디언 시작 */
 div#OPCosList {
 	max-width: 1196px;
 }
 
 h4#OPCosListSubTitle {
-	margin: 32px 0 25px 11px;
+	margin: 159px 0 25px 11px;
 	font-weight: bold;
+}
+
+div.OPCardCss {
+	border: solid 1px lightgray;
+	height: 110px;
 }
 
 div#OPOT {

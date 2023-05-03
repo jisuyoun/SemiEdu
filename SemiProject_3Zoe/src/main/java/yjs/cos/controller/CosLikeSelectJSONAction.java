@@ -15,7 +15,7 @@ import cos.model.CosDAO;
 import cos.model.CosVO;
 import cos.model.InterCosDAO;
 
-public class CosSelectLikeJSONAction extends AbstractController {
+public class CosLikeSelectJSONAction extends AbstractController {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -27,27 +27,25 @@ public class CosSelectLikeJSONAction extends AbstractController {
 		
 		InterCosDAO cdao = new CosDAO();
 		
-		List<CosVO> cvoList = cdao.SelectLike(paraMap);
+		List<CosVO> cosList = cdao.SelectLike(paraMap);
 		
 		JSONArray jsonArr = new JSONArray();
 		
-		if(cvoList.size() > 0){
+		if(cosList.size() > 0){
 			// DB에서 조회해온 결과물이 있을 경우를 뜻한다.
 			
-			for(CosVO cvo : cvoList) {
+			for(CosVO cvo : cosList) {
 				
-				JSONObject jsonObj = new JSONObject();  
+				JSONObject jsonObj = new JSONObject();    
 				jsonObj.put("courseCode", cvo.getCourseCode());    
 				
-	            jsonArr.put(jsonObj); 
+				jsonArr.put(jsonObj); 
 	            
 			} 
 			
 		} // end of if(prodList.size() > 0){} ---------------------------------------------------
 		
 		String json = jsonArr.toString(); 
-		
-		System.out.println(json);
 		
 		request.setAttribute("json", json);
 		

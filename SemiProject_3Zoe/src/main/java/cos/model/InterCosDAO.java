@@ -7,7 +7,10 @@ import java.util.Map;
 import member.model.MemberVO;
 
 public interface InterCosDAO {
-	
+	/*
+	 * // 강의 리스트 페이지에서 필요한 정보 불러오는 메소드 생성하기 List<CosVO> searchCosList() throws
+	 * SQLException;
+	 */
 	// 강의 리스트 불러오기 메소드 생성하기
 	List<CosVO> selectBySpecName(Map<String, String> paraMap) throws SQLException;
 
@@ -18,7 +21,7 @@ public interface InterCosDAO {
 	List<CosVO> SelectLike(Map<String, String> paraMap) throws SQLException;
 	
 	// 찜한 강의 찜 테이블에 올려주는 메소드 생성하기
-	int LikeTblAdd(Map<String, String> paraMap) throws SQLException;
+	int addLike(Map<String, String> paraMap) throws SQLException;
 
 	// 찜 풀은 강의 찜 테이블에서 삭제해주는 메소드 생성하기
 	int dislike(String discheckedHeart, String userid) throws SQLException;
@@ -26,9 +29,9 @@ public interface InterCosDAO {
 	// 제품상세목록 보여주는 메소드 생성하기
 	CosVO selectOneProductByCourseCode(String courseCode)  throws SQLException;
 
-	// 비슷한 강의 찾아주기 메소드 생성하기
-	List<CosVO> CategoryListByCourseCode(Map<String, String> paraMap) throws SQLException;
-	
+	// 비슷한 강의 찾아주기 메소드 생성하기 
+	List<CosVO> RecommendCos(Map<String, String> paraMap) throws SQLException;
+	 
 	// tbl_category 테이블에서 categoryCode, categoryName 조회해오기 
 	List<Map<String, String>> getCategoryList() throws SQLException;
 
@@ -47,7 +50,16 @@ public interface InterCosDAO {
 	// 장바구니에 있는 모든 강의 삭제하기 메소드 생성하기
 	int BagAllDelete(String userid) throws SQLException;
 
+	// 추가이미지 불러오기 메소드 생성하기
+	List<ImgVO> imgPlus(Map<String, String> paraMap) throws SQLException;
+
+	// 강의 검색하기 메소드 생성하기
+	List<CosVO> searchCos(Map<String, String> paraMap) throws SQLException;
+
 	
+
+	
+
 
 
 }

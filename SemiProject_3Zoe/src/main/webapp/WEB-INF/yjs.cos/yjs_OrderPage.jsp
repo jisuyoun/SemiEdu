@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <%
     String ctxPath = request.getContextPath();
@@ -19,63 +19,156 @@
 
 	$(document).ready(function(){
 		
-		/* 연관있는 강의들 불러오기 시작 */
+		alert(sessionStorage.getItem("checked"));
+		<%-- 추가이미지 불러오기 시작 --%>
 		$.ajax({
-			url:"<%= request.getContextPath()%>/yjs.cos/yjs_CosRecommend.go",
-			type:"GET",
+			url:"<%= request.getContextPath()%>/yjs.cos/yjs_PlusImgJSON.go",
+			type:"POST",
 			data:{
-				"courseCode":"${requestScope.courseCode}"
+				"courseCode":"${requestScope.cvo.courseCode}"
+			},
+			dataType:"json",
+			success:function(json){
+				let html = "";
+				
+				if (json.length > 0) {
+					
+					$.each(json, function(index, item){
+					
+						html += "<img class='OPCosContentImg' src='<%= ctxPath%>/yjs.images/"+item.img+"' />";
+						
+						$("div#OPPlusImg").html(html);
+						
+					});
+				} // end of if(json.length > 0)
+			},
+			error: function(request, status, error){
+				
+			}
+		});
+		<%-- 추가이미지 불러오기 끝 --%>
+		
+		
+	
+		<%-- 연관있는 강의들 불러오기 시작 --%>
+		$.ajax({
+			url:"<%= request.getContextPath()%>/yjs.cos/yjs_CosRecommendJSON.go",
+			type:"POST",
+			data:{
+				"fk_categoryCode":"${requestScope.cvo.fk_categoryCode}"
 			},
 			dataType:"json",
 			success:function(json){
 				
+				let html = "";
+				
+				if (json.length > 0) {
+					$.each(json, function(index, item){
+						
+						if("${requestScope.cvo.courseCode}" != item.courseCode) {
+							
+							html += "<div class='OPCardContainer'>"
+								 + "	<a href='<%=request.getContextPath()%>/yjs.cos/yjs_OrderPage.go?courseCode="+item.courseCode+"&fk_categoryCode="+item.fk_categoryCode+"' style='color:black;'>"
+								 + "		<div class='OPImgBox' value='" + item.courseCode + "'>"
+								 + "			<img src='<%= request.getContextPath()%>/yjs.images/" + item.img1 + "' alt='Card image' style='width:100%'>"
+								 + " 		</div>"
+								 + "		<div class='OPTitelBox' style='height: 110px;'>"
+								 + "			<h5 class='card-title'>" + item.courseName + "</h5>"
+								 + "		</div>"
+								 + "	</a>"
+								 + "</div>";
+						
+		                
+						} // end of if("${requestScope.cvo.courseCode}" != item.courseName) {}
+						
+							$("div#OPCardPos").html(html);	
+						
+					});
+						
+				} // end of if
+				
+				else {
+					html = "<div>강의가 준비중에 있습니다.</div>"
+					$("div#OPCardPos").html(html);	
+				}
 			},
 			error: function(request, status, error){
-				alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+				
 			}
 		});
-		/* 연관있는 강의들 불러오기 끝 */
+		<%-- 연관있는 강의들 불러오기 끝 --%>
+		
+		
+		/* 찜한 과목인지 알아오기 시작 */
+		if("${sessionScope.loginuser.userid}" != "") {
+			$.ajax({
+				url:"<%= request.getContextPath()%>/yjs.cos/yjs_CosLikeSelectJSON.go",
+				type:"POST",
+				data:{
+					"userid":"${sessionScope.loginuser.userid}"
+				},
+				dataType:"json",
+				success:function(json){
+					
+					$.each(json, function(index, item){
+					
+						if("${requestScope.cvo.courseCode}" == item.courseCode) {
+							
+							 
+							$("i#heart").removeClass("fa-regular fa-heart");
+							$("i#heart").addClass("fa-solid fa-heart").css("color", "#ff0000");
+							
+		                
+						} 
+					
+					});
+					
+				},
+				error: function(request, status, error){
+					alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+				}
+			});
+		} // end of if
+		/* 찜한 과목인지 알아오기 끝 */
 		
 		
 		
-		
+		/* 가격 알아오기 시작 */
 		var all = ${requestScope.cvo.price}-${requestScope.cvo.salePrice};
 		//alert(all);
 		
 		$("span#salePriceText").text(all);
-		 
-	      $(window).on("scroll",function(){
-	    	  
-	    	  
-	    	  <%-- 스크롤을 내릴시 리스트 상단에 고정 --%>
-	          if( $(window).scrollTop() > 1100){
+		/* 가격 알아오기 끝 */
+		
+	    $(window).on("scroll",function(){
+  
+	    	<%-- 스크롤을 내릴시 리스트 상단에 고정 --%>
+			if( $(window).scrollTop() > 1100){
 	        	  
-	            $(".OPMenuSemi").addClass("nav-menu");
-	            $(".OPMenuSemi").addClass("navbar-expand-sm fixed-top");
-	        	$(".OPMenuSemi").removeClass("OPMenuSemi");
-	        	
-	
-	          }else {
+				$(".OPMenuSemi").addClass("nav-menu");
+				$(".OPMenuSemi").addClass("navbar-expand-sm fixed-top");
+				$(".OPMenuSemi").removeClass("OPMenuSemi");
+
+			}else {
 	        	  
-	        	$(".nav-menu").addClass("OPMenuSemi")
+				$(".nav-menu").addClass("OPMenuSemi")
 	            $(".nav-menu").removeClass("nav-menu");
 	        	$(".OPMenuSemi").removeClass("navbar-expand-sm fixed-top");
 	        	
 	        	$("span#menuIntro").removeClass("OPFont_change");
 	        	$("span#menuList").removeClass("OPFont_change");
 		    	$("span#menuReview").removeClass("OPFont_change");
- 	
-		    	
-	          }
+	
+			}
 	          
-	          if( $(window).scrollTop() > 900){
-	        	  $("nav#showHide").show();
-	          }
-	          else {
-	        	  $("nav#showHide").hide();
-	          }
+			if( $(window).scrollTop() > 900){
+				$("nav#showHide").show();
+			}
+			else {
+				$("nav#showHide").hide();
+			}
 	          
-	        });
+		});
 	      
 	      <%-- 리스트를 누르지 않고 스크롤로 이동시 해당 위치에 따라 리스트 색 변화 --%>
 	      $(window).on("scroll",function(){
@@ -166,7 +259,7 @@
 	      
 	      
 	      /* 찜 토글 */
-	      $("i#heart").click(function(){
+	     /*  $("i#heart").click(function(){
 				if(!flag) {
 					$(this).removeClass("fa-regular fa-heart");
 					$(this).addClass("fa-solid fa-heart").css("color", "#ff0000");
@@ -179,15 +272,56 @@
 					flag = false;
 				}
 				
-			});
+			}); */
  
 		 $('[data-toggle="tooltip"]').tooltip(); 
 		 /* 찜 토글 끝 */
-	      
+	     
+		 
+		 /* 찜 추가 및 삭제 시작 */
+		 $("i#heart").click(function(){
+			 if("${sessionScope.loginuser.userid}" != ""){
+					
+					$.ajax({
+						url:"<%= request.getContextPath()%>/yjs.cos/yjs_CosAddLikeJSON.go",
+						type:"POST",
+						data:{
+							"userid":"${sessionScope.loginuser.userid}",
+							"courseCode":"${requestScope.cvo.courseCode}"	
+						},
+						dataType:"json",
+						success:function(json){
+							
+							$.each(json, function(index, item){
+
+								if(json.result == 1) { 
+									$("i#heart").removeClass("fa-regular fa-heart");
+									$("i#heart").addClass("fa-solid fa-heart").css("color", "#ff0000");
+								}
+								else if(json.result == 0) {
+									$("i#heart").removeClass("fa-solid fa-heart");
+									$("i#heart").addClass("fa-regular fa-heart").css("color", "#cccccc"); 
+								}
+			                
+							}) // end of $.each(json, function(index, item)
+							
+						},
+						error: function(request, status, error){
+							alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+						}
+					});
+					
+				}
+				else {
+					alert("로그인이 필요한 서비스 입니다!");
+				} 
+		 });
+		 /* 찜 추가 및 삭제 끝 */
 		 
 	}); // end of document.ready
 	
 
+	/* 장바구니 가기 시작 */
 	function shoppingGo(){
 		
 		if("${sessionScope.loginuser.userid}" != ""){
@@ -200,11 +334,11 @@
 		}
 		else {
 			alert("로그인이 필요한 서비스 입니다!");
-		}
-		
-		
-	};
+		}	
+	}; // end of function shoppingGo()
+	/* 장바구니 가기 끝 */
 	
+	 
 </script>
 
 	<%-- 최상단 메뉴바 시작 --%>
@@ -235,8 +369,9 @@
 				<div>
 					<a id="OPClassUpdate">2023년 최신강의 업데이트 완료</a>
 					<h1 id="OPClassName">${requestScope.cvo.courseName}
-					<a data-toggle="tooltip" title="찜!"><i id="heart" class="fa-regular fa-heart" style="color: #cccccc;"></i></a>
-					</h1>
+					<a data-toggle="tooltip" title="찜!"><i id="heart"
+						class="fa-regular fa-heart" style="color: #cccccc;"></i></a>
+				</h1>
 				</div>
 				<div id="OPClassDate">
 					<a>기간</a>
@@ -311,23 +446,21 @@
 		
 		<%-- 메인 이미지 시작 --%>
 		<img class="OPCosContentImg" src="<%= request.getContextPath()%>/yjs.images/${requestScope.cvo.img2}" />
-	
+		<div id="OPPlusImg"></div>
 		<%-- 메인 이미지 끝 --%>
 		
 		
 		
-		<%-- 패키지 추천 시작 --%>
-			<div class="container" style="margin:0 300px;">
-				<h4 style="margin:32px 0 25px 11px; font-weight: bold;">이 과정이 포함된 패키지</h4>
-				<div class="card" style="width:290px">
-	    			<img class="card-img-top" src="<%= request.getContextPath()%>/yjs.images/${requestScope.cosList.img1}" alt="Card image" style="width:100%">
-	    			<div class="card-body"  style="height: 110px;">
-						<h5 class="card-title">${requestScope.cosList.fk_categoryCode}</h5>
-	    			</div>
-				</div>
-			</div>
-		<%-- 패키지 추천 끝 --%>
-    
+		<%-- 비슷한 강의 추천 시작 --%>
+		<div class="container">
+			<h4 style="margin:32px 0 25px 11px; font-weight: bold;">추천 강의</h4>
+		</div>
+		<div class="container" style="margin:0 300px;">
+			<div id="OPCardPos"></div>
+		</div>
+		
+		<%-- 비슷한 강의 추천 끝 --%>
+
     
     	<!-- 아코디언 시작 -->
 		<div id="OPCosList" class="container">
