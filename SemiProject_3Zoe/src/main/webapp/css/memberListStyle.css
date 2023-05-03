@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+
+tr.memberInfo:hover {
+	background-color: #e6ffe6;
+	cursor: pointer;
+}
+
+p {
+	font-weight: bold;
+}
+
+
+div#content3 {
+	height: auto !important;
+}
+
+.item2 {
+	display: block !important;
+	padding: 0 auto;
+	align-items: center;
+	padding: 50px 0 20px;
+}
+
+form {
+	float: right;
+	padding: 15px 80px 15px 0;
+	align-items: center;
+}
+
+.my-5 > div {
+	text-align: center;
+	display: block;
+	margin: 0 auto;
+}
+
+#memberTbl {
+	text-align: center;
+	margin: 0 auto;
+}
