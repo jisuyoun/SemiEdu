@@ -62,7 +62,7 @@
   				<p class="pC2">
   					<span class="spanC" >0</span>건
   				</p>
-  				<p class="pC">결제내역</p>
+  				<p class="pC">위시리스트</p>
   			</div>
   		</div>
   		

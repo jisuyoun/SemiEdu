@@ -61,7 +61,7 @@
 	      <a type="button" class="btn btn-light" id="loginBtn" href ="<%= ctxPath%>/login/login.go">
 	         <i class="fa-solid fa-arrow-right-to-bracket" style="margin-right: 10px;"></i>로그인
 	      </a>
-	      <button type="button" class="btn btn-light" id="registerBtn" href="#">
+	      <button type="button" class="btn btn-light" id="registerBtn" onclick= "location.href='<%= ctxPath%>/member/agreementCheck.go'">
 	         <i class="fa-solid fa-user-plus" style="margin-right: 10px;"></i>회원가입
 	      </button>
 	   
@@ -114,9 +114,9 @@
 		  </div> 
 		  
 		  <div class="dropdown">
-		    <button type="button" class="dropbtn" onclick= "location.href='<%= ctxPath%>/pes.customerService/notice.go'">고객센터</button>
+		    <button type="button" class="dropbtn" onclick= "location.href='<%= ctxPath%>/pes.customerService/noticeList.go'">고객센터</button>
 		    <div class="dropdown-content">
-		      <a href="<%= ctxPath%>/pes.customerService/notice.go">공지사항</a>
+		      <a href="<%= ctxPath%>/pes.customerService/noticeList.go">공지사항</a>
 		      <a href="<%= ctxPath%>/pes.customerService/question.go">자주하는질문</a>
 		      <a href="<%= ctxPath%>/hyh.customerService/reviewCourse.go">수강후기</a>
 		      <a href="<%= ctxPath%>/hyh.customerService/event.go">이벤트</a>

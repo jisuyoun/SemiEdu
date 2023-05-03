@@ -1,18 +1,18 @@
-package pes.admin.controller;
+package hyh.customerService.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import common.controller.AbstractController;
 
-public class LoginHistoryAction extends AbstractController {
+public class EventAction extends AbstractController {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
+		super.setRedirect(false);
+		super.setViewPage("/WEB-INF/hyh.customerService/event.jsp");
 		
-		super.setRedirect(false); 
-		super.setViewPage("/WEB-INF/pes.admin/loginHistory.jsp");
 	}
 
 }

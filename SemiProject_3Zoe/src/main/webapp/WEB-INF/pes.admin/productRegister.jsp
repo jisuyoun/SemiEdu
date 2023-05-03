@@ -134,7 +134,7 @@
   
 <div id ="content3" >
 	<div class="content3Div" >
-		<p>신규강좌등록</p>
+		<p style="font-size: 20pt; font-weight: bold;">[ 신규강좌등록 ]</p>
 		
 		<div class="item2">
 		

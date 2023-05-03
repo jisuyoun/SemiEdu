@@ -126,7 +126,7 @@ public class ProductRegisterAction extends AbstractController {
 		        
 		        
 		        try {
-		        	System.out.println("asdfasdfasdfasdfasdfasdfasdf");
+
 		        	// tbl_course 테이블에 insert 하기 
 			        pdao.productInsert(cvo);
 
@@ -148,7 +148,7 @@ public class ProductRegisterAction extends AbstractController {
 				        							   // courseCode 은 위에서 채번해 온 제품번호이다. 
 				        }//end of for----------------
 				        
-			        message = "제품등록 성공!";
+			        message = "신규강좌가 등록되었습니다.";
 			        loc = request.getContextPath() + "/cos/yjs_CosRegister.go";
 			        
 				
@@ -156,7 +156,7 @@ public class ProductRegisterAction extends AbstractController {
 				} catch (SQLException e) {
 					e.printStackTrace();
 					
-					message = "제품등록 실패!!";
+					message = "제품등록을 실패하였습니다.";
 	                loc = request.getContextPath()+"/pes.admin/productRegister.go";
 
 				}

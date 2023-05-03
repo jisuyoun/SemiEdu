@@ -5,12 +5,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import common.controller.AbstractController;
 
-public class NoticeAction extends AbstractController {
+public class NoticeListAction extends AbstractController {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		
 		super.setRedirect(false);
-		super.setViewPage("/WEB-INF/pes.customerService/notice.jsp");
+		super.setViewPage("/WEB-INF/pes.customerService/noticeList.jsp");
+		
 	}
 
 }

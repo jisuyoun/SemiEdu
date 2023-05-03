@@ -19,6 +19,6 @@ public class IndexController extends AbstractController {
 			super.setViewPage("/WEB-INF/index.jsp");
 		//	또는 this.setViewPage("/WEB-INF/index.jsp");	
 		
-	}
+	} 
 
 }

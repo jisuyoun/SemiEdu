@@ -60,15 +60,14 @@
 	      	<span><b>${(sessionScope.loginuser).name}</b>님</span>
 	      	<span style="margin: 0 20px 0 15px;"><b>|</b></span>
 	      
-	      	<a href="#" style="margin-right: 20px;"><i class="fa-solid fa-cart-shopping text-body"></i><b class="text-body">장바구니</b></a>
+	      	<a href="<%=request.getContextPath()%>/yjs.cos/yjs_ShoppingBagPage.go" style="margin-right: 20px;"><i class="fa-solid fa-cart-shopping text-body"></i><b class="text-body">장바구니</b></a>
 	      	<a href="<%= ctxPath %>/index.go" style="margin-right: 20px;"><i class="fa fa-fw fa-home text-body"></i><b class="text-body">홈으로</b></a>
-	      	<a href="#"><i class="fa-solid fa-arrow-right-from-bracket text-body"></i><b class="text-body">로그아웃</b></a>
+	      	<a href="<%=request.getContextPath()%>/login/logout.go"><i class="fa-solid fa-arrow-right-from-bracket text-body"></i><b class="text-body">로그아웃</b></a>
 	      </p>
 	    </li>
 	  </ul>
 	</nav>
 
-	
 	
 	
 <div class="sidenav" >

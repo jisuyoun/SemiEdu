@@ -25,8 +25,11 @@ tr:last-child{
 }
 
 td{
-
 	padding:30px 0;
+}
+
+td:nth-child(2n+1) {
+	width: 13%;
 }
 
 .green{
@@ -34,7 +37,11 @@ color:#1bceb8;
 }
 
 .red{
-color:#1bceb8; 
+color:red; 
+}
+
+input{
+	height: 45px;
 }
 
 
@@ -65,13 +72,18 @@ alert로 비밀번호를 입력하라고 뜨게
 	$(document).ready(function(){
 		
 		
+		$("input#originPasswd").focus(); //기존 비밀번호 포커스 주기
+		
+		$("span#error").addClass('green');
+		
+		
+		// 신규 패스워드
 		$("input#newPasswd").blur( (e) => {
 			//신규 패스워드 입력칸에서 포커스를 잃어버린 경우
 			
-			
 			const regExp = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/; 
 			const bool = regExp.test($(e.target).val());
-			
+		
 			
 			if(!bool){
 				// 암호가 정규표현식에 위배된 경우
@@ -83,15 +95,137 @@ alert로 비밀번호를 입력하라고 뜨게
 				// 암호가 정규표현식에 맞는 경우
 				
 				
+				// 신규 비밀번호와 체크 비밀번호가 같으면 
+				if( $("input#newPasswd").val() == $("input#checkPasswd").val() ){
+					
+					$("span#error").removeClass('red');
+					$("span#error").addClass('green');
+					
+					$("span#error").text("두 비밀번호가 일치합니다.");
+					
+				}
+				
+				// 비밀번호 체크 값에 아무것도 안 넣었다면
+				else if($("input#checkPasswd").val().trim() == "" ) {
+					
+					$("span#error").removeClass('red');
+					$("span#error").addClass('green');
+					
+					$("span#error").text("비밀번호 확인란에 비밀번호를 입력하세요.");
+				}
+				
+				// 두 비밀번호가 다르면
+				else if($("input#newPasswd").val() != $("input#checkPasswd").val() ){
+					
+					$("span#error").removeClass('green');
+					$("span#error").addClass('red');
+					
+					$("span#error").text("두 비밀번호가 일치하지 않습니다.");
+				}
+				
+				
+				
 			}
 			//두 비밀번호가 일치하지 않습니다.
 			// 비밀번호 확인란에 비밀번호를 입력하세요.
 			
-		});
+		});//$("input#newPasswd").blur( (e) =>
+		
+		
+		
+		//비밀번호 확인 칸
+		$("input#checkPasswd").blur( (e) => {
+			//비밀번호 확인 입력칸에서 포커스를 잃어버린 경우
+			
+			const regExp = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/; 
+			const bool = regExp.test($(e.target).val());
+			
+			
+			if(!bool){
+				// 암호가 정규표현식에 위배된 경우
+				
+				$("span#error").removeClass('green');
+				$("span#error").addClass('red');
+				$("span#error").text("영문, 숫자, 특수문자 조합 8자 이상 입력하세요.");
+			}
+			else {
+				// 암호가 정규표현식에 맞는 경우
+				
+				
+				// 신규 비밀번호와 체크 비밀번호가 같으면 
+				if( $("input#newPasswd").val() == $("input#checkPasswd").val() ){
+					
+					$("span#error").removeClass('red');
+					$("span#error").addClass('green');
+					
+					$("span#error").text("두 비밀번호가 일치합니다.");
+				}
+				
+				// 아무것도 입력안했으면
+				else if($("input#newPasswd").val().trim() == "" ) {
+					
+					$("span#error").removeClass('green');
+					$("span#error").addClass('red');
+					
+					$("span#error").text("영문, 숫자, 특수문자 조합 8자 이상 입력하세요.");
+				}
+				
+				// 두 비밀번호가 다르면
+				else if($("input#newPasswd").val() != $("input#checkPasswd").val() ){
+					
+					$("span#error").removeClass('green');
+					$("span#error").addClass('red');
+					
+					$("span#error").text("두 비밀번호가 일치하지 않습니다.");
+				}
+				
+			}
+			//두 비밀번호가 일치하지 않습니다.
+			// 비밀번호 확인란에 비밀번호를 입력하세요.
+			
+		});//$("input#checkPasswd").blur( (e) =>
 		
 		
 		
 	});//$(document).ready(function()
+			
+			
+	function goChange(){
+	
+		
+		const regExp = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/; 
+		const bool1 = regExp.test( $("input#newPasswd").val());
+		const bool2 = regExp.test($("input#checkPasswd").val());
+		
+		
+		// 비밀번호 입력칸에 하나라도 공백이 있다면
+		if( $("input#originPasswd").val().trim()=="" || $("input#newPasswd").val().trim()=="" ||
+				$("input#checkPasswd").val().trim()=="" ){
+			alert("비밀번호를 입력하세요");
+			return ;
+		}
+		
+		// 입력된 두개의 비밀번호 중 하나라도 잘못됐으면
+		else if( (bool1==false) || (bool2==false)){
+			alert("비밀번호는 영문, 숫자, 특수문자 조합 8자 이상 입력하세요.");
+			return;
+		}
+		
+		else if($("input#newPasswd").val() != $("input#checkPasswd").val()){
+			alert("신규비밀번호가 서로 일치하지 않습니다.");
+			return;
+		}
+
+		else{
+		//입력된 비밀번호가 로그인된 계정의 비밀번호와 같은지 검사해야함. 이건 class로 가서 dao로 가서 함
+
+			const frm = document.passwdChange;
+			frm.action = "<%=ctxPath%>/ljh.member.controller/passwdChange.go";
+			frm.method = "post";
+			frm.submit();
+		}
+
+	}//goChange()
 
 </script>			
 
@@ -105,7 +239,7 @@ alert로 비밀번호를 입력하라고 뜨게
   			<tr>
   				<td>기존 비밀번호<span style="color:#1bceb8; margin-left:5px;">*</span></td>
   				<td>
-  					<input type="password" name="originPasswd"></input>
+  					<input type="password" name="originPasswd" id="originPasswd"/>
   				</td>
   			</tr>
   			
@@ -113,14 +247,14 @@ alert로 비밀번호를 입력하라고 뜨게
   			<tr>
   				<td>신규 비밀번호<span style="color:#1bceb8; margin-left:5px;">*</span></td>
   				<td>
-  					<input type="password" name="newPasswd" id="newPasswd"></input><span id="error" class="green" style="margin-left:20px;" >영문, 숫자, 특수문자 조합 8자 이상 입력하세요.</span>
+  					<input type="password" name="newPasswd" id="newPasswd"/><span id="error" style="margin-left:20px;" >영문, 숫자, 특수문자 조합 8자 이상 입력하세요.</span>
   				</td>
   			</tr>
   			
   			<tr>
   				<td>비밀번호 확인<span style="color:#1bceb8; margin-left:5px;">*</span></td>
   				<td>
-  					<input type="password" name="checkPasswd"></input>
+  					<input type="password" name="checkPasswd" id="checkPasswd"/>
   				</td>
   			</tr>
 
@@ -131,7 +265,7 @@ alert로 비밀번호를 입력하라고 뜨게
   	</div>
   	
   	<p style="text-align:center; margin-top:20px;">
-	  	<button type="button" style="background-color:#1bceb8; color:white; border-radius:30px; width:155px; border:none; padding:10px;">변경하기</button>
+	  	<button type="button" onclick="goChange();" style="background-color:#1bceb8; color:white; border-radius:30px; width:155px; border:none; padding:10px;">변경하기</button>
   	</p>
 </div>
 </form>	

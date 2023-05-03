@@ -10,116 +10,7 @@
 
 <jsp:include page="../header.jsp" /> 
 
-
-<style>
-
-	<%-- 상단 title 시작 --%>
-	div.es_bar {
-	    width: 100%;
-	    height: 200px;
-	    background-size: contain;
-	    top: 0;
-	    left: 0;
-	}
-	
-	#page_title {
-	    position: relative;
-	    font-size: 40pt;
-	    top: -140px;
-	    color: #fff;
-	    text-align: center;
-	    font-weight: bold;
-	}
-
-	.es_dropbtn {
-		position: relative;
-	    color: white;
-	    font-size: 14px;
-	    border: none;
-	    cursor: pointer; 
-	    top: -130px;
-	    left: 1300px;
-	    background-color: inherit;
-	}
-	
-	.es_dropdown {
-	    position: relative;
-	    display: inline-block;
-	   
-	}
-	
-	.es_dropdown-content {
-	    display: none;
-	    position: absolute;
-	    background-color: white;
-	    border-radius: 10px;
-	    margin-top: 10px; 
-	    min-width: 120px;
-	    overflow: auto;
-	    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-	    border: solid 1px #ddd;
-	    font-size: 12pt;
-	}
-	
-	.es_dropdown-content a {
-	    color: gray;
-	    padding: 5px 2px;
-	    text-decoration: none;
-	    display: block;
-	}
-
-	.es_dropdown-content a:hover {
-		color: #1BCEB8;
-	} 
-
-	.show {display: block;}
-	<%-- 상단 title 끝 --%>	
-	
-	
-	<%-- notice Contents 시작 --%>
-	.es_input_search {
-		border: solid 1px #ddd;
-		height: 50px;
-		width: 280px;
-		border-radius: 5px;
-	}
-	.noticeSearch {
-		width: 60%;
-		margin: 20px auto;
-		text-align: right;
-		margin-top: 100px;
-	}
-	
-	
-	tr.memberInfo:hover {
-		background-color: #e6ffe6; 
-		cursor: pointer;
-	}
-	
-	table#noticeTitle{
-		width: 60%;
-		margin: 20px auto;
-		border-top: 1px solid #444444;
-    	border-collapse: collapse;
-    	font-size: 12pt;
-	}
-
-    th, tr {
-	    border-bottom: 1px solid #ddd;
-	    padding: 10px;
-	}
-	
-	tr {
-		height: 60px; 
-	}
-
-
-	<%-- notice Contents 끝 --%> 
-	
-	
-
-</style>
-
+<link rel="stylesheet" type="text/css" href="<%= ctxPath%>/css/noticeStyle.css" />
 
 
 <script type="text/javascript">
@@ -165,12 +56,11 @@
 	
 	
 	
-	<%-- notice Contents 시작 --%>
+	<%-- notice 검색 시작 --%>
 	$(document).ready(function(){
 		
 		 // trim 을 사용하지 않았을 경우 띄어쓰기만 하고 검색한 것도 검색 후 검색창에 유지된다.
 		
-	<%--	 if( "${fn:trim(requestScope.searchWord)}" != "" ){		--%>
 		if("${requestScope.searchType}" != "" &&
 		   "${requestScope.searchWord}" != ""){	
 			$("select#searchType").val("${requestScope.searchType}");
@@ -192,16 +82,7 @@
 			goSearch();
 			
 		});//end of $("select#sizePerPage").bind("change", function(){})----------
-		
-		
-		// 특정 회원을 클릭하면 그 회원의 상세정보를 보여주도록 한다.
-		$("tr.memberInfo").click( (e) => {
-		//	alert( $(e.target).parent().find(".userid").text() );
-		
-			const userid = $(e.target).parent().find(".userid").text();
-			location.href="<%= ctxPath%>/member/memberOneDetail.up?userid="+userid;
-		});
-		
+
 	});// end of $(document).ready(function(){})-----------------------------
 	
 	// Function Declaration
@@ -209,11 +90,14 @@
 		
 		const frm = document.memberFrm;			
 	
-		frm.action = "memberList.up";
+		frm.action = "noticeList.go";
 		frm.method = "get";
 		frm.submit();
 	};
-	<%-- notice Contents 끝 --%>
+	<%-- notice 검색 끝 --%>
+	
+	
+    		
 	
 
 </script>
@@ -232,14 +116,14 @@
 	    <button onclick="myFunction()" class="es_dropbtn" style="color:#ffffff; font-size: 14pt;"> 고객센터 <i class="fa-solid fa-circle-chevron-down" style="color: #ffffff; margin: 0 10px;"></i>|
 		    <div id="myDropdown" class="es_dropdown-content">
 		       <a href="#">수강신청</a>
-		       <a href="<%= ctxPath%>/customerService/announcement.go">고객센터</a>
+		       <a href="<%= ctxPath%>/pes.customerService/noticeList.go">고객센터</a>
 		    </div>
 	    </button>
 	    
 	    <button onclick="myFunction2()" class="es_dropbtn" style="color:#ffffff; font-size: 14pt;"> 공지사항 <i class="fa-solid fa-circle-chevron-down" style="color: #ffffff; margin: 0 10px;"></i>|
 		    <div id="myDropdown2" class="es_dropdown-content">
-		       <a href="<%= ctxPath%>/customerService/announcement.go">공지사항</a>
-		       <a href="<%= ctxPath%>/customerService/question.go">자주하는질문</a>
+		       <a href="<%= ctxPath%>/pes.customerService/noticeList.go">공지사항</a>
+		       <a href="<%= ctxPath%>/pes.customerService/question.go">자주하는질문</a>
 		       <a href="#">수강후기</a>
 		       <a href="#">이벤트</a>
 		    </div>
