@@ -26,6 +26,12 @@ public class NoticeAddAction extends AbstractController {
 		
 		MemberVO loginuser = (MemberVO) session.getAttribute("loginuser");
 		
+		InterNoticeDAO ndao;
+		ndao = new NoticeDAO();
+		String notice_seq = ndao.getNotice_seqOfProduct(); // 글번호 채번 해오기
+		System.out.println("notice_seq"+ notice_seq);
+		request.setAttribute("notice_seq", notice_seq);
+		
 		if(loginuser != null && "testadmin".equals(loginuser.getUserid())) {
 			
 			String method = request.getMethod();
@@ -44,9 +50,7 @@ public class NoticeAddAction extends AbstractController {
 				// 1. 첨부되어진 파일이 디스크에 업로드 될 경로
 				ServletContext svlCtx = session.getServletContext();
 				String uploadFileDir = svlCtx.getRealPath("/es_noticeImages"); 
-				System.out.println("1111111");
 				System.out.println("=== [공지사항] 첨부되어지는 이미지 파일이 올라가는 절대경로 uploadFileDir ==> " + uploadFileDir);
-				System.out.println("22222222");
 				// === 파일을 업로드  해준다. ===
 				try {
 					mtrequest = new MultipartRequest(request, uploadFileDir, 10*1024*1024, "UTF-8", new DefaultFileRenamePolicy() );
@@ -61,64 +65,52 @@ public class NoticeAddAction extends AbstractController {
 				
 				// tbl_notice 테이블에 insert 				
 				// 새로운 제품 등록시 form 태그에서 입력한 값들을 얻어오기	
-				System.out.println("33333333");
 				String title = mtrequest.getParameter("title");					// 제목
-				String wirter = (String)session.getAttribute("name");				// 작성자
 				String contents = mtrequest.getParameter("contents");			// 공지사항 본문
 				String readcount = mtrequest.getParameter("readcount");			// 조회수
+				String notice_img1 = mtrequest.getFilesystemName("notice_img1");		// 첨부이미지1
+				String notice_img2 = mtrequest.getFilesystemName("notice_img2");		// 첨부이미지2
+						
 				
 				System.out.println("title"+title);
-				System.out.println("wirter"+wirter);
+				
 				System.out.println("contents"+contents);
 				System.out.println("readcount"+readcount);
+				System.out.println("notice_img1"+notice_img1);
+				System.out.println("notice_img2"+notice_img2);
 
-				System.out.println("444444444");
+
 				
 				// 크로스 사이트 스크립트 공격에 대응하는 안전한 코드(시큐어코드)
-				String noticeList = mtrequest.getParameter("noticeList");
+				String noticeList = mtrequest.getParameter("contents");
+				
 				noticeList = noticeList.replaceAll("<", "&lt;");
+				
 				noticeList = noticeList.replaceAll("<", "&gt;");
 				// 입력한 내용에서 엔터는 <br>로 변환시키기기
 				noticeList = noticeList.replaceAll("\r\n", "<br>");
 
-				InterNoticeDAO ndao = new NoticeDAO();
 				
-				String notice_seq = ndao.getNotice_seqOfProduct(); // 글번호 채번 해오기
 				
 				NoticeVO nvo = new NoticeVO();
 				
 				nvo.setTitle(title);
-				nvo.setWirter(wirter);
 				nvo.setContents(contents);
+				nvo.setNotice_seq(Integer.parseInt(notice_seq));
 				nvo.setReadcount(Integer.parseInt(readcount));
-
+				nvo.setNotice_img1(notice_img1);
+		        nvo.setNotice_img1(notice_img1);
+				
 				
 		        String message = "";
 		        String loc = "";
 		        
 		        try {
-		        	ndao.noticeAdd(nvo);
-		        	// tbl_course 테이블에 insert 하기 
+		        	ndao = new NoticeDAO();
 		        	
-
-			        // 추가이미지파일이 있다라면 tbl_extraImg 테이블에 제품의 추가이미지 파일명 insert
-			        String str_attachCount = mtrequest.getParameter("attachCount"); 
-		            // str_attachCount 이 추가이미지 파일의 개수이다. "" "0" ~ "10" 이 들어온다.
-			        
-			        int attachCount = 0;
-			        
-				        if(!"".equals(str_attachCount)) {
-				        	attachCount = Integer.parseInt(str_attachCount);
-				        }
-				        
-				        // 첨부파일의 파일명(파일서버에 업로드 되어진 실제 파일명) 알아오기 
-				        for(int i=0; i<attachCount; i++) {
-				        	String attachFileName = mtrequest.getFilesystemName("attach"+i);
-				        	
-				        	ndao.notice_imagefile_Insert(notice_seq, attachFileName);
-				        							   // courseCode 은 위에서 채번해 온 제품번호이다. 
-				        }//end of for----------------
-				        
+		        	ndao.noticeAdd(nvo);
+		        	// noticeAdd 테이블에 insert 하기 
+		        				        
 			        message = "공지사항이 등록되었습니다.";
 			        loc = request.getContextPath() + "/pes.customerService/noticeList.go";
 			        

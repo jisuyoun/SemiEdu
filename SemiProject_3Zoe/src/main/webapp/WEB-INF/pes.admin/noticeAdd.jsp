@@ -1,3 +1,4 @@
+<%@page import="pes.notice.model.NoticeDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>  
     
@@ -135,7 +136,7 @@
 	        
 	        console.log(input_file.files[0]); // 배열 아니고 대괄호표기법
 	         
-	        console.log(input_file.files[0].name); // 대괄호표기법 대신 .표기법
+	        console.log(input_file.files[0]); // 대괄호표기법 대신 .표기법
 	        
 	     	// File 객체의 실제 데이터(내용물)에 접근하기 위해 FileReader 객체를 생성
 	        const fileReader = new FileReader();
@@ -206,7 +207,8 @@
 				   <tr>
 				      <td width="25%" class="prodInputName" style="padding-top: 10px;">글번호</td>
 				      <td width="75%" align="left" style="padding-top: 10px;" >
-							<span><b>${(sessionScope.noticeNum).noticeNum}</b></span>
+							<span><b>${requestScope.notice_seq}</b></span>
+							<%--  <%=request.getAttribute("notice_seq") %>  --%>
 				      </td>   
 				   </tr>
 				   <tr>
@@ -220,6 +222,7 @@
 				      <td width="25%" class="prodInputName">작성자</td>
 				      <td width="75%" align="left" style="border-top: hidden; border-bottom: hidden;">
 				         <span><b>${(sessionScope.loginuser).name}</b>님</span>
+				         <input type="hidden" name="writer" value="${(sessionScope.loginuser).name}">
 				      </td>
 				   </tr>
 				   
@@ -260,13 +263,10 @@
 				          <input type="reset" value="취소"  style="width: 150px; padding: 5px;" />   
 				      </td>
 				   </tr>
-				   <tr>
-				   	<td>
-				   		<input type="hidden" value="0" name="readcount">
-				   	</td>
-				   </tr>
+				  
 				</tbody>
 				</table>
+				<input type="hidden" value="0" name="readcount">
 				</form>
 			</div>
 		

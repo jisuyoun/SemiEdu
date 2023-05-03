@@ -3,7 +3,7 @@
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>    
-    
+
 <%
     String ctxPath = request.getContextPath();
 %>
@@ -137,51 +137,7 @@
 	<%-- notice Contents 시작 --%>
 	<div id="content" style="height: 1000px;">
 		
-		<form class="noticeSearch">
-
-			<input type="text" name="s_keyword" class="es_input_search" title="검색어" placeholder="검색어를 입력해주세요" />
-			<input type="image" src="../es_noticeImages/search.png" class="btn_search" style="height: 25px;" onclick="goSearch();" />
-		</form>
-	
-		<table id="noticeTitle" >
-	        <thead>
-	           <tr>
-	              <th style="width: 80px; height: 65px; color: #222; background-color: #f9f9f9; text-align:center;">NO</th>
-	              <th style="width: 750px; color: #222; background-color: #f9f9f9; text-align:center;">제목</th>
-	              <th style="color: #222; background-color: #f9f9f9; text-align:center;">작성자</th>
-	              <th style="color: #222; background-color: #f9f9f9; text-align:center;">등록일</th>
-	              <th style="color: #222; background-color: #f9f9f9; text-align:center;">조회수</th>
-	           </tr>
-	        </thead>	
-	        
-	        <tbody>
-		        <c:if test="${not empty requestScope.lists}">
-		        	<c:forEach var="nvo" items="${lists}">
-		        	<tr class="noticeList">
-		        	 	<th style="width: 80px; text-align:center;">${nvo.notice_seq }</th>		        	 			          
-			            <td class="noticeTitle"><a href="#">${nvo.title }</a></td>
-			            <td class="noticeWirter">${(sessionScope.loginuser).name}</td>
-			            <td class="noticeWriteDate">${nvo.writeDate2 }</td>
-			            <td class="noticeReadcount">${nvo.readcount }</td>
-			        </tr>
-			        </c:forEach>
-		        </c:if>	
-		        <c:if test="${empty requestScope.lists}">
-		        	<tr>
-		        	  <td></td>
-		              <td colspan="4">등록된 공지사항이 없습니다.</td>
-	           		</tr>
-		        </c:if>
-	        </tbody>
-		</table>        
-	        
-        
-    
-    <nav class="my-5">
-        <div style='display:flex; width:80%;'>
-          <ul class="pagination" style='margin:auto;'>${requestScope.pageBar}</ul>
-       </div>
-    </nav>    
+		 
 
 	</div>
 	

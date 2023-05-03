@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import common.controller.AbstractController;
 
 import member.model.*;
+import pes.member.model.InterMemberDAO;
 import pes.member.model.MemberDAO;
 
 public class MemberOneDetailAction extends AbstractController {
@@ -21,7 +22,7 @@ public class MemberOneDetailAction extends AbstractController {
 		// 관리자로 로그인 했을 때만 보여지도록	
 			
 			String userid = request.getParameter("userid");
-			pes.member.model.InterMemberDAO mdao = new MemberDAO();
+			InterMemberDAO mdao = new MemberDAO();
 			MemberVO mvo = mdao.memberOneDetailAction(userid);
 			
 			request.setAttribute("mvo", mvo);

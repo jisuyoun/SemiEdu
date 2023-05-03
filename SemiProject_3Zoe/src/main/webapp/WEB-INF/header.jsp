@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    
 <%
     String ctxPath = request.getContextPath();
 %>
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
@@ -75,7 +75,7 @@
   
    <%-- *** 로그인 후 상단바 화면 *** --%>
    <c:if test="${not empty sessionScope.loginuser}">
-      <div id="loginBar" style="text-align: right;">
+      <div id="loginBar" style="text-align: right; height: 60px;">
    
       <button type="button" class="btn btn-light" id="loginBtn" href="#">
          <i class="fa-regular fa-circle-user" style="margin-right: 10px;"></i>${(sessionScope.loginuser).name}
@@ -87,14 +87,10 @@
          <i class="fa-solid fa-cart-shopping" style="margin-right: 10px;"></i>장바구니
       </button>
    
-      <form style="display: inline-block;">
-         <img src="images/searching.png" class="img-search" width="30px;">
-         <input type="text" class="search" name="search" placeholder="Search.." autocomplete="off">
-      </form>
-   
     </div>
 
    </c:if>
+   
 
 
 
@@ -124,6 +120,9 @@
 		    
 		  </div>
 	 
+	 	<div class="dropdown">
+		    <button type="button" class="dropbtn" onclick= "location.href='<%= ctxPath%>/pes.customerService/projectReview.go'">프로젝트 소감</button>
+		  </div>
 	 
 	 
 	 	<%-- 로그인 전 메인페이지 --%>
@@ -150,7 +149,7 @@
 	</nav>
 	<!-- 상단 네비게이션 끝 -->
 	
-	
+	<nav>
 	<!-- to Top btn 끝 -->
 	<div class="myfixed div_table">
 	   	<div id="div_table_cell">  

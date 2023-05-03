@@ -19,25 +19,23 @@
       text-align: left;
       border: solid 0px red;
       margin-top: 30px; 
-      font-size: 13pt;
+      font-size: 18pt;
       line-height: 200%;
       margin: 0 auto; 
-      border: solid 1px red;
+      padding-left: 150px;
    }
    
    span.myli {
       display: inline-block;
-      width: 200px;
-      border: solid 1px blue;
+      width: 250px;
+      text-align: center;
    }
-   
 
    div#sms {
-      margin: 0 auto; 
+      margin: 100px auto; 
       overflow: hidden; 
-      width: 60%;
-      padding: 10px 0 10px 80px;
-      border: solid 1px blue;
+      width: 50%;
+	  padding-left: 200px;
    }
    
    span#smsTitle {
@@ -71,9 +69,8 @@
    }   
 
 	div#listButton {
-	  border: solid 1px red;
 	  margin: 25px auto;
-	  padding: 10px auto;
+	  width: 370px;
 	}
 
    
@@ -178,8 +175,8 @@
 		
 		   <div id="mvoInfo">
 		    <ol>   
-		       <li><span class="myli">아이디 : </span>${mvo.userid}</li>
-		       <li><span class="myli">회원명 : </span>${mvo.name}</li>
+		       <li style="font-weight: bold;"><span class="myli">아이디 : </span>${mvo.userid}</li>
+		       <li style="font-weight: bold;"><span class="myli">회원명 : </span>${mvo.name}</li>
 		       <li><span class="myli">이메일 : </span>${mvo.email}</li>
 		       <li><span class="myli">휴대폰 : </span>${fn:substring(mobile, 0, 3)}-${fn:substring(mobile, 3, 7)}-${fn:substring(mobile, 7, 11)}</li>
 		       <li><span class="myli">우편번호 : </span>${mvo.postcode}</li>
@@ -204,12 +201,6 @@
 		</c:if>
 		
 		
-		<div id="listButton">
-		   <button type="button" class="btn btn-secondary" onclick="javascript:history.back();">회원목록[검색기록]</button>
-		   &nbsp;&nbsp;
-		   &nbsp;&nbsp;
-		   <button type="button" class="btn btn-secondary" onclick="javascript:location.href='memberList.go'">회원목록[처음으로]</button> 
-		</div>
 		
 	</div>
 
