@@ -5,7 +5,7 @@
     String ctxPath = request.getContextPath();
     //    /MyMVC
 %>   
- 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style type="text/css">
 
 	input.chkboxCos{
@@ -41,11 +41,11 @@
   	<div class="content4">
   		
   		<div>
-  			<ul class="navbar-nav" style="width: 100%; display: flex; justify-content: space-between;">
+  			<ul class="navbar-nav" style="width: 100%; display: flex; margin-bottom:15px; justify-content: space-between;">
 
 		
 			    <li class="nav-item " style="display: flex; align-items: center; ">
-			      	<span><b>증명서 발급</b></span>
+			      	<span ><b>증명서 발급</b></span>
 			      	
 			 
 			      	<input type="checkbox" class="chkboxCos"  style=" margin-left:30px; "></input> <label style="font-size:11pt;" class="labelTag">수료 과정만 보기</label>
@@ -65,9 +65,41 @@
   
 			    </li>
 			  </ul>
-			<hr style="border:solid 0.5px black; margin-top:20px;">
-	  
-	  		<div class="item3">해당 과정이 없습니다.</div>
+			  
+			  
+			<!-- 만약 증명서가 아무것도 없다면 -->
+			<c:if test="${empty requestScope.cosList}"> 
+				<hr style="border:solid 0.5px black; margin-top:20px;">
+		  		<div class="item3">해당 과정이 없습니다.</div>
+	  		</c:if>
+	  		
+	  		<!-- 만약 증명서가 있으면 -->
+	  		<c:if test="${not empty requestScope.cosList}"> 
+	  		<div class="row row-cols-1 row-cols-md-4">
+	  		
+	  		<c:forEach var="cos"  items="${requestScope.cosList}" >
+	  		
+			  <div class="col mb-4">
+			    <div class="card h-100" style="border-radius:25px;">
+			    <i class="fa-solid fa-heart fa-lg" id="i${cos.courseCode}" onclick="deleteWishList(${cos.courseCode})" style="color:#1bceb8; cursor:pointer; position:absolute; right:20px; top:30px;"></i>
+			      
+			      <a href="#">
+			      	<img src="../images/${cos.img1}" style="border-radius:25px 25px 0 0; "  class="card-img-top" alt="${cos.courseName}">
+			      </a>
+			      
+			      <div class="card-body" onClick="location.href =''" style="cursor:pointer;">
+			        <h5 class="card-title">${cos.courseName}</h5>
+			        <p class="card-text" style="font-size:12pt;">기간 <span style="margin-left:15px; font-size:12pt; color:gray;">${cos.courseTerm}일</span></p>
+			        <p class="card-text" style="color:#1bceb8; font-weight:bold;">${cos.salePrice}원</p>
+			      </div>
+			    </div>
+			    
+			  </div>
+			  </c:forEach>
+			  
+			 </div>
+			 
+			</c:if>
 	  
   		</div>
 

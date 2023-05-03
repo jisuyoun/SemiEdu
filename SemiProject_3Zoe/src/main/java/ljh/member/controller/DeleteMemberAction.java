@@ -1,5 +1,7 @@
 package ljh.member.controller;
 
+import java.util.*;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -35,14 +37,17 @@ public class DeleteMemberAction extends AbstractController {
 			MemberVO loginuser = (MemberVO) session.getAttribute("loginuser");
 			
 
+			InterMemberDAO mdao = new MemberDAO();
 			
-			// 입력받은 비밀번호를 넘겨서 
-			//String originPwd = mdao.checkPasswd(inputPwd);
-			String originPwd = loginuser.getPwd();
+			//로그인된 아이디와 비밀번호를 넘겨서 체크하기
+			Map<String,String> paraMap = new HashMap<>();
+			paraMap.put("userid", loginuser.getUserid());
+			paraMap.put("passwd", inputPwd);
+			
+			boolean bool = mdao.checkPasswd(paraMap);
 			
 			
-			
-			if( !originPwd.equals(inputPwd)) {// 입력된 비밀번호가 다르면
+			if( !bool) {// 입력된 비밀번호가 다르면
 				
 				String message = "비밀번호가 일치하지 않습니다.";
 				String loc ="javascript:history.back()";
@@ -55,7 +60,7 @@ public class DeleteMemberAction extends AbstractController {
 				
 			}
 			else {
-				InterMemberDAO mdao = new MemberDAO();
+	
 				
 				int n = mdao.deleteMember(loginuser.getUserid());
 				
@@ -65,7 +70,8 @@ public class DeleteMemberAction extends AbstractController {
 				if(n==1) {//status가 1에서 0으로 변경됨
 					
 					//sessionScope에 있는 로그인 유저 없애고 메인페이지로 이동
-					session.invalidate();
+					//session.invalidate();
+					session.removeAttribute("loginuser");
 					//System.out.println(loginuser.getUserid());
 					//근데 이거 왜... 계속 나오냐
 					
