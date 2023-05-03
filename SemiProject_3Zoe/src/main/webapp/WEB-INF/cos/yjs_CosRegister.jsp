@@ -158,8 +158,127 @@ String ctxPath = request.getContextPath();
 		/* 리스트 불러오기 시작 */
 		$("div#CRAllImg").click(function(){
 			
-			goSort();
-			
+			$.ajax({
+				url:"<%= request.getContextPath()%>/cos/yjs_CosDisplayJSON.go",
+				data:{
+					"ClickData":$("input#CRInput_Text").val()
+				},   
+				dataType:"json", /* dataType 을 생략하면 string 타입으로 들어온다. */
+				/* async:false, */
+				success:function(json){
+					
+					$("div.CRCosList").hide();
+					$("div.CRCosList_1").hide();
+					
+				//	console.log(JSON.stringify(json));
+					/*
+					   [{"courseName":"정보처리기사 필기","courseterm":90,"teacher":"홍길동","salePrice":790,"price":1300,"courseCode":"10","fk_categoryCode":"1","img2":"cos_jeong_1_introduce1.png","img1":"cos_jeong1.png"}
+					   ,{"courseName":"test_정보처리","courseterm":90,"teacher":"asdf","salePrice":500000,"price":20000000,"courseCode":"26","fk_categoryCode":"1","img2":"cos31.png","img1":"cos_cal11.png"}
+					   ,{"courseName":"test 기능사","courseterm":120,"teacher":"이순신","salePrice":109000,"price":160000,"courseCode":"28","fk_categoryCode":"1","img2":"cos1_introduce1.png","img1":"cos_jeong3.png"}
+					   ,{"courseName":"정보처리기사 실기","courseterm":120,"teacher":"홍길동","salePrice":109000,"price":160000,"courseCode":"12","fk_categoryCode":"1","img2":"cos1_introduce1.png","img1":"cos_jeong2.png"}
+					   ]
+					*/
+					
+					// console.log("두번째 : " + sessionStorage.getItem("jjim")); 
+					// "[{"courseCode":"10"},{"courseCode":"12"}]"
+					
+					const jjim_arr = JSON.parse(sessionStorage.getItem("jjim"));
+					// [{"courseCode":"10"},{"courseCode":"12"}]
+					
+					
+					if (json.length > 0) {
+						
+						let html = "";
+					
+						$.each(json, function(index, item){
+							
+							if(index == 0) {
+								html = "<div class='CRCosList  col-lg-12'>"
+							}
+							else {
+								html = "<div class='CRCosList_1  col-lg-12'>"
+							}
+							
+							html += "	<ul>"
+								  +	"		<li><input type='checkbox' class='CRDeleteCheckBox' name='CRDeleteCheckBox' value='" + item.courseCode + "' />"
+								  + "			<a href ='<%= ctxPath%>/yjs.cos/yjs_OrderPage.go?courseCode="+ item.courseCode +"&fk_categoryCode="+ item.fk_categoryCode +"'><img src='<%= ctxPath%>/yjs.images/"+item.img1+"' class='CRSellImg' /></a>";  
+						 	
+							if("${sessionScope.loginuser.userid}" != "") {
+								let jjim_flag = false;	  
+								for(let i=0; i<jjim_arr.length; i++) {
+									if(item.courseCode == jjim_arr[i].courseCode) {
+									    html += "<label for='CRheartCheck" + index + "'><i id='heart" + index + "' class='heartGroup fa-solid fa-heart' style='color: #ff0000;' onclick='likeAdd();'></i>"
+									          + "<input type='checkbox' id='CRheartCheck" + index + "' name='CRHeartCheckName' value='" + item.courseCode + "' style='display:none;' /></label>";
+									    jjim_flag = true;
+									    return;
+									}
+									
+								}// end of for---------------------
+							
+								if(!jjim_flag) {
+									html +=	"<label for='CRheartCheck" + index + "'><i id='heart" + index + "' class='heartGroup fa-regular fa-heart' style='color: #cccccc;' onclick='likeAdd();'></i>"
+							             + "<input type='checkbox' id='CRheartCheck" + index + "' name='CRHeartCheckName' value='" + item.courseCode + "' style='display:none;' /></label>";
+								}
+							} 
+							else {
+								html += "<input type='hidden' name='heartSelect" + index + "' value='" + item.courseCode + "' /><i id='heart" + index + "' class='heartGroup fa-regular fa-heart' style='color: #cccccc;'></i>"; 
+							} 
+							
+					 	  	html += "       </li>"
+							  	  + "	</ul>"	
+							  	  + "	<div class='CRListMainPosition col-lg-4'>"
+							  	  + "		<ul>"
+							  	  + "			<li>"
+							  	  + "				<a href ='<%= ctxPath%>/yjs.cos/yjs_OrderPage.go?courseCode="+ item.courseCode +"&fk_categoryCode="+ item.fk_categoryCode +"'><h4 class='CRCosTitleName' style='color:black'>"+item.courseName+"</h4></a>"
+							  	  + "				<h5 class='CRCosTeacher'>강사명 <a style='margin-left: 10px;'>" + item.teacher + "</a></h5>"
+							  	  + "				<div class='CRDate'>"
+							  	  + "				기간 <a style='margin-left: 28px;'>"+item.courseterm+"일</a>"
+							  	  + "				</div>"
+							  	  + "			</li>"
+							  	  + "		</ul>"
+							  	  + "	</div>"
+							  	  + "	<div class='CRLastListPostion col-lg-2'>"
+							  	  + "		<ul>"
+							  	  + "			<li>"
+							  	  + "				<div class='CRCosPrice'>"+item.price+"</div>"
+							  	  + "				<div class='CRCosSalePrice'>"+item.salePrice+"</div>";
+							  	  + "			</li>"
+							  	  + "		</ul>"
+							  	  + "	</div>";
+							  
+							html += "	<div class='CRButton'>"
+							  	 + " 		<input type='hidden' id='courseCode' /> "
+							  	 + "		<button type='button' class='CRButtonGoBag'  value='" + item.courseCode + "' >"
+							  	 + "			<i class='fa-solid fa-pen' style='color: #ffffff; margin-right=10px;'></i>장바구니"
+							  	 + "		</button>"
+							  	 + "		<button type='button' class='CRButtonGoApplication' value='" + item.courseCode + "'>"
+							  	 + "			<i class='fa-solid fa-cart-shopping' style='color: #1bceb8; margin-right=10px;'></i>수강신청"
+							  	 + "		</button>"
+							  	 + "	</div>"
+							  	 + "</div>";
+						
+							$("div.CRSildeMenu").append(html);
+					
+						}); // end of $.each(json, functioin(index, item){} -------------------------------
+								  
+
+					} // end of if ------------------------------------------------------------------------
+					else if(json.length == 0) {
+						alert("강의 준비중입니다.");
+						
+						$("div.CRCosList").hide();
+						$("div.CRCosList_1").hide();
+						$("div.dropdown").hide();
+						$("div.CRSearchBox").hide(); 
+						
+						return; 
+					} // end of else if --------------------------------------------------------------------
+					
+				},
+				error: function(request, status, error){
+		 			alert("강의를 불러올 수 없습니다. 관리자에게 문의해주세요.");
+		        }
+			}) // end of ajax
 		});
 		/* 리스트 불러오기 끝 */
 			
@@ -289,59 +408,13 @@ String ctxPath = request.getContextPath();
 		
 		else {
 			sessionStorage.removeItem("jjim");
-			//sessionStorage.removeItem("checked");
+			sessionStorage.removeItem("checked");
 			
 		}
 		
 		/* 찜한 과목인지 알아오기 끝 */
 			
 			
-		/* 찜 추가 및 삭제 시작 */
-		$(document).on("change", "input:checkbox[name='CRHeartCheckName']", function(){
-			
-			 if("${sessionScope.loginuser.userid}" != ""){
-				 	
-				 if(!CheckFlag){
-					// sessionStorage.setItem("checked",$("input:checkbox[name='CRHeartCheckName']:checked").val());
-					 CheckFlag = true;
-				 }
-				 
-				$.ajax({
-					url:"<%= request.getContextPath()%>/yjs.cos/yjs_CosAddLikeJSON.go",
-					type:"POST",
-					data:{
-						"userid":"${sessionScope.loginuser.userid}",
-						"courseCode": $("input:checkbox[name='CRHeartCheckName']:checked").val()
-					},
-					dataType:"json",
-					success:function(json){
-						
-						
-						$.each(json, function(index, item){
-
-							if(json.result == 1) {
-								
-								alert("찜 성공");
-								
-							}
-							else if(json.result == 0) {
-								alert("찜 삭제완료");
-							}
-		                
-						}) // end of $.each(json, function(index, item)
-						
-					},
-					error: function(request, status, error){
-						alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
-					}
-				});
-				
-			}
-			else {
-				alert("로그인이 필요한 서비스 입니다!");
-			}  
-		});
-		
 		
 		
 		/* 찜 토글 시작 */
@@ -580,128 +653,6 @@ String ctxPath = request.getContextPath();
 	/* 정렬 시작 */
 	function goSort() {
 		
-		$.ajax({
-			url:"<%= request.getContextPath()%>/cos/yjs_CosDisplayJSON.go",
-			data:{
-				"ClickData":$("input#CRInput_Text").val()
-			},   
-			dataType:"json", /* dataType 을 생략하면 string 타입으로 들어온다. */
-			/* async:false, */
-			success:function(json){
-				
-				$("div.CRCosList").hide();
-				$("div.CRCosList_1").hide();
-				
-			//	console.log(JSON.stringify(json));
-				/*
-				   [{"courseName":"정보처리기사 필기","courseterm":90,"teacher":"홍길동","salePrice":790,"price":1300,"courseCode":"10","fk_categoryCode":"1","img2":"cos_jeong_1_introduce1.png","img1":"cos_jeong1.png"}
-				   ,{"courseName":"test_정보처리","courseterm":90,"teacher":"asdf","salePrice":500000,"price":20000000,"courseCode":"26","fk_categoryCode":"1","img2":"cos31.png","img1":"cos_cal11.png"}
-				   ,{"courseName":"test 기능사","courseterm":120,"teacher":"이순신","salePrice":109000,"price":160000,"courseCode":"28","fk_categoryCode":"1","img2":"cos1_introduce1.png","img1":"cos_jeong3.png"}
-				   ,{"courseName":"정보처리기사 실기","courseterm":120,"teacher":"홍길동","salePrice":109000,"price":160000,"courseCode":"12","fk_categoryCode":"1","img2":"cos1_introduce1.png","img1":"cos_jeong2.png"}
-				   ]
-				*/
-				
-				// console.log("두번째 : " + sessionStorage.getItem("jjim")); 
-				// "[{"courseCode":"10"},{"courseCode":"12"}]"
-				
-				const jjim_arr = JSON.parse(sessionStorage.getItem("jjim"));
-				// [{"courseCode":"10"},{"courseCode":"12"}]
-				
-				
-				if (json.length > 0) {
-					
-					let html = "";
-				
-					$.each(json, function(index, item){
-						
-						if(index == 0) {
-							html = "<div class='CRCosList  col-lg-12'>"
-						}
-						else {
-							html = "<div class='CRCosList_1  col-lg-12'>"
-						}
-						
-						html += "	<ul>"
-							  +	"		<li><input type='checkbox' class='CRDeleteCheckBox' name='CRDeleteCheckBox' value='" + item.courseCode + "' />"
-							  + "			<a href ='<%= ctxPath%>/yjs.cos/yjs_OrderPage.go?courseCode="+ item.courseCode +"&fk_categoryCode="+ item.fk_categoryCode +"'><img src='<%= ctxPath%>/yjs.images/"+item.img1+"' class='CRSellImg' /></a>";  
-					 	
-						if("${sessionScope.loginuser.userid}" != "") {
-							let jjim_flag = false;	  
-							for(let i=0; i<jjim_arr.length; i++) {
-								if(item.courseCode == jjim_arr[i].courseCode) {
-								    html += "<label for='CRheartCheck" + index + "'><i id='heart" + index + "' class='heartGroup fa-solid fa-heart' style='color: #ff0000;' onclick='likeAdd();'></i>"
-								          + "<input type='checkbox' id='CRheartCheck" + index + "' name='CRHeartCheckName' value='" + item.courseCode + "' style='display:none;' /></label>";
-								    jjim_flag = true;
-								    return;
-								}
-								
-							}// end of for---------------------
-						
-							if(!jjim_flag) {
-								html +=	"<label for='CRheartCheck" + index + "'><i id='heart" + index + "' class='heartGroup fa-regular fa-heart' style='color: #cccccc;' onclick='likeAdd();'></i>"
-						             + "<input type='checkbox' id='CRheartCheck" + index + "' name='CRHeartCheckName' value='" + item.courseCode + "' style='display:none;' /></label>";
-							}
-						} 
-						else {
-							html += "<input type='hidden' name='heartSelect" + index + "' value='" + item.courseCode + "' /><i id='heart" + index + "' class='heartGroup fa-regular fa-heart' style='color: #cccccc;'></i>"; 
-						} 
-						
-				 	  	html += "       </li>"
-						  	  + "	</ul>"	
-						  	  + "	<div class='CRListMainPosition col-lg-4'>"
-						  	  + "		<ul>"
-						  	  + "			<li>"
-						  	  + "				<a href ='<%= ctxPath%>/yjs.cos/yjs_OrderPage.go?courseCode="+ item.courseCode +"&fk_categoryCode="+ item.fk_categoryCode +"'><h4 class='CRCosTitleName' style='color:black'>"+item.courseName+"</h4></a>"
-						  	  + "				<h5 class='CRCosTeacher'>강사명 <a style='margin-left: 10px;'>" + item.teacher + "</a></h5>"
-						  	  + "				<div class='CRDate'>"
-						  	  + "				기간 <a style='margin-left: 28px;'>"+item.courseterm+"일</a>"
-						  	  + "				</div>"
-						  	  + "			</li>"
-						  	  + "		</ul>"
-						  	  + "	</div>"
-						  	  + "	<div class='CRLastListPostion col-lg-2'>"
-						  	  + "		<ul>"
-						  	  + "			<li>"
-						  	  + "				<div class='CRCosPrice'>"+item.price+"</div>"
-						  	  + "				<div class='CRCosSalePrice'>"+item.salePrice+"</div>";
-						  	  + "			</li>"
-						  	  + "		</ul>"
-						  	  + "	</div>";
-						  
-						html += "	<div class='CRButton'>"
-						  	 + " 		<input type='hidden' id='courseCode' /> "
-						  	 + "		<button type='button' class='CRButtonGoBag'  value='" + item.courseCode + "' >"
-						  	 + "			<i class='fa-solid fa-pen' style='color: #ffffff; margin-right=10px;'></i>장바구니"
-						  	 + "		</button>"
-						  	 + "		<button type='button' class='CRButtonGoApplication' value='" + item.courseCode + "'>"
-						  	 + "			<i class='fa-solid fa-cart-shopping' style='color: #1bceb8; margin-right=10px;'></i>수강신청"
-						  	 + "		</button>"
-						  	 + "	</div>"
-						  	 + "</div>";
-					
-						$("div.CRSildeMenu").append(html);
-				
-					}); // end of $.each(json, functioin(index, item){} -------------------------------
-							  
-
-				} // end of if ------------------------------------------------------------------------
-				else if(json.length == 0) {
-					alert("강의 준비중입니다.");
-					
-					$("div.CRCosList").hide();
-					$("div.CRCosList_1").hide();
-					$("button#CRDeleteButton").hide();
-					$("div.dropdown").hide();
-					$("div.CRSearchBox").hide(); 
-					
-					return; 
-				} // end of else if --------------------------------------------------------------------
-				
-			},
-			error: function(request, status, error){
-	 			alert("강의를 불러올 수 없습니다. 관리자에게 문의해주세요.");
-	        }
-		}) // end of ajax
 		
 	}
 	/* 정렬 끝 */
