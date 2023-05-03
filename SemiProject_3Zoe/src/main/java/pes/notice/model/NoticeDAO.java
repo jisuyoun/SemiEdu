@@ -4,6 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -18,6 +22,7 @@ public class NoticeDAO implements InterNoticeDAO {
 	private Connection conn;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
+	
 	
 	// 사용한 자원을 반납하는 close() 메소드 생성하기
 	private void close() {
@@ -50,6 +55,7 @@ public class NoticeDAO implements InterNoticeDAO {
 
 		String notice_seq = "";
 		
+		
 		try {
 			conn = ds.getConnection();
 			
@@ -61,7 +67,7 @@ public class NoticeDAO implements InterNoticeDAO {
 			
 			rs.next();
 			
-			notice_seq = rs.getString(1);
+			notice_seq = rs.getString("NOTICESEQ");
 			
 		} finally {
 			close();
@@ -80,20 +86,28 @@ public class NoticeDAO implements InterNoticeDAO {
 
 	      try {
 	         conn = ds.getConnection();
-
-	         String sql = " insert into tbl_notice (notice_seq, title, contents, readcount, writeDate) "
-	         		    + " values(seq_notice.nextval, ?, ?, ?, ?) ";
+  
+	         
+	         String sql = " insert into tbl_notice (notice_seq, title, contents, readcount, writeDate, notice_img1, notice_img2) "
+	         		    + " values(?, ?, ?, ?, default, ?, ?)";
 	         
 	         pstmt = conn.prepareStatement(sql);
+	         
+	         
 
-
-	         pstmt.setString(1, nvo.getTitle());    
-	         pstmt.setString(2, nvo.getContents()); 
-	         pstmt.setInt(3, nvo.getReadcount());    
-	         pstmt.setInt(4, nvo.getWriteDate()); 
+	         pstmt.setInt(1, nvo.getNotice_seq());
+	         System.out.println("notice_seq noticeAdd:"+nvo.getNotice_seq());
+	         pstmt.setString(2, nvo.getTitle());  
+	         System.out.println("title noticeAdd: "+nvo.getTitle());
+	         pstmt.setString(3, nvo.getContents()); 
+	         System.out.println("Contents noticeAdd:"+nvo.getContents());
+	         pstmt.setInt(4, nvo.getReadcount());    
+	         System.out.println("Readcount noticeAdd:"+ nvo.getReadcount());
+	         pstmt.setString(5, nvo.getNotice_img1());
+	         pstmt.setString(6, nvo.getNotice_img2());
 	 
 	         result = pstmt.executeUpdate();
-
+	         System.out.println("result"+result);
 	      } finally {
 	         close();
 	      }
@@ -102,34 +116,39 @@ public class NoticeDAO implements InterNoticeDAO {
 		
 	}// end of public int noticeAdd(NoticeVO nvo) throws SQLException-----------------
 
-	
-	
-	// tbl_product_imagefile 테이블에 제품의 추가이미지 파일명 insert 해주기  
-	@Override
-	public int notice_imagefile_Insert(String notice_seq, String attachFileName) throws SQLException {
-		int result = 0;
-	      
-	      try {
-	         conn = ds.getConnection();
-	         
-	         String sql = " insert into tbl_extraImg(imgNum, notice_seq, img3) "
-	                    + " values(seq_extraImg_imgNum.nextval, ?, ?) ";
-	         
-	         pstmt = conn.prepareStatement(sql);
-	         
-	         pstmt.setString(1, notice_seq);
-	         pstmt.setString(2, attachFileName);
-	         
-	        result =  pstmt.executeUpdate();
-	         
-	      } finally {
+	public  ArrayList<NoticeVO> noticeList(){
+		 ArrayList<NoticeVO> lists = new  ArrayList<NoticeVO>();
+		 
+		 String sql = " select * from tbl_notice order by notice_seq ";
+		 try {
+			conn = ds.getConnection();
+			
+			 pstmt = conn.prepareStatement(sql);
+			 rs = pstmt.executeQuery();
+			 
+			
+				
+			 //NO	제목	작성자 	등록일	조회수
+			 while(rs.next()) {
+				 NoticeVO nvo = new NoticeVO();
+				 nvo.setNotice_seq(rs.getInt("notice_seq"));
+				 nvo.setTitle(rs.getString("TITLE"));
+				 nvo.setWriteDate2(rs.getString("WRITEDATE").substring(0,10));
+				 //System.out.println("rs.getString(\"WRITEDATE\").substring(0,10)"+rs.getString("WRITEDATE").substring(0,10));
+				 nvo.setReadcount(rs.getInt("READCOUNT"));
+				 
+				 lists.add(nvo);
+			 }
+			 
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
 	         close();
 	      }
-    
-    return result;
+		 return lists;
 		
-	}// end of public void notice_imagefile_Insert(String notice_seq, String attachFileName) throws SQLException------
-
+	}
 
 
 	

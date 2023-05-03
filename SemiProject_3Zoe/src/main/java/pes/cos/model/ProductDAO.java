@@ -152,8 +152,8 @@ public class ProductDAO implements InterProductDAO {
 		      try {
 		         conn = ds.getConnection();
 
-		         String sql = " insert into tbl_course (courseCode, fk_categoryCode, courseName, price, salePrice, teacher, courseTerm, img1, img2, courseList) "
-		         		    + " values(seq_course_courseCode.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
+		         String sql = " insert into tbl_course (courseCode, fk_categoryCode, courseName, price, salePrice, teacher, courseTerm, img1, img2, courseList,point) "
+		         		    + " values(seq_course_courseCode.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
 		         
 		         pstmt = conn.prepareStatement(sql);
 
@@ -166,6 +166,7 @@ public class ProductDAO implements InterProductDAO {
 		         pstmt.setString(7, cvo.getImg1());
 		         pstmt.setString(8, cvo.getImg2()); 
 		         pstmt.setString(9, cvo.getCourseList());
+		         pstmt.setInt(10, cvo.getPoint());
 		            
 		         result = pstmt.executeUpdate();
 

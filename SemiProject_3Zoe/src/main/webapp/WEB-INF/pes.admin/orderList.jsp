@@ -8,7 +8,36 @@
 <jsp:include page="adminHeader.jsp"/>
 
 
-<script type="text/javascript">	
+<style type="text/css">
+
+	input.chkboxCos{
+		zoom: 1.5; 
+		border-radius:10px;
+		border:solid 1px lightgray;
+		margin-right:5px;
+	}
+	
+	div.item3{
+
+		border-bottom:solid 1px gray;
+		 height:70%; 
+		 margin-top:10px; 
+		 display: flex; 
+		 justify-content: center; 
+		 align-items: center;
+	}
+	
+	table.table{
+		border-top:solid 1px black !important;
+	}
+
+	
+</style>
+
+
+<script type="text/javascript">
+
+	
 //  ==== 전체 datepicker 옵션 일괄 설정하기 ==== //	
 //  한번의 설정으로 $("input#fromDate"), $("input#toDate") 의 옵션을 모두 설정할 수 있다.  
     $(function() {
@@ -54,7 +83,7 @@
 
 		
 			    <li class="nav-item " style="display: flex; align-items: center; ">
-			      	<span><b  style="font-size: 20pt; font-weight: bold;">[ 회원 주문내역 ]</b></span>
+			      	<span><b>결제내역 조회</b></span>
 			 
 			 
 
@@ -64,9 +93,9 @@
   		<div style="display:flex; justify-content: center; align-items: center; background-color:#f3f7f8; margin-top:30px; height:120px;">
   			
  
-  				<button type="button" class="btn btn-outline-secondary" style="width:90px; height:60px; margin-right:10px;">1개월전</button>
-  				<button type="button" class="btn btn-outline-secondary" style="width:90px; height:60px; margin-right:10px;">3개월전</button>
-  				<button type="button" class="btn btn-outline-secondary" style="width:90px; height:60px; margin-right:10px;">6개월전</button>
+  				<button type="button" class="btn btn-outline-secondary" style="width:90px; height:60px; background-color:white; margin-right:10px;">1개월전</button>
+  				<button type="button" class="btn btn-outline-secondary" style="width:90px; height:60px; background-color:white; margin-right:10px;">3개월전</button>
+  				<button type="button" class="btn btn-outline-secondary" style="width:90px; height:60px; background-color:white; margin-right:10px;">6개월전</button>
   				
   				<input type="text"  id="fromDate" style=" margin-right:10px; width:200px; height:60px;">&nbsp; ~&nbsp; 
                 <input type="text" id="toDate" style=" margin-right:10px; width:200px; height:60px;">
@@ -76,7 +105,7 @@
   	  </div>
 
   	  
-  	  <table  class="table" style="margin-top:50px;">
+  	  <table  class="table" style="margin-top:50px; text-align:center;">
   	  	<thead class="thead-light" style="height:20px; ">
   	  		<tr>
 		  	  	<th>No</th>
@@ -116,6 +145,10 @@
 		  </tbody>
   	  </table>
   	</div>
+  	
+  	
+  	<!-- 삭제예정 -->
+  	<button type="button" onclick = "location.href = '<%= ctxPath %>/pes.admin/orderDetail.go'">상세페이지로 가는 버튼</button>
   
 </div>
 	

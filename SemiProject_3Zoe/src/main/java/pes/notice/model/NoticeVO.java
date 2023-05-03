@@ -2,6 +2,8 @@ package pes.notice.model;
 
 import java.util.List;
 
+
+
 public class NoticeVO {
 
 	 private int notice_seq;	// 글번호
@@ -10,8 +12,35 @@ public class NoticeVO {
      private String contents;	// 공지사항 본문
      private int readcount;		// 조회수
      private int writeDate;		// 작성일자
-     
+     private String notice_img1;			  // 공지사항첨부이미지1
+ 	 private String notice_img2;			  // 공지사항첨부이미지2
+ 	 private String writeDate2;
+ 	 
+ 	
+ 	 
+	public String getWriteDate2() {
+		return writeDate2;
+	}
 
+	public void setWriteDate2(String writeDate2) {
+		this.writeDate2 = writeDate2;
+	}
+
+	public String getNotice_img1() {
+		return notice_img1;
+	}
+
+	public void setNotice_img1(String notice_img1) {
+		this.notice_img1 = notice_img1;
+	}
+
+	public String getNotice_img2() {
+		return notice_img2;
+	}
+
+	public void setNotice_img2(String notice_img2) {
+		this.notice_img2 = notice_img2;
+	}
 
 	public int getNotice_seq() {
 		return notice_seq;
