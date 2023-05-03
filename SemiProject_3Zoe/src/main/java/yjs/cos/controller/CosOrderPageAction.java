@@ -20,17 +20,17 @@ public class CosOrderPageAction extends AbstractController {
 		String courseCode = request.getParameter("courseCode");
 		// System.out.println(courseCode);
 		
-		// String fk_categoryCode = request.getParameter("fk_categoryCode");
+		String fk_categoryCode = request.getParameter("fk_categoryCode");
 		
 		InterCosDAO cdao = new CosDAO();
 		
 		CosVO cvo = cdao.selectOneProductByCourseCode(courseCode);
 		
 		Map<String, String> paraMap = new HashMap<>();
-		paraMap.put("courseCode", courseCode);
+		paraMap.put("fk_categoryCode", fk_categoryCode);
 		// paraMap.put("fk_categoryCode", fk_categoryCode);
 		
-		List<CosVO> cvoList = cdao.CategoryListByCourseCode(paraMap);
+		// List<CosVO> cvoList = cdao.RecommendCos(paraMap);
 		
 		if(cvo == null) {
 			String message = "검색하신 제품은 존재하지 않습니다.";
@@ -44,7 +44,7 @@ public class CosOrderPageAction extends AbstractController {
 		
 		else {
 			request.setAttribute("cvo", cvo);
-			request.setAttribute("cvoList", cvoList);
+		//	request.setAttribute("cvoList", cvoList);
 			
 			super.setRedirect(false); 
 		

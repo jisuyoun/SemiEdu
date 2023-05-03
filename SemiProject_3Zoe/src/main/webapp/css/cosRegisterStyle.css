@@ -307,13 +307,13 @@ input.CRDeleteCheckBox {
 	width: 20px;
 	height: 20px;
 }
-
+/* 
 .fa-solid fa-heart {
 	color: #ff0000;
-}
+} */
 
 
-i#heart {
+i.heartGroup {
 	font-size: 20pt;
 	position: absolute;
 	bottom: 219px;
