@@ -158,128 +158,8 @@ String ctxPath = request.getContextPath();
 		/* 리스트 불러오기 시작 */
 		$("div#CRAllImg").click(function(){
 			
-			$.ajax({
-				url:"<%= request.getContextPath()%>/cos/yjs_CosDisplayJSON.go",
-				data:{
-					"ClickData":$("input#CRInput_Text").val()
-				},   
-				dataType:"json", /* dataType 을 생략하면 string 타입으로 들어온다. */
-				/* async:false, */
-				success:function(json){
-					
-					$("div.CRCosList").hide();
-					$("div.CRCosList_1").hide();
-					
-				//	console.log(JSON.stringify(json));
-					/*
-					   [{"courseName":"정보처리기사 필기","courseterm":90,"teacher":"홍길동","salePrice":790,"price":1300,"courseCode":"10","fk_categoryCode":"1","img2":"cos_jeong_1_introduce1.png","img1":"cos_jeong1.png"}
-					   ,{"courseName":"test_정보처리","courseterm":90,"teacher":"asdf","salePrice":500000,"price":20000000,"courseCode":"26","fk_categoryCode":"1","img2":"cos31.png","img1":"cos_cal11.png"}
-					   ,{"courseName":"test 기능사","courseterm":120,"teacher":"이순신","salePrice":109000,"price":160000,"courseCode":"28","fk_categoryCode":"1","img2":"cos1_introduce1.png","img1":"cos_jeong3.png"}
-					   ,{"courseName":"정보처리기사 실기","courseterm":120,"teacher":"홍길동","salePrice":109000,"price":160000,"courseCode":"12","fk_categoryCode":"1","img2":"cos1_introduce1.png","img1":"cos_jeong2.png"}
-					   ]
-					*/
-					
-					// console.log("두번째 : " + sessionStorage.getItem("jjim")); 
-					// "[{"courseCode":"10"},{"courseCode":"12"}]"
-					
-					const jjim_arr = JSON.parse(sessionStorage.getItem("jjim"));
-					// [{"courseCode":"10"},{"courseCode":"12"}]
-					
-					
-					if (json.length > 0) {
-						
-						let html = "";
-					
-						$.each(json, function(index, item){
-							
-							if(index == 0) {
-								html = "<div class='CRCosList  col-lg-12'>"
-							}
-							else {
-								html = "<div class='CRCosList_1  col-lg-12'>"
-							}
-							
-							html += "	<ul>"
-								  +	"		<li><input type='checkbox' class='CRDeleteCheckBox' name='CRDeleteCheckBox' value='" + item.courseCode + "' />"
-								  + "			<a href ='<%= ctxPath%>/yjs.cos/yjs_OrderPage.go?courseCode="+ item.courseCode +"&fk_categoryCode="+ item.fk_categoryCode +"'><img src='<%= ctxPath%>/yjs.images/"+item.img1+"' class='CRSellImg' /></a>";  
-						 	
-							if("${sessionScope.loginuser.userid}" != "") {
-								let jjim_flag = false;	  
-								for(let i=0; i<jjim_arr.length; i++) {
-									if(item.courseCode == jjim_arr[i].courseCode) {
-									    html += "<label for='CRheartCheck" + index + "'><i id='heart" + index + "' class='heartGroup fa-solid fa-heart' style='color: #ff0000;' onclick='likeAdd();'></i>"
-									          + "<input type='checkbox' id='CRheartCheck" + index + "' name='CRHeartCheckName' value='" + item.courseCode + "' style='display:none;' /></label>";
-									    jjim_flag = true;
-									    return;
-									}
-									
-								}// end of for---------------------
-							
-								if(!jjim_flag) {
-									html +=	"<label for='CRheartCheck" + index + "'><i id='heart" + index + "' class='heartGroup fa-regular fa-heart' style='color: #cccccc;' onclick='likeAdd();'></i>"
-							             + "<input type='checkbox' id='CRheartCheck" + index + "' name='CRHeartCheckName' value='" + item.courseCode + "' style='display:none;' /></label>";
-								}
-							} 
-							else {
-								html += "<input type='hidden' name='heartSelect" + index + "' value='" + item.courseCode + "' /><i id='heart" + index + "' class='heartGroup fa-regular fa-heart' style='color: #cccccc;'></i>"; 
-							} 
-							
-					 	  	html += "       </li>"
-							  	  + "	</ul>"	
-							  	  + "	<div class='CRListMainPosition col-lg-4'>"
-							  	  + "		<ul>"
-							  	  + "			<li>"
-							  	  + "				<a href ='<%= ctxPath%>/yjs.cos/yjs_OrderPage.go?courseCode="+ item.courseCode +"&fk_categoryCode="+ item.fk_categoryCode +"'><h4 class='CRCosTitleName' style='color:black'>"+item.courseName+"</h4></a>"
-							  	  + "				<h5 class='CRCosTeacher'>강사명 <a style='margin-left: 10px;'>" + item.teacher + "</a></h5>"
-							  	  + "				<div class='CRDate'>"
-							  	  + "				기간 <a style='margin-left: 28px;'>"+item.courseterm+"일</a>"
-							  	  + "				</div>"
-							  	  + "			</li>"
-							  	  + "		</ul>"
-							  	  + "	</div>"
-							  	  + "	<div class='CRLastListPostion col-lg-2'>"
-							  	  + "		<ul>"
-							  	  + "			<li>"
-							  	  + "				<div class='CRCosPrice'>"+item.price+"</div>"
-							  	  + "				<div class='CRCosSalePrice'>"+item.salePrice+"</div>";
-							  	  + "			</li>"
-							  	  + "		</ul>"
-							  	  + "	</div>";
-							  
-							html += "	<div class='CRButton'>"
-							  	 + " 		<input type='hidden' id='courseCode' /> "
-							  	 + "		<button type='button' class='CRButtonGoBag'  value='" + item.courseCode + "' >"
-							  	 + "			<i class='fa-solid fa-pen' style='color: #ffffff; margin-right=10px;'></i>장바구니"
-							  	 + "		</button>"
-							  	 + "		<button type='button' class='CRButtonGoApplication' value='" + item.courseCode + "'>"
-							  	 + "			<i class='fa-solid fa-cart-shopping' style='color: #1bceb8; margin-right=10px;'></i>수강신청"
-							  	 + "		</button>"
-							  	 + "	</div>"
-							  	 + "</div>";
-						
-							$("div.CRSildeMenu").append(html);
-					
-						}); // end of $.each(json, functioin(index, item){} -------------------------------
-								  
-
-					} // end of if ------------------------------------------------------------------------
-					else if(json.length == 0) {
-						alert("강의 준비중입니다.");
-						
-						$("div.CRCosList").hide();
-						$("div.CRCosList_1").hide();
-						$("button#CRDeleteButton").hide();
-						$("div.dropdown").hide();
-						$("div.CRSearchBox").hide(); 
-						
-						return; 
-					} // end of else if --------------------------------------------------------------------
-					
-				},
-				error: function(request, status, error){
-		 			alert("강의를 불러올 수 없습니다. 관리자에게 문의해주세요.");
-		        }
-			}) // end of ajax
+			goSort();
+			
 		});
 		/* 리스트 불러오기 끝 */
 			
@@ -409,7 +289,7 @@ String ctxPath = request.getContextPath();
 		
 		else {
 			sessionStorage.removeItem("jjim");
-			sessionStorage.removeItem("checked");
+			//sessionStorage.removeItem("checked");
 			
 		}
 		
@@ -422,7 +302,7 @@ String ctxPath = request.getContextPath();
 			 if("${sessionScope.loginuser.userid}" != ""){
 				 	
 				 if(!CheckFlag){
-					 sessionStorage.setItem("checked",$("input:checkbox[name='CRHeartCheckName']:checked").val());
+					// sessionStorage.setItem("checked",$("input:checkbox[name='CRHeartCheckName']:checked").val());
 					 CheckFlag = true;
 				 }
 				 
@@ -431,7 +311,7 @@ String ctxPath = request.getContextPath();
 					type:"POST",
 					data:{
 						"userid":"${sessionScope.loginuser.userid}",
-						"courseCode": sessionStorage.getItem("checked")	
+						"courseCode": $("input:checkbox[name='CRHeartCheckName']:checked").val()
 					},
 					dataType:"json",
 					success:function(json){
@@ -666,17 +546,6 @@ String ctxPath = request.getContextPath();
 		});
 		/* 강의 등록하기 끝 */
 		
-		/* 검색창 엔터 누르기 시작 */
-		$("input[name=search]").keyup(function(e){
-			// input 태그를 하나만 넣어서 엔터가 그냥 가능하게 만들 경우 alert 와 같은 메소드들을 적용하지 못한다.
-			if(e.keyCode == 13) {
-				
-				goSearch();
-				
-			}
-			
-		});
-		/* 검색창 엔터 누르기 끝 */
 		
 		
 		
@@ -698,25 +567,144 @@ String ctxPath = request.getContextPath();
 	}
 	/* 체크박스 전체선택 또는 전체 해제 끝 */ 
 
-	function goSearch() {
-		
-		const frm = document.CRSearchFrm;
-		
-		if( $("input#CRSearchTxt").val().trim() == "" ) {
-			alert("검색어를 입력해주세요!!");
-		}
-		
-		frm.action = "<%= ctxPath%>/cos/yjs_CRSearch.go";
-		frm.method = "get";
-		frm.submit();
-	}
 	
+	
+	/* 찜 누른 후 새로고침 시작 */
 	function likeAdd() {
 		
 		javascript:history.go(0);
 		
 	}
+	/* 찜 누른 후 새로고침 끝 */
 	
+	/* 정렬 시작 */
+	function goSort() {
+		
+		$.ajax({
+			url:"<%= request.getContextPath()%>/cos/yjs_CosDisplayJSON.go",
+			data:{
+				"ClickData":$("input#CRInput_Text").val()
+			},   
+			dataType:"json", /* dataType 을 생략하면 string 타입으로 들어온다. */
+			/* async:false, */
+			success:function(json){
+				
+				$("div.CRCosList").hide();
+				$("div.CRCosList_1").hide();
+				
+			//	console.log(JSON.stringify(json));
+				/*
+				   [{"courseName":"정보처리기사 필기","courseterm":90,"teacher":"홍길동","salePrice":790,"price":1300,"courseCode":"10","fk_categoryCode":"1","img2":"cos_jeong_1_introduce1.png","img1":"cos_jeong1.png"}
+				   ,{"courseName":"test_정보처리","courseterm":90,"teacher":"asdf","salePrice":500000,"price":20000000,"courseCode":"26","fk_categoryCode":"1","img2":"cos31.png","img1":"cos_cal11.png"}
+				   ,{"courseName":"test 기능사","courseterm":120,"teacher":"이순신","salePrice":109000,"price":160000,"courseCode":"28","fk_categoryCode":"1","img2":"cos1_introduce1.png","img1":"cos_jeong3.png"}
+				   ,{"courseName":"정보처리기사 실기","courseterm":120,"teacher":"홍길동","salePrice":109000,"price":160000,"courseCode":"12","fk_categoryCode":"1","img2":"cos1_introduce1.png","img1":"cos_jeong2.png"}
+				   ]
+				*/
+				
+				// console.log("두번째 : " + sessionStorage.getItem("jjim")); 
+				// "[{"courseCode":"10"},{"courseCode":"12"}]"
+				
+				const jjim_arr = JSON.parse(sessionStorage.getItem("jjim"));
+				// [{"courseCode":"10"},{"courseCode":"12"}]
+				
+				
+				if (json.length > 0) {
+					
+					let html = "";
+				
+					$.each(json, function(index, item){
+						
+						if(index == 0) {
+							html = "<div class='CRCosList  col-lg-12'>"
+						}
+						else {
+							html = "<div class='CRCosList_1  col-lg-12'>"
+						}
+						
+						html += "	<ul>"
+							  +	"		<li><input type='checkbox' class='CRDeleteCheckBox' name='CRDeleteCheckBox' value='" + item.courseCode + "' />"
+							  + "			<a href ='<%= ctxPath%>/yjs.cos/yjs_OrderPage.go?courseCode="+ item.courseCode +"&fk_categoryCode="+ item.fk_categoryCode +"'><img src='<%= ctxPath%>/yjs.images/"+item.img1+"' class='CRSellImg' /></a>";  
+					 	
+						if("${sessionScope.loginuser.userid}" != "") {
+							let jjim_flag = false;	  
+							for(let i=0; i<jjim_arr.length; i++) {
+								if(item.courseCode == jjim_arr[i].courseCode) {
+								    html += "<label for='CRheartCheck" + index + "'><i id='heart" + index + "' class='heartGroup fa-solid fa-heart' style='color: #ff0000;' onclick='likeAdd();'></i>"
+								          + "<input type='checkbox' id='CRheartCheck" + index + "' name='CRHeartCheckName' value='" + item.courseCode + "' style='display:none;' /></label>";
+								    jjim_flag = true;
+								    return;
+								}
+								
+							}// end of for---------------------
+						
+							if(!jjim_flag) {
+								html +=	"<label for='CRheartCheck" + index + "'><i id='heart" + index + "' class='heartGroup fa-regular fa-heart' style='color: #cccccc;' onclick='likeAdd();'></i>"
+						             + "<input type='checkbox' id='CRheartCheck" + index + "' name='CRHeartCheckName' value='" + item.courseCode + "' style='display:none;' /></label>";
+							}
+						} 
+						else {
+							html += "<input type='hidden' name='heartSelect" + index + "' value='" + item.courseCode + "' /><i id='heart" + index + "' class='heartGroup fa-regular fa-heart' style='color: #cccccc;'></i>"; 
+						} 
+						
+				 	  	html += "       </li>"
+						  	  + "	</ul>"	
+						  	  + "	<div class='CRListMainPosition col-lg-4'>"
+						  	  + "		<ul>"
+						  	  + "			<li>"
+						  	  + "				<a href ='<%= ctxPath%>/yjs.cos/yjs_OrderPage.go?courseCode="+ item.courseCode +"&fk_categoryCode="+ item.fk_categoryCode +"'><h4 class='CRCosTitleName' style='color:black'>"+item.courseName+"</h4></a>"
+						  	  + "				<h5 class='CRCosTeacher'>강사명 <a style='margin-left: 10px;'>" + item.teacher + "</a></h5>"
+						  	  + "				<div class='CRDate'>"
+						  	  + "				기간 <a style='margin-left: 28px;'>"+item.courseterm+"일</a>"
+						  	  + "				</div>"
+						  	  + "			</li>"
+						  	  + "		</ul>"
+						  	  + "	</div>"
+						  	  + "	<div class='CRLastListPostion col-lg-2'>"
+						  	  + "		<ul>"
+						  	  + "			<li>"
+						  	  + "				<div class='CRCosPrice'>"+item.price+"</div>"
+						  	  + "				<div class='CRCosSalePrice'>"+item.salePrice+"</div>";
+						  	  + "			</li>"
+						  	  + "		</ul>"
+						  	  + "	</div>";
+						  
+						html += "	<div class='CRButton'>"
+						  	 + " 		<input type='hidden' id='courseCode' /> "
+						  	 + "		<button type='button' class='CRButtonGoBag'  value='" + item.courseCode + "' >"
+						  	 + "			<i class='fa-solid fa-pen' style='color: #ffffff; margin-right=10px;'></i>장바구니"
+						  	 + "		</button>"
+						  	 + "		<button type='button' class='CRButtonGoApplication' value='" + item.courseCode + "'>"
+						  	 + "			<i class='fa-solid fa-cart-shopping' style='color: #1bceb8; margin-right=10px;'></i>수강신청"
+						  	 + "		</button>"
+						  	 + "	</div>"
+						  	 + "</div>";
+					
+						$("div.CRSildeMenu").append(html);
+				
+					}); // end of $.each(json, functioin(index, item){} -------------------------------
+							  
+
+				} // end of if ------------------------------------------------------------------------
+				else if(json.length == 0) {
+					alert("강의 준비중입니다.");
+					
+					$("div.CRCosList").hide();
+					$("div.CRCosList_1").hide();
+					$("button#CRDeleteButton").hide();
+					$("div.dropdown").hide();
+					$("div.CRSearchBox").hide(); 
+					
+					return; 
+				} // end of else if --------------------------------------------------------------------
+				
+			},
+			error: function(request, status, error){
+	 			alert("강의를 불러올 수 없습니다. 관리자에게 문의해주세요.");
+	        }
+		}) // end of ajax
+		
+	}
+	/* 정렬 끝 */
 	
 </script>
 
@@ -848,25 +836,14 @@ String ctxPath = request.getContextPath();
 			class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
 			정렬</button>
 		<div class="dropdown-menu">
-			<a class="dropdown-item" href="#">정렬</a> <a class="dropdown-item"
-				href="#">가격 낮은 순</a> <a class="dropdown-item" href="#">가격 높은 순</a>
+			<a class="dropdown-item" href="#">정렬</a> 
+			<a class="dropdown-item" value="1" onClick="goSort();">가격 낮은 순</a> 
+			<a class="dropdown-item" value="2" href="#">가격 높은 순</a>
 		</div>
 	</div>
 	<%-- 정렬 끝 --%>
 
 
-
-
-	<%-- 검색창 시작 --%>
-	<div class="CRSearchBox">
-		<form name="CRSearchFrm">
-			<input class="CRSearchTxt" id="CRSearchTxt" type="text" placeholder="검색어를 입력해주세요" name="search">
-			<button class="CRSearchBtn" type="submit" onclick="goSearch();">
-				<i class="fa fa-search"></i>
-			</button>
-		</form>
-	</div>
-	<%-- 검색창 끝 --%>
 
 	<div id="CRDeleteAll">
 		<label for="CRDeleteAll" class='CRDeleteCheckBox'>전체선택</label><input type="checkbox" id="CRDeleteAll" class='CRDeleteCheckBox' onclick='AllCheck(this.checked)' />

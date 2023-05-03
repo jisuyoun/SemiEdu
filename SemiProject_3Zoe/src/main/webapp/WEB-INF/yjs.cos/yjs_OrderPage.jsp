@@ -19,7 +19,6 @@
 
 	$(document).ready(function(){
 		
-		alert(sessionStorage.getItem("checked"));
 		<%-- 추가이미지 불러오기 시작 --%>
 		$.ajax({
 			url:"<%= request.getContextPath()%>/yjs.cos/yjs_PlusImgJSON.go",
@@ -125,7 +124,7 @@
 					
 				},
 				error: function(request, status, error){
-					alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+					alert("찜을 불러오는데 오류가 발생했습니다. 관리자에게 문의해주세요.");
 				}
 			});
 		} // end of if
@@ -307,7 +306,7 @@
 							
 						},
 						error: function(request, status, error){
-							alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+							alert("찜 추가에 실패했습니다. 관리자에게 문의해주세요.");
 						}
 					});
 					

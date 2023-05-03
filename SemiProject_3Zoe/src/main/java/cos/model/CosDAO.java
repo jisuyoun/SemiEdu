@@ -1,18 +1,21 @@
 package cos.model;
 
+import java.io.UnsupportedEncodingException;
+import java.security.GeneralSecurityException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-
-import member.model.MemberVO;
 
 
 
@@ -57,37 +60,6 @@ public class CosDAO implements InterCosDAO {
 				e.printStackTrace();
 			}
 		}
-	
-		/*
-		 * // 강의 리스트 페이지에서 필요한 정보 불러오는 메소드 생성하기
-		 * 
-		 * @Override public List<CosVO> searchCosList() throws SQLException {
-		 * 
-		 * List<CosVO> cvoList = new ArrayList<>();
-		 * 
-		 * try {
-		 * 
-		 * conn = ds.getConnection();
-		 * 
-		 * String sql = " select courseCode " + " from tbl_course ";
-		 * 
-		 * pstmt = conn.prepareStatement(sql);
-		 * 
-		 * rs = pstmt.executeQuery();
-		 * 
-		 * while(rs.next()) {
-		 * 
-		 * CosVO cvo = new CosVO();
-		 * 
-		 * cvo.setCourseCode(rs.getString(1));
-		 * 
-		 * cvoList.add(cvo); }
-		 * 
-		 * } finally { close(); }
-		 * 
-		 * return cvoList; }
-		 */
-		
 		
 		
 	// 강의 리스트 불러오기 메소드 생성하기
@@ -673,10 +645,60 @@ public class CosDAO implements InterCosDAO {
 		return imgList;
 	}
 
+	
+	// 검색하기 기능
 	@Override
 	public List<CosVO> searchCos(Map<String, String> paraMap) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		List<CosVO> cosList = new ArrayList<>();
+		
+		String search = paraMap.get("search");
+		String keyWord = paraMap.get("keyWord");
+		
+		try {
+			
+			conn = ds.getConnection();
+			
+			String sql = " select courseCode, fk_categoryCode, coursename, price, saleprice, courseterm, teacher, img1 "
+					   + " from tbl_course ";
+			
+			if(search != null && !search.trim().isEmpty()) {
+				sql += " where " + keyWord + " like '%'|| ? || '%' ";
+				// colname 이 ?가 되지 않는 이유는 컬럼명과 테이블명은 위치홀더로 사용이 불가하기 때문이다.
+				// 위치홀더로 들어오는 것은 오로지 컬럼명과 테이블명이 아닌 데이터값이다.
+				
+			}
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			if(search != null && !search.trim().isEmpty()) {
+				pstmt.setString(1, search);
+			}
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				CosVO cvo = new CosVO();
+				
+				cvo.setCourseCode(rs.getString(1));
+				cvo.setFk_categoryCode(rs.getString(2));
+				cvo.setCourseName(rs.getString(3));
+				cvo.setPrice(rs.getInt(4));
+				cvo.setSalePrice(rs.getInt(5));
+				cvo.setCourseTerm(rs.getInt(6));
+				cvo.setTeacher(rs.getString(7));
+				cvo.setImg1(rs.getString(8));
+							
+				cosList.add(cvo);
+				
+			} // end of while(rs.next()) {}  -----------------------------------------------------------------------
+		
+		} finally {
+			close();
+		}
+		
+		return cosList;
 	}
 	
 
