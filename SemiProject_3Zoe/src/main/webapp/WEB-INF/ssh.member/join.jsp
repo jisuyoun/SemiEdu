@@ -402,11 +402,7 @@
 	</div>
 
 	<form name="registerFrm">
-	<input type="hidden" name="ek" value="e93651e5dd3aafd46d1704c698d762b8">
-	<input type="hidden" name="k" value="nnDicIFtKv">
-	<input type="hidden" name="verify_email_yn" value="N">
-	<input type="hidden" name="domain" value="www.wannaedu.com">
-	<input type="hidden" name="session_id" value="63d2853cb22acd53a454962059498cef89621d5b">
+	
 	<div class="mem_cont">
 		<h4 class="mem_tit marb40 inline">회원정보 입력 <span class="tx"><span class="pointColor">*</span> 필수 입력 정보입니다.</span></h4>
 
@@ -501,7 +497,7 @@
 			
 			<div class="btn_list">
 				<input type="button" class="moreBtn pointColor pointBorder" onclick="location.href='javascript:history.go(-1)'" value="이전으로" />
-				<input type="submit" class="moreBtn bgColor pointBorder" id="btn_submit" onclick="goRegister()" value="회원가입하기" />
+				<input type="button" class="moreBtn bgColor pointBorder" id="btn_submit" onclick="goRegister()" value="회원가입하기" />
 			</div>
 
 			
