@@ -10,35 +10,30 @@ import org.json.JSONObject;
 
 import common.controller.AbstractController;
 import cos.model.CosDAO;
-import cos.model.CosVO;
 import cos.model.InterCosDAO;
 
-public class CosDeleteJSONAction extends AbstractController {
+public class CosAddLikeJSONAction extends AbstractController {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-		String checkedJoin = request.getParameter("checkedJoin");
+		
+		String userid = request.getParameter("userid");
+		String courseCode = request.getParameter("courseCode");
+		
+		Map<String, String> paraMap = new HashMap<>();
+		paraMap.put("userid", userid);
+		paraMap.put("courseCode", courseCode);
 		
 		InterCosDAO cdao = new CosDAO();
 		
-		CosVO cvo = new CosVO();
-		
-		Map<String, Object> paraMap = new HashMap<>();
-		
-		// paraMap.put("checkedJoin", checkedJoin);
-		
-		paraMap.put("checkedArr", checkedJoin.split("\\,"));
-		
-		int n = cdao.delectCos(paraMap);
+		int result = cdao.addLike(paraMap);
 		
 		JSONObject jsonobj = new JSONObject();
 		
-		jsonobj.put("n", n);
+		jsonobj.put("result", result);
 		
 		String json = jsonobj.toString();
 		
-		// 강의를 선택하여 삭제하는 것이므로 무조건 1이 나온다.
 		request.setAttribute("json", json);
 		
 		super.setRedirect(false);

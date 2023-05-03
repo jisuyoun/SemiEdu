@@ -313,7 +313,7 @@ input.CRDeleteCheckBox {
 }
 
 
-i#heart {
+i.heartGroup {
 	font-size: 20pt;
 	position: absolute;
 	bottom: 219px;

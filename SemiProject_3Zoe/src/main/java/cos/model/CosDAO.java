@@ -58,11 +58,45 @@ public class CosDAO implements InterCosDAO {
 			}
 		}
 	
+		/*
+		 * // 강의 리스트 페이지에서 필요한 정보 불러오는 메소드 생성하기
+		 * 
+		 * @Override public List<CosVO> searchCosList() throws SQLException {
+		 * 
+		 * List<CosVO> cvoList = new ArrayList<>();
+		 * 
+		 * try {
+		 * 
+		 * conn = ds.getConnection();
+		 * 
+		 * String sql = " select courseCode " + " from tbl_course ";
+		 * 
+		 * pstmt = conn.prepareStatement(sql);
+		 * 
+		 * rs = pstmt.executeQuery();
+		 * 
+		 * while(rs.next()) {
+		 * 
+		 * CosVO cvo = new CosVO();
+		 * 
+		 * cvo.setCourseCode(rs.getString(1));
+		 * 
+		 * cvoList.add(cvo); }
+		 * 
+		 * } finally { close(); }
+		 * 
+		 * return cvoList; }
+		 */
+		
+		
+		
 	// 강의 리스트 불러오기 메소드 생성하기
 	@Override
 	public List<CosVO> selectBySpecName(Map<String, String> paraMap) throws SQLException {
 		
 		List<CosVO> cosList = new ArrayList<>();
+		
+		CosVO cvo = null;
 		
 		try {
 			conn = ds.getConnection();
@@ -71,7 +105,7 @@ public class CosDAO implements InterCosDAO {
 			
 			// System.out.println("확인용 " + paraMap.get("ClickData"));
 			
-			String sql = " select courseCode, coursename, price, saleprice, courseterm, teacher, img1, img2 "
+			String sql = " select courseCode, fk_categoryCode, coursename, price, saleprice, courseterm, teacher, img1, img2 "
 					   + " from tbl_course "
 					   + " where fk_categorycode = ? ";
 			
@@ -83,16 +117,17 @@ public class CosDAO implements InterCosDAO {
 			
 			while(rs.next()) {
 				
-				CosVO cvo = new CosVO();
+				cvo = new CosVO();
 				
 				cvo.setCourseCode(rs.getString(1));		// 강의코드
-				cvo.setCourseName(rs.getString(2));      // 강의명
-				cvo.setPrice(rs.getInt(3)); 		 	 // 가격
-				cvo.setSalePrice(rs.getInt(4));  		 // 할인가
-				cvo.setCourseTerm(rs.getInt(5)); 		 // 강의기간
-				cvo.setTeacher(rs.getString(6)); 		 // 강사명
-				cvo.setImg1(rs.getString(7));		    // 강의썸네일
-				cvo.setImg2(rs.getString(8));		    // 강의소개메인이미지 
+				cvo.setFk_categoryCode(rs.getString(2)); // 카테고리코드
+				cvo.setCourseName(rs.getString(3));      // 강의명
+				cvo.setPrice(rs.getInt(4)); 		 	 // 가격
+				cvo.setSalePrice(rs.getInt(5));  		 // 할인가
+				cvo.setCourseTerm(rs.getInt(6)); 		 // 강의기간
+				cvo.setTeacher(rs.getString(7)); 		 // 강사명
+				cvo.setImg1(rs.getString(8));		    // 강의썸네일
+				cvo.setImg2(rs.getString(9));		    // 강의소개메인이미지 
 				
 				cosList.add(cvo);
 	            
@@ -159,7 +194,6 @@ public class CosDAO implements InterCosDAO {
 					   + " where fk_userid = ? ";
 			
 			pstmt = conn.prepareStatement(sql);
-			
 			pstmt.setString(1, paraMap.get("userid"));
 
 			rs = pstmt.executeQuery();
@@ -167,7 +201,6 @@ public class CosDAO implements InterCosDAO {
 			while(rs.next()) {
 				
 				CosVO cvo = new CosVO();
-				
 				cvo.setCourseCode(rs.getString(1));		// 강의코드
 				
 				cosList.add(cvo);
@@ -187,34 +220,54 @@ public class CosDAO implements InterCosDAO {
 	
 	// 찜한 강의 찜 테이블에 올려주는 메소드 생성하기
 	@Override
-	public int LikeTblAdd(Map<String, String> paraMap) throws SQLException {
+	public int addLike(Map<String, String> paraMap) throws SQLException {
+		
+		int result = 0;
 		
 		int n = 0;
 		
+		String sql = "";
+		
 		try {
-			System.out.println(paraMap.get("checkedHeart"));
 			
 			conn = ds.getConnection();
 			
 			/* conn.setAutoCommit(false); */
 			
-			String sql = " insert into tbl_like(fk_courseCode, fk_userid) values(?, ?) ";
+			sql = " insert into tbl_like(fk_courseCode, fk_userid) "
+				+ " values(?, ?) ";
 			
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, paraMap.get("checkedHeart"));
+			pstmt.setString(1, paraMap.get("courseCode"));
 			pstmt.setString(2, paraMap.get("userid"));
 			
 			n = pstmt.executeUpdate();
 			
-			System.out.println("dao n값 : " + n);
+			if( n == 1 ) {
+				result = 1;
+			}
 			
+		} catch (SQLException e) {
 			
-		} finally {
+			sql = " delete from tbl_like "
+				+ " where fk_courseCode = ? and fk_userid = ? ";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, paraMap.get("courseCode"));
+			pstmt.setString(2, paraMap.get("userid"));
+			
+			n = pstmt.executeUpdate();
+			
+			if( n == 1 ) {
+				result = 0;
+			}
+			
+		}finally {
 			close();
 		}
 			
-		return n;
-	} // end of public int LikeTblAdd(String checkedHeart, String userid) throws SQLException {} ----------------------
+		return result;
+	} // end of public int addLike(String checkedHeart, String userid) throws SQLException {} ----------------------
 
 	
 	// 찜 풀은 강의 찜 테이블에서 삭제해주는 메소드 생성하기
@@ -266,7 +319,7 @@ public class CosDAO implements InterCosDAO {
 			
 			conn = ds.getConnection();
 			
-			String sql = " select courseName, price, salePrice, courseTerm, courseList, img1, img2, teacher"
+			String sql = " select courseName, fk_categoryCode, price, salePrice, courseTerm, courseList, img1, img2, teacher "
 					   + " from tbl_course "
 					   + " where courseCode = ? ";
 			
@@ -277,17 +330,19 @@ public class CosDAO implements InterCosDAO {
 			
 			if(rs.next()) {
 				String courseName = rs.getString(1);
-				int price = rs.getInt(2);
-				int salePrice = rs.getInt(3);
-				int courseTerm = rs.getInt(4);
-				String courseList = rs.getString(5);
-				String img1 = rs.getString(6);
-				String img2 = rs.getString(7);
-				String teacher = rs.getString(8);
+				String fk_categoryCode = rs.getString(2);
+				int price = rs.getInt(3);
+				int salePrice = rs.getInt(4);
+				int courseTerm = rs.getInt(5);
+				String courseList = rs.getString(6);
+				String img1 = rs.getString(7);
+				String img2 = rs.getString(8);
+				String teacher = rs.getString(9);
 				
 				cvo = new CosVO();
 				
 				cvo.setCourseCode(courseCode);
+				cvo.setFk_categoryCode(fk_categoryCode);
 				cvo.setCourseName(courseName);
 				cvo.setPrice(price);
 				cvo.setSalePrice(salePrice);
@@ -298,6 +353,7 @@ public class CosDAO implements InterCosDAO {
 				cvo.setImg1(img1);
 				cvo.setImg2(img2);
 				
+				
 			}
 		
 		} finally {
@@ -307,55 +363,45 @@ public class CosDAO implements InterCosDAO {
 		return cvo;
 	}
 
-	// 비슷한 강의 보여주는 메소드 생성하기
+	// 비슷한 강의 추천하기 메소드 생성하기
 	@Override
-	public List<CosVO> CategoryListByCourseCode(Map<String, String> paraMap) throws SQLException {
+	public List<CosVO> RecommendCos(Map<String, String> paraMap) throws SQLException {
 		
-		List<CosVO> cosList = null;
+		List<CosVO> cvoList = new ArrayList<>();
 		
 		try {
 			
 			conn = ds.getConnection();
 			
-			String sql = " select C.courseName, C.img1, C.img2, E.img3 "
-					   + " from tbl_course C join tbl_extraImg E "
-					   + " on C.fk_categoryCode = E.fk_courseCode "
-					   + " where C.fk_categoryCode = ? ";
+			String sql = " select courseCode, fk_categoryCode, courseName, img1 "
+					   + " from tbl_course "
+					   + " where fk_categoryCode = ? ";
 			
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, paraMap.get("courseCode"));
+			pstmt.setString(1, paraMap.get("fk_categoryCode"));
 			
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				String courseName = rs.getString(1);
-				String img1 = rs.getString(2);
-				String img2 = rs.getString(3);
-				String img3 = rs.getString(4);
 				
 				CosVO cvo = new CosVO();
 				
-				cvo.setCourseName(rs.getString("courseName"));
-				cvo.setImg1(rs.getString("img1"));
-				cvo.setImg2(rs.getString("img2"));
+				cvo.setCourseCode(rs.getString(1));
+				cvo.setFk_categoryCode(rs.getString(2));
+				cvo.setCourseName(rs.getString(3));
+				cvo.setImg1(rs.getString(4));
 				
-				ImgVO ivo = new ImgVO();
-				ivo.setImg3(rs.getString("img3"));
-				cvo.setImgvo(ivo);
-				
-				cosList.add(cvo);
-				
+				cvoList.add(cvo);
 			}
-			
 			
 		} finally {
 			close();
 		}
 		
-		return cosList;
+		return cvoList;
 	}
-
 	
+		
 	// tbl_category 테이블에서 categoryCode, categoryName 조회해오기 
 	@Override
 	   public List<Map<String, String>> getCategoryList() throws SQLException {
@@ -590,6 +636,52 @@ public class CosDAO implements InterCosDAO {
 		
 		return n;
 	}
+
+	// 추가이미지 불러오기 메소드 생성하기
+	@Override
+	public List<ImgVO> imgPlus(Map<String, String> paraMap) throws SQLException {
+		
+		List<ImgVO> imgList =  new ArrayList<>();
+		
+		try {
+			
+			conn = ds.getConnection();
+			
+			String sql = " select img3 "
+					   + " from tbl_extraImg "
+					   + " where fk_courseCode = ? ";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, paraMap.get("courseCode"));
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				ImgVO ivo = new ImgVO();
+				
+				ivo.setImg3(rs.getString(1));		// 강의코드
+				
+				imgList.add(ivo);
+				
+			}
+			
+		} finally {
+			close();
+		}
+		
+		return imgList;
+	}
+
+	@Override
+	public List<CosVO> searchCos(Map<String, String> paraMap) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+
+	
+	
 
 
 	
