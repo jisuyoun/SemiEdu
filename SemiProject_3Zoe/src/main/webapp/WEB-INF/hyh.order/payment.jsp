@@ -43,39 +43,89 @@
 	}// end of function goOrder()
 	<%-- 주문 함수 끝 --%>
 	
+	// === 이임포트 결제를 해주는 함수 === //
+    function goCoinPurchaseEnd(coinmoney) {
+    //	alert("~~~확인용 부모창의 함수 호출함. 결제금액 : " + coinmoney + "원");
+    	
+    	const userid = "${sessionScope.loginuser.userid}";
+    	
+    	// 아임포트 결제 팝업창 띄우기
+    	const url = "<%= request.getContextPath()%>/member/coinPurchaseEnd.up?coinmoney="+coinmoney+"&userid="+userid;
+    	
+    	window.open(url, "coinPurchaseEnd",
+    				 "left=350px, top=100px, width=1000px height=600px");
+    	
+    }
 	
+	
+	// 결제해주러 가는 함수 //
 	function PurchaseEnd(){
 	      
       if("${sessionScope.loginuser.userid}" != ""){
-         var frm = document.PurchaseEndFrm;
+         <%--
+    	 const frm = document.PurchaseEndFrm;
          frm.method = "POST";
          frm.action = "<%= ctxPath%>/hyh.order/purchaseEnd.go";
-         frm.submit();  
-         //const url = frm.action;
-         //window.open(url, "PurchaseEnd()",
-		 //"left=350px, top=100px, width=1000px height=600px");
+         frm.submit();
+         
+         <form name="PurchaseEndFrm">
+			<input type="text" name="" value="" />
+			<input type="text" name="" value="" />
+			<input type="text" name="" value="" />
+			<input type="text" name="email" value="${sessionScope.loginuser.email}" />
+			<input type="text" name="name" value="${sessionScope.loginuser.name}" />
+			<input type="text" name="mobile" value="${sessionScope.loginuser.mobile}" />
+		</form>
+		--%>  
+         const url = "<%= ctxPath%>/hyh.order/purchaseEnd.go?courseCode=${requestScope.cvo.courseCode}&courseName=${requestScope.cvo.courseName}&salePrice=${requestScope.cvo.salePrice}"; 
+         window.open(url, "PurchaseEnd",
+		             "left=350px, top=100px, width=1000px height=600px");
          
       }
       else {
          alert("로그인이 필요한 서비스 입니다!");
       }
-	};
+      
+	} // end of function PurchaseEnd()-------------------------------------------
 	   
-	// === DB 상의 tnl_member 테이블에 해당 사용자의 코인금액 및 포인트를 증가시켜주는
-    function goUserUpdate(userid, salePrice) {
+	
+	// === DB 상의 tnl_member 테이블에 해당 사용자의 코인금액 감소 및 포인트를 증가시켜주고 이어서 주문내역에 insert 해주는 함수 // 
+    function go_UserUpdate_OrderInsert(userid, salePrice) {
     	
 	   	//console.log("~~ 확인용 userid : " + userid + ", coinmoney : " + coinmoney + "원");
 	   	
-	   	const frm = document.coinUpdateFrm;
-	   	frm.userid.value = userid;
-	   	frm.salePrice.value = salePrice;
-	   	
-	   	frm.action = "<%= request.getContextPath()%>/hyh.order/goUpdateLoginUser.go";
-	   	frm.method = "post";
-	   	frm.submit();
-    } 
+	   	 $.ajax({
+		           url:"<%= request.getContextPath()%>/hyh.order/orderAdd.go",
+		           type:"post",
+		           data:{"orderPoint":parseInt(salePrice*0.01),
+		        	     "totalPrice":salePrice,
+		        	     "fk_userid":userid,
+		        	     "fk_courseCode":"${requestScope.cvo.courseCode}",
+		        	     "coursePrice":"${requestScope.cvo.price}"
+		                },
+		           dataType:"json",
+		           success:function(json){
+		            	  
+		            	  // json 은 {"isSuccess":1} 또는 {"isSuccess":0} 이다.
+		            	  
+		            	  if(json.isSuccess == 1) {
+		            		  alert("결제 성공");
+		            		  ocation.href="<%= request.getContextPath()%>/index.go";
+		            	  }
+		            	  else {
+		            		  alert("결제 비정상ㅜㅜ");
+		            		  location.href="<%= request.getContextPath()%>/index.go";
+		            	  }
+		                 
+		              },
+		             error: function(request, status, error){
+		                     alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+		             }
 
-
+		        }); 
+	   
+	   		
+    }// end of function go_UserUpdate_OrderInsert(userid, salePrice)-----------------------------------------------
 	
 	
 </script>
@@ -176,14 +226,7 @@
 		<%-- 결제약관 끝 --%>
 		
 		<%-- 결제하기 버튼 시작 --%>
-		<form name="PurchaseEndFrm">
-			<input type="hidden" name="courseName" value="${requestScope.cvo.courseName}" />
-			<input type="hidden" name="salePrice" value="${requestScope.cvo.salePrice}" />
-			<input type="hidden" name="email" value="${sessionScope.loginuser.email}" />
-			<input type="hidden" name="name" value="${sessionScope.loginuser.name}" />
-			<input type="hidden" name="mobile" value="${sessionScope.loginuser.mobile}" />
-			<button type="button" id="PMPaymentEnd" onclick="PurchaseEnd();"><i class="fa-regular fa-paper-plane" style="color: #ffffff; margin-right:10px;"></i>신용카드 결제하기</button>
-		</form>
+		<button type="button" id="PMPaymentEnd" onclick="PurchaseEnd();"><i class="fa-regular fa-paper-plane" style="color: #ffffff; margin-right:10px;"></i>신용카드 결제하기</button>
 		<button type="button" id="PMPaymentReset">취소</button>
 		<%-- 결제하기 버튼 끝 --%>
 	</div>
