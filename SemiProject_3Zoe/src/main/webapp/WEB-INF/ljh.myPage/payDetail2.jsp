@@ -5,6 +5,9 @@
     String ctxPath = request.getContextPath();
     //    /MyMVC
 %>   
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <jsp:include page="header.jsp"/>
 <style type="text/css">
 
@@ -82,17 +85,17 @@
   	  	<tbody>
 		    <tr>
 		      <td>1</td>
-		      <td>정보처리기사 필기 외 2건</td>
-		      <td>237,000원</td>
-		      <td>2023.05.03</td>
-		      <td>가상계좌</td>
-		      <td>결제완료</td>
+		      <td>${requestScope.order.firstCourseName}</td>
+	       	  <td><fmt:formatNumber value="${requestScope.order.totalPrice}" pattern="#,###"/>원</td>
+	          <td>카드</td>
+	          <td>${requestScope.order.orderday}</td>
+	          <td>결제완료</td>
 		    </tr>
 
 		  </tbody>
   	  </table>
   	  
-  	  <button type="button" class="btn btn-outline-secondary" style="width:80px; height:48px; background-color:white; ">목록</button>
+  	  <button type="button" class="btn btn-outline-secondary" style="width:80px; height:48px; background-color:white;" onclick="location.href='<%= ctxPath %>/ljh.member.controller/payDetailt.go'">목록</button>
   	</div>
   	
   	
@@ -115,28 +118,22 @@
   	  		<tr>
 		  	  	<th>No</th>
 		  	  	<th>주문 목록</th>
+		  	  	<th>정가</th>
 		  	  	<th>판매가</th>
-		  	  	<th>할인금액</th>
-		  	  	<th>결제금액</th>
 	  	  	</tr>
   	  	</thead>
   	  	
-  	  	<tbody>
-		    <tr>
-		      <td>1</td>
-		      <td>정보처리기사</td>
-		      
-		      <td>
-		      	<span style="text-decoration:line-through; color:gray;">130,000</span>
-		      	<br>
-		      	<span>79,000원</span>
-		      </td>
-		      
-		      <td style=" color:gray;">0원</td>
-		      <td>79,000원</td>
-		    </tr>
 
-		  </tbody>
+		<tbody>
+  		 <c:forEach var="order"  items="${requestScope.orderDetailList}"  varStatus="i">	
+	      <tr class="payDetail" id ="${order.orderCode}">
+	       <td>${i.index+1}</td>
+	       <td>${order.courseName}</td>
+	       <td><fmt:formatNumber value="${order.price}" pattern="#,###"/>원</td>
+	       <td><fmt:formatNumber value="${order.salePrice}" pattern="#,###"/>원</td> 
+	     </tr>
+	    </c:forEach>
+	   </tbody>
   	  </table>
   	  
   	 </div>
@@ -144,42 +141,7 @@
  	 
  	 
  	 
- 	   	<div class="content4" style="height:auto; margin-top:30px;">
-	 		
-	 		<div>
-	 			<ul class="navbar-nav" style="width: 100%; display: flex; justify-content: space-between;">
-			    <li class="nav-item " style="display: flex; align-items: center; ">
-			      	<span><b>결제 정보</b></span>
-			 
-			  </ul>
-	  
-	 		</div>
-	 	
-	 	  
-	 	  <table id="thirdTable" class="table table-bordered" style="margin-top:30px;  font-size:12pt;">
-	 	  	<tr>
-		  	  <td>주문번호</td>
-		      <td>정보처리기사 필기 외 2건</td>
-	  	  	</tr>
-	  	  	
-	  	  	<tr>
-		  	  <td>총결제금액</td>
-		      <td>237,000원</td>
-	  	  	</tr>
-	  	  	
-	  	  	<tr>
-		  	  <td>주문일자</td>
-		      <td>정보처리기사 필기 외 2건</td>
-	  	  	</tr>
-	  	  	
-	  	  	<tr>
-		  	  <td>적립포인트</td>
-		      <td>정보처리기사 필기 외 2건</td>
-	  	  	</tr>
-	
-	 	  </table>
- 	  
- 	 </div>
+ 	   	
   
 </div>
 	

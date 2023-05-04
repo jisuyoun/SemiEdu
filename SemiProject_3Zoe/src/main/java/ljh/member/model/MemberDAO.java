@@ -319,4 +319,34 @@ public class MemberDAO implements InterMemberDAO {
 		return cosList;
 	}
 
+	
+	// 로그인된 회원의 위시리스트 갯수 가져오기
+	@Override
+	public int wishListCount(String userid) throws SQLException {
+		int count = 0;
+		
+		try {
+			conn = ds.getConnection();
+			
+			String sql = " select count(*)"
+					+ " from tbl_like"
+					+ " where fk_userid = ? ";
+			
+			pstmt = conn.prepareStatement(sql); 
+			pstmt.setString(1, userid);
+			
+			rs = pstmt.executeQuery();
+			
+			
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+			
+		} finally {
+			close();
+		}
+		
+		return count;
+	}
+
 }

@@ -60,7 +60,7 @@
   			
   			<div stlye="">
   				<p class="pC2">
-  					<span class="spanC" >0</span>건
+  					<span class="spanC" >${requestScope.count}</span>건
   				</p>
   				<p class="pC">위시리스트</p>
   			</div>
