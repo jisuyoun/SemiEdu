@@ -1,6 +1,6 @@
 package ljh.order.model;
 
-public class ordrDetailVO {
+public class OrdrDetailVO {
 	
 	private int orderNum ;
 	private int fk_orderCode;
@@ -10,10 +10,10 @@ public class ordrDetailVO {
 	private String endDate;
 	
 	
-	public ordrDetailVO() {};
+	public OrdrDetailVO() {};
 	
-	
-	public ordrDetailVO(int orderNum, int fk_orderCode, String fk_courseCode, int coursePrice, String startDate,
+	 
+	public OrdrDetailVO(int orderNum, int fk_orderCode, String fk_courseCode, int coursePrice, String startDate,
 			String endDate) {
 		super();
 		this.orderNum = orderNum;

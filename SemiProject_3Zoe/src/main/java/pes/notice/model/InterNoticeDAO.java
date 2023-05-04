@@ -1,6 +1,7 @@
 package pes.notice.model;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import cos.model.CosVO;
 
@@ -12,11 +13,11 @@ public interface InterNoticeDAO {
 	// tbl_notice 테이블에 insert 하기 
 	public int noticeAdd(NoticeVO nvo) throws SQLException;
 
-	// tbl_product_imagefile 테이블에 제품의 추가이미지 파일명 insert 해주기  
-	public int notice_imagefile_Insert(String notice_seq, String attachFileName) throws SQLException;
+	// tbl_notice SELECT
+	public ArrayList<NoticeVO> noticeList()  throws SQLException;
 
-	
-	
+	// notice_seq 값을 받아 공지사항 본문내용 알아오기
+	public NoticeVO noticeDetailAction(String notice_seq) throws SQLException; 
 	
 
 	

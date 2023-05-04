@@ -18,24 +18,39 @@ public class IssueCertifiAction extends AbstractController {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		
-		InterMemberDAO mdao = new MemberDAO();
-		
 		HttpSession session = request.getSession();
 		//세션에서 로그인된 아이디 가져오기
 		MemberVO loginuser = (MemberVO) session.getAttribute("loginuser");
 		
-		// 로그인한 사람이 듣고있는 강의 가져오기
-		List<CosVO> cosList= mdao.getIngCourse(loginuser.getUserid());
+		if(loginuser == null) {
+			String message = "로그인을 하세요";
+			String loc =request.getContextPath()+"/index.go";
+			
+			request.setAttribute("message", message);
+			request.setAttribute("loc", loc);
+			
+			super.setRedirect(false);
+			super.setViewPage("/WEB-INF/msg.jsp");
+		}
 		
-
-		// jsp로 넘긴다.
-		request.setAttribute("cosList", cosList);
-		
-		
-		
-		super.setRedirect(false);
-		super.setViewPage("/WEB-INF/ljh.myPage/issueCertifi.jsp");
-		
+		else {
+			InterMemberDAO mdao = new MemberDAO();
+			
+			
+			
+			// 로그인한 사람이 듣고있는 강의 가져오기
+			List<CosVO> cosList= mdao.getIngCourse(loginuser.getUserid());
+			
+	
+			// jsp로 넘긴다.
+			request.setAttribute("cosList", cosList);
+			
+			
+			
+			super.setRedirect(false);
+			super.setViewPage("/WEB-INF/ljh.myPage/issueCertifi.jsp");
+			
+		}
 	}
 
 }

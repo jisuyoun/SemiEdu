@@ -5,6 +5,10 @@
     String ctxPath = request.getContextPath();
     //    /MyMVC
 %>   
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+ 
 <jsp:include page="header.jsp"/>
 <style type="text/css">
 
@@ -17,7 +21,6 @@
 	
 	div.item3{
 
-		border-bottom:solid 1px gray;
 		 height:70%; 
 		 margin-top:10px; 
 		 display: flex; 
@@ -27,6 +30,10 @@
 	
 	table.table{
 		border-top:solid 1px black !important;
+	}
+	
+	tr{
+		cursor:pointer;
 	}
 
 	
@@ -63,9 +70,27 @@
         $("input#fromDate").datepicker();                    
         $("input#toDate").datepicker();
         
+      //From의 초기값을 오늘 날짜로 설정
+        $('input#fromDate').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, +1M:한달후, +1Y:일년후)
+        
+        //To의 초기값을 3일후로 설정
+        $('input#toDate').datepicker('setDate', '+today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, +1M:한달후, +1Y:일년후)
+    
+        
         
     });
-
+    
+    
+    $(document).ready(function(){
+    
+		// 특정 주문을 누르면 상세페이지로 이동
+		$("tr.payDetail").click( (e) => {
+			const orderCode = $(e.target).parent().find("#orderCode").text() ;
+			location.href="<%= ctxPath%>/ljh.member.controller/payDetail2.go?orderCode="+orderCode;
+			
+		});
+	});// end of $(document).ready(function(){})-----------------------------
+	
 </script>  
   
   
@@ -74,7 +99,7 @@
 
 <div class="main1">
   	
-  	<div class="content4">
+  	<div class="content4" style="height:auto; min-height:300px;">
   		
   		<div>
   			<ul class="navbar-nav" style="width: 100%; display: flex; justify-content: space-between;">
@@ -83,27 +108,34 @@
 			    <li class="nav-item " style="display: flex; align-items: center; ">
 			      	<span><b>결제내역 조회</b></span>
 			 
-			 
-
+		
 			  </ul>
 	  
   		</div>
+  		
+  		<%-- 
   		<div style="display:flex; justify-content: center; align-items: center; background-color:#f3f7f8; margin-top:30px; height:120px;">
   			
  
-  				<button type="button" class="btn btn-outline-secondary" style="width:90px; height:60px; background-color:white; margin-right:10px;">1개월전</button>
-  				<button type="button" class="btn btn-outline-secondary" style="width:90px; height:60px; background-color:white; margin-right:10px;">3개월전</button>
-  				<button type="button" class="btn btn-outline-secondary" style="width:90px; height:60px; background-color:white; margin-right:10px;">6개월전</button>
-  				
-  				<input type="text"  id="fromDate" style=" margin-right:10px; width:200px; height:60px;">&nbsp; ~&nbsp; 
-                <input type="text" id="toDate" style=" margin-right:10px; width:200px; height:60px;">
+  				<input type="text"  id="fromDate" name="fromDate" style=" margin-right:10px; width:200px; height:60px;">&nbsp; ~&nbsp; 
+                <input type="text" id="toDate" name="toDate" style=" margin-right:10px; width:200px; height:60px;">
                 
-                <button type="button" class="btn btn-dark" style="width:90px; height:60px; font-size:20px; margin-right:10px; margin-left:10px;">검색</button>
+                <button type="button" class="btn btn-dark" style="width:90px; height:60px; font-size:20px; margin-right:10px; margin-left:10px;" onclick="location.href='<%= ctxPath %>/ljh.member.controller/searchDate.go'">검색</button>
 
   	  </div>
 
+  	  --%>
   	  
-  	  <table  class="table" style="margin-top:50px; text-align:center;">
+
+  	  	
+  	  	<!-- 만약 위시리스트가 아무것도 없다면 -->
+			<c:if test="${empty requestScope.orderList}"> 
+				<div class="item3">결제한 강의가 없습니다.</div>
+			</c:if>
+			
+		<!-- 만약 위시리스트가 있으면 -->
+	  	<c:if test="${not empty requestScope.orderList}"> 
+	  	<table  class="table" style="margin-top:50px; text-align:center;">
   	  	<thead class="thead-light" style="height:20px; ">
   	  		<tr>
 		  	  	<th>No</th>
@@ -112,42 +144,29 @@
 		  	  	<th>결제수단</th>
 		  	  	<th>주문일</th>
 		  	  	<th>상태</th>
+		  	  	<th style="visibility:hidden;position:absolute;"></th>
 	  	  	</tr>
   	  	</thead>
   	  	
-  	  	<tbody>
-		    <tr>
-		      <td>1</td>
-		      <td>Mark</td>
-		      <td>Otto</td>
-		      <td>@mdo</td>
-		      <td>@mdo</td>
-		      <td>@mdo</td>
-		    </tr>
-		    <tr>
-		      <td>1</td>
-		      <td>Mark</td>
-		      <td>Otto</td>
-		      <td>@mdo</td>
-		      <td>@mdo</td>
-		      <td>@mdo</td>
-		    </tr>
-		    <tr>
-		      <td>1</td>
-		      <td>Mark</td>
-		      <td>Otto</td>
-		      <td>@mdo</td>
-		      <td>@mdo</td>
-		      <td>@mdo</td>
-		    </tr>
-		  </tbody>
-  	  </table>
+  		<tbody>
+  		 <c:forEach var="order"  items="${requestScope.orderList}"  varStatus="i">	
+	      <tr class="payDetail" id ="${order.orderCode}">
+	       <td>${i.index+1}</td>
+	       <td>${order.firstCourseName}</td>
+	       <td><fmt:formatNumber value="${order.totalPrice}" pattern="#,###"/></td>
+	       <td>카드</td>
+	       <td>${order.orderday}</td>
+	       <td>결제완료</td>
+	       <td id="orderCode" style="visibility:hidden;position:absolute;">${order.orderCode}</td>
+	     </tr>
+	    </c:forEach>
+	   </tbody>
+	</table>
+		</c:if>
+  	  
   	</div>
   	
   	
-  	<!-- 삭제예정 -->
-  	<button type="button" onclick = "location.href = '<%= ctxPath %>/ljh.member.controller/payDetail2.go'">상세페이지로 가는 버튼</button>
-  
 </div>
 	
 	

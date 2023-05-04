@@ -76,16 +76,18 @@ button.btnInfoChange{
 <script type="text/javascript">
 
 
+	let b_flag_email_change = false;
+	//이메일이 변경되었는지 체크
+	
+	let b_flag_emailDuplicate_click = false;
+	// 이메일이 중복인지 체크했는지
+	
+	let b_flag_emailExpOk = false;
+	// 이메일이 정규표현식에 맞는지 체크
+
+
+
 	$(document).ready(function() {
-		
-		let b_flag_email_change = false;
-		//이메일이 변경되었는지 체크
-		
-		let b_flag_emailDuplicate_click = false;
-		// 이메일이 중복인지 체크했는지
-		
-		let b_flag_emailExpOk = false;
-		// 이메일이 정규표현식에 맞는지 체크
 		
 		$("span.error").hide();
 		
@@ -98,7 +100,6 @@ button.btnInfoChange{
 	          if(!bool) {
 	             // 이메일이 정규표현식에 위배 된 경우
 	              $("span.error").show();
-	              //$("button#btnEmailCheck").attr('disabled', 'disabled');
 	              $("span#emailCheckResult").hide();
 	              $(e.target).focus(); 
 	              b_flag_emailExpOk= false;
@@ -117,17 +118,21 @@ button.btnInfoChange{
         $("input#email").bind("change", function(){
               b_flag_email_change = true;
               b_flag_emailDuplicate_click = false;
+              b_flag_emailExpOk = false;
+              
         }); 
 		
-		
+   
+	        
      	// 이메일 중복버튼을 누르면
 		$("button#btnEmailCheck").click(function(){
 				isExistEmailCheck();
-			
+					
+				
 		});
      	
      	$("button#btnSubmit").click(function(){
-     		goEdit(b_flag_email_change,b_flag_emailDuplicate_click,b_flag_emailExpOk);
+     		goEdit();
      	});
 
 	});//$(document).ready(function()
@@ -158,14 +163,15 @@ button.btnInfoChange{
                      
                      const regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 	          
-	          		const bool = regExp.test($("input#email").val());
-                     
+	          		 const bool = regExp.test($("input#email").val());
+	          		 
+	          		 b_flag_emailDuplicate_click = true;
                      
                      if(!bool){	//이메일 정규표현식이 틀렸다면 체크를 못하게 한다.
          				$("input#email").val("");
          				$("span#emailCheckResult").hide();
          				$("span.error").show();
-         				b_flag_emailDuplicate_click = false;
+         				
          				return;
                      }
                      else if(bool){
@@ -173,6 +179,7 @@ button.btnInfoChange{
 	                     $("span#emailCheckResult").show();
 	                     $("span#emailCheckResult").html($("input#email").val()+" 은 사용가능합니다.").css("color","navy"); 
 	                     b_flag_emailDuplicate_click = true;
+	                     return true;
                      }
                    }
                 },
@@ -185,22 +192,19 @@ button.btnInfoChange{
         } // end of function isExistEmailCheck()----------------		
 			
         
-    	function goEdit(b_flag_email_change,b_flag_emailDuplicate_click,b_flag_emailExpOk){
+    	function goEdit(){
     		
-        	alert("b_flag_email_change "+b_flag_email_change);
-        	alert("b_flag_emailDuplicate_click "+b_flag_emailDuplicate_click);
-        	alert("b_flag_emailExpOk "+b_flag_emailExpOk);
+
         	
     		//이메일 변경을 하지 않았거나 했다면 이메일 중복체크를 했고, 정규표현식에 맞는지 체크.
-    		if(!b_flag_email_change ||$ || $("input#email").val().trim() != null || (b_flag_emailDuplicate_click && b_flag_emailExpOk)){
-    			alert("첫번째 if 들오왔음");
+    		if(!b_flag_email_change  || (b_flag_emailDuplicate_click && b_flag_emailExpOk)){
     			const frm = document.infoChange;
                 frm.action = "<%= ctxPath%>/ljh.member.controller/infoChange.go";
                 frm.method = "post";
                 frm.submit();
     		}
     		
-    		else if(b_flag_email_change|| $("input#email").val().trim() == null || (!b_flag_emailDuplicate_click || !b_flag_emailExpOk )){
+    		else if(b_flag_email_change|| $("input#email").val().trim() == "" || (!b_flag_emailDuplicate_click || !b_flag_emailExpOk )){
     			
     			alert("이메일 형식에 맞게 쓰시고 중복체크를 하세요");
     			return false;

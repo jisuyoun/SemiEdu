@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
     
 <%
     String ctxPath = request.getContextPath();
@@ -59,6 +60,7 @@
 		<%-- 상단 title dropdown content 끝 --%>	
 			
 		
+		
 		<%-- 추가이미지 불러오기 시작 --%>
 		$.ajax({
 			url:"<%= request.getContextPath()%>/yjs.cos/yjs_PlusImgJSON.go",
@@ -87,8 +89,12 @@
 		});
 		<%-- 추가이미지 불러오기 끝 --%>
 		
-		
-	
+		$(window).scroll(function() {
+
+
+			  let roll =   $(window).scrollTop();
+			  console.log(roll);
+		});
 		<%-- 비슷한 강의 추천 불러오기 시작 --%>
 		$.ajax({
 			url:"<%= request.getContextPath()%>/yjs.cos/yjs_CosRecommendJSON.go",
@@ -230,6 +236,7 @@
 				
 				$.each(json, function(index, item){
 				
+					
 					html="";
 					starCnt = 0;
 					
@@ -271,7 +278,9 @@
 		var all = ${requestScope.cvo.price}-${requestScope.cvo.salePrice};
 		//alert(all);
 		
-		$("span#salePriceText").text(all);
+		var changeAll = all.toLocaleString('en');
+		
+		$("span#salePriceText").text(changeAll);
 		/* 가격 알아오기 끝 */
 		
 	    $(window).on("scroll",function(){
@@ -306,15 +315,22 @@
 	      
 	      <%-- 리스트를 누르지 않고 스크롤로 이동시 해당 위치에 따라 리스트 색 변화 --%>
 	      $(window).on("scroll",function(){
-	    	  if( $(window).scrollTop()>=1100 && $(window).scrollTop() <= 9368 ) {
+	    	  if( $(window).scrollTop()>=1100 && $(window).scrollTop() <= 4395 ) {
 	        	  $("span#menuIntro").addClass("OPFont_change");
 	        	  $("span#menuList").removeClass("OPFont_change");
+	        	  $("span#menuReview").removeClass("OPFont_change");
 	          }
-	    	  else if ( $(window).scrollTop() >= 10000 ){
+	    	  else if ( $(window).scrollTop() >= 4395 && $(window).scrollTop() <= 4700 ){
 	    		  <%-- 수강후기와 수강목차가 추가된 것을 보고 스크롤 위치 수정하기 --%>
 	    		  $("span#menuIntro").removeClass("OPFont_change");
-	    		  $("span#menuList").addClass("OPFont_change");
-	    		  
+	    		  $("span#menuList").addClass("OPFont_change"); 
+	    		  $("span#menuReview").removeClass("OPFont_change");
+	    	  }
+	    	  else if ( $(window).scrollTop() >= 4700 ){
+	    		  <%-- 수강후기와 수강목차가 추가된 것을 보고 스크롤 위치 수정하기 --%>
+	    		  $("span#menuIntro").removeClass("OPFont_change");
+	    		  $("span#menuList").removeClass("OPFont_change"); 
+	    		  $("span#menuReview").addClass("OPFont_change");
 	    	  }
 	      });
 	      
@@ -330,7 +346,7 @@
 	      });
 	      
 	      $("span#menuList").click(function(){
-	    	  window.scrollTo({top:10000, behavior:'smooth'});
+	    	  window.scrollTo({top:4395, behavior:'smooth'});
 	    	  
 	    	  $("span#menuIntro").removeClass("OPFont_change");
 	    	  $("span#menuList").addClass("OPFont_change");
@@ -338,7 +354,7 @@
 	      });
 	      
 	      $("span#menuReview").click(function(){
-	    	  window.scrollTo({top:9368, behavior:'smooth'});
+	    	  window.scrollTo({top:4700, behavior:'smooth'});
 	    	  
 	    	  $("span#menuIntro").removeClass("OPFont_change");
 	    	  $("span#menuList").removeClass("OPFont_change");
@@ -349,7 +365,7 @@
 	      
 	      
 	      <%-- 수강목차 시작 --%>
-	      var coll = document.getElementsByClassName("collapsible_before");
+	      var coll = document.getElementsByClassName("collapsibleInner");
 	      var i;
 
 	      for (i = 0; i < coll.length; i++) {
@@ -437,6 +453,8 @@
 		 });
 		 /* 찜 추가 및 삭제 끝 */
 		 
+		 
+		 
 	}); // end of document.ready
 	
 
@@ -460,11 +478,18 @@
 	/* 목차 나오기 시작 */
 	function showCourseList() {
 		
-		$("button#collapsible_before").toggle();
+		$("button#collapsibleInner").toggle();
 		
 	}
 	/* 목차 나오기 끝 */
 	
+	
+	/* 맛보기 시작 */
+	function goYoutube() {
+		window.open("https://www.youtube.com/watch?v=JhKOsZuMDWs&list=PL6i7rGeEmTvqEjTJF3PJR4a1N9KTPpfw0", "맛보기", "width=800px, height=500px, top=50px, left=100px");
+	}
+	
+	/* 맛보기 끝 */
 	
 </script>
 
@@ -513,13 +538,17 @@
 				</div>
 				<div id="OPClassDate">
 					<a>기간</a>
-					<a style="color: gray;">${requestScope.cvo.courseTerm}일</a>
+					<a>${requestScope.cvo.courseTerm}일</a>
 				</div>
 				<div id="OPClassStatus">
 					<a>강사명</a>
-					<a style="color: gray;">${requestScope.cvo.teacher}</a>
+					<a>${requestScope.cvo.teacher}</a>
 				</div>
-				<button type="button" id="OPPreButton"><i class="fa-brands fa-youtube" style="color: #ffffff; margin-right:10px;"></i>맛보기</button>
+				<div id="OPClassPoint">
+					<a>적립포인트</a>
+					<a>${requestScope.cvo.point}</a>
+				</div>
+				<button type="button" id="OPPreButton" onClick="goYoutube();"><i class="fa-brands fa-youtube" style="color: #ffffff; margin-right:10px;"></i>맛보기</button>
 			</div>
 			
 			
@@ -533,21 +562,21 @@
 				<label><input type="checkbox" id="OPCheckbox" name="checkbox"/></label>
 				<span class="badge badge-secondary">과정</span>
 				<a>${requestScope.cvo.courseName}</a>
-				<span id="OPSalePrice">${requestScope.cvo.salePrice}원</span><span id="OPPrice">${requestScope.cvo.price}원</span>
+				<span id="OPSalePrice"><fmt:formatNumber value="${requestScope.cvo.salePrice}" pattern="#,###"/>원</span><span id="OPPrice"><fmt:formatNumber value="${requestScope.cvo.price}" pattern="#,###"/>원</span>
 			</div>
 			<div id="OPPrice" class="col-xl-12">
 				<span>판매금액</span>
-				<span style="margin:0 18px 0 40px;">${requestScope.cvo.price}원</span>
-				<span>-</span>
+				<span id="OPPricePosition"><fmt:formatNumber value="${requestScope.cvo.price}" pattern="#,###"/>원</span>
+				<span><i id='SPMinusIcon' class='fa-solid fa-circle-minus' style='color: #ff0000;' ></i></span>
 				<span style="margin:0 40px 0 18px;">할인금액</span>
-				<span id="salePriceText"></span><a>원</a>
+				<span id="salePriceText"></span><a style="font-weight:bold;">원</a>
 			</div>
 			
 			<hr/>
 			
 			<div id="OPAllPrice">
 				<span style="margin-right: 40px;">총 결제금액</span>
-				<span>${requestScope.cvo.salePrice}원</span>
+				<span id="OPFinalPrice"><fmt:formatNumber value="${requestScope.cvo.salePrice}" pattern="#,###"/>원</span>
 			</div>
 		</div>
 		<%-- 강의 가격 끝 --%>
@@ -591,7 +620,7 @@
 		
 		<%-- 비슷한 강의 추천 시작 --%>
 		<div class="container" style="max-width:1184px;">
-			<h4 style="margin:32px 0 25px 11px; font-weight: bold;">추천 강의</h4>
+			<h4 style="margin:150px 0 25px 11px; font-weight: bold;">추천 강의</h4>
 		</div>
 		<div class="container" style="margin:0 300px;">
 			<div id="OPCardPos"></div>
@@ -612,7 +641,7 @@
 				<p></p>
 			</div>
 			
-			<button type="button" id="collapsible_before" class="collapsible_before" style="display:none;">${requestScope.cvo.courseList}</button>
+			<button type="button" id="collapsibleInner" class="collapsibleInner" >${requestScope.cvo.courseList}</button>
 			
 		</div>
 		<!-- 아코디언 끝  -->

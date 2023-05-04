@@ -99,7 +99,6 @@
 		height: 305px;
 		position: relative; 
 		margin: 50px auto; 
-		border: 1px solid #c7c7c7;
 		padding: 0 20px;
 		overflow: hidden;
 
@@ -128,11 +127,17 @@
     	width: 1200px;
     }
     
+    a {
+    	color: gray;
+    }
 	
+	button.bu {
+		outline-style: auto;
+	}
 
 </style>
 
-<title>Insert title here</title>
+<title>워너에듀</title>
 
 <body>
 
@@ -171,24 +176,92 @@
 			<h3 class="yh_title">수강후기</h3>
 			
 			<div class="rolling_panel">
-			<button id="prev" style="width: 50px; height: 50px;"><i class="fa-solid fa-circle-chevron-left"></i></button>
-			<button id="next" style="width: 50px; height: 50px;"><i class="fa-solid fa-circle-chevron-right"></i></button>
+			<button id="prev" class="bu" style="width: 50px; height: 50px;"><i class="fa-solid fa-circle-chevron-left"></i></button>
+			<button id="next" class="bu" style="width: 50px; height: 50px;"><i class="fa-solid fa-circle-chevron-right"></i></button>
 
 	            <ul>
 	         		 <li class="slick-slide">
 	                	<a class="a-review">
 	                		<di>
 					            <dd class="fa-solid fa-star" style="color: #1bcdb9;"></dd>
-					            <dd class="fa-regular fa-star" style="color: #1bcdb9;"></dd>
-					            <dd class="fa-regular fa-star" style="color: #1bcdb9;"></dd>
-					            <dd class="fa-regular fa-star" style="color: #1bcdb9;"></dd>
+					            <dd class="fa-solid fa-star" style="color: #1bcdb9;"></dd>
+					            <dd class="fa-solid fa-star" style="color: #1bcdb9;"></dd>
+					            <dd class="fa-solid fa-star" style="color: #1bcdb9;"></dd>
+					            <dd class="fa-solid fa-star" style="color: #1bcdb9;"></dd>
+					            <dd class="fa-regular fa-user OPUserIcon" style="color: #000000;"></dd>
+			            	</di>
+			            <span>워너에듀</span>
+			            <h4 style="color: gray;">정보처리기사 실기 1회차 합격후기</h4>
+			            <h5></h5>
+			            <p>정보처리기사 실기</p>
+	                	</a>
+	                </li>
+	                
+	                <li class="slick-slide">
+	                	<a class="a-review">
+	                		<di>
+					            <dd class="fa-solid fa-star" style="color: #1bcdb9;"></dd>
+					            <dd class="fa-solid fa-star" style="color: #1bcdb9;"></dd>
+					            <dd class="fa-solid fa-star" style="color: #1bcdb9;"></dd>
+					            <dd class="fa-solid fa-star" style="color: #1bcdb9;"></dd>
+					            <dd class="fa-solid fa-star" style="color: #1bcdb9;"></dd>
+					            <dd class="fa-regular fa-user OPUserIcon" style="color: #000000;"></dd>
+			            	</di>
+			            <span>워너에듀</span>
+			            <h4 style="color: gray;">덕분에 도움많이 받고 1회에 합격했습니다.</h4>
+			            <h2></h2>
+			            <p>정보처리기사 필기</p>
+	                	</a>
+	                </li>
+	                
+	                <li class="slick-slide">
+	                	<a class="a-review">
+	                		<di>
+					            <dd class="fa-solid fa-star" style="color: #1bcdb9;"></dd>
+					            <dd class="fa-solid fa-star" style="color: #1bcdb9;"></dd>
+					            <dd class="fa-solid fa-star" style="color: #1bcdb9;"></dd>
+					            <dd class="fa-solid fa-star" style="color: #1bcdb9;"></dd>
 					            <dd class="fa-regular fa-star" style="color: #1bcdb9;"></dd>
 					            <dd class="fa-regular fa-user OPUserIcon" style="color: #000000;"></dd>
 			            	</di>
-			            <span>사용자이름</span>
-			            <h4>필기 합격 이후 실기 후기로 찾아뵐게요</h4>
+			            <span>워너에듀</span>
+			            <h4 style="color: gray;">필기 합격 이후 실기 후기로 다시 찾아 뵙게 되었습니다!!</h4>
 			            <h5></h5>
-			            <p>기존 워너에듀</p>
+			            <p>정보처리기사 실기</p>
+	                	</a>
+	                </li>
+	                
+	                <li class="slick-slide">
+	                	<a class="a-review">
+	                		<di>
+					            <dd class="fa-solid fa-star" style="color: #1bcdb9;"></dd>
+					            <dd class="fa-solid fa-star" style="color: #1bcdb9;"></dd>
+					            <dd class="fa-solid fa-star" style="color: #1bcdb9;"></dd>
+					            <dd class="fa-solid fa-star" style="color: #1bcdb9;"></dd>
+					            <dd class="fa-solid fa-star" style="color: #1bcdb9;"></dd>
+					            <dd class="fa-regular fa-user OPUserIcon" style="color: #000000;"></dd>
+			            	</di>
+			            <span>워너에듀</span>
+			            <h4 style="color: gray;">정보처리기사 3회차 필기 비전공자 14일 공부 현실 찐 합격 수기입니다.</h4>
+			            <h5></h5>
+			            <p>정보처리기사 필기</p>
+	                	</a>
+	                </li>
+	                
+	                <li class="slick-slide">
+	                	<a class="a-review">
+	                		<di>
+					            <dd class="fa-solid fa-star" style="color: #1bcdb9;"></dd>
+					            <dd class="fa-solid fa-star" style="color: #1bcdb9;"></dd>
+					            <dd class="fa-solid fa-star" style="color: #1bcdb9;"></dd>
+					            <dd class="fa-solid fa-star" style="color: #1bcdb9;"></dd>
+					            <dd class="fa-solid fa-star" style="color: #1bcdb9;"></dd>
+					            <dd class="fa-regular fa-user OPUserIcon" style="color: #000000;"></dd>
+			            	</di>
+			            <span>워너에듀</span>
+			            <h4 style="color: gray;">필기 합격 이후 실기 후기로 찾아뵐게요</h4>
+			            <h5></h5>
+			            <p>정보처리기사 실기</p>
 	                	</a>
 	                </li>
 	                
@@ -202,78 +275,10 @@
 					            <dd class="fa-regular fa-star" style="color: #1bcdb9;"></dd>
 					            <dd class="fa-regular fa-user OPUserIcon" style="color: #000000;"></dd>
 			            	</di>
-			            <span>사용자이름</span>
-			            <h4>필기 합격 이후 실기 후기로 찾아뵐게요</h4>
+			            <span>워너에듀</span>
+			            <h4 style="color: gray;">필기 합격 이후 실기 후기로 찾아뵐게요</h4>
 			            <h5></h5>
-			            <p>기존 워너에듀</p>
-	                	</a>
-	                </li>
-	                
-	                <li class="slick-slide">
-	                	<a class="a-review">
-	                		<di>
-					            <dd class="fa-solid fa-star" style="color: #1bcdb9;"></dd>
-					            <dd class="fa-regular fa-star" style="color: #1bcdb9;"></dd>
-					            <dd class="fa-regular fa-star" style="color: #1bcdb9;"></dd>
-					            <dd class="fa-regular fa-star" style="color: #1bcdb9;"></dd>
-					            <dd class="fa-regular fa-star" style="color: #1bcdb9;"></dd>
-					            <dd class="fa-regular fa-user OPUserIcon" style="color: #000000;"></dd>
-			            	</di>
-			            <span>사용자이름</span>
-			            <h4>필기 합격 이후 실기 후기로 찾아뵐게요</h4>
-			            <h5></h5>
-			            <p>기존 워너에듀</p>
-	                	</a>
-	                </li>
-	                
-	                <li class="slick-slide">
-	                	<a class="a-review">
-	                		<di>
-					            <dd class="fa-solid fa-star" style="color: #1bcdb9;"></dd>
-					            <dd class="fa-regular fa-star" style="color: #1bcdb9;"></dd>
-					            <dd class="fa-regular fa-star" style="color: #1bcdb9;"></dd>
-					            <dd class="fa-regular fa-star" style="color: #1bcdb9;"></dd>
-					            <dd class="fa-regular fa-star" style="color: #1bcdb9;"></dd>
-					            <dd class="fa-regular fa-user OPUserIcon" style="color: #000000;"></dd>
-			            	</di>
-			            <span>사용자이름</span>
-			            <h4>필기 합격 이후 실기 후기로 찾아뵐게요</h4>
-			            <h5></h5>
-			            <p>기존 워너에듀</p>
-	                	</a>
-	                </li>
-	                
-	                <li class="slick-slide">
-	                	<a class="a-review">
-	                		<di>
-					            <dd class="fa-solid fa-star" style="color: #1bcdb9;"></dd>
-					            <dd class="fa-regular fa-star" style="color: #1bcdb9;"></dd>
-					            <dd class="fa-regular fa-star" style="color: #1bcdb9;"></dd>
-					            <dd class="fa-regular fa-star" style="color: #1bcdb9;"></dd>
-					            <dd class="fa-regular fa-star" style="color: #1bcdb9;"></dd>
-					            <dd class="fa-regular fa-user OPUserIcon" style="color: #000000;"></dd>
-			            	</di>
-			            <span>사용자이름</span>
-			            <h4>필기 합격 이후 실기 후기로 찾아뵐게요</h4>
-			            <h5></h5>
-			            <p>기존 워너에듀</p>
-	                	</a>
-	                </li>
-	                
-	                <li class="slick-slide">
-	                	<a class="a-review">
-	                		<di>
-					            <dd class="fa-solid fa-star" style="color: #1bcdb9;"></dd>
-					            <dd class="fa-regular fa-star" style="color: #1bcdb9;"></dd>
-					            <dd class="fa-regular fa-star" style="color: #1bcdb9;"></dd>
-					            <dd class="fa-regular fa-star" style="color: #1bcdb9;"></dd>
-					            <dd class="fa-regular fa-star" style="color: #1bcdb9;"></dd>
-					            <dd class="fa-regular fa-user OPUserIcon" style="color: #000000;"></dd>
-			            	</di>
-			            <span>사용자이름</span>
-			            <h4>필기 합격 이후 실기 후기로 찾아뵐게요</h4>
-			            <h5></h5>
-			            <p>기존 워너에듀</p>
+			            <p>정보처리기사 실기</p>
 	                	</a>
 	                </li>
 	            </ul>

@@ -9,9 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import common.controller.AbstractController;
+import hyh.member.model.InterMemberDAO;
+import hyh.member.model.MemberDAO;
 import member.model.MemberVO;
-import ssh.member.model.InterMemberDAO;
-import ssh.member.model.MemberDAO;
+
 
 
 public class GoUpdateLoginUserAction extends AbstractController {
@@ -33,7 +34,7 @@ public class GoUpdateLoginUserAction extends AbstractController {
 			paraMap.put("salePrice", salePrice);
 			
 			InterMemberDAO mdao = new MemberDAO();
-			int n = mdao.pointUpdate(paraMap);	// DB에 코인 및 포인트 증가하기
+			int n = mdao.pointUpdate(paraMap);	// DB에 포인트 증가하기
 			
 			String message = "";
 		    String loc = "";

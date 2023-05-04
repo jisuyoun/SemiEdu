@@ -18,45 +18,62 @@ public class DeleteWishListAction extends AbstractController {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		String method = request.getMethod();
+		HttpSession session = request.getSession();
+		//세션에서 로그인된 아이디 가져오기
+		MemberVO loginuser = (MemberVO) session.getAttribute("loginuser");
 		
-		if("post".equalsIgnoreCase(method)) {
+		if(loginuser == null) {
+			String message = "로그인을 하세요";
+			String loc =request.getContextPath()+"/index.go";
 			
-			InterMemberDAO mdao = new MemberDAO();
+			request.setAttribute("message", message);
+			request.setAttribute("loc", loc);
 			
-			HttpSession session = request.getSession();
-			//세션에서 로그인된 아이디 가져오기
-			MemberVO loginuser = (MemberVO) session.getAttribute("loginuser");
+			super.setRedirect(false);
+			super.setViewPage("/WEB-INF/msg.jsp");
+		}
+		
+		
+		else {
+		
+			String method = request.getMethod();
 			
-			String courseCode = request.getParameter("courseCode");
-			
-			Map<String,String> paraMap = new HashMap<>();
-			paraMap.put("courseCode", courseCode);
-			paraMap.put("userid", loginuser.getUserid());
-			
-			// 클릭한 강의를 위시리스트에서 삭제한다.
-			int result = mdao.deleteWishList(paraMap);
-			
-			// 삭제성공
-			if(result == 1) {
+			if("post".equalsIgnoreCase(method)) {
 				
-				JSONObject jsonObj = new JSONObject();	//{}
-				jsonObj.put("deleteWish",result);	//{"isExists":true} 또는
-													//{"isExists":false}
+				InterMemberDAO mdao = new MemberDAO();
 				
 				
-				String json = jsonObj.toString();
 				
-				request.setAttribute("json", json);
-				//이걸 다른 페이지에 보내려고.
+				String courseCode = request.getParameter("courseCode");
 				
-				super.setRedirect(false);
-				super.setViewPage("/WEB-INF/jsonview.jsp");
-				//중복결과 검사.
+				Map<String,String> paraMap = new HashMap<>();
+				paraMap.put("courseCode", courseCode);
+				paraMap.put("userid", loginuser.getUserid());
+				
+				// 클릭한 강의를 위시리스트에서 삭제한다.
+				int result = mdao.deleteWishList(paraMap);
+				
+				// 삭제성공
+				if(result == 1) {
+					
+					JSONObject jsonObj = new JSONObject();	//{}
+					jsonObj.put("deleteWish",result);	//{"isExists":true} 또는
+														//{"isExists":false}
+					
+					
+					String json = jsonObj.toString();
+					
+					request.setAttribute("json", json);
+					//이걸 다른 페이지에 보내려고.
+					
+					super.setRedirect(false);
+					super.setViewPage("/WEB-INF/jsonview.jsp");
+					//중복결과 검사.
+				}
+				
 			}
 			
 		}
-		
 	}
 
 }
