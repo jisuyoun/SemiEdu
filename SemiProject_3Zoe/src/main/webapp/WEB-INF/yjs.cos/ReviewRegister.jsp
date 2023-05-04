@@ -94,7 +94,7 @@
 			<input type="radio" name="reviewStar" value="2" id="rate4"><label
 				for="rate4">★</label>
 			<input type="radio" name="reviewStar" value="1" id="rate5"><label
-				for="rate5">★</label>
+				for="rate5">★</label> 
 		</div>
 	</fieldset>
 	<div>
