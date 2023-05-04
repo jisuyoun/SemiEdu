@@ -58,7 +58,7 @@ public class OrderListDAO implements InterOrderListDAO {
 		try {
 			conn = ds.getConnection();
 			
-			String sql = " select orderCode,orderday, totalPrice, count(*), max(courseName) "
+			String sql = " select orderCode, fk_userid, orderday, totalPrice, count(*), max(courseName) "
 					+ " from ( "
 					+ " select  O.orderCode, O.orderday, O.totalPrice, C.courseName "
 					+ " from tbl_order O "
@@ -78,6 +78,7 @@ public class OrderListDAO implements InterOrderListDAO {
 
 				OrderVO order = new OrderVO();
 				order.setOrderCode(rs.getString(1));
+		//		order.setOrderCode(rs.getString(2));
 				order.setOrderday(rs.getString(2));
 				order.setTotalPrice(rs.getInt(3));
 				order.setCount(rs.getInt(4));

@@ -92,7 +92,7 @@
 
 
 <div class="banner_2">
-	<a href="#"><img src="<%=request.getContextPath()%>/images/banner2.png" style="width: 1230px; height: 260px;" alt="배너이미지2" /></a>
+	<a href="<%= ctxPath%>/pes.customerService/noticeDetail.go?notice_seq=101"><img src="<%=request.getContextPath()%>/images/banner2.png" style="width: 1230px; height: 260px;" alt="배너이미지2" /></a>
 </div>
 
 

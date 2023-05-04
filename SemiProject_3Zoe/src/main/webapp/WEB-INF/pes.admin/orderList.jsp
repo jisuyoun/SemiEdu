@@ -89,6 +89,7 @@
 			  </ul>
 	  
   		</div>
+ <%-- 
   		<div style="display:flex; justify-content: center; align-items: center; background-color:#f3f7f8; margin-top:30px; height:120px;">
   			
  
@@ -98,7 +99,7 @@
                 <button type="button" class="btn btn-dark" style="width:90px; height:60px; font-size:20px; margin-right:10px; margin-left:10px;" onclick="location.href='<%= ctxPath %>/ljh.member.controller/searchDate.go'">검색</button>
 
   	  </div>
-
+--%> 		
   	  
   	  
 
@@ -114,6 +115,7 @@
   	  	<thead class="thead-light" style="height:20px; ">
   	  		<tr>
 		  	  	<th>No</th>
+		  	  	<th>주문자명</th>
 		  	  	<th>주문명</th>
 		  	  	<th>결제금액</th>
 		  	  	<th>결제수단</th>
@@ -127,6 +129,7 @@
   		 <c:forEach var="order"  items="${requestScope.orderList}"  varStatus="i">	
 	      <tr class="payDetail" id ="${order.orderCode}">
 	       <td>${i.index+1}</td>
+	       <td>${order.fk_userid}</td>
 	       <td>${order.firstCourseName}</td>
 	       <td><fmt:formatNumber value="${order.totalPrice}" pattern="#,###"/></td>
 	       <td>카드</td>
