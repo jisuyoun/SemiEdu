@@ -112,6 +112,8 @@
 			  </ul>
 	  
   		</div>
+  		
+  		<%-- 
   		<div style="display:flex; justify-content: center; align-items: center; background-color:#f3f7f8; margin-top:30px; height:120px;">
   			
  
@@ -122,7 +124,7 @@
 
   	  </div>
 
-  	  
+  	  --%>
   	  
 
   	  	

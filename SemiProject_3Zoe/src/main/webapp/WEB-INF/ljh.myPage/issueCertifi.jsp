@@ -81,16 +81,14 @@
 	  		
 			  <div class="col mb-4">
 			    <div class="card h-100" style="border-radius:25px;">
-			    <i class="fa-solid fa-heart fa-lg" id="i${cos.courseCode}" onclick="deleteWishList(${cos.courseCode})" style="color:#1bceb8; cursor:pointer; position:absolute; right:20px; top:30px;"></i>
+		
+			      <img src="../yjs.images/${cos.img1}" style="border-radius:25px 25px 0 0; "  class="card-img-top" alt="${cos.courseName}">
+			     
 			      
-			      <a href="#">
-			      	<img src="../images/${cos.img1}" style="border-radius:25px 25px 0 0; "  class="card-img-top" alt="${cos.courseName}">
-			      </a>
-			      
-			      <div class="card-body" onClick="location.href =''" style="cursor:pointer;">
+			      <div class="card-body"  >
 			        <h5 class="card-title">${cos.courseName}</h5>
-			        <p class="card-text" style="font-size:12pt;">기간 <span style="margin-left:15px; font-size:12pt; color:gray;">${cos.courseTerm}일</span></p>
-			        <p class="card-text" style="color:#1bceb8; font-weight:bold;">${cos.salePrice}원</p>
+			        <p class="card-text" style="font-size:12pt; cursor:pointer;">증명서발급</p>
+			        <a href="<%= ctxPath%>/ljh.member.controller/fileDownload.up?courseCode=${cos.courseCode}"></a>
 			      </div>
 			    </div>
 			    

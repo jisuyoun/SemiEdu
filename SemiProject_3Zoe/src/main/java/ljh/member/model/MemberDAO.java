@@ -280,46 +280,6 @@ public class MemberDAO implements InterMemberDAO {
 	}
 
 	
-	// 로그인한 사람이 듣고있는 강의 가져오기
-	@Override
-	public List<CosVO> getIngCourse(String userid) throws SQLException {
-		
-		List<CosVO> cosList = new ArrayList<>();
-		
-		try {
-			conn = ds.getConnection();
-			
-			String sql = " select C.courseCode, C.courseName, C.img1 "
-					+ " from tbl_course C "
-					+ " join tbl_detailOrder D on C.courseCode = D.fk_courseCode  "
-					+ " join tbl_order O on O.orderCode = D.fk_orderCode "
-					+ " where O.fk_userid = ? ";
-			
-			pstmt = conn.prepareStatement(sql); 
-			pstmt.setString(1, userid);
-			
-			rs = pstmt.executeQuery();
-			
-			
-			while(rs.next()) {
-
-				CosVO course = new CosVO();
-				course.setCourseCode(rs.getString(1));
-				course.setCourseName(rs.getString(2));
-				course.setImg1(rs.getString(3));
-				course.setCourseTerm(rs.getInt(4));
-				course.setSalePrice(rs.getInt(5));
-				
-				cosList.add(course);
-				
-			}
-			
-		} finally {
-			close();
-		}
-		
-		return cosList;
-	}
 
 	
 	// 로그인된 회원의 위시리스트 갯수 가져오기
@@ -351,4 +311,47 @@ public class MemberDAO implements InterMemberDAO {
 		return count;
 	}
 
+	
+	
+	
+	
+
+	// 로그인한 사람이 듣고있는 강의 가져오기
+	@Override
+	public List<CosVO> getIngCourse(String userid) throws SQLException {
+		
+		List<CosVO> cosList = new ArrayList<>();
+		
+		try {
+			conn = ds.getConnection();
+			
+			String sql = " select C.courseCode, C.courseName, C.img1 "
+					+ " from tbl_course C "
+					+ " join tbl_detailOrder D on C.courseCode = D.fk_courseCode  "
+					+ " join tbl_order O on O.orderCode = D.fk_orderCode "
+					+ " where O.fk_userid = ? ";
+			
+			pstmt = conn.prepareStatement(sql); 
+			pstmt.setString(1, userid);
+			
+			rs = pstmt.executeQuery();
+			
+			
+			while(rs.next()) {
+
+				CosVO course = new CosVO();
+				course.setCourseCode(rs.getString(1));
+				course.setCourseName(rs.getString(2));
+				course.setImg1(rs.getString(3));
+				
+				cosList.add(course);
+				
+			}
+			
+		} finally {
+			close();
+		}
+		
+		return cosList;
+	}
 }
