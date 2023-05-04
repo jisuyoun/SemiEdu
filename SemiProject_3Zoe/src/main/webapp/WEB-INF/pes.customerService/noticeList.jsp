@@ -53,51 +53,10 @@
 		  }
 		}
 	<%-- 상단 title dropdown content 끝 --%>	
-	
-	
-	
-	<%-- notice 검색 시작 --%>
-	$(document).ready(function(){
-		
-		 // trim 을 사용하지 않았을 경우 띄어쓰기만 하고 검색한 것도 검색 후 검색창에 유지된다.
-		
-		if("${requestScope.searchType}" != "" &&
-		   "${requestScope.searchWord}" != ""){	
-			$("select#searchType").val("${requestScope.searchType}");
-			$("input#searchWord").val("${requestScope.searchWord}");
-		}
-		 
-		 $("select#sizePerPage").val("${requestScope.sizePerPage}");
-	
-		$("input#searchWord").keyup(function (e) {
-			
-			if(e.keyCode == 13){ // 검색어에서 엔터를 하면 검색하러 가도록 한다. 
-				goSearch();
-			}			
-		});
-		
-		
-		// **** select 태그에 대한 이벤트는 click 이 아니라 change 이다. ****//
-		$("select#sizePerPage").bind("change", function(){ 
-			goSearch();
-			
-		});//end of $("select#sizePerPage").bind("change", function(){})----------
 
-	});// end of $(document).ready(function(){})-----------------------------
-	
-	// Function Declaration
-	function goSearch(){
-		
-		const frm = document.memberFrm;			
-	
-		frm.action = "noticeList.go";
-		frm.method = "get";
-		frm.submit();
-	};
-	<%-- notice 검색 끝 --%>
 	
 	
-    		
+	
 	
 
 </script>
@@ -158,11 +117,11 @@
 		        <c:if test="${not empty requestScope.lists}">
 		        	<c:forEach var="nvo" items="${lists}">
 		        	<tr class="noticeList">
-		        	 	<th style="width: 80px; text-align:center;">${nvo.notice_seq }</th>		        	 			          
-			            <td class="noticeTitle"><a href="#">${nvo.title }</a></td>
-			            <td class="noticeWirter">${(sessionScope.loginuser).name}</td>
-			            <td class="noticeWriteDate">${nvo.writeDate2 }</td>
-			            <td class="noticeReadcount">${nvo.readcount }</td>
+		        	 	<th style="width: 80px; text-align:center;">${nvo.notice_seq}</th>		        	 			          
+			            <td class="noticeTitle"><a href="<%= ctxPath%>/pes.customerService/noticeDetail.go?notice_seq=${nvo.notice_seq}">${nvo.title}</a></td>
+			            <td class="noticeWirter">테스트관리자</td>
+			            <td class="noticeWriteDate">${nvo.writeDate2}</td>
+			            <td class="noticeReadcount">${nvo.readcount}</td>
 			        </tr>
 			        </c:forEach>
 		        </c:if>	

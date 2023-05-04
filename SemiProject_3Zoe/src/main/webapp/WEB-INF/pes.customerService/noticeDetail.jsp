@@ -10,8 +10,125 @@
 
 <jsp:include page="../header.jsp" /> 
 
-<link rel="stylesheet" type="text/css" href="<%= ctxPath%>/css/noticeStyle.css" />
+<style type="text/css">
 
+	
+	/* 상단 title 시작 */
+	div.es_bar {
+	    width: 100%;
+	    height: 200px;
+	    background-size: contain;
+	    top: 0;
+	    left: 0;
+	}
+	
+	#page_title {
+	    position: relative;
+	    font-size: 40pt;
+	    top: -140px;
+	    color: #fff;
+	    text-align: center;
+	    font-weight: bold;
+	}
+
+	.es_dropbtn {
+		position: relative;
+	    color: white;
+	    font-size: 14px;
+	    border: none;
+	    cursor: pointer; 
+	    top: -130px;
+	    left: 1300px;
+	    background-color: inherit;
+	}
+	
+	.es_dropdown {
+	    position: relative;
+	    display: inline-block;
+	   
+	}
+	
+	.es_dropdown-content {
+	    display: none;
+	    position: absolute;
+	    background-color: white;
+	    border-radius: 10px;
+	    margin-top: 10px; 
+	    min-width: 120px;
+	    overflow: auto;
+	    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	    border: solid 1px #ddd;
+	    font-size: 12pt;
+	}
+	
+	.es_dropdown-content a {
+	    color: gray;
+	    padding: 5px 2px;
+	    text-decoration: none;
+	    display: block;
+	}
+
+	.es_dropdown-content a:hover {
+		color: #1BCEB8;
+	} 
+
+	.show {display: block;}
+	/* 상단 title 끝 */
+	
+	
+	/* notice Contents 시작 */
+
+	p.noticeTitle a {
+		text-decoration: none;
+		color: black;
+	}
+	
+	p.noticeTitle {
+		margin-top: 100px;
+	}
+	
+	table#noticeTitle {
+		width: 80%;
+		margin: 0 auto;
+    	border-collapse: collapse;
+	}
+	
+	p {
+		width: 80%;
+		margin: 0 auto;
+		border-top: 1px solid #444444;
+    	border-collapse: collapse;
+    	font-size: 15pt;
+	}
+	
+	a {
+		font-style: none;
+	}
+
+    th, tr {
+	    border-bottom: 1px solid #ddd;
+	    padding-left: 50px;
+	}
+	
+	th.noticeWirter, th.noticeWriteDate, th.noticeReadcount {
+		font-size: 18pt !important;
+		width: 300px;
+		height: 50px;
+	}
+	table#noticeContents {
+		margin: 0 auto;
+		font-size: 18pt;
+	}
+	 
+	tr.contents {
+		padding: 50px;
+	}
+
+
+
+	/* notice Contents 끝 */
+
+</style>
 
 <script type="text/javascript">
 
@@ -137,12 +254,30 @@
 	<%-- notice Contents 시작 --%>
 	<div id="content" style="height: 1000px;">
 		
-		 
+		<table id="noticeTitle">
+	        <thead>
+	        <c var="nvo" items="${lists}">
+	        	<p class="noticeTitle" style="width: 80%; color: #222; background-color: #f9f9f9; font-size: 30pt; padding: 10px 50px;"><a href="<%= ctxPath%>/pes.customerService/noticeDetail.go?notice_seq=${nvo.notice_seq}">${nvo.title}</a></p>
+	         
+	           <tr>
+	              <th class="noticeWirter" style="color: #222; background-color: #f9f9f9;">작성자 : 테스트관리자</th>
+	           	  <th class="noticeWriteDate">등록일 : ${nvo.writeDate2}</th>
+			      <th class="noticeReadcount">조회수 : ${nvo.readcount}</th>
+			   </tr> 
+			   <table id="noticeContents" style="padding: 50px; width: 80%;">
+			      <tr class="contents"><td>${nvo.contents}</td></tr>
+			      <tr class="notice_img1"><td>${nvo.notice_img1}</td></tr>
+			      <tr class="notice_img2"><td>${nvo.notice_img2}</td></tr>
+				</table>
+	        </thead>	
+	        </c>
+	        
+		</table>        
+  
 
 	</div>
 	
 	<%-- notice Contents 끝 --%>
-
 
 
 </body>
