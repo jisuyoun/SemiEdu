@@ -68,7 +68,7 @@ public class ReviewRegisterAction extends AbstractController {
 		
 			super.setViewPage("/WEB-INF/index.jsp");
 			
-		}
+		} 
 		
 	}
 
