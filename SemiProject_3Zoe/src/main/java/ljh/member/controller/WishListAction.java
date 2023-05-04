@@ -17,23 +17,36 @@ public class WishListAction extends AbstractController {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		
-		InterMemberDAO mdao = new MemberDAO();
-		
 		HttpSession session = request.getSession();
 		//세션에서 로그인된 아이디 가져오기
 		MemberVO loginuser = (MemberVO) session.getAttribute("loginuser");
 		
-		// 로그인한 사람의 위시리스트 가져오기
-		List<CosVO> cosList= mdao.getWishList(loginuser.getUserid());
+		if(loginuser == null) {
+			String message = "로그인을 하세요";
+			String loc =request.getContextPath()+"/index.go";
+			
+			request.setAttribute("message", message);
+			request.setAttribute("loc", loc);
+			
+			super.setRedirect(false);
+			super.setViewPage("/WEB-INF/msg.jsp");
+		}
 		
-
-		// jsp로 넘긴다.
-		request.setAttribute("cosList", cosList);
-		
-		super.setRedirect(false);
-		super.setViewPage("/WEB-INF/ljh.myPage/wishList.jsp");
-		
+		else {
+			InterMemberDAO mdao = new MemberDAO();
+			
+			
+			// 로그인한 사람의 위시리스트 가져오기
+			List<CosVO> cosList= mdao.getWishList(loginuser.getUserid());
+			
+	
+			// jsp로 넘긴다.
+			request.setAttribute("cosList", cosList);
+			
+			super.setRedirect(false);
+			super.setViewPage("/WEB-INF/ljh.myPage/wishList.jsp");
+			
+		}
 	}
 
 }

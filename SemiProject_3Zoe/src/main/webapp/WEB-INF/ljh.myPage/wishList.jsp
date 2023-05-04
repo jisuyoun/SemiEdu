@@ -86,7 +86,7 @@
 			    <div class="card h-100" style="border-radius:25px;">
 			    <i class="fa-solid fa-heart fa-lg" id="i${cos.courseCode}" onclick="deleteWishList(${cos.courseCode})" style="color:#1bceb8; cursor:pointer; position:absolute; right:20px; top:30px;"></i>
 			      
-			      <a href="#">
+			      <a href="<%= ctxPath%>/yjs.cos/yjs_OrderPage.go?courseCode=${cos.courseCode}">
 			      	<img src="../images/${cos.img1}" style="border-radius:25px 25px 0 0; "  class="card-img-top" alt="${cos.courseName}">
 			      </a>
 			      

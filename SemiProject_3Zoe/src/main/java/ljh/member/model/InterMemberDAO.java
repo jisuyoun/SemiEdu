@@ -38,5 +38,10 @@ public interface InterMemberDAO {
 	// 로그인한 사람이 듣고있는 강의 가져오기
 	List<CosVO> getIngCourse(String userid) throws SQLException;
 
+	
+	// 로그인된 회원의 위시리스트 갯수 가져오기
+	int wishListCount(String userid) throws SQLException;
+
+
 
 }
