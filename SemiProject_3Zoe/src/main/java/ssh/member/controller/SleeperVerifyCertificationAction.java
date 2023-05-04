@@ -41,6 +41,8 @@ public class SleeperVerifyCertificationAction extends AbstractController {
 					
 					super.setRedirect(false);
 					super.setViewPage("/WEB-INF/msg.jsp");
+					
+					session.invalidate();
 			
 				}
 				else {
