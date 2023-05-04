@@ -257,7 +257,8 @@ String ctxPath = request.getContextPath();
 								}
 							} 
 							else {
-								html += "<input type='hidden' name='heartSelect" + index + "' value='" + item.courseCode + "' /><i id='heart" + index + "' class='heartGroup fa-regular fa-heart' style='color: #cccccc;'></i>"; 
+								html +=	"<label for='CRheartCheck" + index + "'><i id='heart" + index + "' class='heartGroup fa-regular fa-heart' style='color: #cccccc;' ></i>"
+					             + "<input type='checkbox' id='CRheartCheck" + index + "' name='CRHeartCheckName' value='" + item.courseCode + "' style='display:none;' /></label>"; 
 							} 
 							
 					 	  	html += "       </li>"
