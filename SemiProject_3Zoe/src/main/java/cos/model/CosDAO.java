@@ -818,6 +818,51 @@ public class CosDAO implements InterCosDAO {
 		
 		return revoList;
 	}
+
+	// 수강후기 등록하기 메소드 생성하기
+	@Override
+	public int reviewRegister(Map<String, String> paraMap) throws SQLException {
+		
+		
+		int result = 0;
+		
+		int n = 0;
+		
+		String sql = "";
+		
+		try {
+			
+			conn = ds.getConnection();
+			
+			/* conn.setAutoCommit(false); */
+			
+			sql = " insert into tbl_reviewBoard(reviewNum, fk_courseCode, fk_userid, reviewTitle, review, reviewPoint) "
+				+ " values(seq_reviewBoard_reviewNum.nextval, ?, ?, ?, ?, ?) ";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, paraMap.get("courseCode"));
+			pstmt.setString(2, paraMap.get("userid"));
+			pstmt.setString(3, paraMap.get("reviewTitle"));
+			pstmt.setString(4, paraMap.get("review"));
+			pstmt.setString(5, paraMap.get("reviewPoint"));
+			
+			n = pstmt.executeUpdate();
+			
+			if( n == 1 ) {
+				result = 1;
+			}
+			
+		} catch (SQLException e) {
+			
+			result = 0;
+			
+		}finally {
+			close();
+		}
+		
+		
+		return result;
+	}
 	
 	
 

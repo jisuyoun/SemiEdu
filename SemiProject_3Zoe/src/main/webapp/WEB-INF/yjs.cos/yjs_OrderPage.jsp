@@ -89,12 +89,7 @@
 		});
 		<%-- 추가이미지 불러오기 끝 --%>
 		
-		$(window).scroll(function() {
-
-
-			  let roll =   $(window).scrollTop();
-			  console.log(roll);
-		});
+		
 		<%-- 비슷한 강의 추천 불러오기 시작 --%>
 		$.ajax({
 			url:"<%= request.getContextPath()%>/yjs.cos/yjs_CosRecommendJSON.go",
@@ -491,6 +486,20 @@
 	
 	/* 맛보기 끝 */
 	
+	function reviewGo() {
+		if("${sessionScope.loginuser.userid}" != ""){
+			var reviewfrm = document.ReviewFrm;
+			
+			reviewfrm.method = "POST";
+			reviewfrm.action = "<%= ctxPath%>/yjs.cos/yjs_Review.go";
+			reviewfrm.submit();
+			
+		}
+		else {
+			alert("로그인이 필요한 서비스 입니다!");
+		}	
+	}
+	
 </script>
 
 	
@@ -593,6 +602,13 @@
 		    </li>
 		    <li class="nav-item">
 		      <button type="button" id="OPCosRegister"><i class="fa-solid fa-pen" style="color: #ffffff; margin-right:10px;"></i>수강신청</button>
+		    </li>
+		    <li>
+		    	<form name="ReviewFrm">
+		    	<input type="hidden" name="courseCode" value="${requestScope.cvo.courseCode}" />
+		    	<input type="hidden" name="userid" value="${sessionScope.loginuser.userid}" />
+		      <button type="button" id="OPReview" onclick="reviewGo();" ><i class="fa-solid fa-pen-to-square" style="color:#1bceb8; margin-right:10px;"></i>수강후기등록</button>
+		    </form>
 		    </li>
 		  </ul>
 		</nav>
