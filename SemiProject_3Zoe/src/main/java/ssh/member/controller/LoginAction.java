@@ -46,15 +46,18 @@ public class LoginAction extends AbstractController {
 			
 			if(loginuser.getIdle() == 1) {
 				
-				String message = "로그인을 한지 1년이 지나 휴먼상태로 되었습니다. 관리자에게 문의바랍니다.";
-				String loc = request.getContextPath() + "/index.go";
+				String lastLogdate = loginuser.getLastLogdate().substring(0,10);
+				int lastLoginyear = Integer.parseInt(lastLogdate.substring(0, 4));
+				int idleyear = lastLoginyear + 1;
+				String idleDate = idleyear+lastLogdate.substring(4);
 				
-				request.setAttribute("message", message);
-				request.setAttribute("loc", loc);
-				// 원래는 위와 같이 index.up이 아니라 휴먼인 계정을 풀어주는 페이지로 잡아주어야 한다. 플젝에서 그렇게 하세요!!!
+				request.setAttribute("userid", loginuser.getUserid());
+				request.setAttribute("email", loginuser.getEmail());
+				request.setAttribute("lastLogdate", lastLogdate);
+				request.setAttribute("idleDate", idleDate);
 				
 				super.setRedirect(false);
-				super.setViewPage("/WEB-INF/msg.jsp");
+				super.setViewPage("/WEB-INF/ssh.login/sleeperAccount.jsp");
 				
 				return; // 메소드종료 
 				

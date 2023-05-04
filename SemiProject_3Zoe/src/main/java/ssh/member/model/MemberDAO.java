@@ -127,7 +127,7 @@ public class MemberDAO implements InterMemberDAO {
 			 
 			 String sql = " SELECT  userid, name, email, mobile, postcode, address, detailaddress, "
 			 		    + " point, registerday, pwdchangegap, issue, checkEmail, checkMobile, "
-			 		    + " NVL(lastlogingap, trunc( months_between(sysdate, registerday)) ) AS lastlogingap "
+			 		    + " NVL(lastlogingap, trunc( months_between(sysdate, registerday)) ) AS lastlogingap, lastLogdate "
 			 		    + " FROM "
 			 		    + " ( "
 			 		    + " select userid, name, email, mobile, postcode, address, detailaddress "
@@ -139,7 +139,7 @@ public class MemberDAO implements InterMemberDAO {
 				 		+ " ) M "
 				 		+ " CROSS JOIN "
 				 		+ " ( "
-				 		+ " select trunc( months_between(sysdate, max(logdate)) ) AS lastlogingap "
+				 		+ " select trunc( months_between(sysdate, max(logdate)) ) AS lastlogingap, max(logdate) as lastLogdate "
 				 		+ " from tbl_loginhistory "
 				 		+ " where fk_userid = ? "
 				 		+ " ) H "; 
@@ -181,6 +181,9 @@ public class MemberDAO implements InterMemberDAO {
 					 // 마지막으로 로그인 한 날짜시간이 현재시각으로 부터 1년이 지났으면 휴면으로 지정  
 					 
 					 member.setIdle(1); 
+					 
+					 // 마지막 로그인 날짜
+					 member.setLastLogdate(rs.getString(15));
 					 
 					 // === tbl_member 테이블의 idle 컬럼의 값을 1 로 변경하기 === //
 					 sql = " update tbl_member set idle = 1 "
@@ -340,6 +343,44 @@ public class MemberDAO implements InterMemberDAO {
 		}
 		
 		return result;
+	}
+
+	
+	
+	// idle 칼럼 상태 update하기
+	@Override
+	public int activateMember(String userid, String logip) throws SQLException {
+			
+			int result = 0;
+			int n = 0;
+		
+		try {
+			conn = ds.getConnection();
+			String sql = " update tbl_member set idle = 0 "
+					   + " where userid = ? "; 
+			 
+			 pstmt = conn.prepareStatement(sql); 
+			 pstmt.setString(1, userid);
+			 
+			 result = pstmt.executeUpdate();
+			 
+			 if(result == 1) {
+				 
+				 sql = " insert into tbl_loginhistory(fk_userid, logip) "
+					 	 + " values(?, ?) "; 
+					 
+					 pstmt = conn.prepareStatement(sql);
+					 pstmt.setString(1, userid);
+					 pstmt.setString(2, logip);
+					 
+				 n =	 pstmt.executeUpdate();
+				 
+			 }
+			 
+			}finally {
+				close();
+			}
+		return result * n;
 	}
 
 

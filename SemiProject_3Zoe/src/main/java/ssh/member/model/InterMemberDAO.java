@@ -28,6 +28,9 @@ public interface InterMemberDAO {
 	// 암호변경하기
 	int pwdUpdate(Map<String, String> paraMap) throws SQLException;
 
+	// idle 칼럼 상태 update하기
+	int activateMember(String userid, String logip) throws SQLException;
+
 	
 
 

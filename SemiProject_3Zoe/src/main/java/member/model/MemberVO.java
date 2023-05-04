@@ -18,8 +18,10 @@ public class MemberVO {
 	private String issue;
 	private int checkEmail;
 	private int checkMobile;
+	private String lastLogdate;
 	///////////////////////////////////////////////////////////////////////
 	
+
 	private boolean requirePwdChange = false;
 	// 마지막으로 암호를 변경한 날짜가 현재시각으로부터 3개월이 지났으면 true
 	// 마지막으로 암호를 변경한 날짜가 현재시각으로부터 3개월이 지나지 않았으면 false
@@ -193,7 +195,14 @@ public class MemberVO {
 		this.requirePwdChange = requirePwdChange;
 	}
 	
-	
+	public String getLastLogdate() {
+		return lastLogdate;
+	}
+
+
+	public void setLastLogdate(String lastLogdate) {
+		this.lastLogdate = lastLogdate;
+	}
 	
 	
 	

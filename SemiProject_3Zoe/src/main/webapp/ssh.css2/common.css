@@ -98,18 +98,6 @@ textarea::placeholder {font-size:15px; font-weight:400; color:#999;  letter-spac
 /*.selectBox select {position: relative; z-index:1; width: 180px !important; height: 48px; border-radius:5px;  border: 1px solid #ddd; cursor: pointer; display:inline-block; vertical-align:middle; z-index:100; background:#fff url('/theme/6/img/main/select_arrow.gif') no-repeat right 20px center; padding:0 35px 0 20px; height:48px;  font-size:15px; color:#666; font-weight:400; text-overflow: ellipsis; white-space: nowrap; overflow:hidden;}*/
 .selectBox select {position: relative; width:100% !important; height: 48px; border-radius:5px;  border: 1px solid #ddd; cursor: pointer; display:inline-block; vertical-align:middle; z-index:100; background:#fff url('/theme/6/img/main/select_arrow.gif') no-repeat right 20px center; padding:0 35px 0 20px; font-size:15px; color:#666; font-weight:400; text-overflow: ellipsis; white-space: nowrap; overflow:hidden;}
 
-/* .selectBox .label {display: flex; align-items: center;  border: 0 none; outline: 0 none; width:100% !important; background:transparent; cursor: pointer; line-height:46px !important; color:#777; letter-spacing:-0.5pt;
-top:0; left:0;}
-.selectBox .optionList {position: absolute; top: -1px; left: -1px; width: calc(100% + 2px); background:#fff; border:1px solid #dddfe3; color: #666;list-style-type: none;  padding:0; border-radius: 5px;
-overflow: hidden; max-height: 0; transition: .3s ease-in; visibility:hidden; opacity:0; padding:58px 20px 10px;}
-.selectBox .optionList li {font-size:0.88rem;transition:all 0.3s; text-align:left !important;}
-.selectBox .optionList li a{display: block; font-size:0.88rem; text-align:left !important;}
-.selectBox .optionList li a:hover {color:#0eb3d3; transition:all 0.3s; text-decoration:underline;}
-.selectBox.active .optionList {visibility:visible; opacity:1; max-height:500px; z-index:-1;}
-.selectBox .optionItem {padding:3px 0; transition:.1s;} */
-
-/**** ê³µí†µ CSS ****/
-
 
 
 /* ë ˆì´ì•„ì›ƒ */
@@ -923,32 +911,29 @@ table caption {font-size:13px;}
 
 
 /**** ê²€ìƒ‰ íŒì—… ****/
-.searchWrap .search_close {width:20px; top:15px; right:15px;}
-.search_in  {border-radius:15px;}
-.search_in dl dt {width:110px;}
-.search_in dl dd {width:calc(100% - 110px); padding:10px !important;}
-.search_in li input[type="checkbox"] + label {font-size:12px; padding:0 10px; line-height:24px;}
-.search_in dl:first-child dt {vertical-align:middle;}
-.search_in dl:last-child dt {vertical-align:middle;}
 
-.search_in .input_search {height:34px;}
+
+ dl dt {width:110px;}
+dl dd {width:calc(100% - 110px); padding:10px !important;}
+li input[type="checkbox"] + label {font-size:12px; padding:0 10px; line-height:24px;}
+dl:first-child dt {vertical-align:middle;}
+dl:last-child dt {vertical-align:middle;}
+
+.input_search {height:34px;}
 .searchWrap button {width:130px; height:42px; font-size:1rem; background-position:top 14px left 30px; background-size:15px; line-height:42px; padding-left:63px;}
 /**** ê²€ìƒ‰ íŒì—… ****/
 
 
 /* ê²Œì‹œíŒ íŽ˜ì´ì§• */
-.page_num {margin:30px 0 0;}
-.page_num ul.pagination li a {font-size:12px; height:25px; width:25px;  line-height:23px; border-radius:3px;}
+
+li a {font-size:12px; height:25px; width:25px;  line-height:23px; border-radius:3px;}
 
 
     /**** íŒì—…ì°½ ****/
     /*.popup { width:92%;}*/
-    .popup { width:92%; position:absolute;top:52px !important;left:50% !important;transform:translate(-50%, 0) !important;transition:none;}
-    .popup .pop_close {width:20px; top:20px; right:20px;}
-    .popup .pop_in {  min-height:330px;} /* padding:15px 10px; ì‚­ì œ */
-    .popup .pop_in h2 {font-size:1.2rem;}
-    .popup .pop_in p {font-size:1rem;}
-    .popup .btnCont a {line-height:40px; font-size:1rem;}
+    h2 {font-size:1.2rem;}
+    p {font-size:1rem;}
+    a {line-height:40px; font-size:1rem;}
     /**** íŒì—…ì°½ ****/
 
 
@@ -959,9 +944,9 @@ table caption {font-size:13px;}
 *******************************************************************************/
 @media all and (max-width:480px) {
 
-.search_in {border-radius:10px;}
-.search_in dl dt {display:block; width:100%; padding:10px; border-bottom:1px solid #ddd;}
-.search_in dl dd {display:block; width:100%; padding:10px !important;}
+
+ dl dt {display:block; width:100%; padding:10px; border-bottom:1px solid #ddd;}
+ dl dd {display:block; width:100%; padding:10px !important;}
 
 
 
@@ -971,7 +956,7 @@ table caption {font-size:13px;}
 *******************************************************************************/
 @media all and (max-width:360px) {
 
-#footer .foot_top {text-align:center;}
-#footer .foot_top a {margin:5px 10px; margin-right:0;}
+
+a {margin:5px 10px; margin-right:0;}
 
 }
