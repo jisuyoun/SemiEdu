@@ -174,7 +174,7 @@ String ctxPath = request.getContextPath();
 			$("span#CRCosIndroduceThree").html("혜택");
 			$("span#CRCosIntroduceFour").html("기본수강기간 1년!");
 			$("span#CRCosIntroduceFive").html("패키지 강의 중 하나라도 불합격 인증 시 6개월 연장 혜택!");
-			$("span#CRCosIntroduceSix").html("    ");
+			$("span#CRCosIntroduceSix").html("두 가지 강의를 동시에!");
 			
 			$("select#dropdown").show();
 			

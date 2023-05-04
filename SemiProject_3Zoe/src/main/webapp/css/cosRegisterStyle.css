@@ -224,11 +224,18 @@ img.CRChangeImg {
 }
 
 img#CRChangeImgFour {
-	position: relative;
+	/* position: relative;
 	top: -7px;
 	left: 41px;
 	width: 312px;
-	height: 291px;
+	height: 291px; */
+	
+	display: none;
+	position: relative;
+	top: 50px;
+	left: 41px;
+	width: 369px;
+	height: 345px;
 }
 
 span.CRCosIntroduce {
@@ -267,7 +274,7 @@ select#dropdown {
 	border-radius: 4px;
 	outline: 0 none;
 	position: relative;
-	top: 637px;
+	top: 652px;
 	right: 544px;
 	display: none;
 }

@@ -362,7 +362,7 @@ public class CosDAO implements InterCosDAO {
 			
 			conn = ds.getConnection();
 			
-			String sql = " select courseName, fk_categoryCode, price, salePrice, courseTerm, courseList, img1, img2, teacher "
+			String sql = " select courseName, fk_categoryCode, price, salePrice, courseTerm, courseList, img1, img2, teacher, point "
 					   + " from tbl_course "
 					   + " where courseCode = ? ";
 			
@@ -381,6 +381,7 @@ public class CosDAO implements InterCosDAO {
 				String img1 = rs.getString(7);
 				String img2 = rs.getString(8);
 				String teacher = rs.getString(9);
+				int point = rs.getInt(10);
 				
 				cvo = new CosVO();
 				
@@ -392,9 +393,9 @@ public class CosDAO implements InterCosDAO {
 				cvo.setCourseTerm(courseTerm);
 				cvo.setCourseList(courseList);
 				cvo.setTeacher(teacher);
-				
 				cvo.setImg1(img1);
 				cvo.setImg2(img2);
+				cvo.setPoint(point);
 				
 				
 			}

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib  prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
     
 <%
     String ctxPath = request.getContextPath();
@@ -83,14 +83,20 @@
 					
 					$.each(json, function(index, item){
 						
+						var price = item.price.toLocaleString('en');
+						
 						var calSalePrice = item.price-item.salePrice;
+						
+						var calSalePriceChange = calSalePrice.toLocaleString('en');
+						
+						var salePrice = item.salePrice.toLocaleString('en');
 						
 						html = "<ul class='SPUlPosition'>"
 							  + "	<div><li><input type='checkbox' name='SPCheckbox' class='SPCheckbox' value='" + item.courseCode + "' checked='on' />과정</li></div>"
 							  + "	<div><li>" + item.courseName + "</li></div>"
-							  + "	<div><li>" + item.price + "원</li></div>"
-							  + "	<div><li>" + calSalePrice + "원</li></div>"
-							  + "   <div><li>" + item.salePrice + "원</li></div>"
+							  + "	<div><li>" + price + " 원</li></div>"
+							  + "	<div><li>" + calSalePriceChange + " 원</li></div>"
+							  + "   <div><li>" + salePrice + " 원</li></div>"
 							  + "</ul>";
 							
 						$("div#SPListContent").append(html);
@@ -101,9 +107,9 @@
 						
 					}); // end of $.each(json, functioin(index, item){} -------------------------------
 
-					document.getElementById("sumTotalPrice").text=sumTotalPrice;
-					document.getElementById("sumTotalSalePrice").text=sumTotalSalePrice;
-					document.getElementById("sumTotalAllPrice").text=sumTotalAllPrice;
+					document.getElementById("sumTotalPrice").text=sumTotalPrice.toLocaleString('en');
+					document.getElementById("sumTotalSalePrice").text=sumTotalSalePrice.toLocaleString('en');
+					document.getElementById("sumTotalAllPrice").text=sumTotalAllPrice.toLocaleString('en');
 					 	
 				} // end of if ------------------------------------------------------------------------
 				
@@ -307,7 +313,7 @@
 			<%-- 총 결제금액 시작 --%>
 			<div id="SPFinishPrice">
 				<ul>
-					<li>총 결제금액 <a id="sumTotalAllPrice"></a>원</li>
+					<li>총 결제금액 <a id="sumTotalAllPrice"></a> 원</li>
 				</ul>
 			<%-- 총 결제금액 끝 --%>
 			</div> 

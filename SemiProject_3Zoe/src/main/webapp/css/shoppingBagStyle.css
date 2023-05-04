@@ -2,64 +2,64 @@
 
 /* 최상단메뉴바 시작 */
 div.es_bar {
-	    width: 100%;
-	    height: 200px;
-	    background-size: contain;
-	    top: 0;
-	    left: 0;
-	}
-	
-	#page_title {
-	    position: relative;
-	    font-size: 40pt;
-	    top: -140px;
-	    color: #fff;
-	    text-align: center;
-	    font-weight: bold;
-	}
+    width: 100%;
+    height: 200px;
+    background-size: contain;
+    top: 0;
+    left: 0;
+}
 
-	.es_dropbtn {
-		position: relative;
-	    color: white;
-	    font-size: 14px;
-	    border: none;
-	    cursor: pointer; 
-	    top: -130px;
-	    left: 1300px;
-	    background-color: inherit;
-	}
-	
-	.es_dropdown {
-	    position: relative;
-	    display: inline-block;
-	   
-	}
-	
-	.es_dropdown-content {
-	    display: none;
-	    position: absolute;
-	    background-color: white;
-	    border-radius: 10px;
-	    margin-top: 10px; 
-	    min-width: 120px;
-	    overflow: auto;
-	    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-	    border: solid 1px #ddd;
-	    font-size: 12pt;
-	}
-	
-	.es_dropdown-content a {
-	    color: gray;
-	    padding: 5px 2px;
-	    text-decoration: none;
-	    display: block;
-	}
+#page_title {
+    position: relative;
+    font-size: 40pt;
+    top: -140px;
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+}
 
-	.es_dropdown-content a:hover {
-		color: #1BCEB8;
-	} 
+.es_dropbtn {
+	position: relative;
+    color: white;
+    font-size: 14px;
+    border: none;
+    cursor: pointer; 
+    top: -130px;
+    left: 1300px;
+    background-color: inherit;
+}
 
-	.show {display: block;}
+.es_dropdown {
+    position: relative;
+    display: inline-block;
+   
+}
+
+.es_dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border-radius: 10px;
+    margin-top: 10px; 
+    min-width: 120px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border: solid 1px #ddd;
+    font-size: 12pt;
+}
+
+.es_dropdown-content a {
+    color: gray;
+    padding: 5px 2px;
+    text-decoration: none;
+    display: block;
+}
+
+.es_dropdown-content a:hover {
+	color: #1BCEB8;
+} 
+
+.show {display: block;}
 /* 최상단메뉴바 끝 */
 
 /* 삭제버튼 시작 */
@@ -97,7 +97,7 @@ div#SPListTitle {
 div#SPListBody > div#SPListTitle > ul > div {
 	display: inline-flex;
 	list-style-type: none;
-	font-size: 15pt;
+	font-size: 16pt;
 	font-weight: bold;
 }
 
@@ -150,7 +150,7 @@ div#SPListContent {
 div#SPListContent > ul > div {
 	display: inline-flex;
 	list-style-type: none;
-	font-size: 13pt;
+	font-size: 14pt;
 }
 
  div#SPListBody > div#SPListContent > ul > div:first-child {
@@ -186,6 +186,11 @@ div#SPAllPrice {
 	
 }
 
+a#sumTotalPrice,
+a#sumTotalSalePrice {
+	margin-right: 10px;
+}
+
 div#SPAllPrice > ul {
 	position: relative;
 	top: 12px;
@@ -194,7 +199,7 @@ div#SPAllPrice > ul {
 div#SPAllPrice > ul > li {
 	display: inline-flex;
 	list-style-type: none;
-	font-size: 13pt;
+	font-size: 16pt;
 	font-weight: bold;
 	margin-right: 61px;
 	padding: 29px 0;
@@ -208,10 +213,10 @@ i#SPMinusIcon {
 /* 총 결제금액 시작 */
 div#SPListBody > div:last-child {
 	text-align: right;
-	font-size: 16pt;
+	font-size: 20pt;
 	font-weight: bold;
 	margin-right: 61px;
-	padding: 51px 0;
+	padding: 41px 0;
 	height: 120px;
 }
 
@@ -233,6 +238,7 @@ button#SPEndButton {
 	border-radius: 40px;
 	width: 200px;
 	height: 65px;
-	font-size: 15pt;
+	font-size: 18pt;
+	font-weight: bold;
 }
 /* 총 결제금액 끝 */

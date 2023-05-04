@@ -90,7 +90,7 @@ img.OPSellImg {
 div.OPContent {
 	display: block;
 	float: left;
-	margin: 108px auto;
+	margin: 75px auto;
 }
 
 form#heartFrm {
@@ -102,6 +102,7 @@ a#OPClassUpdate {
 }
 
 h1#OPClassName {
+	margin-top: 10px;
 	margin-bottom: 30px;
 	font-weight: bold;
 }
@@ -118,15 +119,28 @@ i#heart {
 	top: -5px;
 }
 
-div#OPClassDate {
-	margin-bottom: 5px;
+div#OPClassDate,
+div#OPClassStatus,
+div#OPClassPoint {
+	margin-bottom: 10px;
+	width: 170px;
 }
 
+
 div#OPClassDate > a:nth-child(1),
-div#OPClassStatus > a:nth-child(1) {
-	font-size: 13pt;
+div#OPClassStatus > a:nth-child(1),
+div#OPClassPoint > a:nth-child(1) {
+	font-size: 14pt;
 	margin: 0 10px;
 	font-weight: bold;
+}
+
+div#OPClassDate > a:nth-child(2),
+div#OPClassStatus > a:nth-child(2),
+div#OPClassPoint > a:nth-child(2) {
+	font-size: 14pt;
+	color: gray; 
+	float: right;
 }
 
 
@@ -156,6 +170,15 @@ div#OPPriceTable {
 	clear:both;
 }
 
+span#salePriceText {
+	font-weight: bold;
+}
+
+span#OPPricePosition {
+	margin:0 18px 0 40px;
+	font-weight: bold;
+}
+
 span.badge-secondary {
 	border: solid 1px #f2f2f2;
 	background-color: white;
@@ -168,15 +191,16 @@ span.badge-secondary {
 }
 
 span#OPPrice {
+	margin-right: 20px;
 	float: right;
-	font-size: 13pt;
+	font-size: 16pt;
 	color: gray;
 	text-decoration: line-through;
 }
 
 span#OPSalePrice {
 	float: right;
-	font-size: 13pt;
+	font-size: 16pt;
 	font-weight: bold;
 	color: #1bceb8;
 }
@@ -188,6 +212,7 @@ div#OPPriceTitle {
 	position: relative;
 	top: 17px;
 	padding: 18px 39px;
+	font-size: 13pt;
 }
 
 input#OPCheckbox {
@@ -198,16 +223,23 @@ input#OPCheckbox {
 }
 
 div#OPPrice {
-	margin: 52px -43px;
+	margin: 52px -24px;
 	text-align: right;
 	width: 100%;
 	height: 0;
+	font-size: 15pt;
 }
 
 div#OPAllPrice {
-	margin: 33px -43px;
+	margin: 29px -39px;
 	text-align: right;
 	width: 100%;
+	font-size: 17pt;
+}
+
+span#OPFinalPrice {
+	font-weight: bold;
+	color: #1bceb8;
 }
 /* 강의 가격 끝 */
 
@@ -347,26 +379,24 @@ div#OPOT {
   font-size: 15px;
 }
 
-.collapsible_before {
+.collapsibleInner {
   background-color: white;
   color: black;
-  cursor: pointer;
   padding: 18px;
   width: 100%;
   border: solid 1px lightgray;
+  background-color: #ebfaf6;
   border-radius: 10px;
- /*  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0; */
   text-align: left;
   outline: none;
-  font-size: 15px;
+  font-size: 18px;
+  display: block;
 }
 
 .collapsibleContent {
   padding: 15px 18px 6px 18px;
   display: none;
   overflow: hidden;
-  background-color: #ebfaf6;
   color: black;
   border: solid 1px lightgray;
   border-radius: 10px;
@@ -391,7 +421,7 @@ div#OPCosReview {
 
 h4#OPCosReviewTitle {
 	font-weight: bold; 
-	margin: 113px 0 25px 11px;
+	margin: 140px 0 25px 11px;
 }
 
 i.OPUserIcon {
@@ -417,6 +447,7 @@ div.OPCosReviewSmallTitle {
 	margin-bottom: 5px;
 	font-size: 15pt;
 	font-weight: bold;
+	margin-top: 18px;
 }
 
 div.OPCosReviewPlus {
