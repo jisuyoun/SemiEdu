@@ -34,15 +34,14 @@ public class MemberDAO implements InterMemberDAO {
 		}
 	}
 	
-	// 생성자
-	public MemberDAO() {
+	// 생성자 
+	public MemberDAO() { 
 		try {
 		     Context initContext = new InitialContext();
 	         Context envContext  = (Context)initContext.lookup("java:/comp/env");
 	         ds = (DataSource)envContext.lookup("jdbc/semi_oracle");
 	         
 	         aes = new AES256(SecretMyKey.KEY);
-	         // SecretMyKey.KEY 은 우리가 만든 암호화/복호화 키이다.
 	         
 		} catch(NamingException e) {
 			e.printStackTrace();

@@ -76,7 +76,7 @@
 
 		if( frm.searchWord.value.trim() == "" ){
 			alert("검색어를 올바르게 입력하세요.");
-			return; //함수종료
+			return;
 		}
 
 		frm.action = "memberList.go";

@@ -79,9 +79,15 @@
 	}
 	
 	
-	tr.memberInfo:hover {
+	td.noticeTitle:hover {
 		background-color: #e6ffe6; 
 		cursor: pointer;
+	}
+	
+	td.noticeTitle a {
+		text-decoration: none;
+		color: black;
+		font-size: 14pt;
 	}
 	
 	table#noticeTitle{
@@ -100,4 +106,15 @@
 	tr {
 		height: 60px; 
 	}
+	
+	td.noticeWirter {
+		text-align: center;
+	}
+	td.noticeWriteDate {
+		text-align: center;
+	}
+	td.noticeReadcount {
+		text-align: center;
+	}
+
 	/* notice Contents 끝 */
