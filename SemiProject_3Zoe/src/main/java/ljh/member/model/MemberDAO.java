@@ -283,15 +283,17 @@ public class MemberDAO implements InterMemberDAO {
 	// 로그인한 사람이 듣고있는 강의 가져오기
 	@Override
 	public List<CosVO> getIngCourse(String userid) throws SQLException {
+		
 		List<CosVO> cosList = new ArrayList<>();
 		
 		try {
 			conn = ds.getConnection();
 			
-			String sql = " select courseCode, courseName, img1, courseTerm, salePrice "
+			String sql = " select C.courseCode, C.courseName, C.img1 "
 					+ " from tbl_course C "
-					+ " join tbl_like L on C.courseCode = L.fk_courseCode "
-					+ " where L.fk_userid = ? ";
+					+ " join tbl_detailOrder D on C.courseCode = D.fk_courseCode  "
+					+ " join tbl_order O on O.orderCode = D.fk_orderCode "
+					+ " where O.fk_userid = ? ";
 			
 			pstmt = conn.prepareStatement(sql); 
 			pstmt.setString(1, userid);

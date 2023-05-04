@@ -81,9 +81,10 @@
 
   </div>
   
+  <%----%>
   <hr>
   
-  <a href="<%= ctxPath %>/ljh.member.controller/issueCertifi.go"><i class="fa-solid fa-money-bill" ></i>증명서발급</a>
+   <a href="<%= ctxPath %>/ljh.member.controller/issueCertifi.go"><i class="fa-solid fa-money-bill" ></i>증명서발급</a> 
   
   <hr>
   

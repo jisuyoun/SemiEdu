@@ -19,6 +19,9 @@ public interface InterOrderDAO {
 	// 로그인한 사람이 선택한 구매 상세 목록 가져오기
 	List<OrderVO> getOrderDetail(Map<String, String> paraMap)  throws SQLException;
 
+	// 로그인한 사람이 검색한 날짜 중에 구매내역 보여주기
+	List<OrderVO> getOrderList(Map<String, String> paraMap) throws SQLException;
+
 	
 	
 

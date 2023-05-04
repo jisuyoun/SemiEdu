@@ -1,7 +1,7 @@
 package ljh.order.model;
 
 public class OrderVO {
-	private int orderCode;
+	private String orderCode;
 	private String orderday;
 	private int orderPoint;
 	private int totalPrice;
@@ -53,7 +53,7 @@ public class OrderVO {
 	}
 	
 	
-	public OrderVO(int orderCode, String orderday, int orderPoint, int totalPrice, int usePoint, String fk_userid) {
+	public OrderVO(String orderCode, String orderday, int orderPoint, int totalPrice, int usePoint, String fk_userid) {
 		super();
 		this.orderCode = orderCode;
 		this.orderday = orderday;
@@ -86,10 +86,10 @@ public class OrderVO {
 	}
 
 
-	public int getOrderCode() {
+	public String getOrderCode() {
 		return orderCode;
 	}
-	public void setOrderCode(int orderCode) {
+	public void setOrderCode(String orderCode) {
 		this.orderCode = orderCode;
 	}
 	public String getOrderday() {
