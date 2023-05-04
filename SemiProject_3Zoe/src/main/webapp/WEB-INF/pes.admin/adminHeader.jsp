@@ -70,8 +70,8 @@
 
 	    <li class="nav-item " style="display: flex; align-items: center;">
 	      <p style="margin-bottom: 0;">
-	      	<span><b>${(sessionScope.loginuser).name}</b>님</span>
-	      	<span style="margin: 0 20px 0 15px;"><b>|</b></span>
+	      	<span><b>${(sessionScope.loginuser).name}</b>님</span> 
+	      	<span style="margin: 0 20px 0 15px;"><b>|</b></span> 
 	      
 	      	<a href="<%= ctxPath %>/index.go" style="margin-right: 20px;"><i class="fa fa-fw fa-home text-body"></i><b class="text-body">홈으로</b></a>
 	      	<button type="button" class="btn btn-light" id="registerBtn" onclick="goLogOut();" >
@@ -91,8 +91,6 @@
   </button>
   <div class="dropdown-container">
     <a href="<%= ctxPath%>/pes.admin/memberList.go">- 회원목록</a>
-    <a href="<%= ctxPath%>/pes.admin/loginHistory.go">- 회원 로그인기록</a>
-
   </div>
  
   <hr>
@@ -107,7 +105,6 @@
   </button>
   <div class="dropdown-container">
     <a href="<%= ctxPath%>/pes.admin/noticeAdd.go">- 공지사항 작성</a>
-    <a href="<%= ctxPath%>/pes.admin/eventAdd.go">- 이벤트 작성</a>
   </div>
 
   <hr>

@@ -127,7 +127,12 @@
 <div id="es_collapsible">
 	<button type="button" class="collapsible"><i class="fa-solid fa-user-graduate"></i>박 은 서</button>
 	<div class="content">
-	  <p>강의교안의 경우 pdf로 제공됩니다. 하지만 저작권문제로 비밀번호가 설정이 되어 편집이 불가합니다. <br><br> 태블릿의 경우 플렉슬과 같은 어플을 이용하시면 필기가 가능합니다.</p>
+	  <p>처음 시작은 조원들과 4개월간의 교육을 복습한다는 생각으로 가볍게 시작한 첫 프로젝트였습니다.<br><br>
+	     하지만 프로젝트가 진행될수록 기능을 하나라도 더 구현하고 싶은 마음에 때론 조급함을 느끼기도 하고,<br><br>
+		 내실력을 더 향상하여 사용자가 사용하기에 더 좋은 웹사이트를 만들었으면 좋겠다는 생각을 가지게는 동기가 되기도 했습니다.<br><br><br><br>
+	     조원들과의 첫협업에도 많은걸 느낄 수 있었습니다.<br><br>
+		 나의 페이지만을 완성하는 것이 목표가 아닌, 하나의 사이트로써 팀원들과의 소통과 정보교류가 중요하단 것을<br><br>
+		 말이 아닌 직접 몸소 느낄 수 있는 유익한 시간이였습니다.</p>
 	</div>
 	<button type="button" class="collapsible"><i class="fa-solid fa-user-graduate"></i>서 상 현</button>
 	<div class="content">
@@ -135,13 +140,20 @@
 	</div>
 	<button type="button" class="collapsible"><i class="fa-solid fa-user-graduate"></i>윤 지 수</button>
 	<div class="content">
-	  <p>크롬 원격 프로그램이 설치되어 있는 경우 나타나는 메시지입니다. <br><br> 해결방법<br>- 크롬 확장프로그램에서 Chrome Remote Desktop 프로그램 삭제 부탁드립니다.<br>
-	  또한 엣지 브라우져에도 설치되어 있는 경우가 있으니 엣지 확장프로그램도 확인 후 삭제 부탁드립니다.<br><br>만약 크롬원격 프로그램을 꼭 사용하셔야 하는경우 해결방법<br>
-	  - 크롬 브라우져에서 로그아웃 후 컴퓨터 재부팅합니다. 재부팅 후 엣지나 웨일 등의 브라우져로 강의 수강 부탁드립니다.</p>
+	  <p>스스로 구현해보고 싶은 기능들을 생각해보고 스스로 공부하거나 여러 사람의 도움을 받으며<br><br>
+		 여러 시행착오를 겪으며 구현함으로써 수업시간에 배웠던 내용들을 더욱 이해하게 되는 좋은 기회를 가질 수 있었습니다. <br><br>
+		 처음으로하게된 프로젝트라서 시작할 때는 어떤 과정을 통해 시작을 할 지 감도 잡지 못하였으나,<br><br>
+		 이번 프로젝트를 통해 하나의 프로젝트의 큰 흐름을 알 수 있게 되었습니다.<br><br>
+		 문제가 생겼을 때 자신의 문제인 것처럼 많은 도움을 준 팀원들에게 감사하며,<br><br>
+		 다음 프로젝트에서는 이번 프로젝트를 통해 배운 점들을 적용하여 더욱 좋은 결과물을 만들 수 있도록 하겠습니다.</p>
 	</div>
 	<button type="button" class="collapsible"><i class="fa-solid fa-user-graduate"></i>이 지 현</button>
 	<div class="content">
-	  <p>본 사이트는 개인정보보호법의 정보통신망 이용 촉진 및 정보보호에 관한 법률을 준수하고 있습니다. <br>회원가입 시 기재된 사항은 법률에 의거하여 보호되고 있습니다.</p>
+	  <p>수업시간에 배울 때는 이해가 됐지만 직접 짜보니 확실히 어려웠다.<br><br>
+		처음에 코딩할 때는 많이 버벅이고 jsp와 java부분이 헷갈려서 초반에 시간을 많이 썼다.<br><br>
+		하지만 점점 하다보니까 익숙해졌고 확실히 직접 코딩을 해보니 더 응용력도 생기고<br><br>
+		실력도 늘은 것 같아서 파이널 프로젝트가 기대된다.<br><br>
+	  </p>
 	</div>
 	<button type="button" class="collapsible"><i class="fa-solid fa-user-graduate"></i>홍 용 훈</button>
 	<div class="content">
