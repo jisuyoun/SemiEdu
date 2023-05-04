@@ -68,8 +68,8 @@ public class NoticeAddAction extends AbstractController {
 				String title = mtrequest.getParameter("title");					// 제목
 				String contents = mtrequest.getParameter("contents");			// 공지사항 본문
 				String readcount = mtrequest.getParameter("readcount");			// 조회수
-				String notice_img1 = mtrequest.getFilesystemName("notice_img1");		// 첨부이미지1
-				String notice_img2 = mtrequest.getFilesystemName("notice_img2");		// 첨부이미지2
+				String notice_img1 = mtrequest.getFilesystemName("attach0");		// 첨부이미지1
+				String notice_img2 = mtrequest.getFilesystemName("attach1");		// 첨부이미지2
 						
 				
 				System.out.println("title"+title);

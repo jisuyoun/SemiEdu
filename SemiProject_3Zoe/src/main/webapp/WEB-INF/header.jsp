@@ -101,13 +101,7 @@
   	<div class="menu">
 		<div class="dropdown">
 		  <button type="button" class="dropbtn" onclick= "location.href='<%= ctxPath%>/cos/yjs_CosRegister.go'">수강신청</button> 		  
-		    <div class="dropdown-content">
-		      <a href="<%= ctxPath%>/hyh.order/payment.go">정보처리</a>
-		      <a href="#">빅데이터분석</a>
-		      <a href="#">전자계산기</a>
-		      <a href="#">패키지</a>
-		    </div>
-		  </div> 
+		</div> 
 		  
 		  <div class="dropdown">
 		    <button type="button" class="dropbtn" onclick= "location.href='<%= ctxPath%>/pes.customerService/noticeList.go'">고객센터</button>
@@ -115,7 +109,6 @@
 		      <a href="<%= ctxPath%>/pes.customerService/noticeList.go">공지사항</a>
 		      <a href="<%= ctxPath%>/pes.customerService/question.go">자주하는질문</a>
 		      <a href="<%= ctxPath%>/hyh.customerService/reviewCourse.go">수강후기</a>
-		      <a href="<%= ctxPath%>/hyh.customerService/event.go">이벤트</a>
 		    </div>
 		    
 		  </div>

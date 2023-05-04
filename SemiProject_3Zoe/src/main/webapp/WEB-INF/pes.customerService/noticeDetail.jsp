@@ -125,7 +125,6 @@
 	}
 
 
-
 	/* notice Contents 끝 */
 
 </style>
@@ -252,7 +251,7 @@
 	
 	
 	<%-- notice Contents 시작 --%>
-	<div id="content" style="height: 1000px;">
+	<div id="content" style="height: auto; margin-bottom: 100px;">
 		
 		<table id="noticeTitle">
 	        <thead>
@@ -266,20 +265,22 @@
 			   </tr> 
 			   <table id="noticeContents" style="padding: 50px; width: 80%;">
 			      <tr class="contents"><td>${nvo.contents}</td></tr>
-			      <tr class="notice_img1"><td>${nvo.notice_img1}</td></tr>
-			      <tr class="notice_img2"><td>${nvo.notice_img2}</td></tr>
+			      <tr class="notice_img1"><td><img src="../yjs.images/${nvo.notice_img1}"></td></tr>
+			      <tr class="notice_img2"><td><img src="../yjs.images/${nvo.notice_img2}"></td></tr>
 				</table>
 	        </thead>	
 	        </c>
 	        
 		</table>        
   
+  <button class="btn btn-secondary btn-lg" type="button" style="margin: 200px 100px 0 250px;" onclick = "location.href = '<%= ctxPath %>/pes.customerService/noticeList.go'">목록</button>
+  
 
 	</div>
 	
 	<%-- notice Contents 끝 --%>
 
-
+	
 </body>
 
 <jsp:include page="../footer.jsp" />

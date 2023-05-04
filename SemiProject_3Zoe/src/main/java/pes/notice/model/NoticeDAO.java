@@ -91,8 +91,8 @@ public class NoticeDAO implements InterNoticeDAO {
 	         conn = ds.getConnection();
   
 	         
-	         String sql = " insert into tbl_notice (notice_seq, title, contents, readcount, writeDate, notice_img1, notice_img2) "
-	         		    + " values(?, ?, ?, ?, default, ?, ?)";
+	         String sql = " insert into tbl_notice (notice_seq, title, contents, readcount, notice_img1, notice_img2) "
+	         		    + " values(?, ?, ?, ?, ?, ?)";
 	         
 	         pstmt = conn.prepareStatement(sql);
 	         

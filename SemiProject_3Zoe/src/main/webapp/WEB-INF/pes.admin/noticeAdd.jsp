@@ -237,10 +237,10 @@
 				   
 				   <%-- ==== 첨부파일 타입 추가하기 ==== --%>
 				    <tr>
-			          <td width="25%" class="prodInputName" style="padding-bottom: 10px;">추가이미지파일(선택)</td>
+			          <td width="25%" class="prodInputName" style="padding-bottom: 10px;">이미지파일(선택)</td>
 			          <td>
 			             <label for="spinnerImgQty">파일갯수 : </label>
-			          <input id="spinnerImgQty" value="0" style="width: 30px; height: 20px;">
+			         		 <input id="spinnerImgQty" value="0" style="width: 30px; height: 20px;">
 			             <div id="divfileattach"></div>
 			              
 			             <input type="hidden" name="attachCount" id="attachCount" />
