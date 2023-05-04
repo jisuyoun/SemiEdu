@@ -38,16 +38,16 @@
 
 <div class="main1">
   	
-  	<div class="content4">
+  	<div class="content4" style="height:auto;">
   		
   		<div>
   			<ul class="navbar-nav" style="width: 100%; display: flex; margin-bottom:15px; justify-content: space-between;">
 
 		
 			    <li class="nav-item " style="display: flex; align-items: center; ">
-			      	<span ><b>증명서 발급</b></span>
+			      	<span style="margin-bottom:10px;"><b>증명서 발급</b></span>
 			      	
-			 
+			 <%-- 
 			      	<input type="checkbox" class="chkboxCos"  style=" margin-left:30px; "></input> <label style="font-size:11pt;" class="labelTag">수료 과정만 보기</label>
 		
 
@@ -62,7 +62,7 @@
 							<option>종료일 내림차순</option>
 		
 					</select> 
-  
+  --%>
 			    </li>
 			  </ul>
 			  

@@ -76,16 +76,18 @@ button.btnInfoChange{
 <script type="text/javascript">
 
 
+	let b_flag_email_change = false;
+	//이메일이 변경되었는지 체크
+	
+	let b_flag_emailDuplicate_click = false;
+	// 이메일이 중복인지 체크했는지
+	
+	let b_flag_emailExpOk = false;
+	// 이메일이 정규표현식에 맞는지 체크
+
+
+
 	$(document).ready(function() {
-		
-		let b_flag_email_change = false;
-		//이메일이 변경되었는지 체크
-		
-		let b_flag_emailDuplicate_click = false;
-		// 이메일이 중복인지 체크했는지
-		
-		let b_flag_emailExpOk = false;
-		// 이메일이 정규표현식에 맞는지 체크
 		
 		$("span.error").hide();
 		
@@ -118,7 +120,6 @@ button.btnInfoChange{
               b_flag_emailDuplicate_click = false;
               b_flag_emailExpOk = false;
               
-              alert( "이메일값이 변경됐음. 중복체크 버튼 초기화 : "+b_flag_emailDuplicate_click);
         }); 
 		
    
@@ -131,7 +132,7 @@ button.btnInfoChange{
 		});
      	
      	$("button#btnSubmit").click(function(){
-     		goEdit(b_flag_email_change,b_flag_emailDuplicate_click,b_flag_emailExpOk);
+     		goEdit();
      	});
 
 	});//$(document).ready(function()
@@ -178,7 +179,6 @@ button.btnInfoChange{
 	                     $("span#emailCheckResult").show();
 	                     $("span#emailCheckResult").html($("input#email").val()+" 은 사용가능합니다.").css("color","navy"); 
 	                     b_flag_emailDuplicate_click = true;
-	                     alert("이메일이 중복이아니고 정규표현식에 맞다 : "+b_flag_emailDuplicate_click);
 	                     return true;
                      }
                    }
@@ -192,17 +192,12 @@ button.btnInfoChange{
         } // end of function isExistEmailCheck()----------------		
 			
         
-    	function goEdit(b_flag_email_change, b_flag_emailDuplicate_click, b_flag_emailExpOk){
+    	function goEdit(){
     		
-        	alert("b_flag_email_change : "+b_flag_email_change
-        			+" b_flag_emailDuplicate_click : "+b_flag_emailDuplicate_click
-        			+" b_flag_emailExpOk :"+b_flag_emailExpOk);
-
 
         	
     		//이메일 변경을 하지 않았거나 했다면 이메일 중복체크를 했고, 정규표현식에 맞는지 체크.
     		if(!b_flag_email_change  || (b_flag_emailDuplicate_click && b_flag_emailExpOk)){
-    			alert("첫번째 if 들오왔음");
     			const frm = document.infoChange;
                 frm.action = "<%= ctxPath%>/ljh.member.controller/infoChange.go";
                 frm.method = "post";

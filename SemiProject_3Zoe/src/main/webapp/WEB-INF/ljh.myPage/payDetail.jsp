@@ -21,7 +21,6 @@
 	
 	div.item3{
 
-		border-bottom:solid 1px gray;
 		 height:70%; 
 		 margin-top:10px; 
 		 display: flex; 
@@ -100,7 +99,7 @@
 
 <div class="main1">
   	
-  	<div class="content4">
+  	<div class="content4" style="height:auto; min-height:300px;">
   		
   		<div>
   			<ul class="navbar-nav" style="width: 100%; display: flex; justify-content: space-between;">
@@ -116,10 +115,10 @@
   		<div style="display:flex; justify-content: center; align-items: center; background-color:#f3f7f8; margin-top:30px; height:120px;">
   			
  
-  				<input type="text"  id="fromDate" style=" margin-right:10px; width:200px; height:60px;">&nbsp; ~&nbsp; 
-                <input type="text" id="toDate" style=" margin-right:10px; width:200px; height:60px;">
+  				<input type="text"  id="fromDate" name="fromDate" style=" margin-right:10px; width:200px; height:60px;">&nbsp; ~&nbsp; 
+                <input type="text" id="toDate" name="toDate" style=" margin-right:10px; width:200px; height:60px;">
                 
-                <button type="button" class="btn btn-dark" style="width:90px; height:60px; font-size:20px; margin-right:10px; margin-left:10px;">검색</button>
+                <button type="button" class="btn btn-dark" style="width:90px; height:60px; font-size:20px; margin-right:10px; margin-left:10px;" onclick="location.href='<%= ctxPath %>/ljh.member.controller/searchDate.go'">검색</button>
 
   	  </div>
 

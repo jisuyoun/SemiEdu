@@ -1,5 +1,7 @@
 package pes.notice.model;
 
+import java.io.UnsupportedEncodingException;
+import java.security.GeneralSecurityException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,6 +16,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import member.model.MemberVO;
 import pes.notice.model.NoticeVO;
 
 public class NoticeDAO implements InterNoticeDAO {
@@ -96,13 +99,13 @@ public class NoticeDAO implements InterNoticeDAO {
 	         
 
 	         pstmt.setInt(1, nvo.getNotice_seq());
-	         System.out.println("notice_seq noticeAdd:"+nvo.getNotice_seq());
+	   //    System.out.println("notice_seq noticeAdd:"+nvo.getNotice_seq());
 	         pstmt.setString(2, nvo.getTitle());  
-	         System.out.println("title noticeAdd: "+nvo.getTitle());
+	   //    System.out.println("title noticeAdd: "+nvo.getTitle());
 	         pstmt.setString(3, nvo.getContents()); 
-	         System.out.println("Contents noticeAdd:"+nvo.getContents());
+	   //    System.out.println("Contents noticeAdd:"+nvo.getContents());
 	         pstmt.setInt(4, nvo.getReadcount());    
-	         System.out.println("Readcount noticeAdd:"+ nvo.getReadcount());
+	   //    System.out.println("Readcount noticeAdd:"+ nvo.getReadcount());
 	         pstmt.setString(5, nvo.getNotice_img1());
 	         pstmt.setString(6, nvo.getNotice_img2());
 	 
@@ -116,10 +119,18 @@ public class NoticeDAO implements InterNoticeDAO {
 		
 	}// end of public int noticeAdd(NoticeVO nvo) throws SQLException-----------------
 
-	public  ArrayList<NoticeVO> noticeList(){
+	
+	
+	
+	// tbl_notice SELECT
+	public  ArrayList<NoticeVO> noticeList() throws SQLException {
+		
 		 ArrayList<NoticeVO> lists = new  ArrayList<NoticeVO>();
 		 
-		 String sql = " select * from tbl_notice order by notice_seq ";
+		 String sql = " select * "
+		 			+ " from tbl_notice "
+		 			+ " order by notice_seq ";
+		 
 		 try {
 			conn = ds.getConnection();
 			
@@ -128,25 +139,68 @@ public class NoticeDAO implements InterNoticeDAO {
 			 
 			
 				
-			 //NO	제목	작성자 	등록일	조회수
 			 while(rs.next()) {
 				 NoticeVO nvo = new NoticeVO();
 				 nvo.setNotice_seq(rs.getInt("notice_seq"));
-				 nvo.setTitle(rs.getString("TITLE"));
-				 nvo.setWriteDate2(rs.getString("WRITEDATE").substring(0,10));
+				 nvo.setTitle(rs.getString("title"));
+				 nvo.setWriteDate2(rs.getString("writedate").substring(0,10));
 				 //System.out.println("rs.getString(\"WRITEDATE\").substring(0,10)"+rs.getString("WRITEDATE").substring(0,10));
-				 nvo.setReadcount(rs.getInt("READCOUNT"));
+				 nvo.setReadcount(rs.getInt("readcount"));
 				 
 				 lists.add(nvo);
 			 }
 			 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		} finally {
 	         close();
-	      }
+	    }
 		 return lists;
+		
+	}// end of 
+
+	
+	
+	// notice_seq 값을 받아 공지사항 본문내용 알아오기
+	@Override
+	public NoticeVO noticeDetailAction(String notice_seq) throws SQLException  {
+
+		 NoticeVO notice = null;
+		 
+		 try {
+				conn = ds.getConnection();
+				
+				String sql = " select notice_seq, title, contents, writeDate, readcount, notice_img1, notice_img1 "
+						   + " from tbl_notice "
+						   + " where notice_seq = ? ";
+		
+			 pstmt = conn.prepareStatement(sql);
+			 
+			 pstmt.setString(1, notice_seq);
+			 
+			 rs = pstmt.executeQuery();
+
+			 if(rs.next()) {
+
+				 notice = new NoticeVO();
+				 
+				 notice.setNotice_seq(rs.getInt(1));
+				 notice.setTitle(rs.getString(2));
+				 notice.setContents(rs.getString(3));
+				 notice.setWriteDate2(rs.getString(4).substring(0,10));
+				 notice.setReadcount(rs.getInt(5));
+				 notice.setNotice_img1(rs.getString(6));
+				 notice.setNotice_img2(rs.getString(7));
+				 
+			 }
+			 
+	
+		 } finally {
+			close();
+		 }
+		 
+		 return notice;
 		
 	}
 

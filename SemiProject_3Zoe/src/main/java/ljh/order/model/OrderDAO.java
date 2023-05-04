@@ -83,7 +83,7 @@ public class OrderDAO  implements InterOrderDAO {
 			while(rs.next()) {
 
 				OrderVO order = new OrderVO();
-				order.setOrderCode(rs.getInt(1));
+				order.setOrderCode(rs.getString(1));
 				order.setOrderday(rs.getString(2));
 				order.setTotalPrice(rs.getInt(3));
 				order.setCount(rs.getInt(4));
@@ -129,7 +129,7 @@ public class OrderDAO  implements InterOrderDAO {
 			
 			if(rs.next()) {
 
-				order.setOrderCode(rs.getInt(1));
+				order.setOrderCode(rs.getString(1));
 				order.setOrderday(rs.getString(2));
 				order.setTotalPrice(rs.getInt(3));
 				order.setCount(rs.getInt(4));
@@ -169,7 +169,54 @@ public class OrderDAO  implements InterOrderDAO {
 			while(rs.next()) {
 				OrderVO order = new OrderVO();
 				
-				order.setOrderCode(rs.getInt(1));
+				order.setOrderCode(rs.getString(1));
+				order.setOrderday(rs.getString(2));
+				order.setTotalPrice(rs.getInt(3));
+				order.setCourseName(rs.getString(4));
+				order.setPrice(rs.getInt(5));
+				order.setSalePrice(rs.getInt(6));
+				
+				orderList.add(order);
+			}
+			
+		} finally {
+			close();
+		}
+		
+		return orderList;
+	}
+
+	
+	// 로그인한 사람이 검색한 날짜 중에 구매내역 보여주기
+	@Override
+	public List<OrderVO> getOrderList(Map<String, String> paraMap) throws SQLException {
+		
+		List<OrderVO> orderList = new ArrayList<>();
+		
+		try {
+			conn = ds.getConnection();
+			
+			String sql = " select orderCode,orderday, totalPrice, count(*), max(courseName) "
+					+ " from ( "
+					+ " select  O.orderCode, O.orderday, O.totalPrice, C.courseName "
+					+ " from tbl_order O "
+					+ " join tbl_detailOrder D on O.orderCode = D.fk_orderCode "
+					+ " join tbl_course C on D.fk_courseCode = C.courseCode "
+					+ " where O.fk_userid= ?  and O.orderCode = ? "
+					+ " )  "
+					+ " group by orderCode,orderday, totalPrice ";
+			
+			pstmt = conn.prepareStatement(sql); 
+			pstmt.setString(1, paraMap.get("userid"));
+			pstmt.setString(2, paraMap.get("orderCode"));
+			
+			rs = pstmt.executeQuery();
+			
+			
+			while(rs.next()) {
+				OrderVO order = new OrderVO();
+				
+				order.setOrderCode(rs.getString(1));
 				order.setOrderday(rs.getString(2));
 				order.setTotalPrice(rs.getInt(3));
 				order.setCourseName(rs.getString(4));
