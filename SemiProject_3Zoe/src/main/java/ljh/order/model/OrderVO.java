@@ -16,7 +16,7 @@ public class OrderVO {
 	private String courseName; // 강의이름
 	private int price; // 원래가격
 	private int salePrice; // 판매가
-	
+	 
 	
 	public String getCourseName() {
 		return courseName;

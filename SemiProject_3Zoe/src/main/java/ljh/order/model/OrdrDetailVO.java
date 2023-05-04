@@ -12,7 +12,7 @@ public class OrdrDetailVO {
 	
 	public OrdrDetailVO() {};
 	
-	
+	 
 	public OrdrDetailVO(int orderNum, int fk_orderCode, String fk_courseCode, int coursePrice, String startDate,
 			String endDate) {
 		super();
