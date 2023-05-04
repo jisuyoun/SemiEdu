@@ -273,6 +273,18 @@ button#OPCosRegister {
 	border: solid 1px #1bceb8;
 	color: white;
 }
+
+button#OPReview {
+	padding: 0 10px;
+	margin : 16px 30px;
+	width: 190px;
+	height: 65px;
+	border-radius: 50px;
+	font-size: 14pt;
+	background-color: white;
+	border: solid 1px #1bceb8;
+	color: #1bceb8;
+}
 /* 하단 버튼 끝 */
 
 

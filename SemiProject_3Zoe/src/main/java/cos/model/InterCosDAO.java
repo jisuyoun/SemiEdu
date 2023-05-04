@@ -59,6 +59,9 @@ public interface InterCosDAO {
 	// 리뷰 불러오기 메소드 생성하기
 	List<YJS_ReviewVO> ReviewShow(Map<String, String> paraMap) throws SQLException;
 
+	// 수강후기 등록하기 메소드 생성하기
+	int reviewRegister(Map<String, String> paraMap) throws SQLException;
+
 	
 
 	

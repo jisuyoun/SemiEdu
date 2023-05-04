@@ -1,0 +1,138 @@
+@charset "UTF-8";
+
+
+/* 최상단메뉴바 시작 */
+div.es_bar {
+    width: 100%;
+    height: 200px;
+    background-size: contain;
+    top: 0;
+    left: 0;
+}
+
+#page_title {
+    position: relative;
+    font-size: 40pt;
+    top: -140px;
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+}
+
+.es_dropbtn {
+	position: relative;
+    color: white;
+    font-size: 14px;
+    border: none;
+    cursor: pointer; 
+    top: -130px;
+    left: 1300px;
+    background-color: inherit;
+}
+
+.es_dropdown {
+    position: relative;
+    display: inline-block;
+   
+}
+
+.es_dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border-radius: 10px;
+    margin-top: 10px; 
+    min-width: 120px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border: solid 1px #ddd;
+    font-size: 12pt;
+}
+
+.es_dropdown-content a {
+    color: gray;
+    padding: 5px 2px;
+    text-decoration: none;
+    display: block;
+}
+
+.es_dropdown-content a:hover {
+	color: #1BCEB8;
+} 
+
+.show {display: block;}
+/* 최상단메뉴바 끝 */
+
+
+#myform {
+	margin: 64px 300px;
+}
+
+#myform fieldset{
+    display: inline-block;
+    direction: rtl;
+    border:0;
+}
+#myform fieldset legend{
+    text-align: right;
+}
+#myform input[type=radio]{
+    display: none;
+}
+#myform label{
+    font-size: 3em;
+    color: transparent;
+    text-shadow: 0 0 0 #f0f0f0;
+}
+#myform label:hover{
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+#myform label:hover ~ label{
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+#myform input[type=radio]:checked ~ label{
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+#reviewContents {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: solid 1.5px #D3D3D3;
+    border-radius: 5px;
+    font-size: 16px;
+    resize: none;
+}
+
+div#text-bold {
+	margin-top:100px;
+}
+
+input#reviewTitle {
+	margin-top: 20px;
+	display: block;
+	float: left;
+	height: 50px;
+	width: 600px;
+	border: solid 1px #ddd;
+	text-align: left;
+	padding-left: 10px;
+    box-sizing: border-box;
+    resize: none;
+}
+
+div#starPosition {
+	margin-bottom: 4px;
+}
+
+button#RRReviewRegister {
+	position: relative;
+	margin: 57px 565px;
+	border-radius: 30px;
+	height: 50px;
+	width: 177px;
+	background-color: white;
+	border: solid 1px #1bceb8;
+	color: #1bceb8;
+	font-size: 15pt;
+}
