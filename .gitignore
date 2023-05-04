@@ -97,7 +97,4 @@ replay_pid*
 
 ##### commit 제외파일 #####
 /SemiProject_3Zoe/src/main/webapp/SQL/SemiProject_3DB.sql
-/SemiProject_3Zoe/src/main/java/common/controller/AbstractController.java
-/SemiProject_3Zoe/src/main/java/common/controller/FrontController.java
-/SemiProject_3Zoe/src/main/java/common/controller/InterCommand.java
 /SemiProject_3Zoe/src/main/webapp/WEB-INF/command.properties
