@@ -16,7 +16,7 @@ public class ReviewAction extends AbstractController {
 		
 		super.setRedirect(false); 
 		
-		super.setViewPage("/WEB-INF/index.jsp");
+		super.setViewPage("/WEB-INF/yjs.cos/ReviewRegister.jsp");
 		
 	}
 

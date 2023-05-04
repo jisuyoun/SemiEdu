@@ -66,7 +66,7 @@ public class ReviewRegisterAction extends AbstractController {
 			
 			super.setRedirect(false); 
 		
-			super.setViewPage("/WEB-INF/yjs.cos/yjs_ShoppingBagPage.jsp");
+			super.setViewPage("/WEB-INF/index.jsp");
 			
 		}
 		
