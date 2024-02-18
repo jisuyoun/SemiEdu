@@ -86,7 +86,7 @@
 </details>
 <br>
 <details>
-<summary>🧺 장바구니 페이지</sumaary>
+    <summary>🧺 장바구니 페이지</summary>
 
 ![image](https://github.com/jisuyoun/SemiEdu/assets/122525676/31b2ac79-572a-40f6-96ad-fd1fbb2dd5cd)
 
